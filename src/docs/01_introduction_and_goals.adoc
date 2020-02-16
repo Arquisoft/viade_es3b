@@ -3,7 +3,7 @@
 
 [role="arc42help"]
 ****
-Este proyecto esta enfocado en desarrollar una aplicación para gestionar rutas utilizando las especificaciones de SOLID. El principal objetivo es conseguir que los usuarios tengan el control sobre los datos de sus rutas. Para la relización de dicha apliacicación utilizaremos el framework de React.
+This project is focused on developing an application to manage routes using SOLID specifications. The main objective is to ensure that users have control over their route data. For the realization of this application we will use the React framework.
 ****
 
 === Requirements Overview
