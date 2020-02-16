@@ -17,6 +17,16 @@ context where we do the same in a technical context.
 In this part we use an scheme to specify the communications of the person who is using the application with the application. First of all he 
 logins with Solid, then when he is inside the appication we have to commuicate with the pods to store or see routes, if we want to 
 send any route we have to communicate with the other pods of the users.
+
+image::https://raw.githubusercontent.com/Arquisoft/viade_es3b/master/docs/images/BusinessContextDiagram.PNG[align="center"]
+
+|======================
+|Object   |Description  
+|User | Communicate with the application
+|Viade | Is the application itself.                   
+|Solid Pod | It will contain all the data from the given user.
+|======================
+
 ****
 
 
@@ -25,20 +35,17 @@ send any route we have to communicate with the other pods of the users.
 [role="arc42help"]
 ****
 In this part we have to specify the same we had in previous point but with a technical view.
-.Contents
-Technical interfaces (channels and transmission media) linking your system to its environment. In addition a mapping of domain specific input/output to the channels, i.e. an explanation with I/O uses which channel.
 
-.Motivation
-Many stakeholders make architectural decision based on the technical interfaces between the system and its context. Especially infrastructure or hardware designers decide these technical interfaces.
+image::https://raw.githubusercontent.com/Arquisoft/viade_es3b/master/docs/images/TechnicalContextDiagram.PNG[align="center"]
 
-.Form
-E.g. UML deployment diagram describing channels to neighboring systems,
-together with a mapping table showing the relationships between channels and input/output.
+|======================
+|Object   |Description  
+| User | Communicate with the application
+|User POD | Represents the communication will be made using internet with the HTTP protocol.                   
+|Pod | This is a Solid Pod and it will contain all the data from the given user     
+|SOLID | Is the server in which the Solid pods are stored
+|======================
 
 ****
 
-**<Diagram or Table>**
 
-**<optionally: Explanation of technical interfaces>**
-
-**<Mapping Input/Output to Channels>**
