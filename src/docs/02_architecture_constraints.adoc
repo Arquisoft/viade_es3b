@@ -1,19 +1,26 @@
 [[section-architecture-constraints]]
 == Architecture Constraints
 
-
-[role="arc42help"]
 ****
-.Contents
-Any requirement that constrains software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
+.Software Constraints
+|===
+|Constraint |Explanation
+|React |This year, teachers told us that React must be used in our project
+|SOLID Specifications |None of us have knowledge about SOLID, so we have to invest our time learning how to use it
+****
 
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
+****
+.Organizational Constraints
+|===
+|Constraint |Explanation
+|Time |We only have one semester to develop the application. Assuming we haven't knowledge about technologies involved and having the deadline on 4th May, we may have problems completing all the checkpoints required.
+****
 
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
+****
+.Conventions
+|===
+|Constraint |Explanation
+|Arc42 |We must use arc42 template for the documentation of the project. More info at (https://arc42.org/)
+
+|===
 ****
