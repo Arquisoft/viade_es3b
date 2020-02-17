@@ -2,23 +2,23 @@
 == System Scope and Context
 
 
-[role="arc42help"]
-****
+
+
 In this part we talk about the communication in two contexts, one is business context where we specifies 
 communication partners with explanations of the domain and some schemes and the other one is the technical 
 context where we do the same in a technical context.
-****
+
 
 
 === Business Context
 
-[role="arc42help"]
-****
+
+
 In this part we use an scheme to specify the communications of the person who is using the application with the application. First of all he 
 logins with Solid, then when he is inside the appication we have to commuicate with the pods to store or see routes, if we want to 
 send any route we have to communicate with the other pods of the users.
 
-image::https://raw.githubusercontent.com/Arquisoft/viade_es3b/master/docs/images/BusinessContextDiagram.PNG[align="center"]
+image::https://raw.githubusercontent.com/Arquisoft/viade_es3b/master/src/docs/images/BusinessContextDiagram.PNG[align="center"]
 
 |======================
 |Object   |Description  
@@ -27,16 +27,16 @@ image::https://raw.githubusercontent.com/Arquisoft/viade_es3b/master/docs/images
 |Solid Pod | It will contain all the data from the given user.
 |======================
 
-****
+
 
 
 === Technical Context
 
-[role="arc42help"]
-****
+
+
 In this part we have to specify the same we had in previous point but with a technical view.
 
-image::https://raw.githubusercontent.com/Arquisoft/viade_es3b/master/docs/images/TechnicalContextDiagram.PNG[align="center"]
+image::https://raw.githubusercontent.com/Arquisoft/viade_es3b/master/src/docs/images/TechnicalContextDiagram.PNG[align="center"]
 
 |======================
 |Object   |Description  
@@ -46,6 +46,6 @@ image::https://raw.githubusercontent.com/Arquisoft/viade_es3b/master/docs/images
 |SOLID | Is the server in which the Solid pods are stored
 |======================
 
-****
+
 
 

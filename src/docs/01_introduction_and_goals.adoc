@@ -1,15 +1,13 @@
 [[section-introduction-and-goals]]
 == Introduction and Goals
 
-[role="arc42help"]
-****
+
 This project is focused on developing an application to manage routes using SOLID specifications. The main objective is to ensure that users have control over their route data. For the realization of this application we will use the React framework.
-****
+
 
 === Requirements Overview
 
-[role="arc42help"]
-****
+
 Functional
 
 * Users can see the routes on a map.
@@ -23,12 +21,11 @@ No functional
 * The application must have a friendly interface.
 * Ease of use by non-technical people.
 * Responsiveness of the application must be good.
-****
+
 
 === Quality Goals
 
-[role="arc42help"]
-****
+
 |===
 | Priority | Goal | Description
 | 1 | Security | Give users ownership of their information and grant them control over access to it
@@ -36,12 +33,11 @@ No functional
 | 3 | Reliability | A failure in the application cannot imply a filtering of the data.
 | 4 | Compatibility | Support different types of route formats and images.
 |===
-****
+
 
 === Stakeholders
 
-[role="arc42help"]
-****
+
 |===
 | Role / Name | Contact | Expectations
 | Users | Use the application to save and check your routes | They hope that the application is easy to use, functional and safe.
@@ -49,5 +45,5 @@ No functional
 | Team | Responsible for developing the app | They hope to make a good application and learn to use new technologies.
 | Inrupt | Company that will test and evaluate the app  | They expect to get an application that uses SOLID
 |===
-****
+
 
