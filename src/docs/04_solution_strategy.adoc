@@ -5,20 +5,13 @@
 [role="arc42help"]
 ****
 .Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape the system's architecture. These include
+The system consists in three main modules, a POD server preferably hosted in the machine of one of the developers, a Solid server also hosted in one of such machines and a Javascript client built with React that will provide the interface for the users to interact with the software solution.
 
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
+As there are very different levels of skill in the development team in the various technologies that are going to be employed in the construction of the system, tasks are going to be divided among us in such a way that every developer has the chance to learn some of the basis of them in the implementation but the project's time to market meets the 3 month goal.
 
 .Motivation
-These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.
+The system must be secure enough to prevent any kind of data loss, even in case of a security breach in the system.
 
 .Form
-Keep the explanation of these key decisions short.
-
-Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
-Refer to details in the following sections.
+Given that the developer in charge of the writing of this document is still learning the Javascript, Node, and React, this initial version of the document is not detailed, as will not be point 5.
 ****
