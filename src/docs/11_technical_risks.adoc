@@ -5,5 +5,6 @@ In this part of the documentation we will write about some risks and technical d
 ===Risks
 |===
 |Risk |Explanation
-|React |For us this library is new, so is a problem to use and can be a risk in the beginning.
-|SOLID |None of us have knowledge about SOLID, so this can be a problem.
+|Technologies |All the technologies we have to use in the application are news to us, so is a risk working with all of these applications and technologies.
+|Teamates |Working with so much people in a team without knowing each others is a risk in the development of the application.
+|Time |We have to do other subjects this semester, and this can become a problem for the development of this application. 
