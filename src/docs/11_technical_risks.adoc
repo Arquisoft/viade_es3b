@@ -1,17 +1,11 @@
 [[section-technical-risks]]
 == Risks and Technical Debts
 
+In this part of the documentation we will write about some risks and technical debts we will face in the development of this project.
 
-[role="arc42help"]
-****
-.Contents
-A list of identified technical risks or technical debts, ordered by priority
-
-.Motivation
-“Risk management is project management for grown-ups” (Tim Lister, Atlantic Systems Guild.) 
-
-This should be your motto for systematic detection and evaluation of risks and technical debts in the architecture, which will be needed by management stakeholders (e.g. project managers, product owners) as part of the overall risk analysis and measurement planning.
-
-.Form
-List of risks and/or technical debts, probably including suggested measures to minimize, mitigate or avoid risks or reduce technical debts.
-****
+|===
+|Risk |Explanation
+|Technologies |All the technologies we have to use in the application are news to us, so is a risk working with all of these applications and technologies.
+|Teamates |Working with so much people in a team without knowing each others is a risk in the development of the application.
+|Time |We have to do other subjects this semester, and this can become a problem for the development of this application. 
+|Language | Using another lenguage in the applicaton is hard when you are not used to use it.
