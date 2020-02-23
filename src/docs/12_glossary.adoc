@@ -1,31 +1,10 @@
 [[section-glossary]]
 == Glossary
 
-
-
-[role="arc42help"]
-****
-.Contents
-The most important domain and technical terms that your stakeholders use when discussing the system.
-
-You can also see the glossary as source for translations if you work in multi-language teams.
-
-.Motivation
-You should clearly define your terms, so that all stakeholders
-
-* have an identical understanding of these terms
-* do not use synonyms and homonyms
-
-.Form
-A table with columns <Term> and <Definition>.
-
-Potentially more columns in case you need translations.
-
-****
-
-[options="header"]
 |===
-| Term         | Definition
-| <Term-1>     | <definition-1>
-| <Term-2>     | <definition-2>
-|===
+|Term |Explanation
+|Solid | is a web decentralization project led by Tim Berners-Lee, the inventor of the World Wide Web, developed collaboratively at the Massachusetts Institute of Technology (MIT).
+|Leafletjs | Leaflet is a widely used open source JavaScript library used to build web mapping applications.
+|Javascript |  Is an interpreted programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm.
+|Arc42 | Provides a template for documentation and communication of software and system architectures.
+|Solid Pod | Personal online data store . It allows users to save their information and the information they are sent. A POD can store photos, text, contacts or calendar events and many other things.
