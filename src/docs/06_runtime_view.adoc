@@ -5,6 +5,6 @@ On this section, we will be talking about different scenarios a final user can s
 
 .See map information displayed on a map
 
-image::./images/06_Run_scenario1.png[diagram]
+image::06_Run_scenario1.png[]
 
 
