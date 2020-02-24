@@ -7,6 +7,7 @@
 |Constraint |Explanation
 |React |This year, teachers told us that React must be used in our project
 |SOLID Specifications |None of us have knowledge about SOLID, so we have to invest our time learning how to use it
+|===
 ****
 
 ****
@@ -15,6 +16,7 @@
 |Constraint |Explanation
 |Time |We only have one semester to develop the application. Assuming we haven't knowledge about technologies involved and having the deadline on 4th May, we may have problems completing all the checkpoints required.
 |Team |We are 6 persons in the team and we had never worked together before.
+|===
 ****
 
 ****
