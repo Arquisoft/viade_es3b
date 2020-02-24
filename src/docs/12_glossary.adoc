@@ -8,3 +8,4 @@
 |Javascript |  Is an interpreted programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm.
 |Arc42 | Provides a template for documentation and communication of software and system architectures.
 |Solid Pod | Personal online data store . It allows users to save their information and the information they are sent. A POD can store photos, text, contacts or calendar events and many other things.
+|===

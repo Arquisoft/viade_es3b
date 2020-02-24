@@ -1,9 +1,6 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
-
-[role="arc42help"]
-****
 .Contents
 The system consists in three main modules, a POD server preferably hosted in the machine of one of the developers, a Solid server also hosted in one of such machines and a Javascript client built with React that will provide the interface for the users to interact with the software solution.
 
@@ -14,4 +11,4 @@ The system must be secure enough to prevent any kind of data loss, even in case 
 
 .Form
 Given that the developer in charge of the writing of this document is still learning the Javascript, Node, and React, this initial version of the document is not detailed, as will not be point 5.
-****
+
