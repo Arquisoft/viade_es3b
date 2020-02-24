@@ -1,67 +1,48 @@
 [[section-concepts]]
 == Cross-cutting Concepts
 
+This section describes overall, principal regulations and solution ideas that are relevant in multiple parts of the system.
 
-[role="arc42help"]
-****
-.Content
-This section describes overall, principal regulations and solution ideas that are
-relevant in multiple parts (= cross-cutting) of your system.
-Such concepts are often related to multiple building blocks.
-They can include many different topics, such as
+=== Domain Model
 
-* domain models
-* architecture patterns or design patterns
-* rules for using specific technology
-* principal, often technical decisions of overall decisions
-* implementation rules
-
-.Motivation
-Concepts form the basis for _conceptual integrity_ (consistency, homogeneity)
-of the architecture. Thus, they are an important contribution to achieve inner qualities of your system.
-
-Some of these concepts cannot be assigned to individual building blocks
-(e.g. security or safety). This is the place in the template that we provided for a
-cohesive specification of such concepts.
-
-.Form
-The form can be varied:
-
-* concept papers with any kind of structure
-* cross-cutting model excerpts or scenarios using notations of the architecture views
-* sample implementations, especially for technical concepts
-* reference to typical usage of standard frameworks (e.g. using Hibernate for object/relational mapping)
-
-.Structure
-A potential (but not mandatory) structure for this section could be:
-
-* Domain concepts
-* User Experience concepts (UX)
-* Safety and security concepts
-* Architecture and design patterns
-* "Under-the-hood"
-* development concepts
-* operational concepts
-
-Note: it might be difficult to assign individual concepts to one specific topic
-on this list.
-
-image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
-****
-
-
-=== _<Concept 1>_
-
-_<explanation>_
-
-
-
-=== _<Concept 2>_
-
-_<explanation>_
+Overview of the fundamental data structures of the system and their relevant relationships.
 
 ...
 
-=== _<Concept n>_
+=== User Experience
 
-_<explanation>_
+==== User Interface
+
+The user interface is developed with React. Screenshots of the main pages are shown below.
+
+==== Internationalization
+
+This app will be available in English.
+
+=== Security and Safety
+
+==== Security
+
+The application security is provided by the Solid Authentication Client and the Solid POD.
+
+==== Safety
+
+No part of the system has an aspect that endangers the life of the user.
+
+=== “Under-the-hood”
+
+==== Persistency
+
+The application is based on a decentralized system. Therefore, all information will be stored in each user's personal POD. It will be the user who grants the read / write permissions.
+
+==== Transaction Handling
+
+The transactions realized across the application are asynchronous.
+
+==== Session Handling
+
+Session is handled by Solid Authentication Client.
+
+==== Exception/Error Handling
+
+...
