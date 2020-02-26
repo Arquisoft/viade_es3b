@@ -18,7 +18,7 @@ In this part we use an scheme to specify the communications of the person who is
 logins with Solid, then when he is inside the appication we have to commuicate with the pods to store or see routes, if we want to 
 send any route we have to communicate with the other pods of the users.
 
-image::BussinessContextDiagram.png[]
+image::BusinessContextDiagram.png[align="center"]
 |======================
 |Object   |Description  
 |User | Communicate with the application
