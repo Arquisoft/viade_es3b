@@ -6,7 +6,7 @@
 [role="arc42help"]
 
 .Level 1 white box class diagram
-image::./images/white box level 1 diagram.png[]
+image::white box level 1 diagram.png[]
 At this early stage of the development process, this diagram contains as much detail as we can represent about the current view that we, the development team, have.
 
 .Composite structure diagram
