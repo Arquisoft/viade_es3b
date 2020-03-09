@@ -132,3 +132,10 @@ form-group .select-role {
 .solid-provider-select .option {
   padding-left: 10px !important;
 }
+
+
+.leaflet-container {
+  height: 400px;
+  width: 80%;
+  margin: 0 auto;
+}

@@ -2,6 +2,8 @@ import React from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import styled from 'styled-components';
+import './leaflet.css';
+import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import {
   MapContainer,
@@ -14,42 +16,13 @@ import {
   Down,
   H2Format,
   H3Format,
-  imgFormat
+  imgFormat,
+  MapaStyle
 } from './map.style';
+import MapComponent from 'react-leaflet/lib/MapComponent';
 
-const MapSize = styled.div`
-height: $(props => props.height);
-width: $(props => props.width)`
-  ;
 
-class Map extends React.Component {
-  _isMounted = true;
 
-  componentDidMount() {
-    this._isMounted = true;
-
-    if (this._isMounted) {
-      this.map = L.map('map', {
-        center: [58.16],
-        zoom: 6,
-        zoomControl: false
-      });
-
-      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        detectRetina: true,
-        maxZoom: 20,
-        maxNativeZoom: 17,
-      }).addTo(this.map);
-    }
-
-  }
-
-  componentWillUnmount() {
-    this.abortController.abort();
-  }
-
-  render() { return <MapSize height="800px" width="800px" id="map"></MapSize> };
-}
 
 class RightForm extends React.Component {
   render() {
@@ -82,32 +55,56 @@ class CenterForm extends React.Component {
   render() {
     return (
       <Center>
-        <H2Format>Nombre de la ruta</H2Format>
-          <h3>Descripcion</h3>
-          <p>Esto es un ejemplo de descripción dkfgñsdljgdkgjsdñf
-            flgsñdfglkjsdflgñkjsflkñgjsdfñlkgjsfdñlgs
-            kgsdgsdlkgjsfdkgljsfdlñkgjsdñ
-            dkjghsdfkgsfdñlgjñsdlkjlkfdgjksdfl
-            sdghsdflgsdfgjhsdfjkgl
-            kdjsghsdfkjghsdkl
-          </p>
-          <imgFormat>
-         
-          </imgFormat>
-          
+        <Up> <H2Format>Nombre de la ruta</H2Format>
+        <h3>Descripcion</h3>
+        <p>Esto es un ejemplo de descripción dkfgñsdljgdkgjsdñf
+          flgsñdfglkjsdflgñkjsflkñgjsdfñlkgjsfdñlgs
+          kgsdgsdlkgjsfdkgljsfdlñkgjsdñ
+          dkjghsdfkgsfdñlgjñsdlkjlkfdgjksdfl
+          sdghsdflgsdfgjhsdfjkgl
+          kdjsghsdfkjghsdkl
+          </p></Up>
+          <Down>
+          <MapComponet></MapComponet>
+          </Down>
+       
+        
+
       </Center>
     );
   }
 }
 
+class MapComponet extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      lat: 43.354444,
+      lng: -5.85166,
+      zoom: 12
+    }
+  }
+
+  render() {
+    const position = [this.state.lat, this.state.lng];
+    return (
+      <MapaStyle center = {position} zoom = {this.state.zoom} >
+        <TileLayer url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      </MapaStyle>
+    );
+  }
+}
 
 class Mapa extends React.Component {
   render() {
     return (
-      <MapSection>
-        <RightForm></RightForm>
-        <CenterForm></CenterForm>
-        <LeftForm></LeftForm>
+    <MapSection>
+      <LeftForm></LeftForm>
+    
+        
+     <CenterForm></CenterForm>
+        
+      <RightForm></RightForm>
       </MapSection>
 
     );
