@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Map } from "react-leaflet";
+import { Map, Marker } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 
 
@@ -13,65 +13,48 @@ export const MapSection = styled.section`
   padding: 60px 0;
 `;
 
-export const MapContainer = styled.div`
-  height:50%;
-  width:50%;
-`;
 
-export const Button = styled.button`
-  max-width: 128px;
-  min-width:100px;
-  display: inline-block;
-
-  &:first-child {
-    margin-right: 10px;
-  }
-`;
-export const Right = styled.div`
-        height:100%;
-        background-color:#FFF;
-        float:right;
-        width:25%;
+export const Column = styled.div`
+        width: 25vw;
 `;
 
 export const Up = styled.div`
-        height:50%;
-        background-color:#FFF;
+        height: 300px;   
         float:up;
        
 `;
 
 export const Down = styled.div`
-        height:50%;
-        background-color:#FFF;
+        height: 300px;      
         float:down;
 `;
 
-export const Left = styled.div`
-        height:100%;
-        background-color:#FFF;
-        float:left;
-        width:25%;
-`;
-
 export const Center = styled.div`
-        height:100%;
-        background-color:#FFF;
+        width: 50vw;
         float:center;
-        width:50%;
+        padding:10px;
 `;
 
 export const H2Format = styled.h2`
       text-align:center;
+      font-size: 3rem;
 `;
 
 export const H3Format = styled.h3`
       text-align:center;
+      font-size: 2rem;
 `;
 
 export const MapaStyle = styled(Map)`
-    width: 100px;
-    height: 100px;
+    width: 100vw;
+    height: 100vh;
   `;
 
+
+export const MarkerStyle = styled(Marker)`
+        iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+        shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
+        iconAnchor:   [17, 46],
+        popupAnchor:  [0, -46]
+  `;
 
