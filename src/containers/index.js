@@ -15,8 +15,6 @@ export {
   PageNotFound,
   Welcome,
   Profile,
-  GamePage,
-  GameList,
   FormModelConverter,
   FormModelRenderer,
   TextEditor,
