@@ -2,7 +2,8 @@ import React from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './leaflet.css';
-import { Map as LeafletMap, GeoJSON, TileLayer, Marker,Polyline, Popup } from 'react-leaflet';
+import { Map as TileLayer, Marker,Polyline, Popup } from 'react-leaflet';
+import ruta1 from './rutas/ruta1.json';
 
 
 import {
@@ -13,8 +14,7 @@ import {
   Down,
   H2Format,
   H3Format,
-  MapaStyle,
-  MarkerStyle
+  MapaStyle
 } from './map.style';
 
 
@@ -54,17 +54,21 @@ class LeftForm extends React.Component {
 }
 
 class CenterForm extends React.Component {
+  constructor(){
+    super();
+
+    this.name = ruta1.name;
+    this.description = ruta1.description;
+    
+  }
+   
   render() {
     return (
       <Center>
-        <Up> <H2Format>Nombre de la ruta</H2Format>
-          <h3>Descripcion</h3>
-          <p>Esto es un ejemplo de descripción dkfgñsdl jgdkgjsdñf
-            flgsñ dfglk jsdf lgñkj sfl kñgjsdf ñlkgjs fdñlgs
-            kgs dgs dlkg jsfd kglj sfdl ñkg jsdñ
-            dkjgh sdf kgsfdñl gjñsdlkj lkfd gjk sdfl
-            sdghs dflgsdfg jhsdfjkgl
-            kdjsgh sdfkjg hsdkl
+        
+        <Up> 
+           <H2Format>{this.name}</H2Format>
+          <p>{this.description}
           </p></Up>
 
         <MapComponet></MapComponet>
@@ -77,46 +81,31 @@ class CenterForm extends React.Component {
   }
 }
 
-var positions = [
-  [11.029479,-74.8076453],
-  [11.028873,-74.8070823],
-  [11.028341,-74.8066743],
-  [11.027604,-74.8060093],
-  [11.027028,-74.8050647],
-  [11.0245273,-74.8043527],
-  [11.0235483,-74.8034517],
-  [11.0208286,-74.8000513],
-  [11.0199153,-74.7987372],
-  [11.0194403,-74.7983782],
-  [11.0187983,-74.7978982],
-  [11.0179853,-74.7972762],
-  [11.0173003,-74.7968572],
-  [11.0165893,-74.7961802],
-  [11.0155063,-74.7955112],
-  [11.0147045,-74.7948133],
-  [11.0137273,-74.7941322]
-];
 class MapComponet extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      lat: 11.0137273,
-      lng: -74.7941322,
-      zoom: 12
-    }
+
+  constructor(){
+   super();
+
+   this.puntos = [];
+   var i;
+   
+   for(i = 0; i < ruta1.itinerary.numberOfItems; i++){
+      var aux = [];
+      aux[0] = ruta1.itinerary.itemListElement[i].latitude;
+      aux[1] = ruta1.itinerary.itemListElement[i].longitude;
+      this.puntos[i] = aux;
+   }
 
    
+    
   }
- 
-
-
 
   render() {
-    const position = positions[0];
+    const position = this.puntos[0];
     return (
-      <MapaStyle center={position} zoom={this.state.zoom} >
+      <MapaStyle center={position} zoom={16} >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Polyline color={'blue'} positions={positions}/>
+        <Polyline color={'blue'} positions={this.puntos}/>
         <Marker position={position}>
           <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
         </Marker>
