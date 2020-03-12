@@ -37,6 +37,11 @@ const privateRoutes = [
     component: Mapa
   },
   {
+    id: 'upload',
+    path: '/upload',
+    component: FormModelConverter
+  },
+  {
     id: 'formmodelconverter',
     path: '/formmodel/converter',
     component: FormModelConverter

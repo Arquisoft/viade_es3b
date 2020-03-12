@@ -19,6 +19,12 @@ export const NavigationItems = [
     icon: '/img/icon/routes.png',
     label: 'navBar.routes',
     to: '/map'
+  },
+  {
+	id: 'upload',
+    icon: '/img/icon/routes.png',
+    label: 'navBar.upload',
+    to: '/upload'
   }
 ];
 

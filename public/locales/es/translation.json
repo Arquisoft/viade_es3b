@@ -55,6 +55,7 @@
     "formModelConvert": "Form Model Convert",
     "text-editor": "Editor de Textos",
     "changeLanguage": "Cambiar Lenguaje",
+	"upload": "Subir fichero",
     "languages": {
       "en": "English (Inglés)",
       "es": "Español (Español)"
