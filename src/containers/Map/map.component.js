@@ -2,7 +2,7 @@ import React from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './leaflet.css';
-import { Map as LeafletMap, GeoJSON, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map as LeafletMap, GeoJSON, TileLayer, Marker,Polyline, Popup } from 'react-leaflet';
 
 
 import {
@@ -77,21 +77,46 @@ class CenterForm extends React.Component {
   }
 }
 
+var positions = [
+  [11.029479,-74.8076453],
+  [11.028873,-74.8070823],
+  [11.028341,-74.8066743],
+  [11.027604,-74.8060093],
+  [11.027028,-74.8050647],
+  [11.0245273,-74.8043527],
+  [11.0235483,-74.8034517],
+  [11.0208286,-74.8000513],
+  [11.0199153,-74.7987372],
+  [11.0194403,-74.7983782],
+  [11.0187983,-74.7978982],
+  [11.0179853,-74.7972762],
+  [11.0173003,-74.7968572],
+  [11.0165893,-74.7961802],
+  [11.0155063,-74.7955112],
+  [11.0147045,-74.7948133],
+  [11.0137273,-74.7941322]
+];
 class MapComponet extends React.Component {
   constructor() {
     super();
     this.state = {
-      lat: 43.354444,
-      lng: -5.85166,
+      lat: 11.0137273,
+      lng: -74.7941322,
       zoom: 12
     }
+
+   
   }
+ 
+
+
 
   render() {
-    const position = [this.state.lat, this.state.lng];
+    const position = positions[0];
     return (
       <MapaStyle center={position} zoom={this.state.zoom} >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <Polyline color={'blue'} positions={positions}/>
         <Marker position={position}>
           <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
         </Marker>
