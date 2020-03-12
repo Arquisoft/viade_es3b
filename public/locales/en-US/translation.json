@@ -46,6 +46,7 @@
     "next": "Next"
   },
   "navBar": {
+    "routes": "Routes",
     "welcome": "Welcome",
     "formModel": "Form Model",
     "logOut": "Log out",
