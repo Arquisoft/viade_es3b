@@ -24,10 +24,9 @@ export const WelcomePageContent = props => {
   const limit = 2100000;
   return (
     <WelcomeWrapper data-testid="welcome-wrapper">
+      <h1>VIADE ES3B</h1>
       <WelcomeCard className="card">
-        <WelcomeLogo data-testid="welcome-logo">
-          <img src="/img/logo.svg" alt="Inrupt" />
-        </WelcomeLogo>
+        <Introduccion></Introduccion>
         <WelcomeProfile data-testid="welcome-profile">
           <h3>
             {t('welcome.welcome')}, <WelcomeName>{name}</WelcomeName>
@@ -74,6 +73,27 @@ export const WelcomePageContent = props => {
           </ImageWrapper>
         </WelcomeProfile>
       </WelcomeCard>
+      
     </WelcomeWrapper>
+    
   );
 };
+
+class Introduccion extends React.Component {
+  render() {
+    return (
+      <div class="Introduccion">
+      <p>Aplicación de visualización de rutas descentralizada.</p>
+      <p>Realizada por:</p>
+      <ul>
+        <li>Daniel de Lera</li>
+        <li>Federico Cuervo</li>
+        <li>Ismael Cadenas</li>
+        <li>Alfonso Lozana</li>
+        <li>Ignacio Bermejo</li>
+        <li>Jorge Iturrioz</li>
+      </ul>
+      </div>
+    );
+  }
+}
