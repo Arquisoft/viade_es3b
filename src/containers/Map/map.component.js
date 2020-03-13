@@ -2,7 +2,7 @@ import React from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './leaflet.css';
-import { Map as TileLayer, Marker,Polyline, Popup } from 'react-leaflet';
+import { Map as LeafletMap, GeoJSON, TileLayer, Marker,Polyline, Popup } from 'react-leaflet';
 import ruta1 from './rutas/ruta1.json';
 
 
