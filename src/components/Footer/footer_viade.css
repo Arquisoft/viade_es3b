@@ -1,0 +1,32 @@
+.viade-footer{
+    background-color:#222;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    width: 100%;
+}
+.viade-footer_container{
+    margin-right: auto;
+    margin-left: auto;
+    padding: 31px 0;
+    text-align: center;
+}
+.viade-footer_copyright, .viade-footer_link a{
+    padding: 0 1em;
+    color: white;
+}
+ul, ol {
+    display: flex;
+}
+ul li:not(:first-child), ol li:not(:first-child) {
+    border-left: 1px solid white;
+}
+ul li, ol li {
+    padding: 0 1em;
+    font-size: 1em;
+}
+ul li a img.link-icon, ol li a img.link-icon, ul li a .link-icon, ol li a .link-icon {
+    margin-right: 0.5em;
+}
