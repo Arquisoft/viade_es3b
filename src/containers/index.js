@@ -6,6 +6,7 @@ import Profile from './Profile';
 import TextEditor from './TextEditor';
 import { FormModelConverter, FormModelRenderer } from './FormModel';
 import Mapa from './Map';
+import Uploader from './Uploader';
 
 export {
   Login,
@@ -17,5 +18,6 @@ export {
   FormModelConverter,
   FormModelRenderer,
   TextEditor,
-  Mapa
+  Mapa,
+  Uploader
 };
