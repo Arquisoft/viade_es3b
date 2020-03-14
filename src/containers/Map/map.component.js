@@ -2,8 +2,8 @@ import React from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './leaflet.css';
-import { Map as LeafletMap, GeoJSON, TileLayer, Marker,Polyline, Popup } from 'react-leaflet';
-import ruta1 from './rutas/ruta1.json';
+import { Map as LeafletMap, GeoJSON, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
+import Rutas from '../../components/Ruta/rutas';
 
 
 import {
@@ -17,6 +17,7 @@ import {
   MapaStyle
 } from './map.style';
 
+console.log(Rutas.getRutaByPosition(0));
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -46,7 +47,10 @@ class LeftForm extends React.Component {
     return (
       <Column>
         <H2Format>Rutas</H2Format>
-        <Up><H3Format>Tus rutas</H3Format></Up>
+        <Up>
+          <H3Format>Tus rutas</H3Format>
+         
+        </Up>
         <Down><H3Format>Rutas de amigos</H3Format></Down>
       </Column>
     );
@@ -54,20 +58,20 @@ class LeftForm extends React.Component {
 }
 
 class CenterForm extends React.Component {
-  constructor(){
+  constructor() {
     super();
 
-    this.name = ruta1.name;
-    this.description = ruta1.description;
-    
+    this.name = Rutas.getRutaByPosition(1).name;
+    this.description = Rutas.getRutaByPosition(1).description;
+
   }
-   
+
   render() {
     return (
       <Center>
-        
-        <Up> 
-           <H2Format>{this.name}</H2Format>
+
+        <Up>
+          <H2Format>{this.name}</H2Format>
           <p>{this.description}
           </p></Up>
 
@@ -83,21 +87,12 @@ class CenterForm extends React.Component {
 
 class MapComponet extends React.Component {
 
-  constructor(){
-   super();
+  constructor() {
+    super();
 
-   this.puntos = [];
-   var i;
-   
-   for(i = 0; i < ruta1.itinerary.numberOfItems; i++){
-      var aux = [];
-      aux[0] = ruta1.itinerary.itemListElement[i].latitude;
-      aux[1] = ruta1.itinerary.itemListElement[i].longitude;
-      this.puntos[i] = aux;
-   }
+    this.puntos = []
+    Rutas.getRutaByPosition(1).points.map(p => this.puntos.push(p.getCoordinates()));
 
-   
-    
   }
 
   render() {
@@ -105,9 +100,12 @@ class MapComponet extends React.Component {
     return (
       <MapaStyle center={position} zoom={16} >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Polyline color={'blue'} positions={this.puntos}/>
-        <Marker position={position}>
-          <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+        <Polyline color={'blue'} positions={this.puntos} />
+        <Marker position={this.puntos[0]}>
+          <Popup>Inicio</Popup>
+        </Marker>
+        <Marker position={this.puntos[this.puntos.length - 1]}>
+          <Popup>Fin</Popup>
         </Marker>
       </MapaStyle>
     );
@@ -121,10 +119,7 @@ class Mapa extends React.Component {
     return (
       <MapSection>
         <LeftForm></LeftForm>
-
-
         <CenterForm></CenterForm>
-
         <RightForm></RightForm>
       </MapSection>
 
