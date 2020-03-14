@@ -27,6 +27,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
+
 class RightForm extends React.Component {
   render() {
     return (
@@ -73,15 +74,16 @@ class CenterForm extends React.Component {
 
 class LeftForm extends React.Component {
 
-  a(){
-   
+  a(nombre){
+    console.log(nombre);
   }
   render() {
 
   
-    
+    const self = this;
     
     return (
+      
       <Column>
         <H2Format>Rutas</H2Format>
         <Up>
@@ -89,7 +91,7 @@ class LeftForm extends React.Component {
           {Rutas.getNames().map(function(object, i) { 
               return (
                 <a key={i}>
-                <Button title={object}> {object}</Button>
+                <Button onClick={(e) => self.a(object, e)}> {object}</Button>
                 </a>
               );
             })}
