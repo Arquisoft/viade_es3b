@@ -74,16 +74,26 @@ class CenterForm extends React.Component {
 class LeftForm extends React.Component {
 
   a(){
-    console.log("hola")
+   
   }
   render() {
 
+  
+    
+    
     return (
       <Column>
         <H2Format>Rutas</H2Format>
         <Up>
           <H3Format>Tus rutas</H3Format>
-          <Button onClick={this.a()}>Ruta </Button>
+          {Rutas.getNames().map(function(object, i) { 
+              return (
+                <a key={i}>
+                <Button title={object}> {object}</Button>
+                </a>
+              );
+            })}
+          
         </Up>
         <Down><H3Format>Rutas de amigos</H3Format></Down>
       </Column>
