@@ -17,16 +17,9 @@
     padding: 0 1em;
     color: white;
 }
-ul, ol {
+.viade-footer_container ul{
     display: flex;
 }
-ul li:not(:first-child), ol li:not(:first-child) {
+.viade-footer_container ul li:not(:first-child) {
     border-left: 1px solid white;
-}
-ul li, ol li {
-    padding: 0 1em;
-    font-size: 1em;
-}
-ul li a img.link-icon, ol li a img.link-icon, ul li a .link-icon, ol li a .link-icon {
-    margin-right: 0.5em;
 }

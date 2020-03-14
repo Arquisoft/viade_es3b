@@ -1,0 +1,9 @@
+.viade-navLink-active{
+    background: #89cd72 !important;
+}
+.viade-navLink:hover{
+    background: #b6ffa1 !important;
+}
+.viade-navSpan{
+    color: black !important;
+}

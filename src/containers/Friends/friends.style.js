@@ -3,7 +3,7 @@ import { media } from '../../utils';
 
 export const WelcomeWrapper = styled.section`
   width: 100%;
-  background-image: url('/img/concentric-hex-pattern_2x.png');
+  background:#E7E7E7;
   background-repeat: repeat;
   padding: 50px 0;
 
