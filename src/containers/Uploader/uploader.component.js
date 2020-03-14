@@ -1,7 +1,5 @@
 import React from "react";
 
-import {AnchorButton, Intent} from "@blueprintjs/core";
-
 class Uploader extends React.Component {
 	
   constructor(props) {
@@ -12,7 +10,8 @@ class Uploader extends React.Component {
 	   
 	const FC = require('solid-file-client');
 	const auth = require('solid-auth-cli')
-	const fc = new FC( auth );
+	const fc = new FC(auth, { enableLogging: true });
+	
 		
 	const filesInput = document.getElementById('file-browser-input');
 	const files = filesInput.files;
@@ -20,18 +19,16 @@ class Uploader extends React.Component {
 	const containerInput = document.getElementById('container');
 	
 	for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-		
-		//Unexpected error if we don't get the name on this const, idk why
-		const name = file.name;
+        
+		let file = files[i];
 		
 		try{
-			//Place url in both places
-			await fc.copyFolder(name, "//" );
-		}
+			var res = await fc.putFile("https://jorgeiturrioz.solid.community/viade" + file.name, file, file.type);
+			console.log(res.status)
+			}
 		catch (err) {
 			console.error(err)
-        }	
+			}	
 	}
   }
 
