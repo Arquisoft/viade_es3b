@@ -10,30 +10,27 @@ export const MapSection = styled.section`
   justify-content: center;
   background-image: url('/img/concentric-hex-pattern_2x.png');
   background-repeat: repeat;
-  padding: 60px 0;
+  padding: 30px 30px;
 `;
 
 
 export const Column = styled.div`
         width: 25vw;
+        float:right;
 `;
 
 export const Up = styled.div`
-        height: 300px;   
+        height: 100vh;   
+        width: 100vw;
         float:up;
        
 `;
 
 export const Down = styled.div`
-        height: 300px;      
+        height: 40vh;      
         float:down;
 `;
 
-export const Center = styled.div`
-        width: 50vw;
-        float:center;
-        padding:10px;
-`;
 
 export const H2Format = styled.h2`
       text-align:center;
@@ -46,12 +43,10 @@ export const H3Format = styled.h3`
 `;
 
 export const MapaStyle = styled(Map)`
-    width: 100vw;
-    height: 100vh;
-    margin:0px;
-        padding:3px;
+        width: 75% !important; 
+        height: 60vh !important; 
+        float: left;
   `;
-
 
   export const UlStyle = styled.ul`
         margin-left:15%;
@@ -72,8 +67,8 @@ export const LiStyle = styled.li`
         }   
 `;
 
-        export const PStyle = styled.p`
-        margin:10%;
+export const PStyle = styled.p`
+margin:10%;
   
 `;
 

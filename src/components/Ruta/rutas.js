@@ -14,8 +14,11 @@ class Rutas{
         return rutasName;
     }
 
-    getRutaByName(name){
-        this.rutas.map(r => {if(r.name === name) return r;})
+    getRutaByName(newName){
+        var exit;
+        this.getRutaByPosition( this.rutas.forEach((r)=> {if(r.name == newName){exit=r}}));
+        return exit; 
+        
     }
 
     getRutaByPosition(p){

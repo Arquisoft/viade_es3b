@@ -29,24 +29,11 @@ L.Icon.Default.mergeOptions({
 });
 
 
-class RightForm extends React.Component {
-  render() {
-    return (
-      <Column>
-        <H2Format>Multimedia</H2Format>
-        <Up>
-          <H3Format>Fotos</H3Format>
-
-        </Up>
-        <Down><H3Format>Videos</H3Format></Down>
-      </Column>
-    );
-  }
-}
 
 
 
-class CenterForm extends React.Component {
+
+class DownForm extends React.Component {
   constructor() {
     super();
 
@@ -55,66 +42,55 @@ class CenterForm extends React.Component {
 
   }
 
-  changeName(newName) {
-    this.name = newName;
-  }
-  render() {
-    return (
-      <Center>
-          <H2Format>{this.name}</H2Format>
-          <PStyle>{this.description}</PStyle>
 
-        <MapComponet></MapComponet>
-      </Center>
-    );
-  }
-}
-
-class LeftForm extends React.Component {
-
-  changeRut() {
-    alert("hola");
-  }
   render() {
     return (
 
-      <Column>
-        <H2Format>Rutas</H2Format>
-        <Up>
-          <H3Format>Tus rutas</H3Format>
-          <UlStyle>{Rutas.getNames().map((n) => <LiStyle onClick={this.changeRut}> {n} </LiStyle>)}</UlStyle>
-        </Up>
-        <Down><H3Format>Rutas de amigos</H3Format></Down> 
-      </Column>
+
+      <PStyle>{this.description}</PStyle>
     );
   }
 }
 
 
-class MapComponet extends React.Component {
+class UpForm extends React.Component {
 
   constructor() {
     super();
-
+    this.name = Rutas.getNames()[0];
+    this.description = Rutas.getRutaByPosition(0).description;
     this.puntos = []
     Rutas.getRutaByPosition(1).points.map(p => this.puntos.push(p.getCoordinates()));
 
   }
-
+  changeName(id, e) {
+   var newRuta = Rutas.getRutaByName(id);
+   document.getElementById("name").textContent = newRuta.name;
+   document.getElementById("description").textContent = newRuta.description;
+   document.getElementById("line").remove();
+  }
 
   render() {
     const position = this.puntos[0];
     return (
-      <MapaStyle center={position} zoom={16} >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Polyline color={'blue'} positions={this.puntos} />
-        <Marker position={this.puntos[0]}>
-          <Popup>Inicio</Popup>
-        </Marker>
-        <Marker position={this.puntos[this.puntos.length - 1]}>
-          <Popup>Fin</Popup>
-        </Marker>
-      </MapaStyle>
+      <Up>
+        <MapaStyle id="map" center={position} zoom={16} >
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <Polyline color={'blue'} positions={this.puntos}></Polyline>
+          <Marker position={this.puntos[0]}>
+            <Popup>Inicio</Popup>
+          </Marker>
+          <Marker position={this.puntos[this.puntos.length - 1]}>
+            <Popup>Fin</Popup>
+          </Marker>
+        </MapaStyle>
+        <Column>
+          <H2Format id ="name">{this.name}</H2Format>
+          <PStyle id="description">{this.description}</PStyle>
+          <H3Format>Tus rutas</H3Format>
+          <UlStyle>{Rutas.getNames().map((n,i) => <LiStyle key={i} onClick={(e) => this.changeName(n, e)}> {n} </LiStyle>)}</UlStyle>
+        </Column>
+      </Up>
     );
   }
 }
@@ -125,9 +101,8 @@ class Mapa extends React.Component {
   render() {
     return (
       <MapSection>
-        <LeftForm></LeftForm>
-        <CenterForm></CenterForm>
-        <RightForm></RightForm>
+        <UpForm></UpForm>
+
       </MapSection>
 
     );
