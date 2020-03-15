@@ -5,6 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, GeoJSON, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import Rutas from '../../components/Ruta/rutas';
 import { Button } from 'reactstrap';
+import ReactDOM from 'react-dom';
 
 import {
   Column,
@@ -52,6 +53,24 @@ class DownForm extends React.Component {
   }
 }
 
+class Line extends React.Component {
+  render() {
+    const position = this.puntos[0];
+    return (
+      <div>
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <Polyline color={'blue'} positions={this.puntos}></Polyline>
+        <Marker position={this.puntos[0]}>
+          <Popup>Inicio</Popup>
+        </Marker>
+        <Marker position={this.puntos[this.puntos.length - 1]}>
+          <Popup>Fin</Popup>
+        </Marker>
+      </div>
+    );
+  }
+}
+
 
 class UpForm extends React.Component {
 
@@ -64,17 +83,34 @@ class UpForm extends React.Component {
 
   }
   changeName(id, e) {
-   var newRuta = Rutas.getRutaByName(id);
-   document.getElementById("name").textContent = newRuta.name;
-   document.getElementById("description").textContent = newRuta.description;
-   document.getElementById("line").remove();
+    var newRuta = Rutas.getRutaByName(id);
+    document.getElementById("name").textContent = newRuta.name;
+    document.getElementById("description").textContent = newRuta.description;
+ 
+    this.puntos = newRuta.point;
+    const position = this.puntos[0];
+    console.log(this.puntos);
+
+   var a = <MapaStyle id="map" center={position} zoom={15} >
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <Polyline color={'blue'} positions={this.puntos}></Polyline>
+      <Marker position={this.puntos[0]}>
+        <Popup>Inicio</Popup>
+      </Marker>
+      <Marker position={this.puntos[this.puntos.length - 1]}>
+        <Popup>Fin</Popup>
+      </Marker>
+    </MapaStyle>;
+
+    ReactDOM.render(a, document.getElementById('map'));
   }
 
   render() {
     const position = this.puntos[0];
     return (
       <Up>
-        <MapaStyle id="map" center={position} zoom={16} >
+        <div id = "map">
+        <MapaStyle  center={position} zoom={15} >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <Polyline color={'blue'} positions={this.puntos}></Polyline>
           <Marker position={this.puntos[0]}>
@@ -84,11 +120,12 @@ class UpForm extends React.Component {
             <Popup>Fin</Popup>
           </Marker>
         </MapaStyle>
+        </div>
         <Column>
-          <H2Format id ="name">{this.name}</H2Format>
+          <H2Format id="name">{this.name}</H2Format>
           <PStyle id="description">{this.description}</PStyle>
           <H3Format>Tus rutas</H3Format>
-          <UlStyle>{Rutas.getNames().map((n,i) => <LiStyle key={i} onClick={(e) => this.changeName(n, e)}> {n} </LiStyle>)}</UlStyle>
+          <UlStyle>{Rutas.getNames().map((n, i) => <LiStyle key={i} onClick={(e) => this.changeName(n, e)}> {n} </LiStyle>)}</UlStyle>
         </Column>
       </Up>
     );

@@ -1,11 +1,12 @@
 import ruta1 from './rutas/ruta1.json';
 import ruta2 from './rutas/ruta2.json';
+import ruta3 from './rutas/ruta3.json';
 import Ruta from './ruta.js';
 
 class Rutas{
 
     constructor(){
-        this.rutas = [new Ruta(ruta1),new Ruta(ruta2)];
+        this.rutas = [new Ruta(ruta1),new Ruta(ruta2),new Ruta(ruta3)];
     }
 
     getNames(){
