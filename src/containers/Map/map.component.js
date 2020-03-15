@@ -2,8 +2,9 @@ import React from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './leaflet.css';
-import { Map as LeafletMap, GeoJSON, TileLayer, Marker, Popup } from 'react-leaflet';
-
+import { Map as LeafletMap, GeoJSON, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
+import Rutas from '../../components/Ruta/rutas';
+import { Button } from 'reactstrap';
 
 import {
   Column,
@@ -14,9 +15,10 @@ import {
   H2Format,
   H3Format,
   MapaStyle,
-  MarkerStyle
+  LiStyle,
+  UlStyle,
+  PStyle
 } from './map.style';
-
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -26,76 +28,69 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
-class RightForm extends React.Component {
-  render() {
-    return (
-      <Column>
-        <H2Format>Multimedia</H2Format>
-        <Up>
-          <H3Format>Fotos</H3Format>
-
-        </Up>
-        <Down><H3Format>Videos</H3Format></Down>
-      </Column>
-    );
-  }
-}
-
-class LeftForm extends React.Component {
-  render() {
-    return (
-      <Column>
-        <H2Format>Rutas</H2Format>
-        <Up><H3Format>Tus rutas</H3Format></Up>
-        <Down><H3Format>Rutas de amigos</H3Format></Down>
-      </Column>
-    );
-  }
-}
-
-class CenterForm extends React.Component {
-  render() {
-    return (
-      <Center>
-        <Up> <H2Format>Nombre de la ruta</H2Format>
-          <h3>Descripcion</h3>
-          <p>Esto es un ejemplo de descripción dkfgñsdl jgdkgjsdñf
-            flgsñ dfglk jsdf lgñkj sfl kñgjsdf ñlkgjs fdñlgs
-            kgs dgs dlkg jsfd kglj sfdl ñkg jsdñ
-            dkjgh sdf kgsfdñl gjñsdlkj lkfd gjk sdfl
-            sdghs dflgsdfg jhsdfjkgl
-            kdjsgh sdfkjg hsdkl
-          </p></Up>
-
-        <MapComponet></MapComponet>
 
 
 
 
-      </Center>
-    );
-  }
-}
 
-class MapComponet extends React.Component {
+class DownForm extends React.Component {
   constructor() {
     super();
-    this.state = {
-      lat: 43.354444,
-      lng: -5.85166,
-      zoom: 12
-    }
+
+    this.name = Rutas.getRutaByPosition(1).name;
+    this.description = Rutas.getRutaByPosition(1).description;
+
+  }
+
+
+  render() {
+    return (
+
+
+      <PStyle>{this.description}</PStyle>
+    );
+  }
+}
+
+
+class UpForm extends React.Component {
+
+  constructor() {
+    super();
+    this.name = Rutas.getNames()[0];
+    this.description = Rutas.getRutaByPosition(0).description;
+    this.puntos = []
+    Rutas.getRutaByPosition(1).points.map(p => this.puntos.push(p.getCoordinates()));
+
+  }
+  changeName(id, e) {
+   var newRuta = Rutas.getRutaByName(id);
+   document.getElementById("name").textContent = newRuta.name;
+   document.getElementById("description").textContent = newRuta.description;
+   document.getElementById("line").remove();
   }
 
   render() {
-    const position = [this.state.lat, this.state.lng];
+    const position = this.puntos[0];
     return (
-      <MapaStyle center={position} zoom={this.state.zoom} >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Marker position={position}>
-          <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
-        </Marker>
-      </MapaStyle>
+      <Up>
+        <MapaStyle id="map" center={position} zoom={16} >
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <Polyline color={'blue'} positions={this.puntos}></Polyline>
+          <Marker position={this.puntos[0]}>
+            <Popup>Inicio</Popup>
+          </Marker>
+          <Marker position={this.puntos[this.puntos.length - 1]}>
+            <Popup>Fin</Popup>
+          </Marker>
+        </MapaStyle>
+        <Column>
+          <H2Format id ="name">{this.name}</H2Format>
+          <PStyle id="description">{this.description}</PStyle>
+          <H3Format>Tus rutas</H3Format>
+          <UlStyle>{Rutas.getNames().map((n,i) => <LiStyle key={i} onClick={(e) => this.changeName(n, e)}> {n} </LiStyle>)}</UlStyle>
+        </Column>
+      </Up>
     );
   }
 }
@@ -106,12 +101,8 @@ class Mapa extends React.Component {
   render() {
     return (
       <MapSection>
-        <LeftForm></LeftForm>
+        <UpForm></UpForm>
 
-
-        <CenterForm></CenterForm>
-
-        <RightForm></RightForm>
       </MapSection>
 
     );

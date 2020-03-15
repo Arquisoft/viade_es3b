@@ -15,6 +15,7 @@ export const NavigationItems = [
     to: '/profile'
   },
   {
+<<<<<<< HEAD
     id: 'tictactoe',
     icon: '/img/icon/tictactoe.svg',
     label: 'navBar.tictactoe',

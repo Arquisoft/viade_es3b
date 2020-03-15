@@ -10,30 +10,27 @@ export const MapSection = styled.section`
   justify-content: center;
   background:#E7E7E7;
   background-repeat: repeat;
-  padding: 60px 0;
+  padding: 30px 30px;
 `;
 
 
 export const Column = styled.div`
         width: 25vw;
+        float:right;
 `;
 
 export const Up = styled.div`
-        height: 300px;   
+        height: 100vh;   
+        width: 100vw;
         float:up;
        
 `;
 
 export const Down = styled.div`
-        height: 300px;      
+        height: 40vh;      
         float:down;
 `;
 
-export const Center = styled.div`
-        width: 50vw;
-        float:center;
-        padding:10px;
-`;
 
 export const H2Format = styled.h2`
       text-align:center;
@@ -46,15 +43,34 @@ export const H3Format = styled.h3`
 `;
 
 export const MapaStyle = styled(Map)`
-    width: 100vw;
-    height: 100vh;
+        width: 75% !important; 
+        height: 60vh !important; 
+        float: left;
   `;
 
-
-export const MarkerStyle = styled(Marker)`
-        iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
-        shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
-        iconAnchor:   [17, 46],
-        popupAnchor:  [0, -46]
+  export const UlStyle = styled.ul`
+        margin-left:15%;
   `;
+
+export const LiStyle = styled.li`
+        
+        margin:0px;
+        padding:3px;
+        max-width: 80%;
+        border:1px solid#CCCCCC;
+        text-align:center;
+        border-radius: 2px;
+        background: #DED8D0;
+        :hover {
+                cursor: pointer;
+                background: #B8B0A5;
+        }   
+`;
+
+export const PStyle = styled.p`
+margin:10%;
+  
+`;
+
+
 
