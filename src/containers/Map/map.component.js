@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import './leaflet.css';
 import { Map as LeafletMap, GeoJSON, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import Rutas from '../../components/Ruta/rutas';
-import { Button, ButtonGroup } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 import {
   Column,
@@ -14,10 +14,11 @@ import {
   Down,
   H2Format,
   H3Format,
-  MapaStyle
+  MapaStyle,
+  LiStyle,
+  UlStyle,
+  PStyle
 } from './map.style';
-
-console.log(Rutas.getRutaByPosition(0));
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -54,17 +55,14 @@ class CenterForm extends React.Component {
 
   }
 
-  changeName(newName){
+  changeName(newName) {
     this.name = newName;
   }
   render() {
     return (
       <Center>
-
-        <Up>
           <H2Format>{this.name}</H2Format>
-          <p>{this.description}
-          </p></Up>
+          <PStyle>{this.description}</PStyle>
 
         <MapComponet></MapComponet>
       </Center>
@@ -74,34 +72,24 @@ class CenterForm extends React.Component {
 
 class LeftForm extends React.Component {
 
-  a(nombre){
-    console.log(nombre);
+  changeRut() {
+    alert("hola");
   }
   render() {
-
-  
-    const self = this;
-    
     return (
-      
+
       <Column>
         <H2Format>Rutas</H2Format>
         <Up>
           <H3Format>Tus rutas</H3Format>
-          {Rutas.getNames().map(function(object, i) { 
-              return (
-                <a key={i}>
-                <Button onClick={(e) => self.a(object, e)}> {object}</Button>
-                </a>
-              );
-            })}
-          
+          <UlStyle>{Rutas.getNames().map((n) => <LiStyle onClick={this.changeRut}> {n} </LiStyle>)}</UlStyle>
         </Up>
-        <Down><H3Format>Rutas de amigos</H3Format></Down>
+        <Down><H3Format>Rutas de amigos</H3Format></Down> 
       </Column>
     );
   }
 }
+
 
 class MapComponet extends React.Component {
 
@@ -112,6 +100,7 @@ class MapComponet extends React.Component {
     Rutas.getRutaByPosition(1).points.map(p => this.puntos.push(p.getCoordinates()));
 
   }
+
 
   render() {
     const position = this.puntos[0];
