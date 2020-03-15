@@ -71,7 +71,7 @@ export const Item = styled.li`
     border: none;
     border-radius: 0px;
     &:hover {
-      background: #b6ffa1;
+      background: rgba(74, 97, 255, 0.50);
       transition: all 0.5s ease-in-out;
       color: #083575;
     }
