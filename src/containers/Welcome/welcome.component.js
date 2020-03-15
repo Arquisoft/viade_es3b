@@ -82,7 +82,7 @@ export const WelcomePageContent = props => {
 class Introduccion extends React.Component {
   render() {
     return (
-      <div class="Introduccion">
+      <div className="Introduccion">
       <p>Aplicación de visualización de rutas descentralizada.</p>
       <p>Realizada por:</p>
       <ul>
