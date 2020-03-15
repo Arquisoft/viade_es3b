@@ -10,7 +10,7 @@ class Uploader extends React.Component {
 	   
 	const FC = require('solid-file-client');
 	const auth = require('solid-auth-cli')
-	const fc = new FC(auth, { enableLogging: true });
+	const fc = new FC(auth);
 	
 		
 	const filesInput = document.getElementById('file-browser-input');
