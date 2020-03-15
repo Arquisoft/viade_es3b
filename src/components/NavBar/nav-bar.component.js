@@ -58,7 +58,7 @@ const NavBar = (props: Props) => {
       <section className="header-wrap">
         <div className="logo-block">
           <Link to="/welcome">
-            <img src="/img/viade.png" alt="inrupt" />
+            <img src="/img/logo-viade-pequeño.png" alt="viade" />
           </Link>
         </div>
 

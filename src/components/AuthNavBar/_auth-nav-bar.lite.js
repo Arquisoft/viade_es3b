@@ -66,10 +66,10 @@ const AuthNavBar = React.memo((props: Props) => {
           component: () => <LanguageDropdown {...{ t, i18n }} />,
           id: 'language'
         },
-        {
+        /*{
           component: () => <Notification {...{ webId, inbox: inboxes }} />,
           id: 'notifications'
-        },
+        },*/
         {
           component: props => <NavBarContainer {...{ t, i18n, webId, history, ...props }} />,
           id: 'profile'

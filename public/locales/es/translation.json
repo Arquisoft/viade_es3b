@@ -46,8 +46,12 @@
     "next": "Siguiente"
   },
   "navBar": {
+<<<<<<< HEAD
+    "welcome": "Bienvenido",
+=======
     "routes": "Rutas",
     "welcome": "Bienvenida",
+>>>>>>> prueba_estructura_inicial_map
     "formModel": "Form Model",
     "logOut": "Cerrar Sesión",
     "profile": "Perfil",
@@ -65,7 +69,9 @@
       "noinbox": "No se encontró ningún inbox en su POD, debes tener al menos uno para jugar.",
       "fetchingError": "Error en las notificaciones"
     },
-    "tictactoe": "Juego"
+    "tictactoe": "Juego",
+    "myTrails": "Mis rutas",
+    "friends": "Amigos"
   },
   "footer": {
     "version": "Versión"
