@@ -46,7 +46,12 @@
     "next": "Siguiente"
   },
   "navBar": {
+<<<<<<< HEAD
     "welcome": "Bienvenido",
+=======
+    "routes": "Rutas",
+    "welcome": "Bienvenida",
+>>>>>>> prueba_estructura_inicial_map
     "formModel": "Form Model",
     "logOut": "Cerrar Sesión",
     "profile": "Perfil",

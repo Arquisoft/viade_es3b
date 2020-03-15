@@ -48,13 +48,34 @@ export const H3Format = styled.h3`
 export const MapaStyle = styled(Map)`
     width: 100vw;
     height: 100vh;
+    margin:0px;
+        padding:3px;
   `;
 
 
-export const MarkerStyle = styled(Marker)`
-        iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
-        shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
-        iconAnchor:   [17, 46],
-        popupAnchor:  [0, -46]
+  export const UlStyle = styled.ul`
+        margin-left:15%;
   `;
+
+export const LiStyle = styled.li`
+        
+        margin:0px;
+        padding:3px;
+        max-width: 80%;
+        border:1px solid#CCCCCC;
+        text-align:center;
+        border-radius: 2px;
+        background: #DED8D0;
+        :hover {
+                cursor: pointer;
+                background: #B8B0A5;
+        }   
+`;
+
+        export const PStyle = styled.p`
+        margin:10%;
+  
+`;
+
+
 
