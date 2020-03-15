@@ -8,7 +8,7 @@ export const MapSection = styled.section`
   flex: 1 0 auto;
   align-items: center;
   justify-content: center;
-  background:#E7E7E7;
+  background:#a4d1d1;
   background-repeat: repeat;
   padding: 30px 30px;
 `;
@@ -16,18 +16,19 @@ export const MapSection = styled.section`
 
 export const Column = styled.div`
         width: 25vw;
+        min-width: 400 px !important; 
         float:right;
 `;
 
 export const Up = styled.div`
-        height: 100vh;   
+        height: 80vh;   
         width: 100vw;
         float:up;
        
 `;
 
 export const Down = styled.div`
-        height: 40vh;      
+        height: 30vh;      
         float:down;
 `;
 
@@ -44,7 +45,7 @@ export const H3Format = styled.h3`
 
 export const MapaStyle = styled(Map)`
         width: 75% !important; 
-        height: 60vh !important; 
+        height: 80vh !important; 
         float: left;
   `;
 

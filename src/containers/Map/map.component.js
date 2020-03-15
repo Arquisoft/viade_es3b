@@ -139,7 +139,7 @@ class Mapa extends React.Component {
     return (
       <MapSection>
         <UpForm></UpForm>
-
+        <Down></Down>
       </MapSection>
 
     );
