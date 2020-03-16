@@ -26,7 +26,11 @@ export const WelcomePageContent = props => {
     <WelcomeWrapper data-testid="welcome-wrapper">
       <h1>VIADE ES3B</h1>
       <WelcomeCard className="card">
-        <Introduccion></Introduccion>
+
+        <WelcomeLogo data-testid="welcome-logo">
+          <img src="/img/logo-viade-mediano.png" alt="Viade" />
+        </WelcomeLogo>
+
         <WelcomeProfile data-testid="welcome-profile">
           <h3>
             {t('welcome.welcome')}, <WelcomeName>{name}</WelcomeName>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import './navigation_viade.css';
 
 type Props = {
   navigation: Object
@@ -11,7 +12,7 @@ const Navigation = ({ navigation }: Props) => (
       {navigation &&
         navigation.map(item => (
           <li key={item.id} data-testid="item">
-            <NavLink to={item.to} activeClassName="active">
+            <NavLink to={item.to} className="viade-navLink" activeClassName="viade-navLink-active active">
               <span className="icon">
                 <img
                   src={item.icon}
@@ -22,7 +23,7 @@ const Navigation = ({ navigation }: Props) => (
                   style={{ width: '24px' }}
                 />
               </span>
-              <span className="label">{item.label}</span>
+              <span className="viade-navSpan label">{item.label}</span>
             </NavLink>
           </li>
         ))}

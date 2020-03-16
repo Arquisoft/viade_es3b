@@ -1,0 +1,9 @@
+.viade-navLink-active{
+    background: rgba(74, 97, 255, 0.7) !important;
+}
+.viade-navLink:hover{
+    background: rgba(74, 97, 255, 0.50) !important;
+}
+.viade-navSpan{
+    color: black !important;
+}

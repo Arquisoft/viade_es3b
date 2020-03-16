@@ -7,6 +7,7 @@ import TextEditor from './TextEditor';
 import { FormModelConverter, FormModelRenderer } from './FormModel';
 import Mapa from './Map';
 import Uploader from './Uploader';
+import Friends from './Friends';
 
 export {
   Login,
@@ -19,5 +20,7 @@ export {
   FormModelRenderer,
   TextEditor,
   Mapa,
-  Uploader
+  Uploader,
+
+  Friends
 };

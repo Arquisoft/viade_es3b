@@ -15,7 +15,7 @@ export const Gradient = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/img/background-pattern.svg');
+    background:#E7E7E7;
     filter: opacity(30%);
   }
 `;

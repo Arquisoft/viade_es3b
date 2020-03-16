@@ -3,6 +3,8 @@ import { IconLookup, IconDefinition, findIconDefinition } from '@fortawesome/fon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withTranslation } from 'react-i18next';
 
+import './footer_viade.css';
+
 type Props = {
   t: Function
 };
@@ -13,42 +15,21 @@ const Footer = (props: Props) => {
   const githubIconDef: IconDefinition = findIconDefinition(githubIcon);
 
   return (
-    <footer className="solid-footer footer">
-      <section className="solid-footer__content">
-        <div className="solid-footer__content--copyright">
+    <footer className="viade-footer">
+      <section className="viade-footer_container">
           <ul>
-            <li>© {process.env.REACT_APP_COMPANY_NAME}</li>
-            <li>
-              {t('footer.version')}
-              {''} <span className="build-value">{process.env.REACT_APP_VERSION}</span>
-            </li>
-          </ul>
-        </div>
-
-        <div className="solid-footer__content--links">
-          <ul>
-            <li>
+            <li className="viade-footer_copyright">© 2020, Viade</li>
+            <li className="viade-footer_link">
               <a
-                href="https://github.com/inrupt/solid-react-sdk"
-                target="_blank"
-                rel="noopener noreferrer"
+                  href="https://github.com/Arquisoft/viade_es3b"
+                  target="_blank"
+                  rel="noopener noreferrer"
               >
                 <FontAwesomeIcon className="link-icon" icon={githubIconDef} />
-                react-solid-sdk
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/inrupt/solid-style-guide"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FontAwesomeIcon className="link-icon" icon={githubIconDef} />
-                solid-style-guide
+                GitHub
               </a>
             </li>
           </ul>
-        </div>
       </section>
     </footer>
   );
