@@ -1,0 +1,53 @@
+{
+    "@context": "http://schema.org",
+    "@type": "Trip",
+    "name": "Ruta por Gijón",
+    "description": "Esta es la descripción de la por Gijón",
+    "itinerary": {
+        "@type": "ItemList",
+        "numberOfItems": 8,
+        "itemListOrder": "http://schema.org/ItemListOrderDescending",
+        "itemListElement": [
+            {
+                "@type": "GeoCoordinates",
+                "latitude": 43.544554,
+                "longitude": -5.663473
+            },
+            {
+                "@type": "GeoCoordinates",
+                "latitude": 43.542203 ,
+                "longitude": -5.660811
+            },
+            {
+                "@type": "GeoCoordinates",
+                "latitude":  43.541334 ,
+                "longitude":  -5.656986
+            },
+            {
+                "@type": "GeoCoordinates",
+                "latitude": 43.540363 ,
+                "longitude": -5.650835
+            },
+            {
+                "@type": "GeoCoordinates",
+                "latitude": 43.540261,
+                "longitude":  -5.646446
+            },
+            {
+                "@type": "GeoCoordinates",
+                "latitude":  43.540874 ,
+                "longitude":  -5.644348
+            },
+            {
+                "@type": "GeoCoordinates",
+                "latitude": 43.54182 ,
+                "longitude":  -5.64218
+            },
+            {
+                "@type": "GeoCoordinates",
+                "latitude": 43.54205 ,
+                "longitude": -5.638214
+            }
+        ]
+    }
+}
