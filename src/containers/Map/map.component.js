@@ -29,20 +29,12 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
-
-
-
-
-
 class DownForm extends React.Component {
   constructor() {
     super();
-
     this.name = Rutas.getRutaByPosition(1).name;
     this.description = Rutas.getRutaByPosition(1).description;
-
   }
-
 
   render() {
     return (
@@ -86,11 +78,11 @@ class UpForm extends React.Component {
     var newRuta = Rutas.getRutaByName(id);
     document.getElementById("name").textContent = newRuta.name;
     document.getElementById("description").textContent = newRuta.description;
- 
+
     this.puntos = newRuta.point;
     const position = this.puntos[0];
 
-   var a = <MapaStyle id="map" center={position} zoom={15} >
+    var a = <MapaStyle id="map" center={position} zoom={15} >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Polyline color={'blue'} positions={this.puntos}></Polyline>
       <Marker position={this.puntos[0]}>
@@ -108,17 +100,17 @@ class UpForm extends React.Component {
     const position = this.puntos[0];
     return (
       <Up>
-        <div id = "map">
-        <MapaStyle  center={position} zoom={15} >
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          <Polyline color={'blue'} positions={this.puntos}></Polyline>
-          <Marker position={this.puntos[0]}>
-            <Popup>Inicio</Popup>
-          </Marker>
-          <Marker position={this.puntos[this.puntos.length - 1]}>
-            <Popup>Fin</Popup>
-          </Marker>
-        </MapaStyle>
+        <div id="map">
+          <MapaStyle center={position} zoom={15} >
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <Polyline color={'blue'} positions={this.puntos}></Polyline>
+            <Marker position={this.puntos[0]}>
+              <Popup>Inicio</Popup>
+            </Marker>
+            <Marker position={this.puntos[this.puntos.length - 1]}>
+              <Popup>Fin</Popup>
+            </Marker>
+          </MapaStyle>
         </div>
         <Column>
           <H2Format id="name">{this.name}</H2Format>
