@@ -89,7 +89,6 @@ class UpForm extends React.Component {
  
     this.puntos = newRuta.point;
     const position = this.puntos[0];
-    console.log(this.puntos);
 
    var a = <MapaStyle id="map" center={position} zoom={15} >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
