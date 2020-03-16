@@ -3,14 +3,14 @@
 
 == Building Block View
 
-[role="arc42help"]
 
 .Level 1 white box class diagram
-image::white box level 1 diagram.png[]
+image::white box level 1 diagram.png[diagram]
+
 At this early stage of the development process, this diagram contains as much detail as we can represent about the current view that we, the development team, have.
 
 .Composite structure diagram
-image::composite structure diagram.jpg[]
+image::composite structure diagram.jpg[diagram]
 In this view, we have a representation of the components of the system from a standpoint of the technologies used to implement each module.
 
 
