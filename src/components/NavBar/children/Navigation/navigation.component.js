@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './navigation_viade.css';
+import 'navigation_viade.css';
 
 type Props = {
   navigation: Object
