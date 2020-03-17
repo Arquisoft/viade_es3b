@@ -56,7 +56,7 @@
   },
   "jest":{
     "moduleNameMapper": {
-      "\\.(css)$":"./_mocks__/styleMock.js"
+      "\\.(css)$":"./test/__mocks__/styleMock.js"
     }
   },
   "scripts": {
