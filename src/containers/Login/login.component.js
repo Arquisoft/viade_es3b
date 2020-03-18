@@ -29,7 +29,7 @@ const LoginComponent = () => {
             <LoginTitle data-testid="login-title">
               <span>{t('login.loginTitle')}</span>
             </LoginTitle>
-            <ProviderLogin
+            <ProviderLogin 
               selectPlaceholder={t('login.selectPlaceholder')}
               inputPlaholder={t('login.inputPlaholder')}
               formButtonText={t('login.formButtonText')}

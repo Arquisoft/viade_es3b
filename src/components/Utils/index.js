@@ -1,3 +1,4 @@
+import LoginBackground from './LoginBackground';
 import GradientBackground from './GradientBackground';
 import CenterContainer from './CenterContainer';
 import Panel from './Panel';
@@ -14,6 +15,7 @@ import ConfirmationDialog from './ConfirmationDialog';
 import Labeled from './Labeled';
 
 export {
+  LoginBackground,
   GradientBackground,
   CenterContainer,
   ConfirmationDialog,
