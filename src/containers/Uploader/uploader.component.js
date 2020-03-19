@@ -9,7 +9,7 @@ class Uploader extends React.Component {
    async run() {
 	   
 	const FC = require('solid-file-client');
-	const auth = require('solid-auth-cli');
+	const auth = require('solid-auth-client');
 		
 	const filesInput = document.getElementById('file-browser-input');
 	const files = filesInput.files;
@@ -25,12 +25,15 @@ class Uploader extends React.Component {
 		reader.onload = () => {
 			
 			let fileContent = reader.result;
-			const auth = require("solid-auth-client");
 			auth.trackSession(session => {
 			if (session) {			
-				const fc = new FC(auth , {enableLogging: true});
+			
+				const fc = new FC(auth);	
 				let webId = session.webId;
-				fc.createFile("https://jorgeiturrioz.solid.community/public/".concat(file.name), fileContent, "text/turtle", {});
+				let url = webId.split("/profile/card#me")[0];
+				url = url.concat("/public/myRoutes/").concat(file.name);
+				
+				fc.createFile(url, fileContent);
 				}
 			});
 		};
