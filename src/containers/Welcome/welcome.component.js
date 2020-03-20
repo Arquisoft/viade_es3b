@@ -8,7 +8,8 @@ import {
   WelcomeProfile,
   WelcomeDetail,
   WelcomeName,
-  ImageWrapper
+  ImageWrapper,
+  HeaderCard
 } from './welcome.style';
 import { ImageProfile } from '@components';
 import { errorToaster } from '@utils';
@@ -24,9 +25,12 @@ export const WelcomePageContent = props => {
   const limit = 2100000;
   return (
     <WelcomeWrapper data-testid="welcome-wrapper">
-      <h1>VIADE ES3B</h1>
+      
+      
       <WelcomeCard className="card">
-
+      <HeaderCard>
+        <h1>VIADE ES3B</h1>
+      </HeaderCard>
         <WelcomeLogo data-testid="welcome-logo">
           <img src="/img/logo-viade-mediano.png" alt="Viade" />
         </WelcomeLogo>
@@ -77,7 +81,21 @@ export const WelcomePageContent = props => {
           </ImageWrapper>
         </WelcomeProfile>
       </WelcomeCard>
-      
+      <WelcomeCard className="card">
+        <WelcomeDetail data-testid="welcome-detail">
+          <h3>{t('welcome.whatIsViade')}</h3>
+          <p>{t('welcome.viadeIs')}</p>
+          <p>{t('welcome.realized')}</p>
+        <ul>
+          <li>Daniel de Lera</li>
+          <li>Federico Cuervo</li>
+          <li>Ismael Cadenas</li>
+          <li>Alfonso Lozana</li>
+          <li>Ignacio Bermejo</li>
+          <li>Jorge Iturrioz</li>
+        </ul>
+        </WelcomeDetail>
+      </WelcomeCard>
     </WelcomeWrapper>
     
   );

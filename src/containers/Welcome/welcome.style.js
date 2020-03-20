@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { media } from '../../utils';
+import { PresentationBackground } from '@util-components';
 
 export const WelcomeWrapper = styled.section`
   width: 100%;
-  background:#E7E7E7;
+  background: #a4d1d1;
   background-repeat: repeat;
   padding: 50px 0;
 
@@ -118,4 +119,22 @@ export const WelcomeDetail = styled.div`
 export const WelcomeName = styled.span`
   overflow-wrap: break-word;
   word-break: break-word;
+`;
+
+export const HeaderCard = styled(PresentationBackground)`
+  
+  
+  margin: 30px auto;
+border-radoious: 14px;
+  //Overriding the style guide card flexbox settings
+  max-width: 80% !important;
+  flex-direction: row !important;
+  padding: 10px 0 !important; //temporary fix to a style guide bug
+
+  align-items: center;
+  h1 {
+    margin: 20px;
+    text-align: center;
+    color: black;
+  }
 `;
