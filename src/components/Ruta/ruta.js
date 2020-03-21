@@ -8,6 +8,8 @@ export default class Ruta{
         this.name = file.name;
         this.description = file.description;
         this.photos = [];
+        this.points.map( p => p.photo.map(photo => this.photos.push(photo)));
+        this.currentPhoto=0;
     }
 
      /** Devuelve un array lista con los archivos de tipo photo pertenecientes a un punto */
@@ -30,6 +32,30 @@ export default class Ruta{
         exit.push(new Video(item.author,item.contentUrl,item.datePublished));
         }); 
         return exit;
+    }
+
+    getNextPhoto(){
+        if(this.currentPhoto < this.photos.length-1){
+            this.currentPhoto = this.currentPhoto + 1;
+            
+        }
+        else{
+            this.currentPhoto = 0;
+        }
+        return this.photos[this.currentPhoto];
+    }
+
+    getPreviusPhoto(){
+        if(this.currentPhoto == 0){
+            this.currentPhoto = this.photos.length - 1;
+        }else{
+            this.currentPhoto = this.currentPhoto - 1;
+        }
+        return this.photos[this.currentPhoto];
+    }
+
+    getCurrentPhoto(){
+        return this.photos[this.currentPhoto];
     }
 
     

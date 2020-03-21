@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Map} from "react-leaflet";
+import { Map } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 
 
@@ -12,6 +12,17 @@ export const MapSection = styled.section`
   background-repeat: repeat;
   padding: 30px 30px;
 `;
+
+export const InformationSection = styled.section`
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+  background:#a4d1d1;
+  background-repeat: repeat;
+  padding: 30px 30px;
+`;
+
 
 
 export const Column = styled.div`
@@ -33,6 +44,7 @@ export const Down = styled.div`
 `;
 
 
+
 export const H2Format = styled.h2`
       text-align:center;
       font-size: 3rem;
@@ -49,7 +61,7 @@ export const MapaStyle = styled(Map)`
         float: left;
   `;
 
-  export const UlStyle = styled.ul`
+export const UlStyle = styled.ul`
         margin-left:15%;
   `;
 
@@ -70,8 +82,10 @@ export const LiStyle = styled.li`
 
 export const PStyle = styled.p`
 margin:10%;
-  
 `;
 
+export const ImgSytle = styled.img`
+height: 30vh !important; 
+`
 
 

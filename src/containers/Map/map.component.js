@@ -2,7 +2,7 @@ import React from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './leaflet.css';
-import { Map as LeafletMap,TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import Rutas from '../../components/Ruta/rutas';
 import ReactDOM from 'react-dom';
 
@@ -16,7 +16,9 @@ import {
   MapaStyle,
   LiStyle,
   UlStyle,
-  PStyle
+  PStyle,
+  InformationSection,
+  ImgSytle
 } from './map.style';
 
 /* Método para cambiar la imagen del Marker */
@@ -29,6 +31,7 @@ L.Icon.Default.mergeOptions({
 });
 
 /* Variables */
+var currentRuta;
 var name;
 var description;
 var puntos = []
@@ -38,11 +41,10 @@ var puntos = []
 
 /* Método para cmabiar la ruta actualmento seleccionada */
 function changeRuta(id, e) {
-  let newRuta = Rutas.getRutaByName(id);
-  document.getElementById("name").textContent = newRuta.name;
-  document.getElementById("description").textContent = newRuta.description;
-  puntos =[];
-  newRuta.points.map(p => puntos.push(p.getCoordinates()));
+  currentRuta = Rutas.getRutaByName(id);
+  document.getElementById("name").textContent = currentRuta.name;
+  document.getElementById("description").textContent = currentRuta.description;
+  puntos = [];currentRuta.points.map(p => puntos.push(p.getCoordinates()));
 
   let map = <MapaStyle id="map" center={puntos[0]} zoom={15} >
     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -58,15 +60,14 @@ function changeRuta(id, e) {
 }
 
 /* método que generar el mapa, junto con su nombre, y descripción*/
-class UpForm extends React.Component {
+class Map extends React.Component {
   constructor() {
     super();
-    let ruta = Rutas.getRutaByPosition(1);
-    name = ruta.name;
-    description = ruta.description;
+    currentRuta = Rutas.getRutaByPosition(1);
+    name = currentRuta.name;
+    description = currentRuta.description;
     puntos = []
-    ruta.points.map(p => puntos.push(p.getCoordinates()));
-    console.log(Rutas.getRutaByPosition(1).points[0].photo[0].img)
+    currentRuta.points.map(p => puntos.push(p.getCoordinates()));
 
   }
   render() {
@@ -84,7 +85,6 @@ class UpForm extends React.Component {
             </Marker>
           </MapaStyle>
         </div>
-        <img src = {Rutas.getRutaByPosition(1).points[0].photo[0].img} />
         <Column>
           <H2Format id="name">{name}</H2Format>
           <PStyle id="description">{description}</PStyle>
@@ -96,13 +96,46 @@ class UpForm extends React.Component {
   }
 }
 
+/* método que generar el mapa, junto con su nombre, y descripción*/
+class Information extends React.Component {
+  constructor() {
+    super();
+  }
+
+  previusPhoto(){
+    let newImg = <ImgSytle id="img" src = {currentRuta.getPreviusPhoto().img} />
+    ReactDOM.render(newImg, document.getElementById('imgDiv'));
+  }
+
+  nextPhoto(){
+    let newImg = <ImgSytle id="img" src = {currentRuta.getNextPhoto().img} />
+    ReactDOM.render(newImg, document.getElementById('imgDiv'));
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.previusPhoto}></button>
+        <div id = "imgDiv">
+          <ImgSytle id="img" src = {currentRuta.getCurrentPhoto().img}/>
+        </div>
+        <button onClick={this.nextPhoto}></button>
+      </div>
+    );
+  }
+}
+
 class Mapa extends React.Component {
   render() {
     return (
-      <MapSection>
-        <UpForm></UpForm>
-        <Down></Down>
-      </MapSection>
+      <div>
+        <MapSection>
+          <Map></Map>
+        </MapSection>
+        <InformationSection>
+          <Information></Information>
+        </InformationSection>
+
+      </div>
 
     );
   }
