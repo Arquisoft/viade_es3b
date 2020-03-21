@@ -1,11 +1,11 @@
 
 export class Point{
-    constructor(latitude,longitude,altitude,photo,video){
+    constructor(latitude,longitude,altitude,photos,videos){
         this.latitude = latitude;
         this.longitude = longitude;
         this.altitude = altitude;
-        this.photo = photo;
-        this.video = video;
+        this.photos = photos;
+        this.videos = videos;
     }
 
     getCoordinates(){

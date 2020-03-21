@@ -91,5 +91,8 @@ export const ImgPopupSytle = styled.img`
 max-height: 150px; 
 max-width: 250px; 
 `
-
+export const H1FormatPopup = styled.h1`
+      text-align:center;
+      font-size: 1rem;
+`;
 

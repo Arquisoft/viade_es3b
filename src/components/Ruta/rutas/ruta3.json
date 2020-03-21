@@ -11,42 +11,116 @@
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.544554,
-                "longitude": -5.663473
+                "longitude": -5.663473,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 0,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.542203 ,
-                "longitude": -5.660811
+                "longitude": -5.660811,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 2,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                      {
+                        "@type": "ImageObject",
+                        "author": "Jane Doe",
+                        "contentUrl": "ruta3.1.jpg",
+                        "datePublished": "2008-01-25"
+                      },
+                      {
+                        "@type": "ImageObject",
+                        "author": "Jane Doe",
+                        "contentUrl": "ruta3.2.jpg",
+                        "datePublished": "2008-01-25"
+                      }
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude":  43.541334 ,
-                "longitude":  -5.656986
+                "longitude":  -5.656986,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 0,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.540363 ,
-                "longitude": -5.650835
+                "longitude": -5.650835,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 0,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.540261,
-                "longitude":  -5.646446
+                "longitude":  -5.646446,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 0,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude":  43.540874 ,
-                "longitude":  -5.644348
+                "longitude":  -5.644348,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 0,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.54182 ,
-                "longitude":  -5.64218
+                "longitude":  -5.64218,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 0,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.54205 ,
-                "longitude": -5.638214
+                "longitude": -5.638214,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 2,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                      {
+                        "@type": "ImageObject",
+                        "author": "Jane Doe",
+                        "contentUrl": "ruta3.3.jpg",
+                        "datePublished": "2008-01-25"
+                      }
+                    ]
+                  }
             }
         ]
     }

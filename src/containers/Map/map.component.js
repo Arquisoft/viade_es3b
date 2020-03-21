@@ -19,7 +19,8 @@ import {
   PStyle,
   InformationSection,
   ImgSytle,
-  ImgPopupSytle
+  ImgPopupSytle,
+  H1FormatPopup
 } from './map.style';
 
 /* Método para cambiar la imagen del Marker */
@@ -45,31 +46,57 @@ function changeRuta(id, e) {
   currentRuta = Rutas.getRutaByName(id);
   document.getElementById("name").textContent = currentRuta.name;
   document.getElementById("description").textContent = currentRuta.description;
-  changeMap(id);
+  changeMap();
   changePhotos();
 }
 
 function getMarkets() {
-  return  <React.Fragment><Marker position={puntos[0]}>
-    <Popup>Inicio</Popup>
-  </Marker>
-    <Marker position={puntos[puntos.length - 1]}>
-      <Popup>Fin</Popup>
+  return <React.Fragment>
+    <Marker position={puntos[0]}>
+      {getFirtsPopup()}
     </Marker>
-    </React.Fragment>
-  ;
+     {getCenterMarket()}
+    <Marker position={puntos[puntos.length - 1]}>
+      {getLastPopup()}
+    </Marker>
+  </React.Fragment>
+    ;
+}
+
+function getFirtsPopup() {
+  if (currentRuta.points[0].photos.length != 0)
+    return <Popup><H1FormatPopup>Inicio</H1FormatPopup><ImgPopupSytle src={currentRuta.points[0].photos[0].img} /></Popup>;
+  else
+    return <Popup><H1FormatPopup>Inicio</H1FormatPopup></Popup>;
+}
+
+function getLastPopup() {
+  if (currentRuta.points[currentRuta.points.length - 1].photos.length != 0)
+    return <Popup><H1FormatPopup>Fin</H1FormatPopup><ImgPopupSytle src={currentRuta.points[currentRuta.points.length - 1].photos[currentRuta.points[currentRuta.points.length - 1].photos.length - 1].img} /></Popup>
+  else
+    return <Popup><H1FormatPopup>Fin</H1FormatPopup></Popup>
+}
+
+function getCenterMarket(){
+    let center;
+   puntos.map((p, i = 0) =>{ center = getPopup(i); i = i +1 ;})
+   return center;
+  }
+
+
+function getPopup(i) {
+  if (i != 0 && i != currentRuta.points.length -1 && currentRuta.points[i].photos.length != 0)
+      return <Popup><ImgPopupSytle src={currentRuta.points[i].photos[0].img} /></Popup>
 }
 
 function getMap() {
+  puntos = [];
   currentRuta.points.map(p => puntos.push(p.getCoordinates()));
-
   return <MapaStyle id="map" center={puntos[0]} zoom={15} >
     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     <Polyline color={'blue'} positions={puntos}></Polyline>
       {getMarkets()}
   </MapaStyle>;
-
-
 }
 
 

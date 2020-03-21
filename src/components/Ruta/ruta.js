@@ -8,7 +8,7 @@ export default class Ruta{
         this.name = file.name;
         this.description = file.description;
         this.photos = [];
-        this.points.map( p => p.photo.map(photo => this.photos.push(photo)));
+        this.points.map( p => p.photos.map(photo => this.photos.push(photo)));
         this.currentPhoto=0;
     }
 
