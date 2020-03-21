@@ -16,11 +16,7 @@ export default class Ruta {
     createPhoto(p) {
         let media = p.media;
         let exit = [];
-        media.itemListElement.map(item => {
-            //console.log(item[0]);
-            //if(item.type == "PhotoObject")
-            exit.push(new Photo(item.author, item.contentUrl, item.datePublished));
-        });
+        media.itemListElement.forEach(item => {exit.push(new Photo(item.author, item.contentUrl, item.datePublished)); });
         return exit;
     }
 
@@ -28,8 +24,8 @@ export default class Ruta {
     createVideo(p) {
         let media = p.media;
         let exit = [];
-        media.itemListElement.map(item => {
-            if (item.type == "VideoObject")
+        media.itemListElement.forEach(item => {
+            if (item.type === "VideoObject")
                 exit.push(new Video(item.author, item.contentUrl, item.datePublished));
         });
         return exit;
@@ -47,7 +43,7 @@ export default class Ruta {
     }
 
     getPreviusPhoto() {
-        if (this.currentPhoto == 0) {
+        if (this.currentPhoto === 0) {
             this.currentPhoto = this.photos.length - 1;
         } else {
             this.currentPhoto = this.currentPhoto - 1;

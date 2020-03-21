@@ -10,7 +10,6 @@ import {
   Column,
   MapSection,
   Up,
-  Down,
   H2Format,
   H3Format,
   MapaStyle,
@@ -37,7 +36,7 @@ var currentRuta;
 var name;
 var description;
 var puntos = [];
-var distance;
+var distance = LeafletMap;
 
 
 
@@ -66,14 +65,14 @@ function getMarkets() {
 }
 
 function getFirtsPopup() {
-  if (currentRuta.points[0].photos.length != 0)
+  if (currentRuta.points[0].photos.length !== 0)
     return <Popup><H1FormatPopup>Inicio</H1FormatPopup><ImgPopupSytle src={currentRuta.points[0].photos[0].img} /></Popup>;
   else
     return <Popup><H1FormatPopup>Inicio</H1FormatPopup></Popup>;
 }
 
 function getLastPopup() {
-  if (currentRuta.points[currentRuta.points.length - 1].photos.length != 0)
+  if (currentRuta.points[currentRuta.points.length - 1].photos.length !== 0)
     return <Popup><H1FormatPopup>Fin</H1FormatPopup><ImgPopupSytle src={currentRuta.points[currentRuta.points.length - 1].photos[currentRuta.points[currentRuta.points.length - 1].photos.length - 1].img} /></Popup>
   else
     return <Popup><H1FormatPopup>Fin</H1FormatPopup></Popup>
@@ -83,18 +82,18 @@ function getCenterMarket() {
   let centerMarket = [];
   let aux;
 
-  puntos.map((p, i = 0) => {
+  puntos.forEach((p, i = 0) => {
     aux = getPopup(i);
     i = i + 1;
-    if(aux != null) centerMarket.push(aux);
+    if(aux !== null) centerMarket.push(aux);
   })
-  if(centerMarket.length != 0)
+  if(centerMarket.length !== 0)
     return centerMarket[0];
 }
 
 
 function getPopup(i) {
-  if (i != 0 && i != currentRuta.points.length - 1 && currentRuta.points[i].photos.length != 0)
+  if (i !== 0 && i !== currentRuta.points.length - 1 && currentRuta.points[i].photos.length !== 0)
     return <Marker position={puntos[i]}><Popup><ImgPopupSytle src={currentRuta.points[i].photos[0].img} /></Popup></Marker>
 
   return null;
@@ -102,7 +101,7 @@ function getPopup(i) {
 
 function getMap() {
   puntos = [];
-  currentRuta.points.map(p => puntos.push(p.getCoordinates()));
+  currentRuta.points.forEach(p => puntos.push(p.getCoordinates()));
   return <MapaStyle id="map" center={puntos[0]} zoom={15} >
     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     <Polyline color={'blue'} positions={puntos}></Polyline>
@@ -148,21 +147,25 @@ class Map extends React.Component {
   }
 }
 
+
 /* método que generar el mapa, junto con su nombre, y descripción*/
 class Information extends React.Component {
-  constructor() {
-    super();
-  }
 
   previusPhoto() {
     let newImg = <ImgSytle id="img" src={currentRuta.getPreviusPhoto().img} />
     ReactDOM.render(newImg, document.getElementById('imgDiv'));
   }
 
+  
+  
+
   nextPhoto() {
     let newImg = <ImgSytle id="img" src={currentRuta.getNextPhoto().img} />
     ReactDOM.render(newImg, document.getElementById('imgDiv'));
   }
+
+  
+
   render() {
     return (
       <div>

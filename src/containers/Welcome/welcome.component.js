@@ -1,6 +1,6 @@
 import React from 'react';
 import { Uploader } from '@inrupt/solid-react-components';
-import { Trans, useTranslation } from 'react-i18next';
+import {useTranslation } from 'react-i18next';
 import {
   WelcomeWrapper,
   WelcomeCard,
@@ -101,7 +101,7 @@ export const WelcomePageContent = props => {
   );
 };
 
-class Introduccion extends React.Component {
+/*class Introduccion extends React.Component {
   render() {
     return (
       <div className="Introduccion">
@@ -118,4 +118,4 @@ class Introduccion extends React.Component {
       </div>
     );
   }
-}
+}*/

@@ -2,9 +2,6 @@ import React from "react";
 
 class Uploader extends React.Component {
 	
-  constructor(props) {
-    super(props);
-  }
 
    async run() {
 	   
@@ -14,7 +11,7 @@ class Uploader extends React.Component {
 	const filesInput = document.getElementById('file-browser-input');
 	const files = filesInput.files;
 	
-	const containerInput = document.getElementById('container');
+	//const containerInput = document.getElementById('container');
 	
 	for (let i = 0; i < files.length; i++) {
         
