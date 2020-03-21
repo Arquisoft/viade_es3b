@@ -87,5 +87,9 @@ margin:10%;
 export const ImgSytle = styled.img`
 height: 30vh !important; 
 `
+export const ImgPopupSytle = styled.img`
+max-height: 150px; 
+max-width: 250px; 
+`
 
 

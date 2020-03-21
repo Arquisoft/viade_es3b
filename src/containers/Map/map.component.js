@@ -18,7 +18,8 @@ import {
   UlStyle,
   PStyle,
   InformationSection,
-  ImgSytle
+  ImgSytle,
+  ImgPopupSytle
 } from './map.style';
 
 /* Método para cambiar la imagen del Marker */
@@ -45,28 +46,40 @@ function changeRuta(id, e) {
   document.getElementById("name").textContent = currentRuta.name;
   document.getElementById("description").textContent = currentRuta.description;
   changeMap(id);
-  changePhotos();  
+  changePhotos();
 }
 
-function changeMap(id){
-  puntos = [];
-  currentRuta.points.map(p => puntos.push(p.getCoordinates()));
-
-  let map = <MapaStyle id="map" center={puntos[0]} zoom={15} >
-    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-    <Polyline color={'blue'} positions={puntos}></Polyline>
-    <Marker position={puntos[0]}>
-      <Popup>Inicio</Popup>
-    </Marker>
+function getMarkets() {
+  return  <React.Fragment><Marker position={puntos[0]}>
+    <Popup>Inicio</Popup>
+  </Marker>
     <Marker position={puntos[puntos.length - 1]}>
       <Popup>Fin</Popup>
     </Marker>
-  </MapaStyle>;
-  ReactDOM.render(map, document.getElementById('map'));
+    </React.Fragment>
+  ;
 }
 
-function changePhotos(){
-  let newImg = <ImgSytle id="img" src = {currentRuta.getCurrentPhoto().img} />
+function getMap() {
+  currentRuta.points.map(p => puntos.push(p.getCoordinates()));
+
+  return <MapaStyle id="map" center={puntos[0]} zoom={15} >
+    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+    <Polyline color={'blue'} positions={puntos}></Polyline>
+      {getMarkets()}
+  </MapaStyle>;
+
+
+}
+
+
+
+function changeMap() {
+  ReactDOM.render(getMap(), document.getElementById('map'));
+}
+
+function changePhotos() {
+  let newImg = <ImgSytle id="img" src={currentRuta.getCurrentPhoto().img} />
   ReactDOM.render(newImg, document.getElementById('imgDiv'));
 }
 
@@ -77,24 +90,12 @@ class Map extends React.Component {
     currentRuta = Rutas.getRutaByPosition(1);
     name = currentRuta.name;
     description = currentRuta.description;
-    puntos = []
-    currentRuta.points.map(p => puntos.push(p.getCoordinates()));
-
   }
   render() {
     return (
       <Up>
         <div id="map">
-          <MapaStyle id="map" center={puntos[0]} zoom={15} >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Polyline color={'blue'} positions={puntos}></Polyline>
-            <Marker position={puntos[0]}>
-              <Popup>Inicio</Popup>
-            </Marker>
-            <Marker position={puntos[puntos.length - 1]}>
-              <Popup>Fin</Popup>
-            </Marker>
-          </MapaStyle>
+          {getMap()}
         </div>
         <Column>
           <H2Format id="name">{name}</H2Format>
@@ -113,21 +114,21 @@ class Information extends React.Component {
     super();
   }
 
-  previusPhoto(){
-    let newImg = <ImgSytle id="img" src = {currentRuta.getPreviusPhoto().img} />
+  previusPhoto() {
+    let newImg = <ImgSytle id="img" src={currentRuta.getPreviusPhoto().img} />
     ReactDOM.render(newImg, document.getElementById('imgDiv'));
   }
 
-  nextPhoto(){
-    let newImg = <ImgSytle id="img" src = {currentRuta.getNextPhoto().img} />
+  nextPhoto() {
+    let newImg = <ImgSytle id="img" src={currentRuta.getNextPhoto().img} />
     ReactDOM.render(newImg, document.getElementById('imgDiv'));
   }
   render() {
     return (
       <div>
         <button onClick={this.previusPhoto}></button>
-        <div id = "imgDiv">
-          <ImgSytle id="img" src = {currentRuta.getCurrentPhoto().img}/>
+        <div id="imgDiv">
+          <ImgSytle id="img" src={currentRuta.getCurrentPhoto().img} />
         </div>
         <button onClick={this.nextPhoto}></button>
       </div>

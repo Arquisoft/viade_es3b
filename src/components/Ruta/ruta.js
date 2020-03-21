@@ -17,7 +17,7 @@ export default class Ruta{
         let media = p.media;
         let exit = [];
         media.itemListElement.map(item  =>  {
-            //console.log(item.'@type');
+            //console.log(item[0]);
             //if(item.type == "PhotoObject")
         exit.push(new Photo(item.author,item.contentUrl,item.datePublished));
         }); 
