@@ -8,38 +8,40 @@ export const NavigationItems = [
     label: 'navBar.welcome',
     to: '/welcome'
   },
- /* {
-    id: 'profile',
-    icon: '/img/people.svg',
-    label: 'navBar.profile',
-    to: '/profile'
-  },
+  /* {
+     id: 'profile',
+     icon: '/img/people.svg',
+     label: 'navBar.profile',
+     to: '/profile'
+   },
+   {
+ <<<<<<< HEAD
+     id: 'tictactoe',
+     icon: '/img/icon/tictactoe.svg',
+     label: 'navBar.tictactoe',
+     to: '/tictactoe'
+   },
+   {
+     id: 'text-editor',
+     icon: '/img/icon/files.svg',
+     label: 'navBar.text-editor',
+     to: '/text-editor'
+   },*/
+   
   {
-<<<<<<< HEAD
-    id: 'tictactoe',
-    icon: '/img/icon/tictactoe.svg',
-    label: 'navBar.tictactoe',
-    to: '/tictactoe'
+    id: 'upload',
+    icon: '/img/viade-icons/directions-out.svg',
+    label: 'navBar.upload',
+    to: '/upload'
   },
-  {
-    id: 'text-editor',
-    icon: '/img/icon/files.svg',
-    label: 'navBar.text-editor',
-    to: '/text-editor'
-  },*/
   {
     id: 'map',
-    icon: '/img/viade-icons/directions-out.svg',
+    icon: '/img/icon/map.png',
     label: 'navBar.myTrails',
     to: '/map'
   },
   {
-	id: 'upload',
-    icon: '/img/icon/map.png',
-    label: 'navBar.upload',
-    to: '/upload'
-  },
-    {id: 'friends',
+    id: 'friends',
     icon: '/img/viade-icons/people.svg',
     label: 'navBar.friends',
     to: '/friends'

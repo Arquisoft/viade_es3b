@@ -55,7 +55,7 @@ function getMarkets() {
     <Marker position={puntos[0]}>
       {getFirtsPopup()}
     </Marker>
-     {getCenterMarket()}
+    {getCenterMarket()}
     <Marker position={puntos[puntos.length - 1]}>
       {getLastPopup()}
     </Marker>
@@ -77,16 +77,25 @@ function getLastPopup() {
     return <Popup><H1FormatPopup>Fin</H1FormatPopup></Popup>
 }
 
-function getCenterMarket(){
-    let center;
-   puntos.map((p, i = 0) =>{ center = getPopup(i); i = i +1 ;})
-   return center;
-  }
+function getCenterMarket() {
+  let centerMarket = [];
+  let aux;
+
+  puntos.map((p, i = 0) => {
+    aux = getPopup(i);
+    i = i + 1;
+    if(aux != null) centerMarket.push(aux);
+  })
+  if(centerMarket.length != 0)
+    return centerMarket[0];
+}
 
 
 function getPopup(i) {
-  if (i != 0 && i != currentRuta.points.length -1 && currentRuta.points[i].photos.length != 0)
-      return <Popup><ImgPopupSytle src={currentRuta.points[i].photos[0].img} /></Popup>
+  if (i != 0 && i != currentRuta.points.length - 1 && currentRuta.points[i].photos.length != 0)
+    return <Marker position={puntos[i]}><Popup><ImgPopupSytle src={currentRuta.points[i].photos[0].img} /></Popup></Marker>
+
+  return null;
 }
 
 function getMap() {
@@ -95,7 +104,7 @@ function getMap() {
   return <MapaStyle id="map" center={puntos[0]} zoom={15} >
     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     <Polyline color={'blue'} positions={puntos}></Polyline>
-      {getMarkets()}
+    {getMarkets()}
   </MapaStyle>;
 }
 
@@ -114,7 +123,7 @@ function changePhotos() {
 class Map extends React.Component {
   constructor() {
     super();
-    currentRuta = Rutas.getRutaByPosition(1);
+    currentRuta = Rutas.getRutaByPosition(0);
     name = currentRuta.name;
     description = currentRuta.description;
   }
