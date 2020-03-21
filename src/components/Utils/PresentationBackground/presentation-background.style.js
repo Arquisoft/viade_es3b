@@ -5,7 +5,7 @@ export const Image = styled.div`
     background-image: url(${props => props.image});
   }
   @media screen and (max-width: 992px) {
-    background-color: #a4d1d1;
+    background-color: #8ed2d2;
   }
   background-repeat: no-repeat;
   background-size: cover;

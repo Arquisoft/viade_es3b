@@ -21,7 +21,7 @@
     "notSharable": "(logéate y carga undocumento en tu própio pod para poder dar acceso)"
   },
   "login": {
-    "title": "¡Hola! Bienvenido a Viade.",
+    "title": "¡Hola! Bienvenid@ a Viade.",
     "loginTitle": "Iniciar sesión",
     "register": "Registrarse por una identidad Solid",
     "solidHelp": "Qué es una identidad Solid?",
@@ -39,7 +39,7 @@
     }
   },
   "register": {
-    "title": "Hola! Bienvenido a Solid.",
+    "title": "Hola! Bienvenid@ a Solid.",
     "step1Title": "Selecciona tu Proveedor",
     "whatIsAProvider": "Qué es un Proveedor, cómo escoger uno?",
     "alreadySolid": "Ya tengo una identidad Solid",
@@ -80,7 +80,10 @@
     "redirectButton": "Llevarme a la página principal"
   },
   "welcome": {
-    "welcome": "Bienvenido",
+    "whatIsViade": "¿Qúe es Viade?",
+    "viadeIs": "Viade es un sistema de gestión de rutas descentralizado basado en las  especificaciones Solid.",
+    "realized":"Esta aplicación ha sido realizada por:",
+    "welcome": "Bienvenid@",
     "doneMessage": "¿Terminaste?",
     "title": "<0>Esta aplicacion fue generada con <1>Solid React SDK by inrupt.</1></0>",
     "description": "<0>El <1>Solid React SDK by inrupt</1>  es una combinación de librerias, componentes, documentación, buenas prácticas y un generador de aplicaciones diseñada para acelerar el desarrollo de aplicaciones Solid de alta calidad:</0>",
