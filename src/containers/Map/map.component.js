@@ -21,6 +21,12 @@ import {
   PStyle
 } from './map.style';
 
+/* Variables */
+var name;
+var  description;
+var puntos = []
+
+/* Método para cambiar la imagen del Marker */
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -29,101 +35,62 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
-class DownForm extends React.Component {
-  constructor() {
-    super();
-    this.name = Rutas.getRutaByPosition(1).name;
-    this.description = Rutas.getRutaByPosition(1).description;
-  }
 
-  render() {
-    return (
+ /* Método para cmabiar la ruta actualmento seleccionada */
+ function changeRuta(id, e) {
+  let newRuta = Rutas.getRutaByName(id);
+  document.getElementById("name").textContent = newRuta.name;
+  document.getElementById("description").textContent = newRuta.description;
 
+  puntos = newRuta.point;
 
-      <PStyle>{this.description}</PStyle>
-    );
-  }
+  let a = <MapaStyle id="map" center={puntos[0]} zoom={15} >
+    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+    <Polyline color={'blue'} positions={puntos}></Polyline>
+    <Marker position={puntos[0]}>
+      <Popup>Inicio</Popup>
+    </Marker>
+    <Marker position={puntos[puntos.length - 1]}>
+      <Popup>Fin</Popup>
+    </Marker>
+  </MapaStyle>;
+  ReactDOM.render(a, document.getElementById('map'));
 }
-
-class Line extends React.Component {
-  render() {
-    const position = this.puntos[0];
-    return (
-      <div>
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Polyline color={'blue'} positions={this.puntos}></Polyline>
-        <Marker position={this.puntos[0]}>
-          <Popup>Inicio</Popup>
-        </Marker>
-        <Marker position={this.puntos[this.puntos.length - 1]}>
-          <Popup>Fin</Popup>
-        </Marker>
-      </div>
-    );
-  }
-}
-
 
 class UpForm extends React.Component {
-
   constructor() {
     super();
-    this.name = Rutas.getNames()[0];
-    this.description = Rutas.getRutaByPosition(0).description;
-    this.puntos = []
-    Rutas.getRutaByPosition(1).points.map(p => this.puntos.push(p.getCoordinates()));
+    name = Rutas.getNames()[0];
+    description = Rutas.getRutaByPosition(0).description;
+    puntos = []
+    Rutas.getRutaByPosition(0).points.map(p => puntos.push(p.getCoordinates()));
 
   }
-  changeName(id, e) {
-    var newRuta = Rutas.getRutaByName(id);
-    document.getElementById("name").textContent = newRuta.name;
-    document.getElementById("description").textContent = newRuta.description;
-
-    this.puntos = newRuta.point;
-    const position = this.puntos[0];
-
-    var a = <MapaStyle id="map" center={position} zoom={15} >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <Polyline color={'blue'} positions={this.puntos}></Polyline>
-      <Marker position={this.puntos[0]}>
-        <Popup>Inicio</Popup>
-      </Marker>
-      <Marker position={this.puntos[this.puntos.length - 1]}>
-        <Popup>Fin</Popup>
-      </Marker>
-    </MapaStyle>;
-
-    ReactDOM.render(a, document.getElementById('map'));
-  }
-
   render() {
-    const position = this.puntos[0];
     return (
       <Up>
         <div id="map">
-          <MapaStyle center={position} zoom={15} >
+          <MapaStyle id="map" center={puntos[0]} zoom={15} >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Polyline color={'blue'} positions={this.puntos}></Polyline>
-            <Marker position={this.puntos[0]}>
+            <Polyline color={'blue'} positions={puntos}></Polyline>
+            <Marker position={puntos[0]}>
               <Popup>Inicio</Popup>
             </Marker>
-            <Marker position={this.puntos[this.puntos.length - 1]}>
+            <Marker position={puntos[puntos.length - 1]}>
               <Popup>Fin</Popup>
             </Marker>
           </MapaStyle>
         </div>
         <Column>
-          <H2Format id="name">{this.name}</H2Format>
-          <PStyle id="description">{this.description}</PStyle>
+          <H2Format id="name">{name}</H2Format>
+          <PStyle id="description">{description}</PStyle>
           <H3Format>Tus rutas</H3Format>
-          <UlStyle>{Rutas.getNames().map((n, i) => <LiStyle key={i} onClick={(e) => this.changeName(n, e)}> {n} </LiStyle>)}</UlStyle>
+          <UlStyle>{Rutas.getNames().map((n, i) => <LiStyle key={i} onClick={(e) => changeRuta(n, e)}> {n} </LiStyle>)}</UlStyle>
         </Column>
       </Up>
     );
   }
 }
-
-
 
 class Mapa extends React.Component {
   render() {
