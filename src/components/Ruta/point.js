@@ -11,4 +11,5 @@ export class Point{
     getCoordinates(){
         return [this.latitude,this.longitude];
     }
+
 }

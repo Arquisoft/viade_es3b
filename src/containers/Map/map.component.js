@@ -36,7 +36,8 @@ L.Icon.Default.mergeOptions({
 var currentRuta;
 var name;
 var description;
-var puntos = []
+var puntos = [];
+var distance;
 
 
 
@@ -46,6 +47,7 @@ function changeRuta(id, e) {
   currentRuta = Rutas.getRutaByName(id);
   document.getElementById("name").textContent = currentRuta.name;
   document.getElementById("description").textContent = currentRuta.description;
+  document.getElementById("distance").textContent = currentRuta.getDistance() + " KM";
   changeMap();
   changePhotos();
 }
@@ -126,6 +128,7 @@ class Map extends React.Component {
     currentRuta = Rutas.getRutaByPosition(0);
     name = currentRuta.name;
     description = currentRuta.description;
+    distance = currentRuta.getDistance() + " KM";
   }
   render() {
     return (
@@ -136,6 +139,7 @@ class Map extends React.Component {
         <Column>
           <H2Format id="name">{name}</H2Format>
           <PStyle id="description">{description}</PStyle>
+          <PStyle id= "distance" >{distance}</PStyle>
           <H3Format>Tus rutas</H3Format>
           <UlStyle>{Rutas.getNames().map((n, i) => <LiStyle key={i} onClick={(e) => changeRuta(n, e)}> {n} </LiStyle>)}</UlStyle>
         </Column>
