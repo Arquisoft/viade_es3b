@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Map, Marker } from "react-leaflet";
+import { Map} from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 
 

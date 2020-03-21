@@ -11,32 +11,87 @@
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.3551061,
-                "longitude": -5.8512792
+                "longitude": -5.8512792,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 0,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.3547082,
-                "longitude": -5.8507937
+                "longitude": -5.8507937,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 0,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.3545444,
-                "longitude": -5.8494473
+                "longitude": -5.8494473,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 2,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                      {
+                        "@type": "ImageObject",
+                        "author": "Jane Doe",
+                        "contentUrl": "foto.jpg",
+                        "datePublished": "2008-01-25"
+                      },
+                      {
+                        "@type": "ImageObject",
+                        "author": "Jane Doe",
+                        "contentUrl": "montaña.jpg",
+                        "datePublished": "2008-01-25"
+                      }
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.3546653,
-                "longitude": -5.8490288
+                "longitude": -5.8490288,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 0,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.354872,
-                "longitude": -5.8487445
+                "longitude": -5.8487445,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 0,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                      
+                    ]
+                  }
             },
             {
                 "@type": "GeoCoordinates",
                 "latitude": 43.3552699,
-                "longitude": -5.8485675
+                "longitude": -5.8485675,
+                "media": {
+                    "@type": "ItemList",
+                    "numberOfItems": 0,
+                    "itemListOrder": "http://schema.org/ItemListOrderDescending",
+                    "itemListElement": [
+                    ]
+                  }
             }
         ]
     }
