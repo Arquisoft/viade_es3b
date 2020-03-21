@@ -44,7 +44,13 @@ function changeRuta(id, e) {
   currentRuta = Rutas.getRutaByName(id);
   document.getElementById("name").textContent = currentRuta.name;
   document.getElementById("description").textContent = currentRuta.description;
-  puntos = [];currentRuta.points.map(p => puntos.push(p.getCoordinates()));
+  changeMap(id);
+  changePhotos();  
+}
+
+function changeMap(id){
+  puntos = [];
+  currentRuta.points.map(p => puntos.push(p.getCoordinates()));
 
   let map = <MapaStyle id="map" center={puntos[0]} zoom={15} >
     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -57,6 +63,11 @@ function changeRuta(id, e) {
     </Marker>
   </MapaStyle>;
   ReactDOM.render(map, document.getElementById('map'));
+}
+
+function changePhotos(){
+  let newImg = <ImgSytle id="img" src = {currentRuta.getCurrentPhoto().img} />
+  ReactDOM.render(newImg, document.getElementById('imgDiv'));
 }
 
 /* método que generar el mapa, junto con su nombre, y descripción*/
