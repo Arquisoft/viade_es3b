@@ -9,4 +9,6 @@ In this part of the documentation we will write about some risks and technical d
 |Teamates |Working with so much people in a team without knowing each others is a risk in the development of the application.
 |Time |We have to do other subjects this semester, and this can become a problem for the development of this application. 
 |Language | Using another lenguage in the applicaton is hard when you are not used to use it.
+|Spec | Is hard to negotiate with other teams or people for the standarization of the store of the rutes in the PODs.
+|Load Time| The load time of the application is elevated right now and we want to reduce it.
 |===
