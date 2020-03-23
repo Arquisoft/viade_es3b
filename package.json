@@ -107,7 +107,7 @@
   },
   "name": "viade_es3b",
   "version": "0.1.0",
-  "homepage":".",
+  "homepage":"https://arquisoft.github.io/viade_es3b/",
   "private": true,
   "devDependencies": {
     "@babel/core": "7.1.6",
