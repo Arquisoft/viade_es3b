@@ -108,7 +108,7 @@
   "name": "viade_es3b",
   "version": "0.1.0",
   "homepage":".",
-  "private": false,
+  "private": true,
   "devDependencies": {
     "@babel/core": "7.1.6",
     "@babel/runtime": "^7.4.0",
