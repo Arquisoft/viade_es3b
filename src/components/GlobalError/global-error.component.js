@@ -18,7 +18,7 @@ type Props = {
 export const GlobalError = ({ info }: Props) => (
   <GlobalErrorWrapper>
     <ImageWrapper>
-      <img src="/img/error-ufo.svg" alt="Error" />
+      <img src="/viade_es3b/img/error-ufo.svg" alt="Error" />
     </ImageWrapper>
     <DetailWrapper>
       <ErrorTitle data-testid="error-title">Error:</ErrorTitle>
