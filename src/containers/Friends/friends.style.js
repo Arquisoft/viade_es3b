@@ -21,6 +21,7 @@ export const FriendsWrapper = styled.section`
 `;
 
 export const FriendsContainer = styled.section`
+  width: 100%;
   max-width: 80% !important;
   display: flex;
   flex-direction: row !important;
@@ -52,7 +53,7 @@ export const FriendsTrailsCard = styled.div`
   margin: 30px 0px 30px 40px;
 
   padding: 0 0 50px !important;
-  
+  min-height: 600px;
   justify-content: flex-start !important;
 
   @media screen and (max-width: 1000px) {
