@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import { media } from '../../utils';
 
-export const WelcomeWrapper = styled.section`
+export const FriendsWrapper = styled.section`
   width: 100%;
   background:#E7E7E7;
-  background-repeat: repeat;
   padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  
 
   h3 {
     color: #666666;
@@ -18,30 +20,73 @@ export const WelcomeWrapper = styled.section`
   }
 `;
 
-export const WelcomeCard = styled.div`
-  background-color: #fff;
-  margin: 30px auto;
-
-  //Overriding the style guide card flexbox settings
+export const FriendsContainer = styled.section`
   max-width: 80% !important;
+  display: flex;
   flex-direction: row !important;
-  padding: 50px 0 !important; //temporary fix to a style guide bug
-
-  align-items: center;
-
-  a {
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  button {
-    margin-left: 8px;
+  align-items:flex-start;
+  align-content:flex-start;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column !important;
   }
 `;
 
-export const WelcomeLogo = styled.div`
+export const FriendsCard = styled.div`
+  background-color: #fff;
+  margin: 30px auto;
+  
+  width: 40% !important;
+  min-height: 500px;
+  padding: 0 0 50px !important;
+  
+  justify-content: flex-start !important;
+  
+  @media screen and (max-width: 1000px) {
+    width: 100% !important;
+    min-height: 300px;
+  }
+`;
+
+export const FriendsTrailsCard = styled.div`
+  background-color: #fff;
+  margin: 30px 0px 30px 40px;
+
+  padding: 0 0 50px !important;
+  
+  justify-content: flex-start !important;
+
+  @media screen and (max-width: 1000px) {
+    margin: 30px auto;
+  }
+`;
+
+export const FriendsCardTitle = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  border-bottom: 1px solid rgba(8, 53, 117, 0.1);
+  h4 {
+    margin: 0px;
+    padding: 15px;
+    font-size: 2rem;
+    width: 100%;
+    text-align: center;
+  }
+  button {
+    background: white !important;
+    border: none !important;
+    border-radius: 0 !important;
+    border-left: 1px solid rgba(8, 53, 117, 0.1) !important;
+    transition: all 0.3s ease-in !important;
+    &:hover {
+      background: rgba(8, 53, 117, 0.1) !important;
+    }
+  }
+`;
+
+export const FriendsLogo = styled.div`
   width: 50%;
   height: 100%;
 
@@ -52,7 +97,7 @@ export const WelcomeLogo = styled.div`
   }
 `;
 
-export const WelcomeProfile = styled.div`
+export const FriendsProfile = styled.div`
   height: 100%;
   text-align: center;
   position: relative;
@@ -102,7 +147,7 @@ export const ImageContainer = styled.div`
   height: 128px;
 `;
 
-export const WelcomeDetail = styled.div`
+export const FriendsDetail = styled.div`
   padding: 1rem 3.5rem;
 
   p,
@@ -115,7 +160,7 @@ export const WelcomeDetail = styled.div`
   }
 `;
 
-export const WelcomeName = styled.span`
+export const FriendsName = styled.span`
   overflow-wrap: break-word;
   word-break: break-word;
 `;

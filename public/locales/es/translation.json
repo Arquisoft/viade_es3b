@@ -252,5 +252,18 @@
     "load": "Cargar",
     "save": "Guardar",
     "grantAccess": "Dar Acceso"
+  },
+  "friends": {
+    "title": "Amigos",
+    "addFriend": "Añadir amigo",
+    "sendRequest": "Enviar solicitud",
+    "requests": {
+      "title": "Solicitudes de amistad",
+      "send": "Enviadas",
+      "receive": "Recibidas"
+    },
+    "trails": {
+      "title": "Rutas de mis amigos"
+    }
   }
 }
