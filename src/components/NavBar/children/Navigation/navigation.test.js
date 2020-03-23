@@ -13,7 +13,7 @@ describe.only('Navigation', () => {
       id: 'welcome',
       icon: 'img/icon/apps.svg',
       label: 'Welcome',
-      to: '/welcome'
+      to: '/viade_es3b/welcome'
     }
   ];
 

@@ -47,7 +47,7 @@ const NotLoggedInLayout = props => {
       )}
     />
   ) : (
-    <Redirect to="/welcome" />
+    <Redirect to="/viade_es3b/welcome" />
   );
 };
 

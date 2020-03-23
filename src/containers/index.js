@@ -21,6 +21,5 @@ export {
   TextEditor,
   Mapa,
   Uploader,
-
   Friends
 };
