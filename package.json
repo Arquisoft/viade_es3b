@@ -51,9 +51,9 @@
     "styled-components": "^4.1.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --coverage",
+    "test": "node scripts/test.js",
     "docs": "shx rm -rf build/docs && asciidoctor -D build/docs -a imagesdir=./images -r asciidoctor-diagram src/docs/index.adoc && shx cp -R src/docs/images build/docs",
     "eject": "react-scripts eject"
   },
@@ -102,7 +102,7 @@
   "name": "viade_es3b",
   "version": "0.1.0",
   "homepage": ".",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "@babel/core": "7.1.6",
     "@babel/runtime": "^7.4.0",
