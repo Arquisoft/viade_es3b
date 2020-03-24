@@ -7,7 +7,6 @@ export const DropdownContainer = styled.div`
   height: auto;
   width: 100%;
   padding: 0 !important;
-
   .icon {
     margin-right: 5px;
     font-size: 1rem;
@@ -25,7 +24,6 @@ export const DropdownMain = styled.button`
   margin: 5px 0;
   display: flex;
   align-items: center;
-
   &:focus {
     outline: none;
   }

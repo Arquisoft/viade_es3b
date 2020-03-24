@@ -13,53 +13,50 @@ import {
   FormModelRenderer,
   TextEditor,
   Mapa,
-
   Uploader,
-
   Friends
-
 } from './containers';
 
 const privateRoutes = [
   {
     id: 'welcome',
-    path: '/viade_es3b/welcome',
+    path: '/welcome',
     component: Welcome
   },
   {
     id: 'profile',
-    path: '/viade_es3b/profile',
+    path: '/profile',
     component: Profile
   },
   {
     id: 'text-editor',
-    path: '/viade_es3b/text-editor',
+    path: '/text-editor',
     component: TextEditor
   },
   {
     id: 'map',
-    path: '/viade_es3b/Map',
+    path: '/Map',
     component: Mapa
   },
   {
      id: 'upload',
-    path: '/viade_es3b/upload',
+    path: '/upload',
     component: Uploader
   },
   {
     id: 'friends',
-    path: '/viade_es3b/friends',
+    path: '/friends',
     component: Friends
 
   },
   {
     id: 'formmodelconverter',
-    path: '/viade_es3b/formmodel/converter',
+    path: '/formmodel/converter',
     component: FormModelConverter
   },
   {
     id: 'formmodelrenderer',
-    path: '/viade_es3b/formmodel/renderer',
+    path: '/formmodel/renderer',
     component: FormModelRenderer
   }
 ];
@@ -68,13 +65,13 @@ const Routes = () => (
   <Router>
     <Fragment>
       <Switch>
-        <NotLoggedInLayout component={Login} path="/viade_es3b/login" exact />
-        <NotLoggedInLayout component={Register} path="/viade_es3b/register" exact />
-        <NotLoggedInLayout path="/viade_es3b/register/success" component={RegistrationSuccess} exact />
-        <PublicLayout path="/viade_es3b/404" component={PageNotFound} exact />
-        <Redirect from="/" to="/viade_es3b/welcome" exact />
-        <PrivateLayout path="/viade_es3b/" routes={privateRoutes} />
-        <Redirect from="/login" to="/viade_es3b/login" exact />
+        <NotLoggedInLayout component={Login} path="/login" exact />
+        <NotLoggedInLayout component={Register} path="/register" exact />
+        <NotLoggedInLayout path="/register/success" component={RegistrationSuccess} exact />
+        <PublicLayout path="/404" component={PageNotFound} exact />
+        <Redirect from="/" to="/welcome" exact />
+        <PrivateLayout path="/" routes={privateRoutes} />
+        <Redirect to="/404" />
       </Switch>
     </Fragment>
   </Router>

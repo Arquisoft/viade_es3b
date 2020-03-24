@@ -15,7 +15,7 @@ const LoginComponent = () => {
         <h1 data-testid="title">{t('login.title')}</h1>
         <LoginPanel className="login-panel">
           <PanelBody className="panel-body">
-            <Link className="ids-link-filled ids-link-filled--primary" to="/viade_es3b/register">
+            <Link className="ids-link-filled ids-link-filled--primary" to="/register">
               {t('login.register')}
             </Link>
             <a
@@ -29,14 +29,14 @@ const LoginComponent = () => {
             <LoginTitle data-testid="login-title">
               <span>{t('login.loginTitle')}</span>
             </LoginTitle>
-            <ProviderLogin 
+            <ProviderLogin
               selectPlaceholder={t('login.selectPlaceholder')}
               inputPlaholder={t('login.inputPlaholder')}
               formButtonText={t('login.formButtonText')}
               btnTxtWebId={t('login.btnTxtWebId')}
               btnTxtProvider={t('login.btnTxtProvider')}
               className="provider-login-component"
-              callbackUri={`${window.location.origin}/viade_es3b/welcome`}
+              callbackUri={`${window.location.origin}/viade_es3b/#/welcome`}
               errorsText={{
                 unknown: t('login.errors.unknown'),
                 webIdNotValid: t('login.errors.webIdNotValid'),

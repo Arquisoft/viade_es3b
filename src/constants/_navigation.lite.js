@@ -4,27 +4,27 @@
 export const NavigationItems = [
   {
     id: 'welcome',
-    icon: '/viade_es3b/img/viade-icons/terrain-out.svg',
+    icon: 'img/viade-icons/terrain-out.svg',
     label: 'navBar.welcome',
-    to: '/viade_es3b/welcome'
+    to: '/welcome'
   },
   {
     id: 'upload',
-    icon: '/viade_es3b/img/viade-icons/directions-out.svg',
+    icon: 'img/viade-icons/directions-out.svg',
     label: 'navBar.upload',
-    to: '/viade_es3b/upload'
+    to: '/upload'
   },
   {
     id: 'map',
-    icon: '/viade_es3b/img/icon/map.png',
+    icon: 'img/icon/map.png',
     label: 'navBar.myTrails',
-    to: '/viade_es3b/map'
+    to: '/map'
   },
   {
     id: 'friends',
-    icon: '/viade_es3b/img/viade-icons/people.svg',
+    icon: 'img/viade-icons/people.svg',
     label: 'navBar.friends',
-    to: '/viade_es3b/friends'
+    to: '/friends'
 
   }
 ];

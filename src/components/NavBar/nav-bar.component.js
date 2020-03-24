@@ -57,9 +57,8 @@ const NavBar = (props: Props) => {
     <header role="navigation" className="header header__desktop fixed" ref={componentElement}>
       <section className="header-wrap">
         <div className="logo-block">
-          <Link to="/viade_es3b/welcome">
-            <img src="/img/logo-viade-pequeño.png" alt="viade" />
-
+          <Link to="/welcome">
+            <img src="img/logo-viade-pequeño.png" alt="viade" />
           </Link>
         </div>
 

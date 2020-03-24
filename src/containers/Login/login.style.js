@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { LoginBackground, Panel } from '@util-components';
 
 export const LoginWrapper = styled(LoginBackground)`
-
   
 h1 {
     color: #ffffff;
@@ -39,7 +38,6 @@ export const LoginTitle = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-
   &::before,
   &::after {
     width: 32%;
@@ -49,15 +47,12 @@ export const LoginTitle = styled.span`
     box-sizing: border-box;
     top: 50%;
   }
-
   span {
     padding: 0 5px;
   }
-
   &::before {
     right: 0;
   }
-
   &::after {
     left: 0;
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import Navigation from './navigation.component';
 
 import 'jest-dom/extend-expect';
@@ -13,7 +13,7 @@ describe.only('Navigation', () => {
       id: 'welcome',
       icon: 'img/icon/apps.svg',
       label: 'Welcome',
-      to: '/viade_es3b/welcome'
+      to: '/welcome'
     }
   ];
 

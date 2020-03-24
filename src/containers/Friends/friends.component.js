@@ -26,7 +26,7 @@ export const FriendsPageContent = props => {
     <WelcomeWrapper data-testid="welcome-wrapper">
       <WelcomeCard className="card">
         <WelcomeLogo data-testid="welcome-logo">
-          <img src="/img/logo-viade-mediano.png" alt="Viade" />
+          <img src="img/logo-viade-mediano.png" alt="Viade" />
         </WelcomeLogo>
         <WelcomeProfile data-testid="welcome-profile">
           <h3>

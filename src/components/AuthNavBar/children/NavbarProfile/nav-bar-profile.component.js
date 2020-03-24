@@ -47,7 +47,7 @@ let beforeContext;
 class NavBarProfile extends Component<Props> {
   constructor(props) {
     super(props);
-    this.state = { image: '/viade_es3b/img/icon/empty-profile.svg' };
+    this.state = { image: 'img/icon/empty-profile.svg' };
   }
 
   state = {
@@ -74,13 +74,13 @@ class NavBarProfile extends Component<Props> {
   }
 
   // eslint-disable-next-line react/destructuring-assignment
-  profileRedirect = () => this.props.history.push('/viade_es3b/profile');
+  profileRedirect = () => this.props.history.push('/profile');
 
   // eslint-disable-next-line react/destructuring-assignment
-  formModelRenderRedirect = () => this.props.history.push('/viade_es3b/formModel/renderer');
+  formModelRenderRedirect = () => this.props.history.push('/formModel/renderer');
 
   // eslint-disable-next-line react/destructuring-assignment
-  formModelConvertRedirect = () => this.props.history.push('/viade_es3b/formModel/converter');
+  formModelConvertRedirect = () => this.props.history.push('/formModel/converter');
 
   onImageLoaded = async () => this.setState({ imageLoaded: true });
 
@@ -90,7 +90,7 @@ class NavBarProfile extends Component<Props> {
       // Remove localStorage
       localStorage.removeItem('solid-auth-client');
       // Redirect to login page
-      window.location = '/viade_es3b/login';
+      window.location = '/login';
     } catch (error) {
       errorToaster(error.message, 'Error');
     }
