@@ -1,11 +1,8 @@
 import styled from 'styled-components';
-import { LoginBackground, Panel } from '@util-components';
-import { media } from '../../utils';
 
-export const UploaderWrapper = styled(LoginBackground)`
+export const UploaderWrapper = styled.div`
     width: 100%;
-    background: #a4d1d1;
-    background-repeat: repeat;
+    background-color: #a4d1d1;
     padding: 50px 0;
   }
 `;
@@ -16,7 +13,6 @@ export const UploaderCard = styled.div`
   margin: 30px auto;
   //Overriding the style guide card flexbox settings
   max-width: 80% !important;
-  flex-direction: row !important;
   padding: 50px 0 !important; //temporary fix to a style guide bug
   align-items: center;
   h2{

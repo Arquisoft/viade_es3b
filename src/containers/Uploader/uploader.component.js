@@ -1,6 +1,5 @@
 import React from "react";
 import { UploaderWrapper, UploaderCard, FileButton, ChooseButton, UploadButton } from './uploader.style';
-import { CenterContainer } from '@util-components';
 
 class Uploader extends React.Component {
 	
@@ -43,7 +42,7 @@ class Uploader extends React.Component {
 	  
     return (
 		<UploaderWrapper>
-			<UploaderCard>
+			<UploaderCard className="card">
 					<h2>Sube aquí los archivos multimedia de tus rutas</h2>
 					<FileButton>
 					<div className="inner-container"
