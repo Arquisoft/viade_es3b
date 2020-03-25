@@ -1,0 +1,44 @@
+import styled from 'styled-components';
+import { LoginBackground, Panel } from '@util-components';
+import { media } from '../../utils';
+
+export const UploaderWrapper = styled(LoginBackground)`
+    width: 100%;
+    background: #a4d1d1;
+    background-repeat: repeat;
+    padding: 50px 0;
+  }
+`;
+
+export const UploaderCard = styled.div`
+
+  background-color: #fff;
+  margin: 30px auto;
+  //Overriding the style guide card flexbox settings
+  max-width: 80% !important;
+  flex-direction: row !important;
+  padding: 50px 0 !important; //temporary fix to a style guide bug
+  align-items: center;
+  h2{
+    padding: 0 30px;
+    text-align: center;
+}
+`;
+
+export const FileButton = styled.div`
+  padding: 30px;
+`;
+
+export const ChooseButton = styled.div`
+  margin: 0 200px 20px 200px;
+  background-color: #e9ecef;
+  border: 1px solid #9da2a7;
+  
+`;
+
+export const UploadButton = styled.div`
+    display: inline-block;
+    height: 100%;
+    text-align: center;
+    position: relative;
+`;
