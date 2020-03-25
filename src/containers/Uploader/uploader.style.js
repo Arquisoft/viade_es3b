@@ -31,9 +31,15 @@ export const FileButton = styled.div`
 
 export const ChooseButton = styled.div`
   margin: 0 200px 20px 200px;
-  background-color: #e9ecef;
-  border: 1px solid #9da2a7;
-  
+  @media screen and (max-width: 992px) {
+    margin: 0 0 20px 0;
+  }
+  input{
+    border: 1px solid #9da2a7;
+    -webkit-border-radius:2px;
+    -moz-border-radius: 9px;
+    background-color: #e9ecef;
+  }
 `;
 
 export const UploadButton = styled.div`
@@ -41,4 +47,18 @@ export const UploadButton = styled.div`
     height: 100%;
     text-align: center;
     position: relative;
+    
+    button{
+        color: #083575;
+        background:#8ed2d2;
+        font-weight:bold;
+        width: 10%;
+        @media screen and (max-width: 992px) {
+            width: initial;
+          }
+    }
+    button:hover{
+        background:#a4d1d1;
+        color: #083575;
+    }
 `;
