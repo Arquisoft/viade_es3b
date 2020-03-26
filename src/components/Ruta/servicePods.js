@@ -6,7 +6,6 @@ class ParserRutas{
       .then(function (response) {
         return response.text();
       }).then (function (file){
-
         rutas.push(file);
       });
   
