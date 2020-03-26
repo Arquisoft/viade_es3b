@@ -6,6 +6,7 @@ import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-lea
 import Rutas from '../../components/Ruta/rutas';
 import ReactDOM from 'react-dom';
 
+
 import {
   Column,
   MapSection,
@@ -85,9 +86,9 @@ function getCenterMarket() {
   puntos.forEach((p, i = 0) => {
     aux = getPopup(i);
     i = i + 1;
-    if(aux !== null) centerMarket.push(aux);
+    if (aux !== null) centerMarket.push(aux);
   })
-  if(centerMarket.length !== 0)
+  if (centerMarket.length !== 0)
     return centerMarket[0];
 }
 
@@ -138,7 +139,7 @@ class Map extends React.Component {
         <Column>
           <H2Format id="name">{name}</H2Format>
           <PStyle id="description">{description}</PStyle>
-          <PStyle id= "distance" >{distance}</PStyle>
+          <PStyle id="distance" >{distance}</PStyle>
           <H3Format>Tus rutas</H3Format>
           <UlStyle>{Rutas.getNames().map((n, i) => <LiStyle key={i} onClick={(e) => changeRuta(n, e)}> {n} </LiStyle>)}</UlStyle>
         </Column>
@@ -156,15 +157,15 @@ class Information extends React.Component {
     ReactDOM.render(newImg, document.getElementById('imgDiv'));
   }
 
-  
-  
+
+
 
   nextPhoto() {
     let newImg = <ImgSytle id="img" src={currentRuta.getNextPhoto().img} />
     ReactDOM.render(newImg, document.getElementById('imgDiv'));
   }
 
-  
+
 
   render() {
     return (
@@ -195,5 +196,10 @@ class Mapa extends React.Component {
     );
   }
 }
+
+
+
+
+
 
 export default Mapa;
