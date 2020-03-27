@@ -1,4 +1,5 @@
 import React from "react";
+import { UploaderWrapper, UploaderCard, FileButton, ChooseButton, UploadButton } from './uploader.style';
 
 class Uploader extends React.Component {
 	
@@ -40,25 +41,32 @@ class Uploader extends React.Component {
   render() {
 	  
     return (
-      <div
-        className="inner-container"
-        style={{
-        display: "flex",
-        flexDirection: "column"
-      }}>
-        <div className="draggable-container">
-          <input
-            type="file"
-            id="file-browser-input"
-            name="file-browser-input"
-			multiple
-		/>
-        </div>
-        <button
-		  onClick = { () => this.run() }
-		>Click me!
-		</button>
-      </div>
+		<UploaderWrapper>
+			<UploaderCard className="card">
+					<h2>Sube aquí los archivos multimedia de tus rutas</h2>
+					<FileButton>
+					<div className="inner-container"
+						style= {{display: "flex", flexDirection: "column"}}>
+						<ChooseButton>
+							<div className="draggable-container">
+								<input
+									type="file"
+									id="file-browser-input"
+									name="file-browser-input"
+									multiple
+								/>
+							</div>
+						</ChooseButton>
+						<UploadButton>
+							<button onClick = { () => this.run() } >
+								Subir
+							</button>
+						</UploadButton>
+					</div>
+					</FileButton>
+			</UploaderCard>
+	  	</UploaderWrapper>
+      
     );
   }
 }
