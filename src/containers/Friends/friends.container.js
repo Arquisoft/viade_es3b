@@ -3,6 +3,7 @@ import data from '@solid/query-ldflex';
 import { namedNode } from '@rdfjs/data-model';
 import { FriendsPageContent } from './friends.component';
 import { successToaster, errorToaster } from '@utils';
+import { useLDflexList } from '@solid/react';
 
 const defaultProfilePhoto = '/img/icon/empty-profile.svg';
 
@@ -17,18 +18,25 @@ export class FriendsComponent extends Component<Props> {
       name: '',
       image: defaultProfilePhoto,
       isLoading: false,
-      hasImage: false
+      hasImage: false,
+      friends: []
     };
   }
 
   componentDidMount() {
     const { webId } = this.props;
-    if (webId) this.getProfileData();
+    if (webId){
+      this.getProfileData();
+      this.getFriends();
+    }
   }
 
   componentDidUpdate(prevProps) {
     const { webId } = this.props;
-    if (webId && webId !== prevProps.webId) this.getProfileData();
+    if (webId && webId !== prevProps.webId){
+      this.getProfileData();
+      this.getFriends();
+    }
   }
 
   /**
@@ -72,6 +80,17 @@ export class FriendsComponent extends Component<Props> {
     this.setState({ name, image, isLoading: false, hasImage });
   };
 
+  getFriends = async () => {
+    const { webId } = this.props;
+    const friends=[];
+    const user = data[webId];
+    for await (const friend of user.friends) {
+      const name = await data[friend].name;
+      friends.push(name.value);
+    }
+    this.setState({friends: friends});
+  };
+
   /**
    * updatedPhoto will update the photo url on vcard file
    * this function will check if user has image or hasPhoto node if not
@@ -91,10 +110,10 @@ export class FriendsComponent extends Component<Props> {
   };
 
   render() {
-    const { name, image, isLoading } = this.state;
+    const { name, image, isLoading, friends } = this.state;
     const { webId } = this.props;
     return (
-      <FriendsPageContent {...{ name, image, isLoading, webId, updatePhoto: this.updatePhoto }} />
+      <FriendsPageContent {...{ name, image, isLoading, friends, webId, updatePhoto: this.updatePhoto }} />
     );
   }
 }

@@ -1,23 +1,21 @@
 import React from 'react';
-import { Uploader } from '@inrupt/solid-react-components';
-import { Trans, useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {
-  FriendsWrapper,
   FriendsCard,
-  FriendsLogo,
-  FriendsProfile,
-  FriendsDetail,
-  FriendsName,
-  ImageWrapper,
+  FriendsCardTitle,
   FriendsContainer,
+  FriendsList,
   FriendsTrailsCard,
-  FriendsCardTitle
+  FriendsWrapper,
+  FriendProfile,
+  FriendName,
+  ImageWrapper,
+  ImageContainer,
+  Img
 } from './friends.style';
-import { ImageProfile } from '@components';
-import { errorToaster } from '@utils';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import './addFriendModal.css';
+const defaultProfilePhoto = '/img/icon/empty-profile.svg';
 
 /**
  * Friends Page UI component, containing the styled components for the Friends Page
@@ -25,7 +23,7 @@ import './addFriendModal.css';
  * @param props
  */
 export const FriendsPageContent = props => {
-  const { webId, image, updatePhoto, name } = props;
+  const { webId, image, updatePhoto, name, friends } = props;
   const { t } = useTranslation();
   const limit = 2100000;
   const [modalIsOpen,setIsOpen] = React.useState(false);
@@ -78,6 +76,16 @@ export const FriendsPageContent = props => {
                 </form>
             </Modal>
           </FriendsCardTitle>
+          <FriendsList>
+            {friends.map((friend, index) => (
+                <FriendProfile key={index}>
+                  <ImageContainer>
+                    <Img src={defaultProfilePhoto} alt="profile"/>
+                  </ImageContainer>
+                  <FriendName>{friend}</FriendName>
+                </FriendProfile>
+            ))}
+          </FriendsList>
         </FriendsCard>
         <FriendsTrailsCard className="card">
           <FriendsCardTitle>

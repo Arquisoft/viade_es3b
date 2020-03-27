@@ -39,9 +39,9 @@ export const FriendsCard = styled.div`
   width: 40% !important;
   min-height: 500px;
   padding: 0 0 50px !important;
-  
-  justify-content: flex-start !important;
-  
+  justify-content:flex-start !important;
+  flex-wrap: nowrap !important;
+    
   @media screen and (max-width: 1000px) {
     width: 100% !important;
     min-height: 300px;
@@ -54,7 +54,7 @@ export const FriendsTrailsCard = styled.div`
 
   padding: 0 0 50px !important;
   min-height: 600px;
-  justify-content: flex-start !important;
+  justify-content:flex-start !important;
 
   @media screen and (max-width: 1000px) {
     margin: 30px auto;
@@ -66,7 +66,6 @@ export const FriendsCardTitle = styled.div`
   height: auto;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
   border-bottom: 1px solid rgba(8, 53, 117, 0.1);
   h4 {
     margin: 0px;
@@ -87,15 +86,20 @@ export const FriendsCardTitle = styled.div`
   }
 `;
 
-export const FriendsLogo = styled.div`
-  width: 50%;
-  height: 100%;
-
-  img {
-    width: 60%;
-    display: block;
-    margin: 0 auto;
-  }
+export const FriendsList = styled.div`
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 30px 0px 50px;
+`;
+export const FriendProfile = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0px 0px 10px;
 `;
 
 export const FriendsProfile = styled.div`
@@ -134,18 +138,33 @@ export const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  button {
-    margin-left: 0px;
-  }
 `;
 
-export const ImageContainer = styled.div`
+/*export const ImageContainer = styled.div`
   background-image: ${({ image }) => (image ? `url(${image})` : '#cccccc')};
   background-size: cover;
   border-radius: 50%;
-  width: 128px;
-  height: 128px;
+  width: 42px;
+  height: 42px;
+`;*/
+
+export const ImageContainer = styled.div`
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-size: cover;
+  overflow: hidden;
+  visibility: visible;
+  display: block;
+ `;
+/*  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
+  display: ${({ show }) => (show ? 'block' : 'none')};
+`;*/
+
+export const Img = styled.img`
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 `;
 
 export const FriendsDetail = styled.div`
@@ -161,7 +180,8 @@ export const FriendsDetail = styled.div`
   }
 `;
 
-export const FriendsName = styled.span`
+export const FriendName = styled.span`
   overflow-wrap: break-word;
   word-break: break-word;
+  padding: 12px 0px 0px 10px;
 `;
