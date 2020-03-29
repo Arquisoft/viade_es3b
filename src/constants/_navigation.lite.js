@@ -16,13 +16,15 @@ export const NavigationItems = [
   },
   {
     id: 'map',
-    icon: 'img/icon/map.png',
+    //icon: 'img/icon/map.png',
+    icon: '../images/viade-icons/map.png',
     label: 'navBar.myTrails',
     to: '/map'
   },
   {
     id: 'friends',
-    icon: 'img/viade-icons/people.svg',
+    //icon: 'img/viade-icons/people.svg',
+    icon: '../images/viade-icons/people.svg',
     label: 'navBar.friends',
     to: '/friends'
 

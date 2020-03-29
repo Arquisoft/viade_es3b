@@ -29,11 +29,6 @@ const privateRoutes = [
     component: Profile
   },
   {
-    id: 'text-editor',
-    path: '/text-editor',
-    component: TextEditor
-  },
-  {
     id: 'map',
     path: '/Map',
     component: Mapa
