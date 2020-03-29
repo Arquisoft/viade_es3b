@@ -6,6 +6,9 @@ import { successToaster, errorToaster } from '@utils';
 import { useLDflexList } from '@solid/react';
 
 const defaultProfilePhoto = '/img/icon/empty-profile.svg';
+const reload = () => {
+  window.location.reload();
+}
 
 /**
  * Container component for the Welcome Page, containing example of how to fetch data from a POD
@@ -83,13 +86,31 @@ export class FriendsComponent extends Component<Props> {
   getFriends = async () => {
     const { webId } = this.props;
     const friends=[];
-    const user = data[webId];
-    for await (const friend of user.friends) {
-      const name = await data[friend].name;
-      friends.push(name.value);
+    try {
+      const user = data[webId];
+      for await (const friend of user.friends) {
+        const name = await data[friend].name;
+        friends.push(name.value);
+      }
+      this.setState({friends: friends});
+    } catch (e) {
+      errorToaster(e.message, 'Error');
     }
-    this.setState({friends: friends});
   };
+
+  addFriend = async (event, friendWebId) => {
+    event.preventDefault();
+    const { webId } = this.props;
+    try {
+      const user = data[webId];
+      await user.knows.add(data[friendWebId]);
+      await reload();
+    } catch (e) {
+      errorToaster(e.message, 'Error');
+    }
+  };
+
+
 
   /**
    * updatedPhoto will update the photo url on vcard file
@@ -113,7 +134,7 @@ export class FriendsComponent extends Component<Props> {
     const { name, image, isLoading, friends } = this.state;
     const { webId } = this.props;
     return (
-      <FriendsPageContent {...{ name, image, isLoading, friends, webId, updatePhoto: this.updatePhoto }} />
+      <FriendsPageContent {...{ name, image, isLoading, friends, webId, updatePhoto: this.updatePhoto, addFriend: this.addFriend }} />
     );
   }
 }

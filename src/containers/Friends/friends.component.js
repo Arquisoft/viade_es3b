@@ -23,10 +23,11 @@ const defaultProfilePhoto = '/img/icon/empty-profile.svg';
  * @param props
  */
 export const FriendsPageContent = props => {
-  const { webId, image, updatePhoto, name, friends } = props;
+  const { webId, image, updatePhoto, name, friends, addFriend } = props;
   const { t } = useTranslation();
   const limit = 2100000;
   const [modalIsOpen,setIsOpen] = React.useState(false);
+  const ref = React.createRef();
 
   function openModal() {
     setIsOpen(true);
@@ -67,8 +68,8 @@ export const FriendsPageContent = props => {
                 </button>
               </div>
                 <form className="modal-body">
-                  <input type="text" placeholder="https://alice.solid.community/profile/card#me"/>
-                  <button onClick={closeModal} className="send">
+                  <input type="text" placeholder="https://alice.solid.community/profile/card#me" id="input"/>
+                  <button onClick={(event) => addFriend(event,document.getElementById('input').value)} className="send">
                     <span className="icon">
                       <img src="/img/viade-icons/send.svg" alt="Send" />
                     </span>
