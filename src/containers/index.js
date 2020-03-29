@@ -3,7 +3,6 @@ import Register, { RegistrationSuccess } from './Register';
 import PageNotFound from './PageNotFound';
 import Welcome from './Welcome';
 import Profile from './Profile';
-import TextEditor from './TextEditor';
 import { FormModelConverter, FormModelRenderer } from './FormModel';
 import Mapa from './Map';
 import Uploader from './Uploader';
@@ -18,7 +17,6 @@ export {
   Profile,
   FormModelConverter,
   FormModelRenderer,
-  TextEditor,
   Mapa,
   Uploader,
   Friends

@@ -11,7 +11,6 @@ import {
   Profile,
   FormModelConverter,
   FormModelRenderer,
-  TextEditor,
   Mapa,
   Uploader,
   Friends
@@ -27,11 +26,6 @@ const privateRoutes = [
     id: 'profile',
     path: '/profile',
     component: Profile
-  },
-  {
-    id: 'text-editor',
-    path: '/text-editor',
-    component: TextEditor
   },
   {
     id: 'map',
