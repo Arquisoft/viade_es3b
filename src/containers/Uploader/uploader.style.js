@@ -4,7 +4,6 @@ export const UploaderWrapper = styled.div`
     width: 100%;
     background-color: #a4d1d1;
     padding: 50px 0;
-  }
 `;
 
 export const UploaderCard = styled.div`
@@ -18,7 +17,6 @@ export const UploaderCard = styled.div`
   h2{
     padding: 0 30px;
     text-align: center;
-}
 `;
 
 export const FileButton = styled.div`
