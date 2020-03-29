@@ -9,8 +9,8 @@ class Rutas{
     constructor(){
         this.rutas = [new Ruta(ruta1),new Ruta(ruta3),new Ruta(ruta4)];
         getRoutesFileName();
-        //setTimeout(() => {   getRutas().forEach(r => {console.log(r) ;
-        //new Ruta(r)})}, 3000);
+        setTimeout(() => {   getRutas().forEach(r => {console.log(r) ;
+        new Ruta(r)})}, 3000);
     }
 
     getNames(){
@@ -30,7 +30,7 @@ class Rutas{
     }
 
     getRutaByPosition(p){
-        if(p.lenght == 0)
+        if(p.lenght === 0)
             alert("No hay ninguna rutas");
         return this.rutas[p];
     }
