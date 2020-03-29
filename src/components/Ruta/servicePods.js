@@ -18,9 +18,11 @@ export function getRoutesFileName() {
           a = false;
           if (cadena.includes('.json')) {
             searchRoute(cadena);
+          }else if(cadena.includes('.jpg')){
+            searchPhoto(cadena);
           }
 
-          if(file[i + 1] === ';') break;
+          if (file[i + 1] === ';') break;
           cadena = '';
         } else if (a) {
           cadena = cadena + element
@@ -51,5 +53,28 @@ function searchRoute(fileName) {
         });
     }
   });
+}
+
+function searchPhoto(fileName) {
+  var outside
+  const auth = require('solid-auth-client');
+  auth.trackSession(session => {
+    if (!session) {
+      return;
+    } else {
+      let webId = session.webId;
+      let urlRoute = webId.split("/profile/card#me")[0];
+      urlRoute = urlRoute.concat("/public/myRoutes/").concat(fileName);
+      console.log(urlRoute);
+      fetch(URL)
+        .then(response => response.blob())
+        .then(images => {
+          outside = URL.createObjectURL(images)
+          console.log(outside)
+        })
+    }
+  });
+
+
 }
 
