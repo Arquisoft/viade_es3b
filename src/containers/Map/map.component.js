@@ -20,7 +20,8 @@ import {
   InformationSection,
   ImgSytle,
   ImgPopupSytle,
-  H1FormatPopup
+  H1FormatPopup,
+  DefaultSection
 } from './map.style';
 
 /* Método para cambiar la imagen del Marker */
@@ -180,17 +181,44 @@ class Information extends React.Component {
   }
 }
 
+function updateMap() {
+  let mapView = <div><MapSection>
+    <Map></Map>
+  </MapSection>
+    <InformationSection>
+      <Information></Information>
+    </InformationSection></div>;
+
+  ReactDOM.render(mapView, document.getElementById('mapSeccion'));
+}
+
+function messageNoRutas() {
+  let messageNoRutas = <InformationSection>
+    <H2Format>NO HAY RUTAS EN EL POD</H2Format>
+  </InformationSection>;
+
+  ReactDOM.render(messageNoRutas, document.getElementById('mapSeccion'));
+}
+
 class Mapa extends React.Component {
+
+  updateMap() {
+    setTimeout(() => {
+      if (Rutas.hayRutas)
+        updateMap();
+      else
+        messageNoRutas();
+    }, 1000);
+  }
+
   render() {
     return (
-      <div>
-        <MapSection>
-          <Map></Map>
-        </MapSection>
-        <InformationSection>
-          <Information></Information>
-        </InformationSection>
-
+      <div id="mapSeccion">
+        <DefaultSection>
+          <Up>
+            <button onClick={this.updateMap}>Cargar rutas</button>
+          </Up>
+        </DefaultSection>
       </div>
 
     );

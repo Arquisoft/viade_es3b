@@ -1,16 +1,17 @@
-import ruta1 from './rutas/ruta1.json';
-import ruta3 from './rutas/ruta3.json';
-import ruta4 from './rutas/ruta4.json';
+//import ruta1 from './rutas/ruta1.json';
+//import ruta3 from './rutas/ruta3.json';
+//import ruta4 from './rutas/ruta4.json';
 import Ruta from './ruta.js';
 import {getRoutesFileName , getRutas} from './servicePods';
 
 class Rutas{
 
     constructor(){
-        this.rutas = [new Ruta(ruta1),new Ruta(ruta3),new Ruta(ruta4)];
+        this.rutas = [];
+        //this.rutas = [new Ruta(ruta1),new Ruta(ruta3),new Ruta(ruta4)];
         getRoutesFileName();
         setTimeout(() => {   getRutas().forEach(r => {console.log(r) ;
-        new Ruta(r)})}, 3000);
+        this.rutas.push(new Ruta(r))})}, 2000);
     }
 
     getNames(){
@@ -30,9 +31,12 @@ class Rutas{
     }
 
     getRutaByPosition(p){
-        if(p.lenght === 0)
-            alert("No hay ninguna rutas");
         return this.rutas[p];
+    }
+
+    hayRutas(){
+        if(this.rutas.length === 0) return false;
+        else return true;
     }
 }
 
