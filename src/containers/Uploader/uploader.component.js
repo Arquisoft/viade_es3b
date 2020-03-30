@@ -36,26 +36,32 @@ const Uploader = () => {
 		}
 	  };
 	  const show = () => {
-		
 		const filesInput = document.getElementById('file-browser-input');
 		const files = filesInput.files;
-
-		//Muestro el boton upload 
-		document.getElementById('upload').style.display ="initial";
-		document.getElementById('header-file-container').style.display ="initial";
-		document.getElementById('label-input').style.display ="none";
-		document.getElementById('file-container').removeChild(document.getElementById('file-list'));
-		document.getElementById('files-container').style.display ="initial";
-		var contenedor = document.createElement('ul');
-		contenedor.id = 'file-list';
-
-		document.getElementById('file-container').insertAdjacentElement('beforeend',contenedor);
-		for (let i = 0; i < files.length; i++) {
-			let file = files[i];
-			var elemento = document.createElement('li');
-			elemento.insertAdjacentText('beforeend', i+1 + "- " + file.name);
-			
-			contenedor.insertAdjacentElement('beforeend',elemento);		
+		if(files.length>0){
+			//Muestro el boton upload y modify
+			document.getElementById('upload').style.display ="initial";
+			//Muestro el encabezado (Archivos seleccionados)
+			document.getElementById('header-file-container').style.display ="initial";
+			//Oculto el label de selccionar archivos
+			document.getElementById('label-input').style.display ="none";
+			//Borro lo seleccionado anteriormente
+			document.getElementById('file-container').removeChild(document.getElementById('file-list'));
+			//Muestro la lista de archivos y los botones de subir y modificar
+			document.getElementById('files-container').style.display ="initial";
+			//Creo la lista donde inserto los archivos seleccionados en el for
+			var contenedor = document.createElement('ul');
+			contenedor.id = 'file-list';
+			//Inserto la lista al div con id=file-container
+			document.getElementById('file-container').insertAdjacentElement('beforeend',contenedor);
+			//Recorro los archivos seleccionados para insertarlos a la lista
+			for (let i = 0; i < files.length; i++) {
+				let file = files[i];
+				var elemento = document.createElement('li');
+				elemento.insertAdjacentText('beforeend', i+1 + "- " + file.name);
+				//Añado a ul el elemento li
+				contenedor.insertAdjacentElement('beforeend',elemento);		
+			}
 		}
 	  };
 	
