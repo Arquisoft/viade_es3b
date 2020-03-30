@@ -140,7 +140,7 @@ class Map extends React.Component {
           <H2Format id="name">{name}</H2Format>
           <PStyle id="description">{description}</PStyle>
           <PStyle id="distance" >{distance}</PStyle>
-          <H3Format>Tus rutas</H3Format>
+          <H3Format>Tus rutas:</H3Format>
           <UlStyle>{Rutas.getNames().map((n, i) => <LiStyle key={i} onClick={(e) => changeRuta(n, e)}> {n} </LiStyle>)}</UlStyle>
         </Column>
       </Up>
