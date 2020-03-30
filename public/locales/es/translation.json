@@ -255,6 +255,9 @@
   },
   "uploader": {
     "explanation": "Sube aquí los archivos multimedia de tus rutas",
-    "upload": "Subir"
+    "upload": "Subir",
+    "choose": "Elegir archivos",
+    "selectedFiles": "Archivos seleccionados:",
+    "modifyFiles": "Modificar archivos"
   }
 }

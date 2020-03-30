@@ -253,6 +253,9 @@
   },
   "uploader": {
     "explanation": "Upload here the multimedia files of your routes",
-    "upload": "Upload"
+    "upload": "Upload",
+    "choose": "Choose files",
+    "selectedFiles": "Selected files:",
+    "modifyFiles": "Modify files"
   }
 }

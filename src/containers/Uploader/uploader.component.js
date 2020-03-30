@@ -84,7 +84,7 @@ const Uploader = () => {
 						</ChooseButton>
 						<FilesContainer id="files-container">
 							<FileNames>
-								<h3 id="header-file-container">Archivos seleccionados:</h3>
+								<h3 id="header-file-container">{t('uploader.selectedFiles')}</h3>
 								<div id="file-container">
 									<ul id="file-list">
 									</ul>
@@ -95,7 +95,7 @@ const Uploader = () => {
 								{t('uploader.upload')}
 								</button>
 								<label for="file-browser-input">
-										Modificar archivos
+								{t('uploader.modifyFiles')}
 									</label>
 							</UploadButton>
 							</FilesContainer>
