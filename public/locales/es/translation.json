@@ -252,5 +252,9 @@
     "load": "Cargar",
     "save": "Guardar",
     "grantAccess": "Dar Acceso"
+  },
+  "uploader": {
+    "explanation": "Sube aquí los archivos multimedia de tus rutas",
+    "upload": "Subir"
   }
 }

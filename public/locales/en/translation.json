@@ -250,5 +250,9 @@
     "load": "Load",
     "save": "Save",
     "grantAccess": "Grant Access"
+  },
+  "uploader": {
+    "explanation": "Upload here the multimedia files of your routes",
+    "upload": "Upload"
   }
 }
