@@ -1,5 +1,5 @@
 import React from "react";
-import { UploaderWrapper, UploaderCard, FileButton, ChooseButton, UploadButton } from './uploader.style';
+import { UploaderWrapper, UploaderCard, FileButton, ChooseButton, UploadButton, FileNames, FilesContainer } from './uploader.style';
 import { useTranslation } from 'react-i18next';
 
 const Uploader = () => {
@@ -35,9 +35,10 @@ const Uploader = () => {
 			};
 		}
 	  };
+	  
 	
-  const { t } = useTranslation();
-  return (
+  	const { t } = useTranslation();
+  	return (
     <UploaderWrapper>
 			<UploaderCard className="card">
 					<h2>{t('uploader.explanation')}</h2>
@@ -52,15 +53,21 @@ const Uploader = () => {
 									name="file-browser-input"
 									multiple
 								/>
+								<label id="label-input" for="file-browser-input">
+									<span>{t('uploader.choose')}</span>
+								</label>
+								
 							</div>
 						</ChooseButton>
-						<UploadButton>
-							<button onClick = { run } >
-							{t('uploader.upload')}
-							</button>
-						</UploadButton>
-					</div>
+							<UploadButton  id="upload">
+								<button onClick = { run } >
+								{t('uploader.upload')}
+								</button>
+								
+							</UploadButton>
+						</div>
 					</FileButton>
+					
 			</UploaderCard>
 	  	</UploaderWrapper>
   );
