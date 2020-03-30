@@ -1,35 +1,43 @@
 var rutas = [];
 
 export function getRoutesFileName() {
-  fetch('https://uo264354.solid.community/public/myRoutes/')
-    .then(function (response) {
-      return response.text();
-    }).then(function (file) {
-      let i = 0;
-      let a = false;
-      let cadena = '';
 
-      for (i; i < file.length; i++) {
-        let element = file[i];
+  const auth = require('solid-auth-client');
+    auth.trackSession(session => {
+    let webId = session.webId;
+    let urlRoute = webId.split("/profile/card#me")[0];
+    urlRoute = urlRoute.concat("/public/myRoutes/");
 
-        if (element === '<') {
-          a = true;
-        } else if (element === '>') {
-          a = false;
-          if (cadena.includes('.json')) {
-            searchRoute(cadena);
-          }else if(cadena.includes('.jpg')){
-            searchPhoto(cadena);
+    fetch(urlRoute)
+      .then(function (response) {
+        return response.text();
+      }).then(function (file) {
+        let i = 0;
+        let a = false;
+        let cadena = '';
+
+        for (i; i < file.length; i++) {
+          let element = file[i];
+
+          if (element === '<') {
+            a = true;
+          } else if (element === '>') {
+            a = false;
+            if (cadena.includes('.json')) {
+              searchRoute(cadena);
+            } else if (cadena.includes('.jpg')) {
+              searchPhoto(cadena);
+            }
+
+            if (file[i + 1] === ';') break;
+            cadena = '';
+          } else if (a) {
+            cadena = cadena + element
           }
-
-          if (file[i + 1] === ';') break;
-          cadena = '';
-        } else if (a) {
-          cadena = cadena + element
         }
-      }
-    });
-};
+      })
+  });
+}
 
 export function getRutas() {
   return rutas;
@@ -54,6 +62,7 @@ function searchRoute(fileName) {
     }
   });
 }
+
 
 function searchPhoto(fileName) {
   var outside
