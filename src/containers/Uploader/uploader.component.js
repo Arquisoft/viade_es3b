@@ -35,7 +35,29 @@ const Uploader = () => {
 			};
 		}
 	  };
-	  
+	  const show = () => {
+		
+		const filesInput = document.getElementById('file-browser-input');
+		const files = filesInput.files;
+
+		//Muestro el boton upload 
+		document.getElementById('upload').style.display ="initial";
+		document.getElementById('header-file-container').style.display ="initial";
+		document.getElementById('label-input').style.display ="none";
+		document.getElementById('file-container').removeChild(document.getElementById('file-list'));
+		document.getElementById('files-container').style.display ="initial";
+		var contenedor = document.createElement('ul');
+		contenedor.id = 'file-list';
+
+		document.getElementById('file-container').insertAdjacentElement('beforeend',contenedor);
+		for (let i = 0; i < files.length; i++) {
+			let file = files[i];
+			var elemento = document.createElement('li');
+			elemento.insertAdjacentText('beforeend', i+1 + "- " + file.name);
+			
+			contenedor.insertAdjacentElement('beforeend',elemento);		
+		}
+	  };
 	
   	const { t } = useTranslation();
   	return (
@@ -49,6 +71,7 @@ const Uploader = () => {
 							<div className="draggable-container">
 								<input
 									type="file"
+									onChange = { show }
 									id="file-browser-input"
 									name="file-browser-input"
 									multiple
@@ -59,12 +82,23 @@ const Uploader = () => {
 								
 							</div>
 						</ChooseButton>
+						<FilesContainer id="files-container">
+							<FileNames>
+								<h3 id="header-file-container">Archivos seleccionados:</h3>
+								<div id="file-container">
+									<ul id="file-list">
+									</ul>
+								</div>
+							</FileNames>
 							<UploadButton  id="upload">
 								<button onClick = { run } >
 								{t('uploader.upload')}
 								</button>
-								
+								<label for="file-browser-input">
+										Modificar archivos
+									</label>
 							</UploadButton>
+							</FilesContainer>
 						</div>
 					</FileButton>
 					

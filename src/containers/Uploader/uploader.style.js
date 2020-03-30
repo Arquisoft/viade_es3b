@@ -64,6 +64,7 @@ export const UploadButton = styled.div`
     height: 100%;
     text-align: center;
     position: relative;
+    display:none;
     
     button{
         color: #083575;
@@ -96,5 +97,24 @@ export const UploadButton = styled.div`
       }
 `;
 
+export const FileNames = styled.div`
+    h3{
+      display: none;
+    }
+`;
 
-
+export const FilesContainer = styled.div`
+    display:none;
+    padding: 10px 30px;
+    border: 2px solid #a4d1d1;
+    border-radius: 4px;
+    width: 100%;
+    background-color: #a4d1d1;
+    
+    input,label{
+      margin:10px;
+    }
+    div#file-container{
+      margin: 0 0 10px 0;
+    }
+    `;
