@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { CenterContainer } from '@util-components';
-// import { NavBar } from "@components";
 import { RegistrationPage } from './registration-success.style';
 
 type Props = {
@@ -44,7 +43,7 @@ class RegistrationSuccess extends Component<Props, State> {
       <RegistrationPage className="registration-success--page">
         <CenterContainer>
           <h1>Success! Welcome to the decentralized web.</h1>
-          <img src="/img/rocket.svg" alt="rocket" className="rocket" />
+          <img src="img/rocket.svg" alt="rocket" className="rocket" />
           <span>We have emailed you more information about your new Solid Identity</span>
           <span>We will redirect you to your POD in {timeLeft} seconds...</span>
         </CenterContainer>

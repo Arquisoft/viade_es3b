@@ -5443,17 +5443,17 @@ __webpack_require__.r(__webpack_exports__);
  */
 var NavigationItems = [{
   id: 'welcome',
-  icon: '/img/icon/apps.svg',
+  icon: 'img/icon/apps.svg',
   label: 'navBar.welcome',
   to: '/welcome'
 }, {
   id: 'profile',
-  icon: '/img/people.svg',
+  icon: 'img/people.svg',
   label: 'navBar.profile',
   to: '/profile'
 }, {
   id: 'map',
-  icon: '/img/icon/routes.png',
+  icon: 'img/icon/routes.png',
   label: 'navBar.routes',
   to: '/map'
 }];

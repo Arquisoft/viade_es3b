@@ -32,7 +32,7 @@ export const WelcomePageContent = props => {
         <h1>VIADE ES3B</h1>
       </HeaderCard>
         <WelcomeLogo data-testid="welcome-logo">
-          <img src="/img/logo-viade-mediano.png" alt="Viade" />
+          <img src="img/logo-viade-mediano.png" alt="Viade" />
         </WelcomeLogo>
 
         <WelcomeProfile data-testid="welcome-profile">
@@ -100,22 +100,3 @@ export const WelcomePageContent = props => {
     
   );
 };
-
-/*class Introduccion extends React.Component {
-  render() {
-    return (
-      <div className="Introduccion">
-      <p>Aplicación de visualización de rutas descentralizada.</p>
-      <p>Realizada por:</p>
-      <ul>
-        <li>Daniel de Lera</li>
-        <li>Federico Cuervo</li>
-        <li>Ismael Cadenas</li>
-        <li>Alfonso Lozana</li>
-        <li>Ignacio Bermejo</li>
-        <li>Jorge Iturrioz</li>
-      </ul>
-      </div>
-    );
-  }
-}*/

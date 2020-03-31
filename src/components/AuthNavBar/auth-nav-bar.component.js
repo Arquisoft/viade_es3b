@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { NavBar} from '@components';
+import { NavBar } from '@components';
 import { useTranslation } from 'react-i18next';
 import { NavBarContainer } from './children';
-import { LanguageDropdown } from '@util-components';
 import { ldflexHelper, errorToaster, storageHelper } from '@utils';
 import { NavigationItems } from '@constants';
+import LanguageDropdown from "../Utils/LanguageDropdown";
+import Notification from "../Notifications";
 
 type Props = {
   webId: string
@@ -79,17 +80,17 @@ const AuthNavBar = React.memo((props: Props) => {
       sticky
       toolbar={[
         {
-          component: () => <LanguageDropdown {...{ t, i18n }} />,
+          component: () => <LanguageDropdown {...{ t, i18n }}/>,
           id: 'language'
         },
-        /*{
-          component: () => <Notification {...{ webId, inbox: inboxes }} />,
-          id: 'notifications'
-        },*/
+        {
+          component: () => <Notification {...{ webId, inbox: inboxes }}/>,
+          id: 'notification'
+        },
         {
           component: props => <NavBarContainer {...{ t, i18n, webId, history, ...props }} />,
           id: 'profile'
-        }
+        },
       ]}
     />
   );

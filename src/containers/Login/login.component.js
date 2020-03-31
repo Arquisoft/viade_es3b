@@ -29,14 +29,14 @@ const LoginComponent = () => {
             <LoginTitle data-testid="login-title">
               <span>{t('login.loginTitle')}</span>
             </LoginTitle>
-            <ProviderLogin 
+            <ProviderLogin
               selectPlaceholder={t('login.selectPlaceholder')}
               inputPlaholder={t('login.inputPlaholder')}
               formButtonText={t('login.formButtonText')}
               btnTxtWebId={t('login.btnTxtWebId')}
               btnTxtProvider={t('login.btnTxtProvider')}
               className="provider-login-component"
-              callbackUri={`${window.location.origin}/welcome`}
+              callbackUri={`${window.location.origin}/viade_es3b/#/welcome`}
               errorsText={{
                 unknown: t('login.errors.unknown'),
                 webIdNotValid: t('login.errors.webIdNotValid'),

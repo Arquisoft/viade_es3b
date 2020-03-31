@@ -2,7 +2,7 @@ export class Photo{
     constructor(author,url,date){
         this.author = author;
         this.date = date;
-        this.img = '/img/rutas/' + url;
+        this.img = 'img/rutas/' + url;
        
     }
 }

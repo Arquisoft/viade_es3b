@@ -7,7 +7,6 @@ export const WelcomeWrapper = styled.section`
   background: #a4d1d1;
   background-repeat: repeat;
   padding: 50px 0;
-
   h3 {
     color: #666666;
     span {
@@ -22,21 +21,17 @@ export const WelcomeWrapper = styled.section`
 export const WelcomeCard = styled.div`
   background-color: #fff;
   margin: 30px auto;
-
   //Overriding the style guide card flexbox settings
   max-width: 80% !important;
   flex-direction: row !important;
   padding: 50px 0 !important; //temporary fix to a style guide bug
-
   align-items: center;
-
   a {
     text-decoration: none;
     &:hover {
       text-decoration: underline;
     }
   }
-
   button {
     margin-left: 8px;
   }
@@ -45,7 +40,6 @@ export const WelcomeCard = styled.div`
 export const WelcomeLogo = styled.div`
   width: 50%;
   height: 100%;
-
   img {
     width: 60%;
     display: block;
@@ -57,20 +51,17 @@ export const WelcomeProfile = styled.div`
   height: 100%;
   text-align: center;
   position: relative;
-
   img {
     width: 120px;
     height: 120px;
     border-radius: 50%;
   }
-
   h1,
   img {
     margin: 0 10px;
     display: inline-block;
     vertical-align: middle;
   }
-
   ${media.tablet`
     width: 50%;
     &:after {
@@ -89,7 +80,6 @@ export const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   button {
     margin-left: 0px;
   }
@@ -105,7 +95,6 @@ export const ImageContainer = styled.div`
 
 export const WelcomeDetail = styled.div`
   padding: 1rem 3.5rem;
-
   p,
   li {
     color: #666666;
@@ -130,7 +119,6 @@ border-radoious: 14px;
   max-width: 80% !important;
   flex-direction: row !important;
   padding: 10px 0 !important; //temporary fix to a style guide bug
-
   align-items: center;
   h1 {
     margin: 20px;

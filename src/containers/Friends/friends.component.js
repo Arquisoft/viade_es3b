@@ -23,6 +23,7 @@ import './addFriendModal.css';
 export const FriendsPageContent = props => {
   const { friends, friendsPhotos, addFriend } = props;
   const { t } = useTranslation();
+
   const [modalIsOpen,setIsOpen] = React.useState(false);
 
   function openModal() {
