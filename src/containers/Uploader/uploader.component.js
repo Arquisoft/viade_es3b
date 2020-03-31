@@ -2,6 +2,9 @@ import React from "react";
 import { UploaderWrapper, UploaderCard, FileButton, ChooseButton, UploadButton, FileNames, FilesContainer } from './uploader.style';
 import { useTranslation } from 'react-i18next';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Uploader = () => {
 	const run = async () => {
 		const FC = require('solid-file-client');
@@ -22,20 +25,41 @@ const Uploader = () => {
 				
 				let fileContent = reader.result;
 				auth.trackSession(session => {
-				if (session) {			
-				
-					const fc = new FC(auth);	
-					let webId = session.webId;
-					let url = webId.split("/profile/card#me")[0];
-					url = url.concat("/public/myRoutes/").concat(file.name);
-					
-					fc.createFile(url, fileContent);
+					if (session) {	
+						const fc = new FC(auth);	
+						let webId = session.webId;
+						let url = webId.split("/profile/card#me")[0];
+						url = url.concat("/public/myRoutes/").concat(file.name);
+						
+						if(fc.createFile(url, fileContent)){
+							showSuccessUploadFile(file.name);
+						}else{
+							showErrorUploadFile(file.name);
+						}
 					}
 				});
 			};
 		}
-	  };
-	  const show = () => {
+	};
+
+	const showErrorUploadFile = (name) => {
+		toast.error("Archivo " + name + " no se ha subido correctamente", {
+			delay: 1000,
+			autoClose: false,
+			position: toast.POSITION.TOP_CENTER
+		});
+	}
+
+	const showSuccessUploadFile = (name) => {
+		//https://github.com/fkhadra/react-toastify
+		toast.success("Archivo " + name + " subido correctamente", {
+			delay: 1000,
+			autoClose: false,
+			position: toast.POSITION.TOP_CENTER
+		});
+	}
+
+	const show = () => {
 		const filesInput = document.getElementById('file-browser-input');
 		const files = filesInput.files;
 		if(files.length>0){
@@ -63,7 +87,7 @@ const Uploader = () => {
 				contenedor.insertAdjacentElement('beforeend',elemento);		
 			}
 		}
-	  };
+	};
 	
   	const { t } = useTranslation();
   	return (
@@ -85,12 +109,12 @@ const Uploader = () => {
 								<label id="label-input" for="file-browser-input">
 									<span>{t('uploader.choose')}</span>
 								</label>
-								
 							</div>
 						</ChooseButton>
 						<FilesContainer id="files-container">
 							<FileNames>
 								<h3 id="header-file-container">{t('uploader.selectedFiles')}</h3>
+								
 								<div id="file-container">
 									<ul id="file-list">
 									</ul>
@@ -107,7 +131,6 @@ const Uploader = () => {
 							</FilesContainer>
 						</div>
 					</FileButton>
-					
 			</UploaderCard>
 	  	</UploaderWrapper>
   );
