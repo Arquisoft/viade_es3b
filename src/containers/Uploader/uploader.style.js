@@ -88,6 +88,7 @@ export const UploadButton = styled.div`
       padding: 6.4px 12.8px;
       width: fit-content;
       text-align: center;
+      
       }
       label:hover {
         color: #083575;
@@ -113,6 +114,12 @@ export const FilesContainer = styled.div`
     
     input,label{
       margin:10px;
+      @media screen and (max-width: 538px) {
+        margin: 0px;
+      }
+      @media screen and (max-width: 400px) {
+        margin: 2px 0px;
+      }
     }
     div#file-container{
       margin: 0 0 10px 0;
