@@ -252,5 +252,15 @@
     "load": "Cargar",
     "save": "Guardar",
     "grantAccess": "Dar Acceso"
+  },
+  "uploader": {
+    "explanation": "Sube aquí los archivos multimedia de tus rutas",
+    "upload": "Subir",
+    "choose": "Elegir archivos",
+    "selectedFiles": "Archivos seleccionados:",
+    "modifyFiles": "Modificar archivos",
+    "file": "El archivo ",
+    "incorrectUpload": " no se ha subido correctamente.",
+    "correctUpload": " se ha subido correctamente."
   }
 }

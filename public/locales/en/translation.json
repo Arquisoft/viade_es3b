@@ -250,5 +250,15 @@
     "load": "Load",
     "save": "Save",
     "grantAccess": "Grant Access"
+  },
+  "uploader": {
+    "explanation": "Upload here the multimedia files of your routes",
+    "upload": "Upload",
+    "choose": "Choose files",
+    "selectedFiles": "Selected files:",
+    "modifyFiles": "Modify files",
+    "file": "The file ",
+    "incorrectUpload": " has not been uploaded correctly.",
+    "correctUpload": " has been uploaded successfully."
   }
 }
