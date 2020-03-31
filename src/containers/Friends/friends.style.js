@@ -44,7 +44,9 @@ export const FriendsCard = styled.div`
     
   @media screen and (max-width: 1000px) {
     width: 100% !important;
-    min-height: 300px;
+    min-height: 200px;
+    max-height: 3000px;
+    padding: 0  !important;
   }
 `;
 
@@ -92,6 +94,10 @@ export const FriendsList = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px 30px 0px 50px;
+  @media screen and (max-width: 1000px) {
+    overflow: auto;
+    padding-left: 33%;
+  }
 `;
 export const FriendProfile = styled.div`
   width: 100%;
@@ -102,52 +108,6 @@ export const FriendProfile = styled.div`
   padding: 0px 0px 10px;
 `;
 
-export const FriendsProfile = styled.div`
-  height: 100%;
-  text-align: center;
-  position: relative;
-
-  img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-  }
-
-  h1,
-  img {
-    margin: 0 10px;
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  ${media.tablet`
-    width: 50%;
-    &:after {
-      display: block;
-      content: "";
-      position: absolute;
-      height: 100%;
-      width: 1px;
-      background-color:#D0D0D0;
-      top:0;
-    }
-  `}
-`;
-
-export const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-/*export const ImageContainer = styled.div`
-  background-image: ${({ image }) => (image ? `url(${image})` : '#cccccc')};
-  background-size: cover;
-  border-radius: 50%;
-  width: 42px;
-  height: 42px;
-`;*/
-
 export const ImageContainer = styled.div`
   width: 42px;
   height: 42px;
@@ -157,27 +117,11 @@ export const ImageContainer = styled.div`
   visibility: visible;
   display: block;
  `;
-/*  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
-  display: ${({ show }) => (show ? 'block' : 'none')};
-`;*/
 
 export const Img = styled.img`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-`;
-
-export const FriendsDetail = styled.div`
-  padding: 1rem 3.5rem;
-
-  p,
-  li {
-    color: #666666;
-  }
-  ul {
-    list-style: disc;
-    margin: 0 18px;
-  }
 `;
 
 export const FriendName = styled.span`

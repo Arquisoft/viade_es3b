@@ -9,13 +9,11 @@ import {
   FriendsWrapper,
   FriendProfile,
   FriendName,
-  ImageWrapper,
   ImageContainer,
   Img
 } from './friends.style';
 import Modal from 'react-modal';
 import './addFriendModal.css';
-const defaultProfilePhoto = '/img/icon/empty-profile.svg';
 
 /**
  * Friends Page UI component, containing the styled components for the Friends Page
@@ -23,11 +21,9 @@ const defaultProfilePhoto = '/img/icon/empty-profile.svg';
  * @param props
  */
 export const FriendsPageContent = props => {
-  const { webId, image, updatePhoto, name, friends, addFriend } = props;
+  const { friends, friendsPhotos, addFriend } = props;
   const { t } = useTranslation();
-  const limit = 2100000;
   const [modalIsOpen,setIsOpen] = React.useState(false);
-  const ref = React.createRef();
 
   function openModal() {
     setIsOpen(true);
@@ -49,7 +45,7 @@ export const FriendsPageContent = props => {
             <h4>{t('friends.title')}</h4>
             <button onClick={openModal}>
               <span className="icon">
-                <img src="/img/viade-icons/person_add.svg" alt="Add Friend" />
+                <img src={'/img/viade-icons/person_add.svg'} alt="Add Friend" />
               </span>
             </button>
             <Modal
@@ -63,7 +59,7 @@ export const FriendsPageContent = props => {
                 <h2 className="modalTitle">Please enter WebID:</h2>
                 <button onClick={closeModal} className="close">
                   <span className="icon">
-                    <img src="/img/viade-icons/close.svg" alt="Close" />
+                    <img src={'/img/viade-icons/close.svg'} alt="Close" />
                   </span>
                 </button>
               </div>
@@ -71,7 +67,7 @@ export const FriendsPageContent = props => {
                   <input type="text" placeholder="https://alice.solid.community/profile/card#me" id="input"/>
                   <button onClick={(event) => addFriend(event,document.getElementById('input').value)} className="send">
                     <span className="icon">
-                      <img src="/img/viade-icons/send.svg" alt="Send" />
+                      <img src={'/img/viade-icons/send.svg'} alt="Send" />
                     </span>
                   </button>
                 </form>
@@ -81,7 +77,7 @@ export const FriendsPageContent = props => {
             {friends.map((friend, index) => (
                 <FriendProfile key={index}>
                   <ImageContainer>
-                    <Img src={defaultProfilePhoto} alt="profile"/>
+                    <Img src={friendsPhotos[index]} alt="profile"/>
                   </ImageContainer>
                   <FriendName>{friend}</FriendName>
                 </FriendProfile>
