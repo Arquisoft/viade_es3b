@@ -258,6 +258,9 @@
     "upload": "Subir",
     "choose": "Elegir archivos",
     "selectedFiles": "Archivos seleccionados:",
-    "modifyFiles": "Modificar archivos"
+    "modifyFiles": "Modificar archivos",
+    "file": "El archivo ",
+    "incorrectUpload": " no se ha subido correctamente.",
+    "correctUpload": " se ha subido correctamente."
   }
 }

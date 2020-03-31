@@ -43,7 +43,7 @@ const Uploader = () => {
 	};
 
 	const showErrorUploadFile = (name) => {
-		toast.error("Archivo " + name + " no se ha subido correctamente", {
+		toast.error(t('uploader.file') + name + t('uploader.incorrectUpload'), {
 			delay: 1000,
 			autoClose: false,
 			position: toast.POSITION.TOP_CENTER
@@ -52,7 +52,7 @@ const Uploader = () => {
 
 	const showSuccessUploadFile = (name) => {
 		//https://github.com/fkhadra/react-toastify
-		toast.success("Archivo " + name + " subido correctamente", {
+		toast.success(t('uploader.file') + name + t('uploader.correctUpload'), {
 			delay: 1000,
 			autoClose: false,
 			position: toast.POSITION.TOP_CENTER
