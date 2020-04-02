@@ -24,6 +24,14 @@ export const InformationSection = styled.section`
 `;
 
 
+export const DefaultSection = styled.section`
+  align-items: center;
+  justify-content: center;
+  background:#a4d1d1;
+  background-repeat: repeat;
+  padding: 30px 30px;
+`;
+
 
 export const Column = styled.div`
         width: 25vw;
@@ -35,6 +43,8 @@ export const Up = styled.div`
         height: 80vh;   
         width: 100vw;
         float:up;
+        text-align: center;
+
        
 `;
 
@@ -95,4 +105,6 @@ export const H1FormatPopup = styled.h1`
       text-align:center;
       font-size: 1rem;
 `;
+
+
 
