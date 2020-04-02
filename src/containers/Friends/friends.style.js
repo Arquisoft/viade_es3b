@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from '../../utils';
+//import { media } from '../../utils';
 
 export const FriendsWrapper = styled.section`
   width: 100%;

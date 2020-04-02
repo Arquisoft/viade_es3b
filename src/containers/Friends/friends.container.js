@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import data from '@solid/query-ldflex';
 import {FriendsPageContent} from './friends.component';
-import {errorToaster, successToaster} from '@utils';
+import {errorToaster} from '@utils';
 
 const defaultProfilePhoto = '/img/icon/empty-profile.svg';
 const reload = () => {
