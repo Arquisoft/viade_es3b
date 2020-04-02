@@ -4,6 +4,9 @@ export function getRoutesFileName() {
 
   const auth = require('solid-auth-client');
     auth.trackSession(session => {
+      if (!session) {
+        return;
+      } 
     let webId = session.webId;
     let urlRoute = webId.split("/profile/card#me")[0];
     urlRoute = urlRoute.concat("/public/myRoutes/");
