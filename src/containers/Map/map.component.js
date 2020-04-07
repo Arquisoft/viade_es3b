@@ -7,6 +7,7 @@ import Rutas from '../../components/Ruta/rutas';
 import ReactDOM from 'react-dom';
 import AddRoute from './prueba';
 
+import LoadRoute from '../../components/Ruta/service';
 
 import {
   Column,
@@ -219,6 +220,7 @@ class Mapa extends React.Component {
           <Up>
             <button onClick={this.updateMap}>Cargar rutas</button>
             <AddRoute></AddRoute>
+            <LoadRoute></LoadRoute>
           </Up>
         </DefaultSection>
       </div>
