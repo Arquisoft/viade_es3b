@@ -7,7 +7,6 @@ export const UploaderWrapper = styled.div`
 `;
 
 export const UploaderCard = styled.div`
-
   background-color: #fff;
   margin: 30px auto;
   //Overriding the style guide card flexbox settings
@@ -109,7 +108,6 @@ export const FilesContainer = styled.div`
     border-radius: 4px;
     width: 100%;
     background-color: #a4d1d1;
-    
     input,label{
       margin:10px;
       @media screen and (max-width: 538px) {
@@ -122,4 +120,4 @@ export const FilesContainer = styled.div`
     div#file-container{
       margin: 0 0 10px 0;
     }
-    `;
+`;
