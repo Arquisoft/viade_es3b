@@ -5,6 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import Rutas from '../../components/Ruta/rutas';
 import ReactDOM from 'react-dom';
+import AddRoute from './prueba';
 
 
 import {
@@ -217,6 +218,7 @@ class Mapa extends React.Component {
         <DefaultSection>
           <Up>
             <button onClick={this.updateMap}>Cargar rutas</button>
+            <AddRoute></AddRoute>
           </Up>
         </DefaultSection>
       </div>

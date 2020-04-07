@@ -10,7 +10,7 @@ class Rutas{
         this.rutas = [];
         //this.rutas = [new Ruta(ruta1),new Ruta(ruta3),new Ruta(ruta4)];
         getRoutesFileName();
-        setTimeout(() => {   getRutas().forEach(r => {console.log(r) ;
+        setTimeout(() => {   getRutas().forEach(r => {
         this.rutas.push(new Ruta(r))})}, 2000);
     }
 
