@@ -1,4 +1,4 @@
-import Mapa from './map.component';
+import Mapa from './map.container';
 
 
 
