@@ -11,3 +11,11 @@ export class Point{
     }
 
 }
+
+export class WayPoint{
+    constructor(name, description , point){
+        this.name = name;
+        this.description = description;
+        this.point = point;
+    }
+}

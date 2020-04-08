@@ -1,16 +1,16 @@
-import { Point } from "./point.js";
+import { Point , WayPoint} from "./point.js";
 
 export default class Ruta {
     constructor(file) {
         this.name = file.name;
         this.description = file.description;
-        console.log("Nombre: " + this.name + " descripcion: " + this.description);
         this.photos = [];
         this.videos = [];
         this.points = [];
+        this.waypoints = []; 
         file.points.forEach(p =>this.points.push(new Point(p.latitude, p.longitude,p.elevation)));
-        this.points.forEach(p => console.log(p.getCoordinates())); 
         file.media.forEach(m => this.saveMultimedia(m));
+        file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
         this.currentPhoto = 0;
         this.currentVideo = 0;
     }
