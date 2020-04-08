@@ -3,9 +3,9 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
-import Rutas from '../../components/Ruta/rutas';
+//import Rutas from '../../components/Ruta/rutas';
 import ReactDOM from 'react-dom';
-
+import AddRoute from './prueba';
 
 import {
   Column,
@@ -39,6 +39,7 @@ var name;
 var description;
 var puntos = [];
 var distance = LeafletMap;
+var Rutas ;
 
 
 
@@ -200,34 +201,32 @@ function messageNoRutas() {
   ReactDOM.render(messageNoRutas, document.getElementById('mapSeccion'));
 }
 
-class Mapa extends React.Component {
 
-  updateMap() {
+const MapaComponent = props => {
+  const {rutas} = props;
+  Rutas = rutas;
+
+  function loadMap(){
     setTimeout(() => {
       if (Rutas.hayRutas)
         updateMap();
       else
         messageNoRutas();
     }, 1000);
-  }
+  };
+  
 
-  render() {
     return (
       <div id="mapSeccion">
         <DefaultSection>
           <Up>
-            <button onClick={this.updateMap}>Cargar rutas</button>
+            <button onClick={loadMap}>Cargar rutas</button>
+            <AddRoute></AddRoute>
           </Up>
         </DefaultSection>
       </div>
 
     );
-  }
 }
 
-
-
-
-
-
-export default Mapa;
+export default MapaComponent;
