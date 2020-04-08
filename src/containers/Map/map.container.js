@@ -15,7 +15,10 @@ const LoadRoute = () => {
 
     useEffect(() => {
         if (user !== undefined) {
-            const url = user.split("profile/card#me")[0] + "/public/myRoutes";
+            const url = user.split("profile/card#me")[0] + "public/myRoutes";
+            console.log(url);
+            //const url = "https://uo264354.solid.community/public/myRoutes";
+            //console.log(url);
             loadRoutes(url);
         }
     }, [user]);
@@ -28,6 +31,10 @@ async function loadRoutes(url) {
     let i;
     let count= 0;
     let rutasJson = [];
+    if(folder.files.length == 0){
+        let rutas = new Rutas(rutasJson);
+                    ReactDOM.render(<MapaComponent { ... {rutas}}></MapaComponent>, document.getElementById('mapComponent'));
+    }
     for (i = 0; i < folder.files.length; i++) {
         if (folder.files[i].name.includes('.png')) {
             count += 1;
