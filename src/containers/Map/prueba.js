@@ -40,11 +40,11 @@ const Formulario = () => {
             <UploadJson setFile={setFile} file={file} />
             <br></br>
             <div class="form-group">
-                <label class="exampleInputPhoto" for="photo" class="labelPhoto">Images:</label><br></br>
+                <label  for="photo" class="labelPhoto">Images:</label><br></br>
                 <input value={null} type="file" id="photo" name="image" accept=".png" multiple="true" onChange={(e) => setImage(e.target.files)} />
             </div>
             <div class="form-group">
-                <label class="exampleInputVideo" for="video" class="labelVideo">Video:</label><br></br>
+                <label  for="video" class="labelVideo">Video:</label><br></br>
                 <input value={null} type="file" id="video" name="video" accept=".mp4" multiple="true" onChange={(e) => setVideo(e.target.files)} />
             </div>
             <br></br>

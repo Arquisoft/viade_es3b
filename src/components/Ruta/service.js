@@ -10,8 +10,8 @@ const fileClien = new fileClient(solidAuth, { enableLogging: true });
 var rutas = [];
 const LoadRoute = () => {
 
-    const [folders, setFolders] = useState([]);
-    const [selected, setSelected] = useState({
+    const [setFolders] = useState([]);
+    const [selected] = useState({
         name: '',
         description: '',
         images: [],
@@ -24,7 +24,7 @@ const LoadRoute = () => {
     var user = useWebId();
 
     useEffect(() => {
-        if (user != undefined) {
+        if (user !== undefined) {
             const url = user.split("profile/card#me")[0] + "prueba2";
             //listRoutes(url);
             loadRoutes(url, setFolders);
@@ -40,10 +40,10 @@ async function loadRoutes(url) {
     let folder = await fileClien.readFolder(url);
 
 
-    let i = 0;
+    let i;
     for (i = 0; i < folder.files.length; i++) {
         if (folder.files[i].name.includes('.png')) {
-            let messageNoRutas = <img src={url + "/" + folder.files[i].name} />
+            let messageNoRutas = <img src={url + "/" + folder.files[i].name} alt = "A" />
             ReactDOM.render(messageNoRutas, document.getElementById('prueba'));
         } else if (folder.files[i].name.includes('.json')) {
             fileClien.readFile(url + "/" + folder.files[i].name).then((file) => {
