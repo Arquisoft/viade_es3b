@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
-
+import MapaComponent from './map.component';
+import Rutas from '../../components/Ruta/rutas';
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 var rutas = [];
@@ -17,7 +18,7 @@ const LoadRoute = () => {
             loadRoutes(url);
         }
     }, [user]);
-    return (<div><h2 id="porcentaje">Porcentaje: 0 %</h2><div id="prueba"></div></div>)
+    return (<div id = "map"><h2 id="porcentaje">Porcentaje: 0 %</h2><div id="prueba"></div></div>)
 }
 
 async function loadRoutes(url) {
@@ -35,6 +36,9 @@ async function loadRoutes(url) {
                 rutas.push(JSON.parse(file));
                 count += 1;
                 document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / folder.files.length * 100)  + " %";
+                if(Math.trunc((count) / folder.files.length * 100) === 100) {
+                    ReactDOM.render(<MapaComponent { ... {Rutas}}></MapaComponent>, document.getElementById('map'));
+                }
             }
             );
         } else{
