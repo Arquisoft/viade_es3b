@@ -32,7 +32,7 @@ async function loadRoutes(url) {
             count += 1;
             document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / folder.files.length * 100)  + " %";
         } else if (folder.files[i].name.includes('.json')) {
-            fileClien.readFile(url + "/" + folder.files[i].name).then((file) => {
+            fileClien.readFile(url + "/" + folder.files[i].name).then((file,count) => {
                 rutas.push(JSON.parse(file));
                 count += 1;
                 document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / folder.files.length * 100)  + " %";
