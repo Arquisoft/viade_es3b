@@ -69,6 +69,10 @@ export default class Ruta {
         return this.videos[this.currentVideo];
     }
 
+    getWayPoints(){
+        return this.waypoints;
+    }
+
 
 
     getBetweenTwoPoints(lat1, lon1, lat2, lon2) {

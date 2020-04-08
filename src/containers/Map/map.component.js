@@ -50,67 +50,27 @@ function changeRuta(id, e) {
   document.getElementById("description").textContent = currentRuta.description;
   document.getElementById("distance").textContent = currentRuta.getDistance() + " KM";
   changeMap();
-  //changePhotos();
-}
-
-function getMarkets() {
-  return <React.Fragment>
-    <Marker position={puntos[0]}>
-      {getFirtsPopup()}
-    </Marker>
-    {getCenterMarket()}
-    <Marker position={puntos[puntos.length - 1]}>
-      {getLastPopup()}
-    </Marker>
-  </React.Fragment>
-    ;
-}
-
-function getFirtsPopup() {
-  if (currentRuta.points[0].photos.length !== 0)
-    return <Popup><H1FormatPopup>Inicio</H1FormatPopup><ImgPopupSytle src={currentRuta.points[0].photos[0]} /></Popup>;
-  else
-    return <Popup><H1FormatPopup>Inicio</H1FormatPopup></Popup>;
-}
-
-function getLastPopup() {
-  if (currentRuta.points[currentRuta.points.length - 1].photos.length !== 0)
-    return <Popup><H1FormatPopup>Fin</H1FormatPopup><ImgPopupSytle src={currentRuta.points[currentRuta.points.length - 1].photos[currentRuta.points[currentRuta.points.length - 1].photos.length - 1]} /></Popup>
-  else
-    return <Popup><H1FormatPopup>Fin</H1FormatPopup></Popup>
-}
-
-function getCenterMarket() {
-  let centerMarket = [];
-  let aux;
-
-  puntos.forEach((p, i = 0) => {
-    aux = getPopup(i);
-    i = i + 1;
-    if (aux !== null) centerMarket.push(aux);
-  })
-  if (centerMarket.length !== 0)
-    return centerMarket[0];
 }
 
 
-function getPopup(i) {
-  if (i !== 0 && i !== currentRuta.points.length - 1 && currentRuta.points[i].photos.length !== 0)
-    return <Marker position={puntos[i]}><Popup><ImgPopupSytle src={currentRuta.points[i].photos[0]} /></Popup></Marker>
 
-  return null;
+function getPopup() {
+  let w = currentRuta.getWayPoints()[0];
+  return <Marker position={w.point.getCoordinates()}><Popup><p>{w.name}</p><p>{w.description}</p></Popup></Marker>;
+
+
+  
 }
 
 function getMap() {
   puntos = [];
   currentRuta.points.forEach(p => puntos.push(p.getCoordinates()));
-  return <MapaStyle id="map" center={puntos[0]} zoom={15} >
+  return <MapaStyle center={puntos[0]} zoom={15} >
     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     <Polyline color={'blue'} positions={puntos}></Polyline>
-    {/*getMarkets()*/}
+    {getPopup()}
   </MapaStyle>;
 }
-
 
 
 function changeMap() {
