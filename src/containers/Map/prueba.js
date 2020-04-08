@@ -12,8 +12,6 @@ const UploadJson = ({ setFile, file }) => {
     const changeName = e => {
         setFile(e.target.files[0]);
     }
-
-
     return (
         <div>
             <div >

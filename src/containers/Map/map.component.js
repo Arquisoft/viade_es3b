@@ -205,7 +205,6 @@ function messageNoRutas() {
 class Mapa extends React.Component {
 
   updateMap() {
-   // console.log(getRutasA[0].description);
     setTimeout(() => {
       if (Rutas.hayRutas)
         updateMap();
