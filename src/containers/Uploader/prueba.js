@@ -39,7 +39,7 @@ const Formulario = () => {
             <br></br>
             <div class="form-group">
                 <label  for="photo" class="labelPhoto">Images:</label><br></br>
-                <input value={null} type="file" id="photo" name="image" accept=".png,.jpg" multiple="true" onChange={(e) => setImage(e.target.files)} />
+                <input value={null} type="file" id="photo" name="image" accept=".png," multiple="true" onChange={(e) => setImage(e.target.files)} />
             </div>
             <div class="form-group">
                 <label  for="video" class="labelVideo">Video:</label><br></br>
@@ -71,7 +71,6 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
     if (!existe) {
         await fileClien.createFolder(folder);
     }
-
 
     var i = 0;
 

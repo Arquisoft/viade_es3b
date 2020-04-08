@@ -3,38 +3,30 @@ import { Video, Photo } from "./media.js";
 
 export default class Ruta {
     constructor(file) {
-        this.points = [];
-        file.itinerary.itemListElement.map(p => this.points.push(new Point(p.latitude, p.longitude, 0, this.createPhoto(p), this.createVideo(p))));
         this.name = file.name;
         this.description = file.description;
+        console.log("Nombre: " + this.name + " descripcion: " + this.description);
         this.photos = [];
-        this.points.map(p => p.photos.map(photo => this.photos.push(photo)));
+        this.videos = [];
+        this.points = [];
+        file.points.forEach(p =>this.points.push(new Point(p.latitude, p.longitude,p.elevation)));
+        this.points.forEach(p => console.log(p.getCoordinates())); 
+        file.media.forEach(m => this.saveMultimedia(m));
         this.currentPhoto = 0;
+        this.currentVideo = 0;
     }
 
-    /** Devuelve un array lista con los archivos de tipo photo pertenecientes a un punto */
-    createPhoto(p) {
-        let media = p.media;
-        let exit = [];
-        media.itemListElement.forEach(item => {exit.push(new Photo(item.author, item.contentUrl, item.datePublished)); });
-        return exit;
-    }
-
-    /** Devuelve un array lista con los archivos de tipo viedo pertenecientes a un punto */
-    createVideo(p) {
-        let media = p.media;
-        let exit = [];
-        media.itemListElement.forEach(item => {
-            if (item.type === "VideoObject")
-                exit.push(new Video(item.author, item.contentUrl, item.datePublished));
-        });
-        return exit;
+    saveMultimedia(m){
+        let mUrl = m["@id"];
+        if(mUrl.includes(".png") || mUrl.includes(".jpg"))
+            this.photos.push(mUrl);
+        else if(mUrl.includes(".mp4") )
+            this.videos.push(mUrl);
     }
 
     getNextPhoto() {
         if (this.currentPhoto < this.photos.length - 1) {
             this.currentPhoto = this.currentPhoto + 1;
-
         }
         else {
             this.currentPhoto = 0;
@@ -54,6 +46,31 @@ export default class Ruta {
     getCurrentPhoto() {
         return this.photos[this.currentPhoto];
     }
+
+    getNextVideo() {
+        if (this.currentVideo < this.videos.length - 1) {
+            this.currentVideo = this.currentVideo + 1;
+        }
+        else {
+            this.currentVideo = 0;
+        }
+        return this.videos[this.currentVideo];
+    }
+
+    getPreviusVideo() {
+        if (this.currentVideo === 0) {
+            this.currentVideo = this.videos.length - 1;
+        } else {
+            this.currentVideo = this.currentVideo - 1;
+        }
+        return this.videos[this.currentVideo];
+    }
+
+    getCurrentVideo() {
+        return this.videos[this.currentVideo];
+    }
+
+
 
     getBetweenTwoPoints(lat1, lon1, lat2, lon2) {
         let rad = function (x) { return x * Math.PI / 180; }
