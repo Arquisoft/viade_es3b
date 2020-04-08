@@ -27,9 +27,7 @@ const LoadRoute = () => {
 }
 
 async function loadRoutes(url) {
-    //let folder = await fileClien.readFolder(url);
     let routes = await fileClien.readFolder(url + "/routes");
-    //let resources = await fileClien.readFolder(url + "/resources");
     let i;
     let count= 0;
     let rutasJson = [];
@@ -57,27 +55,6 @@ async function loadRoutes(url) {
         }
         
     }
-    /*for (i = 0; i < folder.files.length; i++) {
-        if (folder.files[i].name.includes('.png') || folder.files[i].name.includes('.jpg')) {
-            count += 1;
-            document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / folder.files.length * 100)  + " %";
-        } else if (folder.files[i].name.includes('.jsonld') || folder.files[i].name.includes('.jsonld')) {
-            fileClien.readFile(url + "/" + folder.files[i].name).then((file) => {
-                rutasJson.push(JSON.parse(file));
-                count += 1;
-                document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / folder.files.length * 100)  + " %";
-                if(Math.trunc((count) / folder.files.length * 100) === 100) {
-                    let rutas = new Rutas(rutasJson);
-                    ReactDOM.render(<MapaComponent { ... {rutas}}></MapaComponent>, document.getElementById('mapComponent'));
-                }
-            }
-            );
-        } else{
-            document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / folder.files.length * 100) + " %";
-            count += 1;
-        }
-        
-    }*/
 }
 
 class Map extends React.Component{

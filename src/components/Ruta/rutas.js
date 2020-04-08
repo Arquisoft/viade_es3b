@@ -10,7 +10,8 @@ class Rutas{
     constructor(newRoutes){
         this.rutas = [];
         this.prueba = new Ruta(prueba);
-        //newRoutes.forEach(r => {this.rutas.push(new Ruta(r))})
+        newRoutes.forEach(r => {this.rutas.push(new Ruta(r))})
+        //this.rutas.push(prueba);
     }
 
     getNames(){

@@ -1,5 +1,4 @@
 import { Point } from "./point.js";
-import { Video, Photo } from "./media.js";
 
 export default class Ruta {
     constructor(file) {
