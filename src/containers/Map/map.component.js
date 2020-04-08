@@ -5,7 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 //import Rutas from '../../components/Ruta/rutas';
 import ReactDOM from 'react-dom';
-import AddRoute from './prueba';
+//import AddRoute from './prueba';
 
 import {
   Column,
@@ -39,19 +39,19 @@ var name;
 var description;
 var puntos = [];
 var distance = LeafletMap;
-var Rutas ;
+var rutas ;
 
 
 
 
 /* Método para cmabiar la ruta actualmento seleccionada */
 function changeRuta(id, e) {
-  currentRuta = Rutas.getRutaByName(id);
+  currentRuta = rutas.getRutaByName(id);
   document.getElementById("name").textContent = currentRuta.name;
   document.getElementById("description").textContent = currentRuta.description;
   document.getElementById("distance").textContent = currentRuta.getDistance() + " KM";
   changeMap();
-  changePhotos();
+  //changePhotos();
 }
 
 function getMarkets() {
@@ -115,19 +115,18 @@ function getMap() {
 
 
 function changeMap() {
-  ReactDOM.render(getMap(), document.getElementById('map'));
+  ReactDOM.hydrate(<MapView></MapView>, document.getElementById('map'));
 }
 
 function changePhotos() {
-  let newImg = <ImgSytle id="img" src={currentRuta.getCurrentPhoto().img} />
-  ReactDOM.render(newImg, document.getElementById('imgDiv'));
+  document.getElementById('img').src=currentRuta.getCurrentPhoto().img;
 }
 
 /* método que generar el mapa, junto con su nombre, y descripción*/
 class Map extends React.Component {
   constructor() {
     super();
-    currentRuta = Rutas.getRutaByPosition(0);
+    currentRuta = rutas.getRutaByPosition(0);
     name = currentRuta.name;
     description = currentRuta.description;
     distance = currentRuta.getDistance() + " KM";
@@ -143,7 +142,7 @@ class Map extends React.Component {
           <PStyle id="description">{description}</PStyle>
           <PStyle id="distance" >{distance}</PStyle>
           <H3Format>Tus rutas:</H3Format>
-          <UlStyle>{Rutas.getNames().map((n, i) => <LiStyle key={i} onClick={(e) => changeRuta(n, e)}> {n} </LiStyle>)}</UlStyle>
+          <UlStyle>{rutas.getNames().map((n, i) => <LiStyle key={i} onClick={(e) => changeRuta(n, e)}> {n} </LiStyle>)}</UlStyle>
         </Column>
       </Up>
     );
@@ -152,45 +151,41 @@ class Map extends React.Component {
 
 
 /* método que generar el mapa, junto con su nombre, y descripción*/
-class Information extends React.Component {
-
-  previusPhoto() {
-    let newImg = <ImgSytle id="img" src={currentRuta.getPreviusPhoto().img} />
-    ReactDOM.render(newImg, document.getElementById('imgDiv'));
+const Information  = () => {
+  function previusPhoto() {
+    document.getElementById('img').src = currentRuta.getPreviusPhoto().img;
   }
 
 
 
 
-  nextPhoto() {
-    let newImg = <ImgSytle id="img" src={currentRuta.getNextPhoto().img} />
-    ReactDOM.render(newImg, document.getElementById('imgDiv'));
+  function nextPhoto() {
+    document.getElementById('img').src = currentRuta.getNextPhoto().img;
   }
 
-
-
-  render() {
     return (
       <div>
-        <button onClick={this.previusPhoto}></button>
+        <button onClick={previusPhoto}></button>
         <div id="imgDiv">
           <ImgSytle id="img" src={currentRuta.getCurrentPhoto().img} />
         </div>
-        <button onClick={this.nextPhoto}></button>
-      </div>
-    );
-  }
+        <button onClick={nextPhoto}></button>
+      </div>);
+}
+
+const MapView = () =>{
+  return <div><MapSection>
+  <Map></Map>
+</MapSection>
+  <InformationSection>
+    <Information></Information>
+  </InformationSection></div>;
 }
 
 function updateMap() {
-  let mapView = <div><MapSection>
-    <Map></Map>
-  </MapSection>
-    <InformationSection>
-      <Information></Information>
-    </InformationSection></div>;
 
-  ReactDOM.render(mapView, document.getElementById('mapSeccion'));
+  ReactDOM.hydrate(<div id="mapSeccion"><MapView></MapView></div>, document.getElementById('map'));
+ 
 }
 
 function messageNoRutas() {
@@ -198,35 +193,24 @@ function messageNoRutas() {
     <H2Format>NO HAY RUTAS EN EL POD</H2Format>
   </InformationSection>;
 
-  ReactDOM.render(messageNoRutas, document.getElementById('mapSeccion'));
+  ReactDOM.hydrate(messageNoRutas, document.getElementById('map'));
 }
 
 
-const MapaComponent = props => {
-  const {rutas} = props;
-  Rutas = rutas;
 
-  function loadMap(){
-    setTimeout(() => {
-      if (Rutas.hayRutas)
-        updateMap();
-      else
-        messageNoRutas();
-    }, 1000);
-  };
-  
+function loadMap(){
+  if (rutas.hayRutas())
+      updateMap();
+  else
+    messageNoRutas();
 
+};
+
+function MapaComponent(props){
+  rutas = props.Rutas;
     return (
-      <div id="mapSeccion">
-        <DefaultSection>
-          <Up>
-            <button onClick={loadMap}>Cargar rutas</button>
-            <AddRoute></AddRoute>
-          </Up>
-        </DefaultSection>
-      </div>
-
-    );
+      <div>{loadMap()}</div>
+    )
 }
 
 export default MapaComponent;

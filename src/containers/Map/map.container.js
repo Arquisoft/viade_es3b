@@ -18,6 +18,7 @@ const LoadRoute = () => {
             loadRoutes(url);
         }
     }, [user]);
+
     return (<div id = "map"><h2 id="porcentaje">Porcentaje: 0 %</h2><div id="prueba"></div></div>)
 }
 
@@ -32,12 +33,12 @@ async function loadRoutes(url) {
             count += 1;
             document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / folder.files.length * 100)  + " %";
         } else if (folder.files[i].name.includes('.json')) {
-            fileClien.readFile(url + "/" + folder.files[i].name).then((file,count) => {
+            fileClien.readFile(url + "/" + folder.files[i].name).then((file) => {
                 rutas.push(JSON.parse(file));
                 count += 1;
                 document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / folder.files.length * 100)  + " %";
                 if(Math.trunc((count) / folder.files.length * 100) === 100) {
-                    ReactDOM.render(<MapaComponent { ... {Rutas}}></MapaComponent>, document.getElementById('map'));
+                    ReactDOM.render(<MapaComponent { ... {Rutas}}></MapaComponent>, document.getElementById('prueba'));
                 }
             }
             );
@@ -48,4 +49,11 @@ async function loadRoutes(url) {
         
     }
 }
-export default LoadRoute;
+
+class Map extends React.Component{
+    render(){
+        return <LoadRoute></LoadRoute>
+    }
+}
+
+export default Map;

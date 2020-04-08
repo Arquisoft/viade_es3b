@@ -16,9 +16,6 @@ class Rutas{
     getNames(){
         let rutasName = [];
         this.rutas.map(r => rutasName.push(r.name));
-        
-
-        
         return rutasName;
    
     }
@@ -34,8 +31,7 @@ class Rutas{
     }
 
     hayRutas(){
-        if(this.rutas.length === 0) return false;
-        else return true;
+        return this.rutas.length !== 0;
     }
 }
 
