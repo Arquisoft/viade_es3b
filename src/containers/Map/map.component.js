@@ -115,11 +115,7 @@ function getMap() {
 
 
 function changeMap() {
-  ReactDOM.hydrate(<MapView></MapView>, document.getElementById('map'));
-}
-
-function changePhotos() {
-  document.getElementById('img').src=currentRuta.getCurrentPhoto().img;
+  ReactDOM.hydrate(<MapView></MapView>, document.getElementById('mapComponent'));
 }
 
 /* método que generar el mapa, junto con su nombre, y descripción*/
@@ -184,7 +180,7 @@ const MapView = () =>{
 
 function updateMap() {
 
-  ReactDOM.hydrate(<div id="mapSeccion"><MapView></MapView></div>, document.getElementById('map'));
+  ReactDOM.hydrate(<MapView></MapView>, document.getElementById('mapComponent'));
  
 }
 
@@ -193,10 +189,8 @@ function messageNoRutas() {
     <H2Format>NO HAY RUTAS EN EL POD</H2Format>
   </InformationSection>;
 
-  ReactDOM.hydrate(messageNoRutas, document.getElementById('map'));
+  ReactDOM.hydrate(messageNoRutas, document.getElementById('mapComponent'));
 }
-
-
 
 function loadMap(){
   if (rutas.hayRutas())
@@ -207,7 +201,7 @@ function loadMap(){
 };
 
 function MapaComponent(props){
-  rutas = props.Rutas;
+  rutas = props.rutas;
     return (
       <div>{loadMap()}</div>
     )

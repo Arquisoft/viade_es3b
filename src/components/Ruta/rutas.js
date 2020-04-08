@@ -6,11 +6,14 @@ import {getRoutesFileName , getRutas} from './servicePods';
 
 class Rutas{
 
-    constructor(){
+    constructor(newRoutes){
         this.rutas = [];
-        getRoutesFileName();
+        console.log(newRoutes);
+        newRoutes.forEach(r => {this.rutas.push(new Ruta(r))})
+        
+        /*getRoutesFileName();
         setTimeout(() => {   getRutas().forEach(r => {
-        this.rutas.push(new Ruta(r))})}, 2000);
+        this.rutas.push(new Ruta(r))})}, 2000);*/
     }
 
     getNames(){
@@ -36,5 +39,5 @@ class Rutas{
 }
 
 
-export default Rutas = new Rutas();
+export default Rutas;
 
