@@ -3,6 +3,7 @@ import { UploaderWrapper, UploaderCard, FileButton, ChooseButton, UploadButton, 
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AddRoute from './prueba';
 
 const Uploader = () => {
 	const run = async () => {
@@ -83,7 +84,7 @@ const show = () => {
 };
 	
 const { t } = useTranslation();
-return (
+/*return (
 <UploaderWrapper>
 		<UploaderCard className="card">
 				<h2>{t('uploader.explanation')}</h2>
@@ -125,7 +126,8 @@ return (
 				</FileButton>
 		</UploaderCard>
 	</UploaderWrapper>
-);
+);*/
+return(<AddRoute></AddRoute>);
 };
 
 export default Uploader;

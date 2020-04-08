@@ -5,7 +5,6 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 //import Rutas from '../../components/Ruta/rutas';
 import ReactDOM from 'react-dom';
-//import AddRoute from './prueba';
 
 import {
   Column,

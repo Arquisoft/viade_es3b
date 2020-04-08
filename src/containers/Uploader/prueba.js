@@ -28,7 +28,7 @@ const Formulario = () => {
 
     const [image, setImage] = useState(null);
     const [video, setVideo] = useState(null);
-    const folder = "prueba2";
+    const folder = "viade";
 
     const url = user.split("profile/card#me")[0] + folder;
     console.log(url);
