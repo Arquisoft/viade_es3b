@@ -3,8 +3,9 @@
 
 
 This section will be to specify some of the design decisions of the project. Some of them are:
+ - The documentation will be done with asciidoctor, is opne source and is usefull.
  - The interface will be build with React and we will search some libraries to help us to do it more usable.
  - The code of the application will be Javascript.
  - The architecture will be Peer-to-Peer because is the better in a Solid decentraliced app.
- - The store of the data will be in Solid Pods so we won't need any database.
- - The maps used in the application will be generated with leafletjs.
+ - The store of the data will be in Solid Pods so we won't need any database, the routes and the images will be stored there.
+ - The maps used in the application will be generated with leafletjs because is free and is a good option.
