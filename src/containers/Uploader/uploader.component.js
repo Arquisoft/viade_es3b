@@ -4,7 +4,7 @@ import { useWebId } from '@solid/react';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
-import { UploaderWrapper, UploaderCard, FormCard, MultimediaCard, ChooseButton, UploadButton, FileNames, FilesContainer } from './uploader.style';
+import { UploaderWrapper, UploaderCard, FormCard, MultimediaCard, MultimediasCard, ChooseButton, UploadButton, FileNames, FilesContainer } from './uploader.style';
 import { useTranslation } from 'react-i18next';
 
 
@@ -34,6 +34,8 @@ const UploadJson = ({ setFile, file }) => {
 		</div>
     );
 };
+
+
 const Formulario = () => {
     var user = "" + useWebId();
     //it saves the actual state of the data
@@ -53,24 +55,51 @@ const Formulario = () => {
 			</FormCard>
 			<FormCard>
 				<div><h2>Escoja los archivos multimedia que desee</h2></div>
-				<MultimediaCard>
-					<div class="form-group">
-						<label  for="photo" class="labelPhoto">Images:</label>
-						<input value={null} type="file" id="photo" name="image" accept=".png" multiple="true" onChange={(e) => setImage(e.target.files)} />
-					</div>
-				</MultimediaCard>
-				<MultimediaCard>
-					<div class="form-group">
-						<label  for="video" class="labelVideo">Video:</label>
-						<input value={null} type="file" id="video" name="video" accept=".mp4" multiple="true" onChange={(e) => setVideo(e.target.files)} />
-					</div>
-				</MultimediaCard>
+				<MultimediasCard>
+					<MultimediaCard>	
+							<div class="form-group">
+								<h3 for="photo" class="labelPhoto">Seleccione las imágenes</h3>
+								<ChooseButton>
+									<center>
+										<input value={null} type="file" id="photo" name="image" accept=".png" multiple="true" onChange={(e) => setImage(e.target.files)} />
+										<label id="label-input" for="photo">
+											<span>Elegir fotos</span>
+										</label>
+									</center>
+								</ChooseButton>
+							</div>
+							<FilesContainer id="photos-container">
+								<FileNames>
+									<h3 id="header-photo-container">GSA</h3>
+									<div id="photo-container">
+										<ul id="photo-list">
+										</ul>
+									</div>
+								</FileNames>
+							</FilesContainer>
+					</MultimediaCard>
+					<MultimediaCard>
+						<div class="form-group">
+							<h3  for="video" class="labelVideo">Seleccione los vídeos</h3>
+							<ChooseButton>
+								<center>
+									<input value={null} type="file" id="video" name="video" accept=".mp4" multiple="true" onChange={(e) => setVideo(e.target.files)} />
+									<label id="video-input" for="route">
+										<span>Elegir videos</span>
+									</label>
+								</center>
+							</ChooseButton>
+						</div>
+					</MultimediaCard>
+				</MultimediasCard>
 			</FormCard>
             
             <br></br>
             <center>
+				<UploadButton>
                 <button onClick={() => createFolder(url, file, image, video, setFile, setImage, setVideo)} class="btn btn-info" >Add route
                 </button>
+				</UploadButton>
             </center>
         </div>
     );
