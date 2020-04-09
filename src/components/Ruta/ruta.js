@@ -1,59 +1,45 @@
-import { Point } from "./point.js";
-import { Video, Photo } from "./media.js";
+import { Point , WayPoint} from "./point.js";
 
 export default class Ruta {
     constructor(file) {
-        this.points = [];
-        file.itinerary.itemListElement.map(p => this.points.push(new Point(p.latitude, p.longitude, 0, this.createPhoto(p), this.createVideo(p))));
         this.name = file.name;
         this.description = file.description;
-        this.photos = [];
-        this.points.map(p => p.photos.map(photo => this.photos.push(photo)));
-        this.currentPhoto = 0;
+        this.media = [];
+        this.points = [];
+        this.waypoints = []; 
+        file.points.forEach(p =>this.points.push(new Point(p.latitude, p.longitude,p.elevation)));
+        file.media.forEach(m => this.media.push(m["@id"]));
+        file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
+        this.currentMedia = 0;
     }
 
-    /** Devuelve un array lista con los archivos de tipo photo pertenecientes a un punto */
-    createPhoto(p) {
-        let media = p.media;
-        let exit = [];
-        media.itemListElement.forEach(item => {exit.push(new Photo(item.author, item.contentUrl, item.datePublished)); });
-        return exit;
-    }
-
-    /** Devuelve un array lista con los archivos de tipo viedo pertenecientes a un punto */
-    createVideo(p) {
-        let media = p.media;
-        let exit = [];
-        media.itemListElement.forEach(item => {
-            if (item.type === "VideoObject")
-                exit.push(new Video(item.author, item.contentUrl, item.datePublished));
-        });
-        return exit;
-    }
-
-    getNextPhoto() {
-        if (this.currentPhoto < this.photos.length - 1) {
-            this.currentPhoto = this.currentPhoto + 1;
-
+    getNextMedia() {
+        if (this.currentMedia < this.media.length - 1) {
+            this.currentMedia = this.currentMedia + 1;
         }
         else {
-            this.currentPhoto = 0;
+            this.currentMedia = 0;
         }
-        return this.photos[this.currentPhoto];
+        return this.media[this.currentMedia];
     }
 
-    getPreviusPhoto() {
-        if (this.currentPhoto === 0) {
-            this.currentPhoto = this.photos.length - 1;
+    getPreviusMedia() {
+        if (this.currentMedia === 0) {
+            this.currentMedia = this.media.length - 1;
         } else {
-            this.currentPhoto = this.currentPhoto - 1;
+            this.currentMedia = this.currentMedia - 1;
         }
-        return this.photos[this.currentPhoto];
+        return this.media[this.currentMedia];
     }
 
-    getCurrentPhoto() {
-        return this.photos[this.currentPhoto];
+    getCurrentMedia() {
+        return this.media[this.currentMedia];
     }
+
+
+  
+
+
 
     getBetweenTwoPoints(lat1, lon1, lat2, lon2) {
         let rad = function (x) { return x * Math.PI / 180; }

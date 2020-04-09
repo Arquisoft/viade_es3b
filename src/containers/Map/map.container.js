@@ -1,4 +1,4 @@
-import React, {useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useWebId } from '@solid/react';
 import ReactDOM from 'react-dom';
 
@@ -6,7 +6,12 @@ import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 import MapaComponent from './map.component';
 import Rutas from '../../components/Ruta/rutas';
-//import Ruta from '../../components/Ruta/ruta';
+
+import {
+    H2Format,
+    InformationSection,
+} from './map.style';
+
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 
@@ -15,51 +20,75 @@ const LoadRoute = () => {
 
     useEffect(() => {
         if (user !== undefined) {
-            const url = user.split("profile/card#me")[0] + "public/myRoutes";
-            console.log(url);
+            const url = user.split("profile/card#me")[0] + "viade";
             //const url = "https://uo264354.solid.community/public/myRoutes";
             //console.log(url);
             loadRoutes(url);
         }
     }, [user]);
 
-    return (<div id = "mapComponent"><h2 id="porcentaje">Porcentaje: 0 %</h2></div>)
+    return (<InformationSection id="mapComponent"><H2Format id="porcentaje">Cargando: 0 %</H2Format></InformationSection>)
 }
 
 async function loadRoutes(url) {
-    let folder = await fileClien.readFolder(url);
+    let routes = await fileClien.readFolder(url + "/routes");
     let i;
-    let count= 0;
+
     let rutasJson = [];
-    if(folder.files.length == 0){
+
+    if (routes.files.length === 0) {
         let rutas = new Rutas(rutasJson);
-                    ReactDOM.render(<MapaComponent { ... {rutas}}></MapaComponent>, document.getElementById('mapComponent'));
+        try {
+            ReactDOM.render(<MapaComponent {... { rutas }}></MapaComponent>, document.getElementById('mapComponent'));
+        }
+        catch (error) {
+            return;
+        }
+
+
     }
-    for (i = 0; i < folder.files.length; i++) {
-        if (folder.files[i].name.includes('.png')) {
-            count += 1;
-            document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / folder.files.length * 100)  + " %";
-        } else if (folder.files[i].name.includes('.json')) {
-            fileClien.readFile(url + "/" + folder.files[i].name).then((file) => {
+
+    for (i = 0; i < routes.files.length; i++) {
+        var count = 0;
+        if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
+            console.log(count);
+            // eslint-disable-next-line
+            fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
                 rutasJson.push(JSON.parse(file));
                 count += 1;
-                document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / folder.files.length * 100)  + " %";
-                if(Math.trunc((count) / folder.files.length * 100) === 100) {
+                try {
+                    document.getElementById('porcentaje').textContent = "Cargando: " + Math.trunc((count) / routes.files.length * 100) + " %";
+                }
+                catch (error) {
+                    return;
+                }
+                if (Math.trunc((count) / routes.files.length * 100) === 100) {
                     let rutas = new Rutas(rutasJson);
-                    ReactDOM.render(<MapaComponent { ... {rutas}}></MapaComponent>, document.getElementById('mapComponent'));
+                    setTimeout(() => {
+                        try {
+                            ReactDOM.render(<MapaComponent {... { rutas }}></MapaComponent>, document.getElementById('mapComponent'))
+                        }
+                        catch (error) {
+                            return;
+                        }
+                    },100);
                 }
             }
             );
-        } else{
-            document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / folder.files.length * 100) + " %";
+        } else {
+            try {
+                document.getElementById('porcentaje').textContent = "Cargando: " + Math.trunc((count) / routes.files.length * 100) + " %";
+            }
+            catch (error) {
+                return;
+            }
             count += 1;
         }
-        
     }
 }
 
-class Map extends React.Component{
-    render(){
+class Map extends React.Component {
+    render() {
         return <LoadRoute></LoadRoute>
     }
 }

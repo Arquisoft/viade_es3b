@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Map } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
-
+import "video-react/dist/video-react.css";
 
 export const MapSection = styled.section`
   display: flex;
@@ -10,7 +10,7 @@ export const MapSection = styled.section`
   justify-content: center;
   background:#a4d1d1;
   background-repeat: repeat;
-  padding: 30px 30px;
+  padding: 0px 15px 30px 0px;
 `;
 
 export const InformationSection = styled.section`
@@ -20,7 +20,7 @@ export const InformationSection = styled.section`
   justify-content: center;
   background:#a4d1d1;
   background-repeat: repeat;
-  padding: 30px 30px;
+  padding:  0px 0px  ;
 `;
 
 
@@ -29,7 +29,7 @@ export const DefaultSection = styled.section`
   justify-content: center;
   background:#a4d1d1;
   background-repeat: repeat;
-  padding: 30px 30px;
+  padding: 0px 0px;
 `;
 
 
@@ -66,10 +66,10 @@ export const H3Format = styled.h3`
 `;
 
 export const MapaStyle = styled(Map)`
-        width: 75% !important; 
-        height: 80vh !important; 
-        float: left;
-  `;
+  width: 75% !important; 
+  height: 80vh !important; 
+  float: left;
+`;
 
 export const UlStyle = styled.ul`
         margin-left:15%;
@@ -95,7 +95,8 @@ margin:10%;
 `;
 
 export const ImgSytle = styled.img`
-height: 30vh !important; 
+max-width: 640px !important; 
+max-height: 360px !important; 
 `
 export const ImgPopupSytle = styled.img`
 max-height: 150px; 
@@ -105,6 +106,15 @@ export const H1FormatPopup = styled.h1`
       text-align:center;
       font-size: 1rem;
 `;
+
+export const ButtonStyled = styled.button`
+  border: none;
+  background: white;
+  width: 10%; 
+  margin: 15px;
+`;
+
+
 
 
 

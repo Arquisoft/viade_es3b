@@ -1,15 +1,21 @@
 
 export class Point{
-    constructor(latitude,longitude,altitude,photos,videos){
+    constructor(latitude,longitude,altitude){
         this.latitude = latitude;
         this.longitude = longitude;
         this.altitude = altitude;
-        this.photos = photos;
-        this.videos = videos;
     }
 
     getCoordinates(){
         return [this.latitude,this.longitude];
     }
 
+}
+
+export class WayPoint{
+    constructor(name, description , point){
+        this.name = name;
+        this.description = description;
+        this.point = point;
+    }
 }

@@ -28,10 +28,9 @@ const Formulario = () => {
 
     const [image, setImage] = useState(null);
     const [video, setVideo] = useState(null);
-    const folder = "prueba2";
+    const folder = "viade";
 
     const url = user.split("profile/card#me")[0] + folder;
-    console.log(url);
     return (
         <div>
             <br></br>
@@ -39,7 +38,7 @@ const Formulario = () => {
             <br></br>
             <div class="form-group">
                 <label  for="photo" class="labelPhoto">Images:</label><br></br>
-                <input value={null} type="file" id="photo" name="image" accept=".pngor" multiple="true" onChange={(e) => setImage(e.target.files)} />
+                <input value={null} type="file" id="photo" name="image" accept=".png," multiple="true" onChange={(e) => setImage(e.target.files)} />
             </div>
             <div class="form-group">
                 <label  for="video" class="labelVideo">Video:</label><br></br>
@@ -72,17 +71,16 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
         await fileClien.createFolder(folder);
     }
 
-
     var i = 0;
 
-    await fileClien.createFile(folder + "/" + file.name, file, file.type);
+    await fileClien.createFile(folder + "/routes/" + file.name, file, file.type);
 
     for (i = 0; photo != null && i < photo.length; i++) {
-        fileClien.createFile(folder + "/" + photo[i].name, photo[i], "image/png");
+        fileClien.createFile(folder + "/resources/" + photo[i].name, photo[i], "image/png");
     }
 
     for (i = 0; video != null && i < video.length; i++) {
-        fileClien.createFile(folder + "/" + video[i].name, video[i], "video/mp4");
+        fileClien.createFile(folder + "/resources/" + video[i].name, video[i], "video/mp4");
     }
 
     alert("La ruta se ha añadido con exito!");

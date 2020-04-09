@@ -1,19 +1,11 @@
-//import ruta1 from './rutas/ruta1.json';
-//import ruta3 from './rutas/ruta3.json';
-//import ruta4 from './rutas/ruta4.json';
 import Ruta from './ruta.js';
-import {getRoutesFileName , getRutas} from './servicePods';
 
 class Rutas{
 
     constructor(newRoutes){
         this.rutas = [];
-        console.log(newRoutes);
         newRoutes.forEach(r => {this.rutas.push(new Ruta(r))})
-        
-        /*getRoutesFileName();
-        setTimeout(() => {   getRutas().forEach(r => {
-        this.rutas.push(new Ruta(r))})}, 2000);*/
+        //this.rutas.push(prueba);
     }
 
     getNames(){

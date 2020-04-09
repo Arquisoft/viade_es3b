@@ -5,7 +5,8 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 //import Rutas from '../../components/Ruta/rutas';
 import ReactDOM from 'react-dom';
-//import AddRoute from './prueba';
+import { Player } from 'video-react';
+
 
 import {
   Column,
@@ -19,9 +20,7 @@ import {
   PStyle,
   InformationSection,
   ImgSytle,
-  ImgPopupSytle,
-  H1FormatPopup,
-  DefaultSection
+  ButtonStyled
 } from './map.style';
 
 /* Método para cambiar la imagen del Marker */
@@ -39,7 +38,7 @@ var name;
 var description;
 var puntos = [];
 var distance = LeafletMap;
-var rutas ;
+var rutas;
 
 
 
@@ -51,68 +50,27 @@ function changeRuta(id, e) {
   document.getElementById("description").textContent = currentRuta.description;
   document.getElementById("distance").textContent = currentRuta.getDistance() + " KM";
   changeMap();
-  //changePhotos();
 }
 
-function getMarkets() {
-  return <React.Fragment>
-    <Marker position={puntos[0]}>
-      {getFirtsPopup()}
-    </Marker>
-    {getCenterMarket()}
-    <Marker position={puntos[puntos.length - 1]}>
-      {getLastPopup()}
-    </Marker>
-  </React.Fragment>
-    ;
-}
-
-function getFirtsPopup() {
-  if (currentRuta.points[0].photos.length !== 0)
-    return <Popup><H1FormatPopup>Inicio</H1FormatPopup><ImgPopupSytle src={currentRuta.points[0].photos[0].img} /></Popup>;
-  else
-    return <Popup><H1FormatPopup>Inicio</H1FormatPopup></Popup>;
-}
-
-function getLastPopup() {
-  if (currentRuta.points[currentRuta.points.length - 1].photos.length !== 0)
-    return <Popup><H1FormatPopup>Fin</H1FormatPopup><ImgPopupSytle src={currentRuta.points[currentRuta.points.length - 1].photos[currentRuta.points[currentRuta.points.length - 1].photos.length - 1].img} /></Popup>
-  else
-    return <Popup><H1FormatPopup>Fin</H1FormatPopup></Popup>
-}
-
-function getCenterMarket() {
-  let centerMarket = [];
-  let aux;
-
-  puntos.forEach((p, i = 0) => {
-    aux = getPopup(i);
-    i = i + 1;
-    if (aux !== null) centerMarket.push(aux);
-  })
-  if (centerMarket.length !== 0)
-    return centerMarket[0];
-}
 
 
 function getPopup(i) {
-  if (i !== 0 && i !== currentRuta.points.length - 1 && currentRuta.points[i].photos.length !== 0)
-    return <Marker position={puntos[i]}><Popup><ImgPopupSytle src={currentRuta.points[i].photos[0].img} /></Popup></Marker>
-
-  return null;
+  let w = currentRuta.waypoints;
+  if(w.length > i){
+    return <Marker position={w[i].point.getCoordinates()}><Popup><p>{w[i].name}</p><p>{w[i].description}</p></Popup></Marker>;
+  }
 }
 
 function getMap() {
   puntos = [];
   currentRuta.points.forEach(p => puntos.push(p.getCoordinates()));
-  return <MapaStyle id="map" center={puntos[0]} zoom={15} >
+  return <MapaStyle id="MapStyle" center={puntos[0]} zoom={15} >
     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     <Polyline color={'blue'} positions={puntos}></Polyline>
-    {getMarkets()}
+    {getPopup(0)}{getPopup(1)}{getPopup(2)}{getPopup(3)}{getPopup(4)}{getPopup(5)}
+    {getPopup(6)}{getPopup(7)}{getPopup(8)}{getPopup(9)}{getPopup(10)}
   </MapaStyle>;
 }
-
-
 
 function changeMap() {
   ReactDOM.hydrate(<MapView></MapView>, document.getElementById('mapComponent'));
@@ -132,6 +90,8 @@ class Map extends React.Component {
       <Up>
         <div id="map">
           {getMap()}
+          
+          {getPopup()}
         </div>
         <Column>
           <H2Format id="name">{name}</H2Format>
@@ -145,43 +105,56 @@ class Map extends React.Component {
   }
 }
 
-
-/* método que generar el mapa, junto con su nombre, y descripción*/
-const Information  = () => {
-  function previusPhoto() {
-    document.getElementById('img').src = currentRuta.getPreviusPhoto().img;
+const getMediaComponent = (url) => {
+  console.log(url);
+  if (url.includes('.mp4')) {
+    return (<Player
+      playsInline
+      poster="/assets/poster.png"
+      src={url}
+      fluid={false}
+      width={640}
+      height={360}
+    />)
+  } else {
+    return <ImgSytle id="img" src={url} />
   }
-
-
-
-
-  function nextPhoto() {
-    document.getElementById('img').src = currentRuta.getNextPhoto().img;
-  }
-
-    return (
-      <div>
-        <button onClick={previusPhoto}></button>
-        <div id="imgDiv">
-          <ImgSytle id="img" src={currentRuta.getCurrentPhoto().img} />
-        </div>
-        <button onClick={nextPhoto}></button>
-      </div>);
 }
 
-const MapView = () =>{
+
+/* método que generar el mapa, junto con su nombre, y descripción*/
+const Multimedia = () => {
+  function previusPhoto() {
+    ReactDOM.hydrate(getMediaComponent(currentRuta.getPreviusMedia()), document.getElementById('imgDiv'));
+  }
+
+  function nextPhoto() {
+    ReactDOM.hydrate(getMediaComponent(currentRuta.getNextMedia()), document.getElementById('imgDiv'));
+  }
+
+  return (
+    <div  display = "flex">
+      <Column><ButtonStyled onClick={previusPhoto}></ButtonStyled></Column>
+      <div id="imgDiv">
+        {getMediaComponent(currentRuta.getCurrentMedia())}
+      </div>
+      <ButtonStyled onClick={nextPhoto}></ButtonStyled>
+    </div>);
+}
+
+const MapView = () => {
   return <div><MapSection>
-  <Map></Map>
-</MapSection>
-  <InformationSection>
-    <Information></Information>
-  </InformationSection></div>;
+    <Map></Map>
+  </MapSection>
+    <InformationSection>
+      <Multimedia></Multimedia>
+    </InformationSection></div>;
 }
 
 function updateMap() {
 
   ReactDOM.hydrate(<MapView></MapView>, document.getElementById('mapComponent'));
- 
+
 }
 
 function messageNoRutas() {
@@ -192,19 +165,19 @@ function messageNoRutas() {
   ReactDOM.hydrate(messageNoRutas, document.getElementById('mapComponent'));
 }
 
-function loadMap(){
+function loadMap() {
   if (rutas.hayRutas())
-      updateMap();
+    updateMap();
   else
     messageNoRutas();
 
 };
 
-function MapaComponent(props){
+function MapaComponent(props) {
   rutas = props.rutas;
-    return (
-      <div>{loadMap()}</div>
-    )
+  return (
+    <div>{loadMap()}</div>
+  )
 }
 
 export default MapaComponent;
