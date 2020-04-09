@@ -4,7 +4,7 @@ import { useWebId } from '@solid/react';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
-import { UploaderWrapper, UploaderCard, FormCard, MultimediaCard, MultimediasCard, ChooseButton, UploadButton, FileNames, FilesContainer } from './uploader.style';
+import { UploaderWrapper, UploaderCard, FormCard, MultimediaCard, MultimediasCard, ChooseButton, UploadButton} from './uploader.style';
 import { useTranslation } from 'react-i18next';
 
 
@@ -65,7 +65,6 @@ const Formulario = () => {
 										<label id="label-input" for="photo">
 											<span>Elegir fotos</span>
 										</label>
-										<h1></h1>
 									</center>
 								</ChooseButton>
 							</div>
