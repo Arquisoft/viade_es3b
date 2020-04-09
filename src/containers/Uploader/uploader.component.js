@@ -35,7 +35,7 @@ const UploadJson = ({ setFile, file }) => {
     );
 };
 
-const show = () => {alert("DGLHA");}
+
 
 const Formulario = () => {
     var user = "" + useWebId();
@@ -76,7 +76,7 @@ const Formulario = () => {
 							<ChooseButton>
 								<center>
 									<input value={null} type="file" id="video" name="video" accept=".mp4" multiple="true" onChange={(e) => setVideo(e.target.files)} />
-									<label id="video-input" for="route">
+									<label id="video-input" for="video">
 										<span>Elegir videos</span>
 									</label>
 								</center>
