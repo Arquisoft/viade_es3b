@@ -34,7 +34,14 @@ async function loadRoutes(url) {
    
     if(routes.files.length == 0){
         let rutas = new Rutas(rutasJson);
-                    ReactDOM.render(<MapaComponent { ... {rutas}}></MapaComponent>, document.getElementById('mapComponent'));
+        try {
+            ReactDOM.render(<MapaComponent { ... {rutas}}></MapaComponent>, document.getElementById('mapComponent'));
+          }
+          catch(error) {
+              return;
+          }
+          
+                   
     }
 
     for (i = 0; i < routes.files.length; i++) {
@@ -42,15 +49,30 @@ async function loadRoutes(url) {
             fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
                 rutasJson.push(JSON.parse(file));
                 count += 1;
-                document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / routes.files.length * 100)  + " %";
+                try {
+                    document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / routes.files.length * 100)  + " %";
+                  }
+                  catch(error) {
+                    return;
+                  }
                 if(Math.trunc((count) / routes.files.length * 100) === 100) {
                     let rutas = new Rutas(rutasJson);
-                    ReactDOM.render(<MapaComponent { ... {rutas}}></MapaComponent>, document.getElementById('mapComponent'));
+                    try {
+                        ReactDOM.render(<MapaComponent { ... {rutas}}></MapaComponent>, document.getElementById('mapComponent'));
+                      }
+                      catch(error) {
+                        return;
+                      }
                 }
             }
             );
         } else{
-            document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / routes.files.length * 100) + " %";
+            try {
+                document.getElementById('porcentaje').textContent = "Porcentaje: " + Math.trunc((count) / routes.files.length * 100) + " %";
+              }
+              catch(error) {
+                return;
+              }
             count += 1;
         }
         

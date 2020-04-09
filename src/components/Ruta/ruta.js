@@ -4,74 +4,40 @@ export default class Ruta {
     constructor(file) {
         this.name = file.name;
         this.description = file.description;
-        this.photos = [];
-        this.videos = [];
+        this.media = [];
         this.points = [];
         this.waypoints = []; 
         file.points.forEach(p =>this.points.push(new Point(p.latitude, p.longitude,p.elevation)));
-        file.media.forEach(m => this.saveMultimedia(m));
+        file.media.forEach(m => this.media.push(m["@id"]));
         file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
-        this.currentPhoto = 0;
-        this.currentVideo = 0;
+        this.currentMedia = 0;
     }
 
-    saveMultimedia(m){
-        let mUrl = m["@id"];
-        if(mUrl.includes(".png") || mUrl.includes(".jpg"))
-            this.photos.push(mUrl);
-        else if(mUrl.includes(".mp4") )
-            this.videos.push(mUrl);
-    }
-
-    getNextPhoto() {
-        if (this.currentPhoto < this.photos.length - 1) {
-            this.currentPhoto = this.currentPhoto + 1;
+    getNextMedia() {
+        if (this.currentMedia < this.media.length - 1) {
+            this.currentMedia = this.currentMedia + 1;
         }
         else {
-            this.currentPhoto = 0;
+            this.currentMedia = 0;
         }
-        return this.photos[this.currentPhoto];
+        return this.media[this.currentMedia];
     }
 
-    getPreviusPhoto() {
-        if (this.currentPhoto === 0) {
-            this.currentPhoto = this.photos.length - 1;
+    getPreviusMedia() {
+        if (this.currentMedia === 0) {
+            this.currentMedia = this.media.length - 1;
         } else {
-            this.currentPhoto = this.currentPhoto - 1;
+            this.currentMedia = this.currentMedia - 1;
         }
-        return this.photos[this.currentPhoto];
+        return this.media[this.currentMedia];
     }
 
-    getCurrentPhoto() {
-        return this.photos[this.currentPhoto];
+    getCurrentMedia() {
+        return this.media[this.currentMedia];
     }
 
-    getNextVideo() {
-        if (this.currentVideo < this.videos.length - 1) {
-            this.currentVideo = this.currentVideo + 1;
-        }
-        else {
-            this.currentVideo = 0;
-        }
-        return this.videos[this.currentVideo];
-    }
 
-    getPreviusVideo() {
-        if (this.currentVideo === 0) {
-            this.currentVideo = this.videos.length - 1;
-        } else {
-            this.currentVideo = this.currentVideo - 1;
-        }
-        return this.videos[this.currentVideo];
-    }
-
-    getCurrentVideo() {
-        return this.videos[this.currentVideo];
-    }
-
-    getWayPoints(){
-        return this.waypoints;
-    }
+  
 
 
 
