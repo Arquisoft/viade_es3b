@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Map } from "react-leaflet";
-import { Player } from "video-react";
 import 'leaflet/dist/leaflet.css';
 import "video-react/dist/video-react.css";
 
@@ -11,7 +10,7 @@ export const MapSection = styled.section`
   justify-content: center;
   background:#a4d1d1;
   background-repeat: repeat;
-  padding: 30px 30px;
+  padding: 0px 15px 30px 0px;
 `;
 
 export const InformationSection = styled.section`
@@ -21,7 +20,7 @@ export const InformationSection = styled.section`
   justify-content: center;
   background:#a4d1d1;
   background-repeat: repeat;
-  padding: 30px 30px;
+  padding:  0px 0px  ;
 `;
 
 
@@ -30,7 +29,7 @@ export const DefaultSection = styled.section`
   justify-content: center;
   background:#a4d1d1;
   background-repeat: repeat;
-  padding: 30px 30px;
+  padding: 0px 0px;
 `;
 
 
@@ -66,10 +65,6 @@ export const H3Format = styled.h3`
       font-size: 2rem;
 `;
 
-export const PlayerStyle = styled(Player)`
-height: 50vh !important; 
-  `;
-
 export const MapaStyle = styled(Map)`
   width: 75% !important; 
   height: 80vh !important; 
@@ -100,7 +95,6 @@ margin:10%;
 `;
 
 export const ImgSytle = styled.img`
-
 max-width: 640px !important; 
 max-height: 360px !important; 
 `
@@ -112,6 +106,14 @@ export const H1FormatPopup = styled.h1`
       text-align:center;
       font-size: 1rem;
 `;
+
+export const ButtonStyled = styled.button`
+  border: none;
+  background: white;
+  width: 10%; 
+  margin: 15px;
+`;
+
 
 
 

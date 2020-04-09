@@ -20,6 +20,7 @@ import {
   PStyle,
   InformationSection,
   ImgSytle,
+  ButtonStyled
 } from './map.style';
 
 /* Método para cambiar la imagen del Marker */
@@ -122,7 +123,7 @@ const getMediaComponent = (url) => {
 
 
 /* método que generar el mapa, junto con su nombre, y descripción*/
-const Information = () => {
+const Multimedia = () => {
   function previusPhoto() {
     ReactDOM.hydrate(getMediaComponent(currentRuta.getPreviusMedia()), document.getElementById('imgDiv'));
   }
@@ -132,12 +133,12 @@ const Information = () => {
   }
 
   return (
-    <div>
-      <button onClick={previusPhoto}></button>
+    <div  display = "flex">
+      <Column><ButtonStyled onClick={previusPhoto}></ButtonStyled></Column>
       <div id="imgDiv">
         {getMediaComponent(currentRuta.getCurrentMedia())}
       </div>
-      <button onClick={nextPhoto}></button>
+      <ButtonStyled onClick={nextPhoto}></ButtonStyled>
     </div>);
 }
 
@@ -146,7 +147,7 @@ const MapView = () => {
     <Map></Map>
   </MapSection>
     <InformationSection>
-      <Information></Information>
+      <Multimedia></Multimedia>
     </InformationSection></div>;
 }
 

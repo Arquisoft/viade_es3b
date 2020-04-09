@@ -64,7 +64,14 @@ async function loadRoutes(url) {
                 }
                 if (Math.trunc((count) / routes.files.length * 100) === 100) {
                     let rutas = new Rutas(rutasJson);
-                    setTimeout(() => ReactDOM.render(<MapaComponent {... { rutas }}></MapaComponent>, document.getElementById('mapComponent')), 100);
+                    setTimeout(() => {
+                        try {
+                            ReactDOM.render(<MapaComponent {... { rutas }}></MapaComponent>, document.getElementById('mapComponent'))
+                        }
+                        catch (error) {
+                            return;
+                        }
+                    },100);
                 }
             }
             );
