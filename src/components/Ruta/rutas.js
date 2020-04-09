@@ -1,8 +1,4 @@
-//import ruta1 from './rutas/ruta1.json';
-//import ruta3 from './rutas/ruta3.json';
-
 import Ruta from './ruta.js';
-import {getRoutesFileName , getRutas} from './servicePods';
 
 class Rutas{
 

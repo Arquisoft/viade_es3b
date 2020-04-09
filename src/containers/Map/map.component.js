@@ -20,7 +20,6 @@ import {
   PStyle,
   InformationSection,
   ImgSytle,
-  PlayerStyle,
 } from './map.style';
 
 /* Método para cambiar la imagen del Marker */
@@ -63,7 +62,6 @@ function getPopup(i) {
 
 function getMap() {
   puntos = [];
-  let waypoints = currentRuta.waypoints;
   currentRuta.points.forEach(p => puntos.push(p.getCoordinates()));
   return <MapaStyle id="MapStyle" center={puntos[0]} zoom={15} >
     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -72,7 +70,6 @@ function getMap() {
     {getPopup(6)}{getPopup(7)}{getPopup(8)}{getPopup(9)}{getPopup(10)}
   </MapaStyle>;
 }
-
 
 function changeMap() {
   ReactDOM.hydrate(<MapView></MapView>, document.getElementById('mapComponent'));

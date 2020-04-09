@@ -1,12 +1,12 @@
 import React from "react";
-import { UploaderWrapper, UploaderCard, FileButton, ChooseButton, UploadButton, FileNames, FilesContainer } from './uploader.style';
-import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
+//import { UploaderWrapper, UploaderCard, FileButton, ChooseButton, UploadButton, FileNames, FilesContainer } from './uploader.style';
+//import { useTranslation } from 'react-i18next';
+//import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddRoute from './prueba';
 
 const Uploader = () => {
-	const run = async () => {
+	/*const run = async () => {
 		const FC = require('solid-file-client');
 		const auth = require('solid-auth-client');
 		const filesInput = document.getElementById('file-browser-input');
@@ -84,7 +84,7 @@ const show = () => {
 };
 	
 const { t } = useTranslation();
-/*return (
+return (
 <UploaderWrapper>
 		<UploaderCard className="card">
 				<h2>{t('uploader.explanation')}</h2>

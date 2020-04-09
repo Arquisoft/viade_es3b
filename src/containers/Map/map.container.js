@@ -6,7 +6,6 @@ import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 import MapaComponent from './map.component';
 import Rutas from '../../components/Ruta/rutas';
-//import Ruta from '../../components/Ruta/ruta';
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 
@@ -29,10 +28,10 @@ const LoadRoute = () => {
 async function loadRoutes(url) {
     let routes = await fileClien.readFolder(url + "/routes");
     let i;
-    let count= 0;
+    
     let rutasJson = [];
    
-    if(routes.files.length == 0){
+    if(routes.files.length === 0){
         let rutas = new Rutas(rutasJson);
         try {
             ReactDOM.render(<MapaComponent { ... {rutas}}></MapaComponent>, document.getElementById('mapComponent'));
@@ -45,6 +44,7 @@ async function loadRoutes(url) {
     }
 
     for (i = 0; i < routes.files.length; i++) {
+        let count= 0;
         if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
             fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
                 rutasJson.push(JSON.parse(file));
