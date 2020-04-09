@@ -7,6 +7,7 @@ import fileClient from 'solid-file-client';
 import MapaComponent from './map.component';
 import Rutas from '../../components/Ruta/rutas';
 
+
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 
 const LoadRoute = () => {
@@ -15,7 +16,6 @@ const LoadRoute = () => {
     useEffect(() => {
         if (user !== undefined) {
             const url = user.split("profile/card#me")[0] + "viade";
-            console.log(url);
             //const url = "https://uo264354.solid.community/public/myRoutes";
             //console.log(url);
             loadRoutes(url);
@@ -44,9 +44,11 @@ async function loadRoutes(url) {
     }
 
     for (i = 0; i < routes.files.length; i++) {
-        let count= 0;
+        var count= 0;
         if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
-            fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
+            console.log(count);
+            // eslint-disable-next-line
+            fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => { 
                 rutasJson.push(JSON.parse(file));
                 count += 1;
                 try {
@@ -75,6 +77,7 @@ async function loadRoutes(url) {
               }
             count += 1;
         }
+        
         
     }
 }
