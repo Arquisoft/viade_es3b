@@ -54,18 +54,22 @@ function changeRuta(id, e) {
 
 
 
-function getPopup() {
-  let w = currentRuta.getWayPoints()[0];
-  return <Marker position={w.point.getCoordinates()}><Popup><p>{w.name}</p><p>{w.description}</p></Popup></Marker>
+function getPopup(i) {
+  let w = currentRuta.waypoints;
+  if(w.length > i){
+    return <Marker position={w[i].point.getCoordinates()}><Popup><p>{w[i].name}</p><p>{w[i].description}</p></Popup></Marker>;
+  }
 }
 
 function getMap() {
   puntos = [];
+  let waypoints = currentRuta.waypoints;
   currentRuta.points.forEach(p => puntos.push(p.getCoordinates()));
-  return <MapaStyle center={puntos[0]} zoom={15} >
+  return <MapaStyle id="MapStyle" center={puntos[0]} zoom={15} >
     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     <Polyline color={'blue'} positions={puntos}></Polyline>
-
+    {getPopup(0)}{getPopup(1)}{getPopup(2)}{getPopup(3)}{getPopup(4)}{getPopup(5)}
+    {getPopup(6)}{getPopup(7)}{getPopup(8)}{getPopup(9)}{getPopup(10)}
   </MapaStyle>;
 }
 
@@ -88,6 +92,8 @@ class Map extends React.Component {
       <Up>
         <div id="map">
           {getMap()}
+          
+          {getPopup()}
         </div>
         <Column>
           <H2Format id="name">{name}</H2Format>

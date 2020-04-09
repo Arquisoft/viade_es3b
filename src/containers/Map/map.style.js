@@ -100,9 +100,9 @@ margin:10%;
 `;
 
 export const ImgSytle = styled.img`
-width: 640px
+
 max-width: 640px !important; 
-max-height: 640px !important; 
+max-height: 360px !important; 
 `
 export const ImgPopupSytle = styled.img`
 max-height: 150px; 
