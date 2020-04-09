@@ -20,9 +20,7 @@ import {
   PStyle,
   InformationSection,
   ImgSytle,
-  ImgPopupSytle,
-  H1FormatPopup,
-  DefaultSection
+  PlayerStyle,
 } from './map.style';
 
 /* Método para cambiar la imagen del Marker */
@@ -67,7 +65,7 @@ function getMap() {
   return <MapaStyle center={puntos[0]} zoom={15} >
     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     <Polyline color={'blue'} positions={puntos}></Polyline>
-    
+
   </MapaStyle>;
 }
 
@@ -106,7 +104,14 @@ class Map extends React.Component {
 const getMediaComponent = (url) => {
   console.log(url);
   if (url.includes('.mp4')) {
-    return (<Player playsInline src={url}/>)
+    return (<Player
+      playsInline
+      poster="/assets/poster.png"
+      src={url}
+      fluid={false}
+      width={640}
+      height={360}
+    />)
   } else {
     return <ImgSytle id="img" src={url} />
   }
@@ -127,7 +132,7 @@ const Information = () => {
     <div>
       <button onClick={previusPhoto}></button>
       <div id="imgDiv">
-      {getMediaComponent(currentRuta.getCurrentMedia())}
+        {getMediaComponent(currentRuta.getCurrentMedia())}
       </div>
       <button onClick={nextPhoto}></button>
     </div>);

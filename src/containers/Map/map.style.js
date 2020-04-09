@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Map } from "react-leaflet";
+import { Player } from "video-react";
 import 'leaflet/dist/leaflet.css';
 import "video-react/dist/video-react.css";
 
@@ -65,11 +66,15 @@ export const H3Format = styled.h3`
       font-size: 2rem;
 `;
 
-export const MapaStyle = styled(Map)`
-        width: 75% !important; 
-        height: 80vh !important; 
-        float: left;
+export const PlayerStyle = styled(Player)`
+height: 50vh !important; 
   `;
+
+export const MapaStyle = styled(Map)`
+  width: 75% !important; 
+  height: 80vh !important; 
+  float: left;
+`;
 
 export const UlStyle = styled.ul`
         margin-left:15%;
@@ -95,7 +100,9 @@ margin:10%;
 `;
 
 export const ImgSytle = styled.img`
-height: 30vh !important; 
+width: 640px
+max-width: 640px !important; 
+max-height: 640px !important; 
 `
 export const ImgPopupSytle = styled.img`
 max-height: 150px; 
@@ -105,6 +112,7 @@ export const H1FormatPopup = styled.h1`
       text-align:center;
       font-size: 1rem;
 `;
+
 
 
 
