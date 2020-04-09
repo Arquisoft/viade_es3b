@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 
 const UploadJson = ({ setFile, file }) => {
-	const filename = file == null ? '' : file.name;
+	const filename = file == null ? '' : "Ha seleccionado el siguiente archivo:"+file.name;
 	const { t } = useTranslation();
     const changeName = e => {
         setFile(e.target.files[0]);
@@ -27,7 +27,7 @@ const UploadJson = ({ setFile, file }) => {
 						<label id="label-input" for="route">
 							<span>{t('uploader.choose')}</span>
 						</label>
-						<h4 class="custom-file-label" id="nameRoute">{filename}</h4>
+						<h4 class="custom-file-label" id="nameRoute"> {filename}</h4>
 					</center>
 				</div>
 			</ChooseButton>
@@ -35,6 +35,7 @@ const UploadJson = ({ setFile, file }) => {
     );
 };
 
+const show = () => {alert("DGLHA");}
 
 const Formulario = () => {
     var user = "" + useWebId();
@@ -61,22 +62,14 @@ const Formulario = () => {
 								<h3 for="photo" class="labelPhoto">Seleccione las imágenes</h3>
 								<ChooseButton>
 									<center>
-										<input value={null} type="file" id="photo" name="image" accept=".png" multiple="true" onChange={(e) => setImage(e.target.files)} />
+										<input value={null} type="file" id="photo" name="image" accept=".png" multiple="true" onChange={show}  />
 										<label id="label-input" for="photo">
 											<span>Elegir fotos</span>
 										</label>
+										<h1></h1>
 									</center>
 								</ChooseButton>
 							</div>
-							<FilesContainer id="photos-container">
-								<FileNames>
-									<h3 id="header-photo-container">GSA</h3>
-									<div id="photo-container">
-										<ul id="photo-list">
-										</ul>
-									</div>
-								</FileNames>
-							</FilesContainer>
 					</MultimediaCard>
 					<MultimediaCard>
 						<div class="form-group">
@@ -153,4 +146,4 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
     document.getElementById('route').value = null;
 }
 
-export default AddRoute;
+export default AddRoute;	
