@@ -16,7 +16,6 @@ export const UploaderCard = styled.div`
   h2{
     padding: 0 30px;
     text-align: center;
-  }
 `;
 
 export const FileButton = styled.div`
@@ -24,8 +23,10 @@ export const FileButton = styled.div`
 `;
 
 export const ChooseButton = styled.div`
-
-  
+  margin: 0 200px 20px 200px;
+  @media screen and (max-width: 992px) {
+    margin: 0 0 20px 0;
+  }
   input{
     width: 0.1px;
     height:0.1x;
@@ -120,24 +121,3 @@ export const FilesContainer = styled.div`
       margin: 0 0 10px 0;
     }
 `;
-export const FormCard = styled.div`
-  margin: 30px;
-  display: flex;
-  border-radius: 4px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-  -o-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-  align-items: center;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  padding: 1em 0;
-  border: 1px solid rgba(124, 77, 255, 0);
-  transition: all .25s ease-in-out;
-`;
-
-export const MultimediaCard = styled.div`
-  margin: 30px;
-`;
-

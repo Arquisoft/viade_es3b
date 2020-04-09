@@ -261,8 +261,8 @@
     "modifyFiles": "Modificar archivos",
     "file": "El archivo ",
     "incorrectUpload": " no se ha subido correctamente.",
-    "correctUpload": " se ha subido correctamente."
-
+    "correctUpload": " se ha subido correctamente.",
+    "addRoute": "Añadir ruta"
   },
   "friends": {
     "title": "Amigos",
