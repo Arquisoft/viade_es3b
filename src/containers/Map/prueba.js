@@ -1,35 +1,18 @@
 import React, { useState } from "react";
-// import Slide from "react-swipeable-views";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { AutoRotatingCarousel} from "material-auto-rotating-carousel";
 import { Player } from 'video-react';
-
-
-import {
-  ImgPopupSytle,
-  DivPrueba
-} from './map.style';
+import {ImgPopupSytle, DivPrueba} from './map.style';
 
 const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) => {
     function getMedia(){
         var slide = []
         for (var i = 0; i < m.media.length ; i++) {
-            /*slide.push(<Slide
-                media={ 
-                    getMediaComponent(m.media[i])
-                }
-                
-                mediaBackgroundStyle={{ backgroundColor: 'rgba(255, 0, 0, 0)' , height:"100vh !important"}}
-                style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}
-                título = "Multimedia"
-              >{getMediaComponent(m.media[i])}</Slide>)*/
-
               slide.push( <DivPrueba>{getMediaComponent(m.media[i])}</DivPrueba>)
         }
         return slide;
       }
-    
     
     const getMediaComponent = (url) => {
         if (url.includes('.mp4')) {
@@ -48,7 +31,7 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) =>
 
   return (
     <div>
-      {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
+      {}
       <AutoRotatingCarousel
         label="Cerrar"
         open={handleOpen.open}
@@ -58,16 +41,14 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) =>
         landscape={false}
         mobile={isMobile}
         style={{ width: "center"}}
-        containerStyle={{margin: "auto"}}
-      >
+        containerStyle={{margin: "auto"}}>
         {getMedia()}
-       
       </AutoRotatingCarousel>
     </div>
   );
 };
 
-function Prueba(media) {
+function Slider(media) {
   const [handleOpen, setHandleOpen] = useState({ open: false });
   const handleClick = () => {
     setHandleOpen({ open: true });
@@ -85,5 +66,4 @@ function Prueba(media) {
     </>
   );
 }
-
-export default Prueba;
+export default Slider;

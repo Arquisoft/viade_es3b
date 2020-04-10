@@ -21,8 +21,6 @@ const LoadRoute = () => {
     useEffect(() => {
         if (user !== undefined) {
             const url = user.split("profile/card#me")[0] + "viade";
-            //const url = "https://uo264354.solid.community/public/myRoutes";
-            //console.log(url);
             loadRoutes(url);
         }
     }, [user]);
@@ -33,19 +31,14 @@ const LoadRoute = () => {
 async function loadRoutes(url) {
     let routes = await fileClien.readFolder(url + "/routes");
     let i;
-
     let rutasJson = [];
-
     if (routes.files.length === 0) {
-        let rutas = new Rutas(rutasJson);
         try {
-            ReactDOM.render(<MapaComponent {... { rutas }}></MapaComponent>, document.getElementById('mapComponent'));
+            ReactDOM.render(<InformationSection id="mapComponent"><H2Format>No hay rutas</H2Format></InformationSection>, document.getElementById('mapComponent'));
         }
         catch (error) {
             return;
         }
-
-
     }
 
     for (i = 0; i < routes.files.length; i++) {
