@@ -1,54 +1,80 @@
 const {defineFeature, loadFeature}=require('jest-cucumber');
 const feature = loadFeature('./e2e/features/login-form.feature');
 
+const puppeteer = require('puppeteer');
+let browser = null;
+let page = null;
+
 defineFeature(feature, test => {
-  
-  beforeEach(async () => {
-    await page.goto('http://localhost:3000')
-  })
 
-  test('The user is not registered in the site', ({given,when,then}) => {
-    
-    let email;
-    let password;
-
-    given('An unregistered user', () => {
-      email = "newuser@test.com",
-      password = "123456"
+    beforeEach(async () => {
+        jest.setTimeout(1200000);
     });
 
-    when('I fill the data in the form and press submit', async () => {
-      await expect(page).toFillForm('form[name="register"]', {
-        email: email,
-        password: password,
-      })
-      await expect(page).toClick('button', { text: 'Submit' })
-    });
+    test('Trying to log in', ({given, when, and, then}) => {
 
-    then('An error message should be shown in the screen', async () => {
-      await expect(page).toMatchElement('span', { text: 'User '+email+' has been registered!' })
-    });
-  });
+        given('I will log ing', async () => {
+            browser = await puppeteer.launch({
+                headless: false
+            });
 
-  test('The user is already registered in the site', ({ given, when, then }) => {
-    
-    let email;
+            page = await browser.newPage()
+            await page.goto("http://localhost:3000/#/login", {
+                waitUntil: 'networkidle2'
+            });
 
-    given('An already registered user', () => {
-      email = "foo@test.com"
-    });
+        });
 
-    when('I fill the data in the form and press submit', async () => {
-      await expect(page).toFillForm('form[name="register"]', {
-        email: email,
-        remail: email,
-      })
-      await expect(page).toClick('button', { text: 'Submit' })
-    });
+        when('I write my webID', async () => {
 
-    then('A welcome message should be shown in the screen', async () => {
-      await expect(page).toMatchElement('span', { text: 'ERROR: User '+email+' is already registered!' })
+            await page.waitForSelector(".sc-gzVnrw.hJUbuD");
+            await page.type(".sc-gzVnrw.hJUbuD", "https://viadeEs3b.solid.community/profile/card#me");
+
+            await page.evaluate(() => {
+                let btns = [...document.querySelectorAll("button")];
+                btns.forEach(function (btn) {
+                    if (btn.innerText == "Iniciar sesión") {
+                        btn.click();
+                    }
+
+                });
+            });
+
+            await page.waitForNavigation({
+                waitUntil: 'networkidle2'
+            });
+
+        });
+
+        and('I fill the form', async () => {
+
+            await page.waitForSelector("[id='username']", {visible: true});
+            await page.type("[id='username']", "viadeEs3b");
+
+            await page.waitFor(500);
+            await page.waitForSelector("[id='password']", {visible: true});
+            await page.type("[id='password']", "viadeEs3b", {visible: true});
+
+            await page.waitFor(500);
+
+            await page.evaluate(() => {
+                let btns = [...document.querySelector(".form-horizontal.login-up-form").querySelectorAll("button")];
+                btns.forEach(function (btn) {
+                    if (btn.innerText == "Log In")
+                        btn.click();
+                });
+            });
+
+        });
+
+        then('sends us to the welcome page', async () => {
+
+            await page.waitForNavigation({
+                waitUntil: 'networkidle2'
+            });
+
+            expect(page.url()).toBe("http://localhost:3000/viade_es3b/#/welcome")
+
+        });
     });
-    
-  });
 });
