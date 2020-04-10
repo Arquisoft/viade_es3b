@@ -1,5 +1,5 @@
 const {defineFeature, loadFeature}=require('jest-cucumber');
-const feature = loadFeature('./e2e/features/register-form.feature');
+const feature = loadFeature('./e2e/features/login-form.feature');
 
 defineFeature(feature, test => {
   
@@ -10,15 +10,17 @@ defineFeature(feature, test => {
   test('The user is not registered in the site', ({given,when,then}) => {
     
     let email;
+    let password;
 
     given('An unregistered user', () => {
-      email = "newuser@test.com"
+      email = "newuser@test.com",
+      password = "123456"
     });
 
     when('I fill the data in the form and press submit', async () => {
       await expect(page).toFillForm('form[name="register"]', {
         email: email,
-        remail: email,
+        password: password,
       })
       await expect(page).toClick('button', { text: 'Submit' })
     });
