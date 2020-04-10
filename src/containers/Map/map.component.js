@@ -6,6 +6,7 @@ import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-lea
 //import Rutas from '../../components/Ruta/rutas';
 import ReactDOM from 'react-dom';
 import { Player } from 'video-react';
+import Prueba from './prueba'
 
 
 import {
@@ -19,7 +20,7 @@ import {
   UlStyle,
   PStyle,
   InformationSection,
-  ImgSytle,
+
   ButtonStyled
 } from './map.style';
 
@@ -39,6 +40,7 @@ var description;
 var puntos = [];
 var distance = LeafletMap;
 var rutas;
+var media;
 
 
 
@@ -53,12 +55,13 @@ function changeRuta(id, e) {
 }
 
 
-
-function getPopup(i) {
+function getMark(){
+  var markets = []
   let w = currentRuta.waypoints;
-  if(w.length > i){
-    return <Marker position={w[i].point.getCoordinates()}><Popup><p>{w[i].name}</p><p>{w[i].description}</p></Popup></Marker>;
+  for (var i = 0; i < w.length ; i++) {
+    markets.push(<Marker position={w[i].point.getCoordinates()}><Popup><p>{w[i].name}</p><p>{w[i].description}</p></Popup></Marker>)
   }
+  return markets;
 }
 
 function getMap() {
@@ -67,8 +70,7 @@ function getMap() {
   return <MapaStyle id="MapStyle" center={puntos[0]} zoom={15} >
     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     <Polyline color={'blue'} positions={puntos}></Polyline>
-    {getPopup(0)}{getPopup(1)}{getPopup(2)}{getPopup(3)}{getPopup(4)}{getPopup(5)}
-    {getPopup(6)}{getPopup(7)}{getPopup(8)}{getPopup(9)}{getPopup(10)}
+    {getMark()}
   </MapaStyle>;
 }
 
@@ -84,19 +86,19 @@ class Map extends React.Component {
     name = currentRuta.name;
     description = currentRuta.description;
     distance = currentRuta.getDistance() + " KM";
+    media = currentRuta.media;
   }
   render() {
     return (
       <Up>
         <div id="map">
           {getMap()}
-          
-          {getPopup()}
         </div>
         <Column>
           <H2Format id="name">{name}</H2Format>
           <PStyle id="description">{description}</PStyle>
           <PStyle id="distance" >{distance}</PStyle>
+          <Prueba {... { media }}></Prueba>
           <H3Format>Tus rutas:</H3Format>
           <UlStyle>{rutas.getNames().map((n, i) => <LiStyle key={i} onClick={(e) => changeRuta(n, e)}> {n} </LiStyle>)}</UlStyle>
         </Column>
@@ -105,54 +107,18 @@ class Map extends React.Component {
   }
 }
 
-const getMediaComponent = (url) => {
-  console.log(url);
-  if (url.includes('.mp4')) {
-    return (<Player
-      playsInline
-      poster="/assets/poster.png"
-      src={url}
-      fluid={false}
-      width={640}
-      height={360}
-    />)
-  } else {
-    return <ImgSytle id="img" src={url} />
-  }
-}
-
-
-/* método que generar el mapa, junto con su nombre, y descripción*/
-const Multimedia = () => {
-  function previusPhoto() {
-    ReactDOM.hydrate(getMediaComponent(currentRuta.getPreviusMedia()), document.getElementById('imgDiv'));
-  }
-
-  function nextPhoto() {
-    ReactDOM.hydrate(getMediaComponent(currentRuta.getNextMedia()), document.getElementById('imgDiv'));
-  }
-
-  return (
-    <div  display = "flex">
-      <Column><ButtonStyled onClick={previusPhoto}></ButtonStyled></Column>
-      <div id="imgDiv">
-        {getMediaComponent(currentRuta.getCurrentMedia())}
-      </div>
-      <ButtonStyled onClick={nextPhoto}></ButtonStyled>
-    </div>);
-}
 
 const MapView = () => {
   return <div><MapSection>
     <Map></Map>
   </MapSection>
     <InformationSection>
-      <Multimedia></Multimedia>
-    </InformationSection></div>;
+    </InformationSection>
+    
+   </div>;
 }
 
 function updateMap() {
-
   ReactDOM.hydrate(<MapView></MapView>, document.getElementById('mapComponent'));
 
 }
