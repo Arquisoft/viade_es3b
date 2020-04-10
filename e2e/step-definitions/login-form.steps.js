@@ -53,7 +53,7 @@ defineFeature(feature, test => {
 
             await page.waitFor(500);
             await page.waitForSelector("[id='password']", {visible: true});
-            await page.type("[id='password']", "viadeEs3b", {visible: true});
+            await page.type("[id='password']", "ES3B_viade", {visible: true});
 
             await page.waitFor(500);
 
