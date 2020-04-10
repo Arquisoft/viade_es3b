@@ -36,10 +36,6 @@ export default class Ruta {
         return this.media[this.currentMedia];
     }
 
-    getMedia() {
-        return this.media;
-    }
-
 
   
 

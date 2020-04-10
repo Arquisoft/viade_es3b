@@ -16,10 +16,8 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) =>
                 media={ 
                     getMediaComponent(m.media[i])
                 }
-                mediaBackgroundStyle={{ backgroundColor: red[400] }}
-                style={{ backgroundColor: red[600] }}
-                title="This is a very cool feature"
-                subtitle="Just using this will blow your mind."
+                mediaBackgroundStyle={{ backgroundColor: green[400] }}
+                style={{ backgroundColor: green[600] }}
               />)
         }
         return slide;
@@ -27,7 +25,6 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) =>
     
     
     const getMediaComponent = (url) => {
-        console.log(url);
         if (url.includes('.mp4')) {
           return (<Player
             playsInline
@@ -46,7 +43,7 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) =>
     <div>
       {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
       <AutoRotatingCarousel
-        label="Get started"
+        label="Cerrar"
         open={handleOpen.open}
         onClose={() => setHandleOpen({ open: false })}
         onStart={() => setHandleOpen({ open: false })}

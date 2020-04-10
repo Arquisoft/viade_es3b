@@ -51,6 +51,7 @@ function changeRuta(id, e) {
   document.getElementById("name").textContent = currentRuta.name;
   document.getElementById("description").textContent = currentRuta.description;
   document.getElementById("distance").textContent = currentRuta.getDistance() + " KM";
+  media = currentRuta.media;
   changeMap();
 }
 
