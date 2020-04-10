@@ -7,10 +7,7 @@ import fileClient from 'solid-file-client';
 import MapaComponent from './map.component';
 import Rutas from '../../components/Ruta/rutas';
 
-import {
-    H2Format,
-    InformationSection,
-} from './map.style';
+import {H2Format, InformationSection,} from './map.style';
 
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });

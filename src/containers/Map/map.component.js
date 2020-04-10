@@ -53,7 +53,6 @@ const MapaComponent = props => {
       {getMark()}
     </MapaStyle>;
   }
-
   return (
     <Up>
       <div id="map">
