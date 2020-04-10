@@ -13,7 +13,8 @@ export const Up = styled.div`
         height: 80vh;   
         width: 100vw;
         float:up;
-        text-align: center;     
+        text-align: center;    
+        background:#8ed2d2; 
 `;
 
 export const Down = styled.div`
@@ -55,6 +56,10 @@ export const UploaderCard = styled.div`
   }
 `;
 
+export const ScrollDiv  = styled.div`
+  overflow-y: scroll;
+  max-height: 38vh; 
+`;
 export const FormCard = styled.div`
   margin: 15px 0px;
   display: flex;
@@ -70,6 +75,8 @@ export const FormCard = styled.div`
   padding: 1em 0;
   border: 1px solid rgba(124, 77, 255, 0);
   transition: all .25s ease-in-out;
+  height: auto;
+ 
 `;
 
 export const Button = styled.button`

@@ -5,7 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import ReactDOM from 'react-dom';
 import Slider from './prueba'
-import { Column, Up, MapaStyle, UploaderCard, Button, FormCard } from './map.style';
+import { Column, Up, MapaStyle, UploaderCard, Button, FormCard,ScrollDiv } from './map.style';
 
 /* Método para cambiar la imagen del Marker */
 delete L.Icon.Default.prototype._getIconUrl;
@@ -55,7 +55,7 @@ const MapaComponent = props => {
   }
   return (
     <Up>
-      <div id="map">
+      <div id="map" >
         <Map></Map>
       </div>
       <Column>
@@ -66,8 +66,10 @@ const MapaComponent = props => {
             <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
             <Slider {... { media }}></Slider>
           </FormCard>
-          <FormCard><h2>Tus rutas:</h2>
+          <ScrollDiv>
+          <FormCard  ><h2>Tus rutas:</h2>
             {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}</FormCard>
+            </ScrollDiv>
         </UploaderCard>
       </Column>
     </Up>
