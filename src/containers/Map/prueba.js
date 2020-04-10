@@ -2,24 +2,30 @@ import React, { useState } from "react";
 // import Slide from "react-swipeable-views";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import {  green } from "@material-ui/core/colors";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 import { Player } from 'video-react';
 
 
+import {
+  ImgPopupSytle,
+  DivPrueba
+} from './map.style';
 
 const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) => {
     function getMedia(){
         var slide = []
         for (var i = 0; i < m.media.length ; i++) {
-            slide.push(<Slide
+            /*slide.push(<Slide
                 media={ 
                     getMediaComponent(m.media[i])
                 }
-                mediaBackgroundStyle={{ backgroundColor: green[400] }}
-                style={{ backgroundColor: green[600] }}
+                
+                mediaBackgroundStyle={{ backgroundColor: 'rgba(255, 0, 0, 0)' , height:"100vh !important"}}
+                style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}
                 título = "Multimedia"
-              />)
+              >{getMediaComponent(m.media[i])}</Slide>)*/
+
+              slide.push( <DivPrueba>{getMediaComponent(m.media[i])}</DivPrueba>)
         }
         return slide;
       }
@@ -36,7 +42,7 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) =>
             height={360}
           />)
         } else {
-          return <img src={url} alt="alt"/>
+          return <ImgPopupSytle src={url}  alt="alt"/>
         }
       }
 
@@ -51,9 +57,11 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) =>
         autoplay={false}
         landscape={false}
         mobile={isMobile}
-        style={{ position: "absolute" }}
+        style={{ width: "center"}}
+        containerStyle={{margin: "auto"}}
       >
         {getMedia()}
+       
       </AutoRotatingCarousel>
     </div>
   );

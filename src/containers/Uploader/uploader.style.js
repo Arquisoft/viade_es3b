@@ -99,7 +99,7 @@ export const FilesContainer = styled.div`
 `;
 export const FormCard = styled.div`
 
-  margin: 30px;
+  margin: 10px;
   display: flex;
   border-radius: 4px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);

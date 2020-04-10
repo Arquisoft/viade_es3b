@@ -18,7 +18,10 @@ import {
   LiStyle,
   UlStyle,
   PStyle,
-  InformationSection
+  InformationSection,
+  UploaderCard,
+  Button,
+  FormCard
 } from './map.style';
 
 /* Método para cambiar la imagen del Marker */
@@ -53,10 +56,10 @@ function changeRuta(id, e) {
 }
 
 
-function getMark(){
+function getMark() {
   var markets = []
   let w = currentRuta.waypoints;
-  for (var i = 0; i < w.length ; i++) {
+  for (var i = 0; i < w.length; i++) {
     markets.push(<Marker position={w[i].point.getCoordinates()}><Popup><p>{w[i].name}</p><p>{w[i].description}</p></Popup></Marker>)
   }
   return markets;
@@ -83,7 +86,7 @@ class Map extends React.Component {
     currentRuta = rutas.getRutaByPosition(0);
     name = currentRuta.name;
     description = currentRuta.description;
-    distance = currentRuta.getDistance() + " KM";
+    distance = "Distancia: " + currentRuta.getDistance() + " KM";
     media = currentRuta.media;
   }
   render() {
@@ -93,12 +96,17 @@ class Map extends React.Component {
           {getMap()}
         </div>
         <Column>
-          <H2Format id="name">{name}</H2Format>
-          <PStyle id="description">{description}</PStyle>
-          <PStyle id="distance" >{distance}</PStyle>
-          <Prueba {... { media }}></Prueba>
-          <H3Format>Tus rutas:</H3Format>
-          <UlStyle>{rutas.getNames().map((n, i) => <LiStyle key={i} onClick={(e) => changeRuta(n, e)}> {n} </LiStyle>)}</UlStyle>
+          <UploaderCard>
+            <FormCard>
+              <h1 id="name">{name}</h1>
+              <h3 id="description">{description}</h3>
+              <h3 id="distance" >{distance}</h3>
+              <Prueba {... { media }}></Prueba>
+            </FormCard>
+            <FormCard><h2>Tus rutas:</h2>
+           {rutas.getNames().map((n, i) => <Button key={i} onClick={(e) => changeRuta(n, e)}> {n} </Button>)}</FormCard>
+          </UploaderCard>
+
         </Column>
       </Up>
     );
@@ -112,8 +120,8 @@ const MapView = () => {
   </MapSection>
     <InformationSection>
     </InformationSection>
-    
-   </div>;
+
+  </div>;
 }
 
 function updateMap() {
