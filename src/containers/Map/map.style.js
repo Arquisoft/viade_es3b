@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Map } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import "video-react/dist/video-react.css";
-import { AutoRotatingCarousel } from "material-auto-rotating-carousel";
 
 export const MapSection = styled.section`
   display: flex;
