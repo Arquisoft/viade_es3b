@@ -5,7 +5,6 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 //import Rutas from '../../components/Ruta/rutas';
 import ReactDOM from 'react-dom';
-import { Player } from 'video-react';
 import Prueba from './prueba'
 
 
@@ -19,9 +18,7 @@ import {
   LiStyle,
   UlStyle,
   PStyle,
-  InformationSection,
-
-  ButtonStyled
+  InformationSection
 } from './map.style';
 
 /* Método para cambiar la imagen del Marker */
