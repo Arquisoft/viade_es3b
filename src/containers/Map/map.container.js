@@ -18,14 +18,14 @@ const LoadRoute = () => {
     useEffect(() => {
         if (user !== undefined) {
             const url = user.split("profile/card#me")[0] + "viade";
-            loadRoutes(url);
+            loadRoutes(url,user);
         }
     }, [user]);
 
     return (<InformationSection id="mapComponent"><H2Format id="porcentaje">Cargando: 0 %</H2Format></InformationSection>)
 }
 
-async function loadRoutes(url) {
+async function loadRoutes(url,user) {
     let routes = await fileClien.readFolder(url + "/routes");
     let rutasJson = [];
     let commentsJson = [];
@@ -51,7 +51,7 @@ async function loadRoutes(url) {
                     count += 1;
                     updatePercent(count, routes.files.length);
                     if (Math.trunc((count) / routes.files.length * 100) === 100)
-                        loadMapView(new Rutas(rutasJson,commentsJson,fileName));
+                        loadMapView(new Rutas(rutasJson,commentsJson,fileName),user);
                 });
             });
         } else {
@@ -61,10 +61,10 @@ async function loadRoutes(url) {
     }
 }
 
-function loadMapView(rutas) {
+function loadMapView(rutas,user) {
     setTimeout(() => {
         try {
-            ReactDOM.render(<MapaComponent {... { rutas }}></MapaComponent>, document.getElementById('mapComponent'))
+            ReactDOM.render(<MapaComponent {... { rutas,user}}></MapaComponent>, document.getElementById('mapComponent'))
         }
         catch (error) {
             return;

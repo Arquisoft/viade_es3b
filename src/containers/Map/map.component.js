@@ -6,6 +6,10 @@ import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-lea
 import ReactDOM from 'react-dom';
 import Slider from './prueba'
 import { Column, Up, MapaStyle, UploaderCard, Button, FormCard,ScrollDiv } from './map.style';
+import { useWebId } from '@solid/react';
+import * as solidAuth from 'solid-auth-client';
+import fileClient from 'solid-file-client';
+
 
 /* Método para cambiar la imagen del Marker */
 delete L.Icon.Default.prototype._getIconUrl;
@@ -20,6 +24,7 @@ L.Icon.Default.mergeOptions({
 const MapaComponent = props => {
   let rutas = LeafletMap;
   rutas = props.rutas;
+  let user = props.user;
   let currentRuta = rutas.currentRuta;
   let media = currentRuta.media;
   let puntos = [];
@@ -44,6 +49,14 @@ const MapaComponent = props => {
     return markets;
   }
 
+  function addComment(){
+    var value = currentRuta.addComment("hola")
+    var fileClien = new fileClient(solidAuth, { enableLogging: true });
+    let url = user.split("profile/card#me")[0] + value[1];
+    fileClien.createFile(url, value[0], value[0].type);
+    
+  }
+
   const Map = () => {
     puntos = [];
     currentRuta.points.forEach(p => puntos.push(p.getCoordinates()));
@@ -64,11 +77,13 @@ const MapaComponent = props => {
             <h1 id="name">{currentRuta.name}</h1>
             <h3 id="description">{currentRuta.description}</h3>
             <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
+            <button onClick={addComment}>Comentario</button>
             <Slider {... { media }}></Slider>
           </FormCard>
           <ScrollDiv>
           <FormCard  ><h2>Tus rutas:</h2>
-            {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}</FormCard>
+            {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
+            </FormCard>
             </ScrollDiv>
         </UploaderCard>
       </Column>

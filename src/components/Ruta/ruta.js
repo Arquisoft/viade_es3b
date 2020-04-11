@@ -1,8 +1,6 @@
-import { Point , WayPoint} from "./point.js";
-import { useWebId } from '@solid/react';
+import { Point , WayPoint,CommentObj} from "./point.js";
+//import CommentObj from './comment.js'
 
-import * as solidAuth from 'solid-auth-client';
-import fileClient from 'solid-file-client';
 
 export default class Ruta {
     constructor(file,commentsFile,fileName) {
@@ -16,12 +14,11 @@ export default class Ruta {
         file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
         this.currentMedia = 0;
         this.comments = [];
-        commentsFile.comments.forEach( c => this.comments.push(new Comment(file.text,file.dateCreated)));
-
+        commentsFile.comments.forEach( c => this.comments.push(new CommentObj(file.text,file.dateCreated)));
         //Datos para subir commentarios al pod
-        this.fileClien = new fileClient(solidAuth, { enableLogging: true });
-        this.user = "" + useWebId();
-	    this.url = this.user.split("profile/card#me")[0] + "/comments/routeComments/" + fileName + "Comments.json";
+        
+        this.fileName = fileName;
+        
     }
 
     getNextMedia() {
@@ -47,12 +44,14 @@ export default class Ruta {
         return this.media[this.currentMedia];
     }
 
-    addComment(text){
+    addComment(text ){
+        //console.log("Usuario: " + user);
         let f = new Date();
         let date = f.getFullYear() + "-" + (f.getMonth() +1) + "-" + f.getDate();
-        this.comments.push(new Comment(text,date));
-        let json = this.makeJsonComment();
-        this.fileClien.createFile(this.url, json, json.type);
+        this.comments.push(new CommentObj(text,date));
+        console.log(new CommentObj(text,date));
+        console.log(this.comments[0].text);
+        return  [this.makeJsonComment(),"comments/routeComments/" + this.fileName + "Comments.json"];
     }
 
     makeJsonComment(){
@@ -80,6 +79,7 @@ export default class Ruta {
             "text": c.text,
             "dateCreated": c.dateCreated
         }));
+        console.log(JSON.stringify(obj));
         return JSON.stringify(obj);
     }
 
