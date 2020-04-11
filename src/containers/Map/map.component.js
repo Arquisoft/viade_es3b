@@ -49,14 +49,20 @@ const MapaComponent = props => {
   }
 
   function addComment() {
+    let text = document.getElementById("comentario").value;
+    document.getElementById("comentario").value = "Publicando";
+    document.getElementById("comentario").readonly = true;
     var fileClien = new fileClient(solidAuth, { enableLogging: true });
     let url = user.split("profile/card#me")[0] + currentRuta.CommentsFileName;
     console.log(url);
     fileClien.readFile(url).then((fileComment) =>{
-      console.log(fileComment);
-    let text = document.getElementById("comentario").value;
-    var value = currentRuta.addComment(JSON.parse(fileComment,text));
-    fileClien.createFile(url, value, "application/json")});
+    
+    var value = currentRuta.addComment(JSON.parse(fileComment),text);
+    fileClien.createFile(url, value, "application/json").then(() => {
+      ReactDOM.hydrate(<Comments></Comments>, document.getElementById('comments'));
+      document.getElementById("comentario").value = "";})
+    }
+    );
   }
 
   const Comments = () => {
@@ -112,8 +118,9 @@ const MapaComponent = props => {
         </Up>
       </MapSection>
       <InformationSection>
-        <h1 id="name">{Comment}</h1>
-        <Comments></Comments>
+        <h1 id="name">Compemtarios</h1>
+        <div id="comments"><Comments></Comments></div>
+        
       </InformationSection>
     </div>
 

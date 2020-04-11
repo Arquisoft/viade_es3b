@@ -14,9 +14,6 @@ export default class Ruta {
         file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
         this.currentMedia = 0;
         this.comments = [];
-        console.log("eSTO");
-        console.log(commentsFile);
-        console.log(commentsFile);
         commentsFile.comments.forEach( c => {this.comments.push(new CommentObj(c.text,c.dateCreated))} );
         //Datos para subir commentarios al pod
         this.CommentsFileName = "viade/comments/routeComments/" + fileName + "Comments.json";
