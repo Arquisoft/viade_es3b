@@ -1,7 +1,7 @@
 import { Point , WayPoint} from "./point.js";
 
 export default class Ruta {
-    constructor(file) {
+    constructor(file,commentsFile) {
         this.name = file.name;
         this.description = file.description;
         this.media = [];
@@ -11,6 +11,9 @@ export default class Ruta {
         file.media.forEach(m => this.media.push(m["@id"]));
         file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
         this.currentMedia = 0;
+        this.comments = [];
+        
+        commentsFile.comments.forEach( c => this.comments.push(new Comment(file.text,file.dateCreated)));
     }
 
     getNextMedia() {
@@ -34,6 +37,12 @@ export default class Ruta {
 
     getCurrentMedia() {
         return this.media[this.currentMedia];
+    }
+
+    addComment(text){
+        var f = new Date();
+        var date = f.getFullYear() + "-" + (f.getMonth() +1) + "-" + f.getDate();
+        this.comments.push(new Comment(text,date));
     }
 
 
