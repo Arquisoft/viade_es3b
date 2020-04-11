@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import data from '@solid/query-ldflex';
 import {FriendsPageContent} from './friends.component';
 import {errorToaster} from '@utils';
+import auth from 'solid-auth-client';
+import FC from 'solid-file-client';
 
 const defaultProfilePhoto = 'img/icon/empty-profile.svg';
 const reload = () => {
@@ -82,11 +84,45 @@ export class FriendsComponent extends Component<Props> {
     const { webId } = this.props;
     try {
       const user = data[webId];
-      await user.knows.add(data[friendWebId]);
-      await reload();
+      if (await this.isWebIdValid(friendWebId) && friendWebId.localeCompare("") !== 0) {
+        if (await this.friendAlreadyAdded(friendWebId)) {
+          errorToaster('WebId ya pertenece a tus amigos', 'Error');
+        } else {
+          await user.knows.add(data[friendWebId]);
+          await reload();
+        }
+      } else  {
+        errorToaster('WebId no válido', 'Error');
+      }
     } catch (e) {
       errorToaster(e.message, 'Error');
     }
+  };
+
+  isWebIdValid = async(friendWebId) => {
+    const fc = new FC(auth);
+    let session = await auth.currentSession()
+    if (!session) {
+      session = await auth.login();
+    }
+    try {
+      let op = async client => await client.itemExists(friendWebId);
+      return await op(fc);
+    }catch (e) {
+    }
+  };
+
+  friendAlreadyAdded = async (friendWebId) => {
+    const { webId } = this.props;
+    const user = data[webId];
+
+    for await (const friend of user.friends) {
+      if (String(friend).localeCompare(String(friendWebId)) === 0) {
+        console.log(friend.toString());
+        return true;
+      }
+    }
+    return false;
   };
 
   render() {
