@@ -32,7 +32,7 @@ async function loadRoutes(url,user) {
     let fileName =[];
     if (routes.files.length === 0) {
         try {
-            ReactDOM.render(<InformationSection id="mapComponent"><H2Format>No hay rutas</H2Format></InformationSection>, document.getElementById('mapComponent'));
+            ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
         }
         catch (error) {
             return;

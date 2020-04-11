@@ -3,6 +3,25 @@ import { Map } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import "video-react/dist/video-react.css";
 
+export const MapSection = styled.section`
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+  background:#a4d1d1;
+  background-repeat: repeat;
+  padding: 0px 15px 30px 0px;
+`;
+
+export const LI = styled.li`
+    font-size: 1em;
+      color: #083575;
+      background:#8ed2d2;
+      font-weight:bold;
+      width: 75% !important; 
+      margin:2px;
+  `;
+
 export const Column = styled.div`
         width: 25vw;
         min-width: 400 px !important; 
@@ -20,6 +39,9 @@ export const Up = styled.div`
 export const Down = styled.div`
         height: 30vh;      
         float:down;
+        width: 100vw;
+        text-align: center;    
+        background:#8ed2d2; 
 `;
 
 export const MapaStyle = styled(Map)`

@@ -5,7 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import ReactDOM from 'react-dom';
 import Slider from './prueba'
-import { Column, Up, MapaStyle, UploaderCard, Button, FormCard,ScrollDiv } from './map.style';
+import { Column, Up, MapaStyle, UploaderCard, Button, FormCard, ScrollDiv, InformationSection, MapSection,LI } from './map.style';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
@@ -35,7 +35,7 @@ const MapaComponent = props => {
     document.getElementById("description").textContent = currentRuta.description;
     document.getElementById("distance").textContent = "Distancia: " + currentRuta.getDistance() + " KM";
     media = currentRuta.media;
-    ReactDOM.hydrate(<MapaComponent  {... { rutas,user}}></MapaComponent>, document.getElementById('mapComponent'));
+    ReactDOM.hydrate(<MapaComponent  {... { rutas, user }}></MapaComponent>, document.getElementById('mapComponent'));
   }
 
   /* Método que devuelve los marcadores con los sistios de interes */
@@ -48,14 +48,33 @@ const MapaComponent = props => {
     return markets;
   }
 
-  function addComment(){
-    let text = document.getElementById("comentario").value;
-    var value = currentRuta.addComment(text);
+  function addComment() {
     var fileClien = new fileClient(solidAuth, { enableLogging: true });
-    let url = user.split("profile/card#me")[0] + value[1];
-    console.log(value[0]);
-    fileClien.createFile(url, value[0], "application/json");
-    
+    let url = user.split("profile/card#me")[0] + currentRuta.CommentsFileName;
+    console.log(url);
+    fileClien.readFile(url).then((fileComment) =>{
+      console.log(fileComment);
+    let text = document.getElementById("comentario").value;
+    var value = currentRuta.addComment(JSON.parse(fileComment,text));
+    fileClien.createFile(url, value, "application/json")});
+  }
+
+  const Comments = () => {
+    function obtainComments() {
+      let aux = [];
+      let count = 0;
+      currentRuta.comments.forEach(c =>{
+          aux.push(<LI key={c.text}>{c.text}</LI>);
+          count +=1;
+          console.log(c);
+        });
+      return aux;
+    }
+
+    return <UploaderCard>
+      <ul>{obtainComments()}</ul>
+      <input type="text" id="comentario"></input>
+      <button onClick={addComment}>Comentar</button></UploaderCard>;
   }
 
   const Map = () => {
@@ -68,28 +87,38 @@ const MapaComponent = props => {
     </MapaStyle>;
   }
   return (
-    <Up>
-      <div id="map" >
-        <Map></Map>
-      </div>
-      <Column>
-        <UploaderCard>
-          <FormCard>
-            <h1 id="name">{currentRuta.name}</h1>
-            <h3 id="description">{currentRuta.description}</h3>
-            <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
-            <input type="text" id="comentario"></input>
-            <button onClick={addComment}>Comentario</button>
-            <Slider {... { media }}></Slider>
-          </FormCard>
-          <ScrollDiv>
-          <FormCard  ><h2>Tus rutas:</h2>
-            {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
-            </FormCard>
-            </ScrollDiv>
-        </UploaderCard>
-      </Column>
-    </Up>
+    <div>
+      <MapSection>
+        <Up id="up">
+          <div id="map" >
+            <Map></Map>
+          </div>
+          <Column>
+            <UploaderCard>
+              <FormCard>
+                <h1 id="name">{currentRuta.name}</h1>
+                <h3 id="description">{currentRuta.description}</h3>
+                <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
+
+                <Slider {... { media }}></Slider>
+              </FormCard>
+              <ScrollDiv>
+                <FormCard  ><h2>Tus rutas:</h2>
+                  {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
+                </FormCard>
+              </ScrollDiv>
+            </UploaderCard>
+          </Column>
+        </Up>
+      </MapSection>
+      <InformationSection>
+        <h1 id="name">{Comment}</h1>
+        <Comments></Comments>
+      </InformationSection>
+    </div>
+
+
+
   );
 }
 export default MapaComponent;

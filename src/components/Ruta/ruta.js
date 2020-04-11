@@ -14,9 +14,12 @@ export default class Ruta {
         file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
         this.currentMedia = 0;
         this.comments = [];
-        commentsFile.comments.forEach( c => {this.comments.push(new CommentObj(file.text,file.dateCreated))} );
+        console.log("eSTO");
+        console.log(commentsFile);
+        console.log(commentsFile);
+        commentsFile.comments.forEach( c => {this.comments.push(new CommentObj(c.text,c.dateCreated))} );
         //Datos para subir commentarios al pod
-        this.fileName = fileName;
+        this.CommentsFileName = "viade/comments/routeComments/" + fileName + "Comments.json";
         
     }
 
@@ -43,46 +46,17 @@ export default class Ruta {
         return this.media[this.currentMedia];
     }
 
-    addComment(text ){
-        //console.log("Usuario: " + user);
+    addComment(file ,text){
         let f = new Date();
         let date = f.getFullYear() + "-" + (f.getMonth() +1) + "-" + f.getDate();
-        this.comments.push(new CommentObj(text,date));
-        return  [this.makeJsonComment(),"viade/comments/routeComments/" + this.fileName + "Comments.json"];
-    }
-
-    makeJsonComment(){
-        var obj = ({
-            "@context": {
-                "@version": 1.1,
-                "comments": {
-                    "@container": "@list",
-                    "@id": "viade:comments"
-                },
-                "dateCreated": {
-                    "@id": "viade:dateCreated",
-                    "@type": "xsd:date"
-                },
-                "text": {
-                    "@id": "viade:text",
-                    "@type": "xsd:string"
-                },
-                "viade": "http://arquisoft.github.io/viadeSpec/",
-                "xsd": "http://www.w3.org/2001/XMLSchema#"
-            }, "comments": []
-        });
-    
-        this.comments.forEach(c => { let text = c.text ;
-            let dateCreated = c.dateCreated ;
-            obj.comments.push({
+        file.comments.push({
             "text": text,
-            "dateCreated": dateCreated
-        })});
-        console.log(JSON.stringify(obj));
-        return JSON.stringify(obj);
+            "dateCreated": date
+        });
+        this.comments =[];
+        file.comments.forEach( c => {this.comments.push(new CommentObj(c.text,c.dateCreated))} );
+        return JSON.stringify(file);
     }
-
-  
 
 
 
