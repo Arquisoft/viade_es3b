@@ -29,6 +29,7 @@ async function loadRoutes(url) {
     let routes = await fileClien.readFolder(url + "/routes");
     let rutasJson = [];
     let commentsJson = [];
+    let fileName =[];
     if (routes.files.length === 0) {
         try {
             ReactDOM.render(<InformationSection id="mapComponent"><H2Format>No hay rutas</H2Format></InformationSection>, document.getElementById('mapComponent'));
@@ -46,10 +47,11 @@ async function loadRoutes(url) {
                 fileClien.readFile(url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0] + "Comments.json").then((fileComment) =>{
                     commentsJson.push(JSON.parse(fileComment));
                     rutasJson.push(JSON.parse(file));
+                    fileName.push(routes.files[i].name.split('.json')[0]);
                     count += 1;
                     updatePercent(count, routes.files.length);
                     if (Math.trunc((count) / routes.files.length * 100) === 100)
-                        loadMapView(new Rutas(rutasJson,commentsJson));
+                        loadMapView(new Rutas(rutasJson,commentsJson,fileName));
                 });
             });
         } else {
