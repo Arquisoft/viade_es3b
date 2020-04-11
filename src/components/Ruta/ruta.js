@@ -14,9 +14,8 @@ export default class Ruta {
         file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
         this.currentMedia = 0;
         this.comments = [];
-        commentsFile.comments.forEach( c => this.comments.push(new CommentObj(file.text,file.dateCreated)));
+        commentsFile.comments.forEach( c => {this.comments.push(new CommentObj(file.text,file.dateCreated))} );
         //Datos para subir commentarios al pod
-        
         this.fileName = fileName;
         
     }
@@ -49,9 +48,7 @@ export default class Ruta {
         let f = new Date();
         let date = f.getFullYear() + "-" + (f.getMonth() +1) + "-" + f.getDate();
         this.comments.push(new CommentObj(text,date));
-        console.log(new CommentObj(text,date));
-        console.log(this.comments[0].text);
-        return  [this.makeJsonComment(),"comments/routeComments/" + this.fileName + "Comments.json"];
+        return  [this.makeJsonComment(),"viade/comments/routeComments/" + this.fileName + "Comments.json"];
     }
 
     makeJsonComment(){
@@ -75,10 +72,12 @@ export default class Ruta {
             }, "comments": []
         });
     
-        this.comments.forEach(c => obj.comments.push({
-            "text": c.text,
-            "dateCreated": c.dateCreated
-        }));
+        this.comments.forEach(c => { let text = c.text ;
+            let dateCreated = c.dateCreated ;
+            obj.comments.push({
+            "text": text,
+            "dateCreated": dateCreated
+        })});
         console.log(JSON.stringify(obj));
         return JSON.stringify(obj);
     }

@@ -6,7 +6,6 @@ import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-lea
 import ReactDOM from 'react-dom';
 import Slider from './prueba'
 import { Column, Up, MapaStyle, UploaderCard, Button, FormCard,ScrollDiv } from './map.style';
-import { useWebId } from '@solid/react';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
@@ -36,7 +35,7 @@ const MapaComponent = props => {
     document.getElementById("description").textContent = currentRuta.description;
     document.getElementById("distance").textContent = "Distancia: " + currentRuta.getDistance() + " KM";
     media = currentRuta.media;
-    ReactDOM.hydrate(<MapaComponent  {... { rutas }}></MapaComponent>, document.getElementById('mapComponent'));
+    ReactDOM.hydrate(<MapaComponent  {... { rutas,user}}></MapaComponent>, document.getElementById('mapComponent'));
   }
 
   /* Método que devuelve los marcadores con los sistios de interes */
@@ -50,10 +49,12 @@ const MapaComponent = props => {
   }
 
   function addComment(){
-    var value = currentRuta.addComment("hola")
+    let text = document.getElementById("comentario").value;
+    var value = currentRuta.addComment(text);
     var fileClien = new fileClient(solidAuth, { enableLogging: true });
     let url = user.split("profile/card#me")[0] + value[1];
-    fileClien.createFile(url, value[0], value[0].type);
+    console.log(value[0]);
+    fileClien.createFile(url, value[0], "application/json");
     
   }
 
@@ -77,6 +78,7 @@ const MapaComponent = props => {
             <h1 id="name">{currentRuta.name}</h1>
             <h3 id="description">{currentRuta.description}</h3>
             <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
+            <input type="text" id="comentario"></input>
             <button onClick={addComment}>Comentario</button>
             <Slider {... { media }}></Slider>
           </FormCard>

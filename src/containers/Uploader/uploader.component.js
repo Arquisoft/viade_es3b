@@ -145,6 +145,7 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
 	}
 	let i = 0;
 
+	
 	await fileClien.createFile(folder + "/routes/" + file.name, file, file.type);
 	await fileClien.createFile(folder + "/comments/routeComments/" + file.name.split('.json')[0] + "Comments.json", getJson(), file.type);
 
