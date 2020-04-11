@@ -5,7 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import ReactDOM from 'react-dom';
 import Slider from './prueba'
-import { Column, Up, MapaStyle, UploaderCard, Button, FormCard, ScrollDiv, InformationSection, MapSection,LI } from './map.style';
+import { Column, Up, MapaStyle, MapCard, Button, FormCard, ScrollDiv, MapSection ,CommentCard} from './map.style';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
@@ -70,17 +70,18 @@ const MapaComponent = props => {
       let aux = [];
       let count = 0;
       currentRuta.comments.forEach(c =>{
-          aux.push(<LI key={c.text}>{c.text}</LI>);
+          aux.push(<p key={c.text}><h1>{c.dateCreated}</h1>{c.text}</p>);
           count +=1;
           console.log(c);
         });
       return aux;
     }
 
-    return <UploaderCard>
-      <ul>{obtainComments()}</ul>
-      <input type="text" id="comentario"></input>
-      <button onClick={addComment}>Comentar</button></UploaderCard>;
+    return <CommentCard>
+      <h1 id="name">Comentarios</h1>
+      {obtainComments()}
+      <div></div><input type="text" id="comentario"></input>
+      <button onClick={addComment}>Comentar</button></CommentCard>;
   }
 
   const Map = () => {
@@ -100,7 +101,7 @@ const MapaComponent = props => {
             <Map></Map>
           </div>
           <Column>
-            <UploaderCard>
+            <MapCard>
               <FormCard>
                 <h1 id="name">{currentRuta.name}</h1>
                 <h3 id="description">{currentRuta.description}</h3>
@@ -113,15 +114,12 @@ const MapaComponent = props => {
                   {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
                 </FormCard>
               </ScrollDiv>
-            </UploaderCard>
+            </MapCard>
           </Column>
         </Up>
       </MapSection>
-      <InformationSection>
-        <h1 id="name">Compemtarios</h1>
         <div id="comments"><Comments></Comments></div>
-        
-      </InformationSection>
+      
     </div>
 
 

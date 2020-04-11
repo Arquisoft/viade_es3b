@@ -13,15 +13,6 @@ export const MapSection = styled.section`
   padding: 0px 15px 30px 0px;
 `;
 
-export const LI = styled.li`
-    font-size: 1em;
-      color: #083575;
-      background:#8ed2d2;
-      font-weight:bold;
-      width: 75% !important; 
-      margin:2px;
-  `;
-
 export const Column = styled.div`
         width: 25vw;
         min-width: 400 px !important; 
@@ -33,15 +24,15 @@ export const Up = styled.div`
         width: 100vw;
         float:up;
         text-align: center;    
-        background:#8ed2d2; 
+        background:#a4d1d1; 
 `;
 
 export const Down = styled.div`
-        height: 30vh;      
+        height: 80vh;      
         float:down;
         width: 100vw;
         text-align: center;    
-        background:#8ed2d2; 
+        background:#a4d1d1; 
 `;
 
 export const MapaStyle = styled(Map)`
@@ -50,7 +41,7 @@ export const MapaStyle = styled(Map)`
   float: left;
 `;
 
-export const UploaderCard = styled.div`
+export const MapCard = styled.div`
   background-color: #fff;
   margin: 30px auto;
   //Overriding the style guide card flexbox settings
@@ -76,6 +67,60 @@ export const UploaderCard = styled.div`
       background:#a4d1d1;
       color: #083575;
   }
+`;
+
+export const CommentCard = styled.div`
+  background-color: #fff;
+  margin: auto;
+  //Overriding the style guide card flexbox settings
+  max-width: 60% !important;
+  align-items: center;
+  padding: 30px 0px 30px 0px;
+  h1{
+    text-align: center;
+  }
+    input{
+    width: 60% !important; 
+    margin-left: 10%;
+  }
+
+  button{font-size: 1em;
+        color: #083575;
+        background:#8ed2d2;
+        font-weight:bold;
+        width: 15% !important; 
+        margin-left: 5%;
+        margin-right: 10%;
+        
+
+    }
+    hover{
+        background:#a4d1d1;
+        color: #083575;
+    }
+  }
+
+
+  p{
+    font-size: 1em;
+    color: #083575;
+    background:rgba(164, 209, 209,0.4);
+    width: 90% !important; 
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #a4d1d1; 
+    border-radius: 6px;
+    padding: 5px 30px 15px 30px;
+
+    h1{
+      font-size: 0.8em;
+      text-align: right;
+      font-weight: bold;
+    }
+
+    
+  }
+
 `;
 
 export const ScrollDiv  = styled.div`

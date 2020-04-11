@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 
 const UploadJson = ({ setFile, file }) => {
-	const filename = file == null ? '' : "Ha seleccionado el siguiente archivo:" + file.name;
+	const filename = file == null ? '' : "Archivo seleccionado:" + file.name;
 	const { t } = useTranslation();
 	const changeName = e => {
 		setFile(e.target.files[0]);

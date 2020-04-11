@@ -14,7 +14,7 @@ export default class Ruta {
         file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
         this.currentMedia = 0;
         this.comments = [];
-        commentsFile.comments.forEach( c => {this.comments.push(new CommentObj(c.text,c.dateCreated))} );
+        commentsFile.comments.forEach( c => {if(c.text!= undefined) this.comments.push(new CommentObj(c.text,c.dateCreated))} );
         //Datos para subir commentarios al pod
         this.CommentsFileName = "viade/comments/routeComments/" + fileName + "Comments.json";
         
@@ -51,7 +51,7 @@ export default class Ruta {
             "dateCreated": date
         });
         this.comments =[];
-        file.comments.forEach( c => {this.comments.push(new CommentObj(c.text,c.dateCreated))} );
+        file.comments.forEach( c => {if(c.text!= undefined) this.comments.push(  new CommentObj(c.text,c.dateCreated))} );
         return JSON.stringify(file);
     }
 
