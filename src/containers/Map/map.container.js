@@ -7,7 +7,7 @@ import fileClient from 'solid-file-client';
 import MapaComponent from './map.component';
 import Rutas from '../../components/Ruta/rutas';
 
-import {H2Format, InformationSection,} from './map.style';
+import { H2Format, InformationSection, } from './map.style';
 
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
@@ -27,8 +27,8 @@ const LoadRoute = () => {
 
 async function loadRoutes(url) {
     let routes = await fileClien.readFolder(url + "/routes");
-    let i;
     let rutasJson = [];
+    let commentsJson = [];
     if (routes.files.length === 0) {
         try {
             ReactDOM.render(<InformationSection id="mapComponent"><H2Format>No hay rutas</H2Format></InformationSection>, document.getElementById('mapComponent'));
@@ -38,42 +38,44 @@ async function loadRoutes(url) {
         }
     }
 
-    for (i = 0; i < routes.files.length; i++) {
+    for (let i = 0; i < routes.files.length; i++) {
         var count = 0;
         if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
-            console.log(count);
             // eslint-disable-next-line
             fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
-                rutasJson.push(JSON.parse(file));
-                count += 1;
-                try {
-                    document.getElementById('porcentaje').textContent = "Cargando: " + Math.trunc((count) / routes.files.length * 100) + " %";
-                }
-                catch (error) {
-                    return;
-                }
-                if (Math.trunc((count) / routes.files.length * 100) === 100) {
-                    let rutas = new Rutas(rutasJson);
-                    setTimeout(() => {
-                        try {
-                            ReactDOM.render(<MapaComponent {... { rutas }}></MapaComponent>, document.getElementById('mapComponent'))
-                        }
-                        catch (error) {
-                            return;
-                        }
-                    },100);
-                }
-            }
-            );
+                fileClien.readFile(url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0] + "Comments.json").then((fileComment) =>{
+                    commentsJson.push(JSON.parse(fileComment));
+                    rutasJson.push(JSON.parse(file));
+                    count += 1;
+                    updatePercent(count, routes.files.length);
+                    if (Math.trunc((count) / routes.files.length * 100) === 100)
+                        loadMapView(new Rutas(rutasJson,commentsJson));
+                });
+            });
         } else {
-            try {
-                document.getElementById('porcentaje').textContent = "Cargando: " + Math.trunc((count) / routes.files.length * 100) + " %";
-            }
-            catch (error) {
-                return;
-            }
             count += 1;
+            updatePercent(count, routes.files.length);
         }
+    }
+}
+
+function loadMapView(rutas) {
+    setTimeout(() => {
+        try {
+            ReactDOM.render(<MapaComponent {... { rutas }}></MapaComponent>, document.getElementById('mapComponent'))
+        }
+        catch (error) {
+            return;
+        }
+    }, 100);
+}
+
+function updatePercent(count, length) {
+    try {
+        document.getElementById('porcentaje').textContent = "Cargando: " + Math.trunc((count) / length * 100) + " %";
+    }
+    catch (error) {
+        return;
     }
 }
 

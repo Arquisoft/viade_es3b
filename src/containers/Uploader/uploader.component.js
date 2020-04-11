@@ -113,9 +113,7 @@ const AddRoute = () => {
 };
 
 function getJson() {
-	var obj = {
-	};
-	obj.table.push({
+	var obj = ({
 		"@context": {
 			"@version": 1.1,
 			"comments": {

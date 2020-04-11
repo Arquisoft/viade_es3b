@@ -1,8 +1,7 @@
 import Ruta from './ruta.js';
 
 class Rutas{
-
-    constructor(newRoutes){
+    constructor(newRoutes,commentsJson){
         this.rutas = [];
         newRoutes.forEach(r => {this.rutas.push(new Ruta(r))})
         this.currentRuta = this.rutas[0];
