@@ -46,7 +46,7 @@ export const FriendsPageContent = props => {
             <h4>{t('friends.title')}</h4>
             <button onClick={openModal}>
               <span className="icon">
-                <img src={'/img/viade-icons/person_add.svg'} alt="Add Friend" />
+                <img src={'img/viade-icons/person_add.svg'} alt="Add Friend" />
               </span>
             </button>
             <Modal
@@ -60,7 +60,7 @@ export const FriendsPageContent = props => {
                 <h2 className="modalTitle">Please enter WebID:</h2>
                 <button onClick={closeModal} className="close">
                   <span className="icon">
-                    <img src={'/img/viade-icons/close.svg'} alt="Close" />
+                    <img src={'img/viade-icons/close.svg'} alt="Close" />
                   </span>
                 </button>
               </div>
@@ -68,7 +68,7 @@ export const FriendsPageContent = props => {
                   <input type="text" placeholder="https://alice.solid.community/profile/card#me" id="input"/>
                   <button onClick={(event) => addFriend(event,document.getElementById('input').value)} className="send">
                     <span className="icon">
-                      <img src={'/img/viade-icons/send.svg'} alt="Send" />
+                      <img src={'img/viade-icons/send.svg'} alt="Send" />
                     </span>
                   </button>
                 </form>
@@ -89,6 +89,7 @@ export const FriendsPageContent = props => {
           <FriendsCardTitle>
             <h4>{t('friends.trails.title')}</h4>
           </FriendsCardTitle>
+
         </FriendsTrailsCard>
       </FriendsContainer>
     </FriendsWrapper>

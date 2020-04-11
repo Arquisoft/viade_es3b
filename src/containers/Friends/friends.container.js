@@ -3,7 +3,7 @@ import data from '@solid/query-ldflex';
 import {FriendsPageContent} from './friends.component';
 import {errorToaster} from '@utils';
 
-const defaultProfilePhoto = '/img/icon/empty-profile.svg';
+const defaultProfilePhoto = 'img/icon/empty-profile.svg';
 const reload = () => {
   window.location.reload();
 };
@@ -55,6 +55,23 @@ export class FriendsComponent extends Component<Props> {
         friendsPhotos.push(image)
       }
       this.setState({friends: friends, friendsPhotos: friendsPhotos});
+    } catch (e) {
+      errorToaster(e.message, 'Error');
+    }
+  };
+
+  getFriendsTrails = async () => {
+    const { webId } = this.props;
+    const friendsTrails=[];
+
+    try {
+      const user = data[webId];
+      for await (const friend of user.friends) {
+        const name = await data[friend].name;
+        const imageLd = await data[friend].vcard_hasPhoto;
+        friendsTrails.push(name.value);
+      }
+      this.setState({friendsTrails: friendsTrails});
     } catch (e) {
       errorToaster(e.message, 'Error');
     }
