@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import { HashRouter as Router } from 'react-router-dom';
-import TextEditor from './text-editor.component';
+import FriendsComponent from './friends.container';
 
-describe('Text Editor', () => {
+describe('Page Not Found', () => {
   afterAll(cleanup);
 
   const { container } = render(
     <Router>
-      <TextEditor />
+      <FriendsComponent />
     </Router>
   );
 
