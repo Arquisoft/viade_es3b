@@ -1,7 +1,9 @@
-import { Point , WayPoint} from "./point.js";
+import { Point , WayPoint,CommentObj} from "./point.js";
+//import CommentObj from './comment.js'
+
 
 export default class Ruta {
-    constructor(file) {
+    constructor(file,commentsFile,fileName) {
         this.name = file.name;
         this.description = file.description;
         this.media = [];
@@ -11,6 +13,11 @@ export default class Ruta {
         file.media.forEach(m => this.media.push(m["@id"]));
         file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
         this.currentMedia = 0;
+        this.comments = [];
+        commentsFile.comments.forEach( c => {if(c.text!= undefined) this.comments.push(new CommentObj(c.text,c.dateCreated))} );
+        //Datos para subir commentarios al pod
+        this.CommentsFileName = "viade/comments/routeComments/" + fileName + "Comments.json";
+        
     }
 
     getNextMedia() {
@@ -36,8 +43,17 @@ export default class Ruta {
         return this.media[this.currentMedia];
     }
 
-
-  
+    addComment(file ,text){
+        let f = new Date();
+        let date = f.getFullYear() + "-" + (f.getMonth() +1) + "-" + f.getDate();
+        file.comments.push({
+            "text": text,
+            "dateCreated": date
+        });
+        this.comments =[];
+        file.comments.forEach( c => {if(c.text!= undefined) this.comments.push(  new CommentObj(c.text,c.dateCreated))} );
+        return JSON.stringify(file);
+    }
 
 
 

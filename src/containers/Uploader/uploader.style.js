@@ -16,6 +16,7 @@ export const UploaderCard = styled.div`
   h2{
     padding: 0 30px;
     text-align: center;
+  }
 `;
 
 export const FileButton = styled.div`
@@ -23,10 +24,6 @@ export const FileButton = styled.div`
 `;
 
 export const ChooseButton = styled.div`
-  margin: 0 200px 20px 200px;
-  @media screen and (max-width: 992px) {
-    margin: 0 0 20px 0;
-  }
   input{
     width: 0.1px;
     height:0.1x;
@@ -61,9 +58,9 @@ export const UploadButton = styled.div`
     height: 100%;
     text-align: center;
     position: relative;
-    display:none;
     
     button{
+      font-size: 1.2em;
         color: #083575;
         background:#8ed2d2;
         font-weight:bold;
@@ -72,27 +69,6 @@ export const UploadButton = styled.div`
         background:#a4d1d1;
         color: #083575;
     }
-    label {
-      border: 1px solid #DAE0E6;
-      border-radius: 4px;
-      font-size: 12.8px;
-      font-weight: bold;
-      color: #083575;
-      background-color: #8ed2d2;
-      display: inline-block;
-      transition: all .5s;
-      cursor: pointer;
-      padding: 6.4px 12.8px;
-      width: fit-content;
-      text-align: center;
-      
-      }
-      label:hover {
-        color: #083575;
-        background: #a4d1d1;
-        border-color: #449DF5;
-        transition: 0.25s all ease-in-out;
-      }
 `;
 
 export const FileNames = styled.div`
@@ -120,4 +96,31 @@ export const FilesContainer = styled.div`
     div#file-container{
       margin: 0 0 10px 0;
     }
+`;
+export const FormCard = styled.div`
+
+  margin: 10px;
+  display: flex;
+  border-radius: 4px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em 0;
+  border: 1px solid rgba(124, 77, 255, 0);
+  transition: all .25s ease-in-out;
+`;
+
+export const MultimediaCard = styled.div`
+
+  margin: 30px;
+`;
+
+export const MultimediasCard = styled.div`
+  display: flex;
+  flex-direction: row;
 `;

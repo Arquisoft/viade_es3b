@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const FriendsWrapper = styled.section`
   width: 100%;
-  background:#E7E7E7;
+  background:#a4d1d1;
   padding: 50px 0;
   display: flex;
   justify-content: center;

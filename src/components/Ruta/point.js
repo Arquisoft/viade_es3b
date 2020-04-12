@@ -19,3 +19,11 @@ export class WayPoint{
         this.point = point;
     }
 }
+
+export class CommentObj{
+    constructor(text,dateCreated){
+        this.text = text;
+        this.dateCreated = dateCreated;
+    }
+
+}

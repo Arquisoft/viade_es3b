@@ -7,10 +7,7 @@ import fileClient from 'solid-file-client';
 import MapaComponent from './map.component';
 import Rutas from '../../components/Ruta/rutas';
 
-import {
-    H2Format,
-    InformationSection,
-} from './map.style';
+import { H2Format, InformationSection, } from './map.style';
 
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
@@ -21,69 +18,66 @@ const LoadRoute = () => {
     useEffect(() => {
         if (user !== undefined) {
             const url = user.split("profile/card#me")[0] + "viade";
-            //const url = "https://uo264354.solid.community/public/myRoutes";
-            //console.log(url);
-            loadRoutes(url);
+            loadRoutes(url,user);
         }
     }, [user]);
 
     return (<InformationSection id="mapComponent"><H2Format id="porcentaje">Cargando: 0 %</H2Format></InformationSection>)
 }
 
-async function loadRoutes(url) {
+async function loadRoutes(url,user) {
     let routes = await fileClien.readFolder(url + "/routes");
-    let i;
-
     let rutasJson = [];
-
+    let commentsJson = [];
+    let fileName =[];
     if (routes.files.length === 0) {
-        let rutas = new Rutas(rutasJson);
         try {
-            ReactDOM.render(<MapaComponent {... { rutas }}></MapaComponent>, document.getElementById('mapComponent'));
+            ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
         }
         catch (error) {
             return;
         }
-
-
     }
 
-    for (i = 0; i < routes.files.length; i++) {
+    for (let i = 0; i < routes.files.length; i++) {
         var count = 0;
         if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
-            console.log(count);
             // eslint-disable-next-line
             fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
-                rutasJson.push(JSON.parse(file));
-                count += 1;
-                try {
-                    document.getElementById('porcentaje').textContent = "Cargando: " + Math.trunc((count) / routes.files.length * 100) + " %";
-                }
-                catch (error) {
-                    return;
-                }
-                if (Math.trunc((count) / routes.files.length * 100) === 100) {
-                    let rutas = new Rutas(rutasJson);
-                    setTimeout(() => {
-                        try {
-                            ReactDOM.render(<MapaComponent {... { rutas }}></MapaComponent>, document.getElementById('mapComponent'))
-                        }
-                        catch (error) {
-                            return;
-                        }
-                    },100);
-                }
-            }
-            );
+                fileClien.readFile(url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0] + "Comments.json").then((fileComment) =>{
+                    commentsJson.push(JSON.parse(fileComment));
+                    rutasJson.push(JSON.parse(file));
+                    fileName.push(routes.files[i].name.split('.json')[0]);
+                    count += 1;
+                    updatePercent(count, routes.files.length);
+                    if (Math.trunc((count) / routes.files.length * 100) === 100)
+                        loadMapView(new Rutas(rutasJson,commentsJson,fileName),user);
+                });
+            });
         } else {
-            try {
-                document.getElementById('porcentaje').textContent = "Cargando: " + Math.trunc((count) / routes.files.length * 100) + " %";
-            }
-            catch (error) {
-                return;
-            }
             count += 1;
+            updatePercent(count, routes.files.length);
         }
+    }
+}
+
+function loadMapView(rutas,user) {
+    setTimeout(() => {
+        try {
+            ReactDOM.render(<MapaComponent {... { rutas,user}}></MapaComponent>, document.getElementById('mapComponent'))
+        }
+        catch (error) {
+            return;
+        }
+    }, 100);
+}
+
+function updatePercent(count, length) {
+    try {
+        document.getElementById('porcentaje').textContent = "Cargando: " + Math.trunc((count) / length * 100) + " %";
+    }
+    catch (error) {
+        return;
     }
 }
 

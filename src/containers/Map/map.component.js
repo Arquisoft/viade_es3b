@@ -3,25 +3,12 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
-//import Rutas from '../../components/Ruta/rutas';
 import ReactDOM from 'react-dom';
-import { Player } from 'video-react';
+import Slider from './prueba'
+import { Column, Up, MapaStyle, MapCard, Button, FormCard, ScrollDiv, MapSection ,CommentCard} from './map.style';
+import * as solidAuth from 'solid-auth-client';
+import fileClient from 'solid-file-client';
 
-
-import {
-  Column,
-  MapSection,
-  Up,
-  H2Format,
-  H3Format,
-  MapaStyle,
-  LiStyle,
-  UlStyle,
-  PStyle,
-  InformationSection,
-  ImgSytle,
-  ButtonStyled
-} from './map.style';
 
 /* Método para cambiar la imagen del Marker */
 delete L.Icon.Default.prototype._getIconUrl;
@@ -32,152 +19,111 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
-/* Variables */
-var currentRuta;
-var name;
-var description;
-var puntos = [];
-var distance = LeafletMap;
-var rutas;
-
-
-
-
-/* Método para cmabiar la ruta actualmento seleccionada */
-function changeRuta(id, e) {
-  currentRuta = rutas.getRutaByName(id);
-  document.getElementById("name").textContent = currentRuta.name;
-  document.getElementById("description").textContent = currentRuta.description;
-  document.getElementById("distance").textContent = currentRuta.getDistance() + " KM";
-  changeMap();
-}
-
-
-
-function getPopup(i) {
-  let w = currentRuta.waypoints;
-  if(w.length > i){
-    return <Marker position={w[i].point.getCoordinates()}><Popup><p>{w[i].name}</p><p>{w[i].description}</p></Popup></Marker>;
-  }
-}
-
-function getMap() {
-  puntos = [];
-  currentRuta.points.forEach(p => puntos.push(p.getCoordinates()));
-  return <MapaStyle id="MapStyle" center={puntos[0]} zoom={15} >
-    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-    <Polyline color={'blue'} positions={puntos}></Polyline>
-    {getPopup(0)}{getPopup(1)}{getPopup(2)}{getPopup(3)}{getPopup(4)}{getPopup(5)}
-    {getPopup(6)}{getPopup(7)}{getPopup(8)}{getPopup(9)}{getPopup(10)}
-  </MapaStyle>;
-}
-
-function changeMap() {
-  ReactDOM.hydrate(<MapView></MapView>, document.getElementById('mapComponent'));
-}
-
 /* método que generar el mapa, junto con su nombre, y descripción*/
-class Map extends React.Component {
-  constructor() {
-    super();
-    currentRuta = rutas.getRutaByPosition(0);
-    name = currentRuta.name;
-    description = currentRuta.description;
-    distance = currentRuta.getDistance() + " KM";
+const MapaComponent = props => {
+  let rutas = LeafletMap;
+  rutas = props.rutas;
+  let user = props.user;
+  let currentRuta = rutas.currentRuta;
+  let media = currentRuta.media;
+  let puntos = [];
+
+  /* Método para cambiar la ruta actualmento seleccionada */
+  function changeRuta(id) {
+    currentRuta = rutas.getRutaByName(id);
+    document.getElementById("name").textContent = currentRuta.name;
+    document.getElementById("description").textContent = currentRuta.description;
+    document.getElementById("distance").textContent = "Distancia: " + currentRuta.getDistance() + " KM";
+    media = currentRuta.media;
+    ReactDOM.hydrate(<MapaComponent  {... { rutas, user }}></MapaComponent>, document.getElementById('mapComponent'));
   }
-  render() {
-    return (
-      <Up>
-        <div id="map">
-          {getMap()}
-          
-          {getPopup()}
-        </div>
-        <Column>
-          <H2Format id="name">{name}</H2Format>
-          <PStyle id="description">{description}</PStyle>
-          <PStyle id="distance" >{distance}</PStyle>
-          <H3Format>Tus rutas:</H3Format>
-          <UlStyle>{rutas.getNames().map((n, i) => <LiStyle key={i} onClick={(e) => changeRuta(n, e)}> {n} </LiStyle>)}</UlStyle>
-        </Column>
-      </Up>
+
+  /* Método que devuelve los marcadores con los sistios de interes */
+  function getMark() {
+    let markets = []
+    let w = currentRuta.waypoints;
+    for (var i = 0; i < w.length; i++) {
+      markets.push(<Marker position={w[i].point.getCoordinates()}><Popup><p>{w[i].name}</p><p>{w[i].description}</p></Popup></Marker>)
+    }
+    return markets;
+  }
+
+  function addComment() {
+    let text = document.getElementById("comentario").value;
+    document.getElementById("comentario").value = "Publicando";
+    document.getElementById("comentario").readonly = true;
+    var fileClien = new fileClient(solidAuth, { enableLogging: true });
+    let url = user.split("profile/card#me")[0] + currentRuta.CommentsFileName;
+    console.log(url);
+    fileClien.readFile(url).then((fileComment) =>{
+    
+    var value = currentRuta.addComment(JSON.parse(fileComment),text);
+    fileClien.createFile(url, value, "application/json").then(() => {
+      ReactDOM.hydrate(<Comments></Comments>, document.getElementById('comments'));
+      document.getElementById("comentario").value = "";})
+    }
     );
   }
-}
 
-const getMediaComponent = (url) => {
-  console.log(url);
-  if (url.includes('.mp4')) {
-    return (<Player
-      playsInline
-      poster="/assets/poster.png"
-      src={url}
-      fluid={false}
-      width={640}
-      height={360}
-    />)
-  } else {
-    return <ImgSytle id="img" src={url} />
-  }
-}
+  const Comments = () => {
+    function obtainComments() {
+      let aux = [];
+      let count = 0;
+      currentRuta.comments.forEach(c =>{
+          aux.push(<p key={c.text}><h1>{c.dateCreated}</h1>{c.text}</p>);
+          count +=1;
+          console.log(c);
+        });
+      return aux;
+    }
 
-
-/* método que generar el mapa, junto con su nombre, y descripción*/
-const Multimedia = () => {
-  function previusPhoto() {
-    ReactDOM.hydrate(getMediaComponent(currentRuta.getPreviusMedia()), document.getElementById('imgDiv'));
+    return <CommentCard>
+      <h1 id="name">Comentarios</h1>
+      {obtainComments()}
+      <div></div><input type="text" id="comentario"></input>
+      <button onClick={addComment}>Comentar</button></CommentCard>;
   }
 
-  function nextPhoto() {
-    ReactDOM.hydrate(getMediaComponent(currentRuta.getNextMedia()), document.getElementById('imgDiv'));
+  const Map = () => {
+    puntos = [];
+    currentRuta.points.forEach(p => puntos.push(p.getCoordinates()));
+    return <MapaStyle id="MapStyle" center={puntos[0]} zoom={15} >
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <Polyline color={'blue'} positions={puntos}></Polyline>
+      {getMark()}
+    </MapaStyle>;
   }
-
   return (
-    <div  display = "flex">
-      <Column><ButtonStyled onClick={previusPhoto}></ButtonStyled></Column>
-      <div id="imgDiv">
-        {getMediaComponent(currentRuta.getCurrentMedia())}
-      </div>
-      <ButtonStyled onClick={nextPhoto}></ButtonStyled>
-    </div>);
+    <div>
+      <MapSection>
+        <Up id="up">
+          <div id="map" >
+            <Map></Map>
+          </div>
+          <Column>
+            <MapCard>
+              <FormCard>
+                <h1 id="name">{currentRuta.name}</h1>
+                <h3 id="description">{currentRuta.description}</h3>
+                <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
+
+                <Slider {... { media }}></Slider>
+              </FormCard>
+              <ScrollDiv>
+                <FormCard  ><h2>Tus rutas:</h2>
+                  {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
+                </FormCard>
+              </ScrollDiv>
+            </MapCard>
+          </Column>
+        </Up>
+      </MapSection>
+        <div id="comments"><Comments></Comments></div>
+      
+    </div>
+
+
+
+  );
 }
-
-const MapView = () => {
-  return <div><MapSection>
-    <Map></Map>
-  </MapSection>
-    <InformationSection>
-      <Multimedia></Multimedia>
-    </InformationSection></div>;
-}
-
-function updateMap() {
-
-  ReactDOM.hydrate(<MapView></MapView>, document.getElementById('mapComponent'));
-
-}
-
-function messageNoRutas() {
-  let messageNoRutas = <InformationSection>
-    <H2Format>NO HAY RUTAS EN EL POD</H2Format>
-  </InformationSection>;
-
-  ReactDOM.hydrate(messageNoRutas, document.getElementById('mapComponent'));
-}
-
-function loadMap() {
-  if (rutas.hayRutas())
-    updateMap();
-  else
-    messageNoRutas();
-
-};
-
-function MapaComponent(props) {
-  rutas = props.rutas;
-  return (
-    <div>{loadMap()}</div>
-  )
-}
-
 export default MapaComponent;

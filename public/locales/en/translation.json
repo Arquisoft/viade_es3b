@@ -271,6 +271,7 @@
     "modifyFiles": "Modify files",
     "file": "The file ",
     "incorrectUpload": " has not been uploaded correctly.",
-    "correctUpload": " has been uploaded successfully."
+    "correctUpload": " has been uploaded successfully.",
+    "addRoute": "Add route"
   }
 }
