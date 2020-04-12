@@ -7,4 +7,8 @@ On this section, we will be talking about different scenarios a final user can s
 
 image::06_Run_scenario1.png[]
 
+.User uploading routes
+
+image::06_Run_scenario2.png[]
+
 

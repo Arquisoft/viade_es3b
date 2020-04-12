@@ -68,7 +68,7 @@ export class FriendsComponent extends Component<Props> {
       const user = data[webId];
       for await (const friend of user.friends) {
         const name = await data[friend].name;
-        const imageLd = await data[friend].vcard_hasPhoto;
+        //const imageLd = await data[friend].vcard_hasPhoto;
         friendsTrails.push(name.value);
       }
       this.setState({friendsTrails: friendsTrails});

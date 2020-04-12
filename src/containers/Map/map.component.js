@@ -68,10 +68,10 @@ const MapaComponent = props => {
   const Comments = () => {
     function obtainComments() {
       let aux = [];
-      let count = 0;
+      //let count = 0;
       currentRuta.comments.forEach(c =>{
           aux.push(<p key={c.text}><h1>{c.dateCreated}</h1>{c.text}</p>);
-          count +=1;
+          //count +=1;
           console.log(c);
         });
       return aux;
