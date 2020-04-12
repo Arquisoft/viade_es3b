@@ -19,12 +19,14 @@ const UploadJson = ({ setFile, file }) => {
 	const changeName = e => {
 		setFile(e.target.files[0]);
 	}
+
+
+
 	return (
 		<div>
 			<ChooseButton>
 				<div>
 					<h2>Escoja un archivo JSON</h2>
-					<button onClick={() => { publico = true }} >Comparter</button>
 					<center>
 
 						<input value={null} type="file" class="custom-file-input" id="route" accept=".json" onChange={changeName} required />
@@ -51,12 +53,23 @@ const Formulario = () => {
 	const folder = "viade";
 
 	const url = user.split("profile/card#me")[0];
+
+	function clickButtom() {
+		if (publico) {
+			publico = false;
+		}
+		else {
+			publico = true;
+		}
+	}
+
 	return (
 		<div>
 			<br></br>
 			<FormCard>
 				<UploadJson setFile={setFile} file={file} />
 			</FormCard>
+			
 			<FormCard>
 				<div><h2>Escoja los archivos multimedia que desee</h2></div>
 				<MultimediasCard>
@@ -70,6 +83,7 @@ const Formulario = () => {
 										<span>Elegir fotos</span>
 									</label>
 								</center>
+
 							</ChooseButton>
 						</div>
 					</MultimediaCard>
@@ -88,8 +102,13 @@ const Formulario = () => {
 					</MultimediaCard>
 				</MultimediasCard>
 			</FormCard>
+			<FormCard>
+				<h3>Compartir</h3>
+				<input type="checkbox" id="cbox1" value="first_checkbox" onChange={clickButtom}></input>
+			</FormCard>
 
 			<br></br>
+
 			<center>
 				<UploadButton>
 					<button onClick={() => {
