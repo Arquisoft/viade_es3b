@@ -169,17 +169,17 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
 
 	for (i = 0; photo != null && i < photo.length; i++) {
 		if(fileClien.createFile(folder + "/resources/" + photo[i].name, photo[i], "image/png")){
-			showSuccessUploadFile("La photo");
+			showSuccessUploadFile("La photo "+ photo[i].name);
 		}else{
-			showErrorUploadFile("La photo");
+			showErrorUploadFile("La photo"+ photo[i].name);
 		}
 	}
 
 	for (i = 0; video != null && i < video.length; i++) {
 		if(fileClien.createFile(folder + "/resources/" + video[i].name, video[i], "video/mp4")){
-			showSuccessUploadFile("El video");
+			showSuccessUploadFile("El video"+ video[i].name);
 		}else{
-			showErrorUploadFile("El video");
+			showErrorUploadFile("El video"+ video[i].name);
 		}
 	}
 
