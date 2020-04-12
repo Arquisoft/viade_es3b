@@ -83,10 +83,10 @@ defineFeature(feature, test => {
         then('I can see the route', async () => {
             await page.waitFor(8000);
             await page.evaluate(() => {
-                let li = [...document.querySelectorAll("li")];
+                let b = [...document.querySelectorAll("button")];
                 li.forEach(function (li) {
-                    if (li.innerText == "Route test 1") {
-                        li.click();
+                    if (b.innerText == "Route test 1") {
+                        b.click();
                     }
 
                 });

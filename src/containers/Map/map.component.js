@@ -107,7 +107,7 @@ const MapaComponent = props => {
                 <Slider {... { media }}></Slider>
               </FormCard>
               <ScrollDiv>
-                <FormCard  ><h2>Tus rutas:</h2>
+                <FormCard  ><h2>Rutas:</h2>
                   {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
                 </FormCard>
               </ScrollDiv>
