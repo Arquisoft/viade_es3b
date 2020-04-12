@@ -118,9 +118,6 @@ const MapaComponent = props => {
         <div id="comments"><Comments></Comments></div>
       
     </div>
-
-
-
   );
 }
 export default MapaComponent;

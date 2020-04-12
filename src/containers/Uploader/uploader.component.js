@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
+var publico = false;
 
 const UploadJson = ({ setFile, file }) => {
 	const filename = file == null ? '' : "Archivo seleccionado:" + file.name;
@@ -23,7 +24,9 @@ const UploadJson = ({ setFile, file }) => {
 			<ChooseButton>
 				<div>
 					<h2>Escoja un archivo JSON</h2>
+					<button onClick={() => { publico = true }} >Comparter</button>
 					<center>
+
 						<input value={null} type="file" class="custom-file-input" id="route" accept=".json" onChange={changeName} required />
 						<label id="label-input" for="route">
 							<span>{t('uploader.choose')}</span>
@@ -47,7 +50,7 @@ const Formulario = () => {
 	const [video, setVideo] = useState(null);
 	const folder = "viade";
 
-	const url = user.split("profile/card#me")[0] + folder;
+	const url = user.split("profile/card#me")[0];
 	return (
 		<div>
 			<br></br>
@@ -89,7 +92,10 @@ const Formulario = () => {
 			<br></br>
 			<center>
 				<UploadButton>
-					<button onClick={() => createFolder(url, file, image, video, setFile, setImage, setVideo)} class="btn btn-info" >Add route
+					<button onClick={() => {
+						createFolder(url + folder, file, image, video, setFile, setImage, setVideo, false)
+						if (publico) createFolder(url + "public/" + folder, file, image, video, setFile, setImage, setVideo, true)
+					}} class="btn btn-info" >Add route
                 </button>
 				</UploadButton>
 			</center>
@@ -156,42 +162,50 @@ function getJson() {
 }
 
 
-const createFolder = async (folder, file, photo, video, setFile, setImage, setVideo) => {
+const createFolder = async (folder, file, photo, video, setFile, setImage, setVideo, bool) => {
 	let existe = await fileClien.itemExists(folder);
 	if (!existe) {
 		await fileClien.createFolder(folder);
 	}
 	let i = 0;
 
-	
+
 	await fileClien.createFile(folder + "/routes/" + file.name, file, file.type);
 	await fileClien.createFile(folder + "/comments/routeComments/" + file.name.split('.json')[0] + "Comments.json", getJson(), file.type);
 
 	for (i = 0; photo != null && i < photo.length; i++) {
-		if(fileClien.createFile(folder + "/resources/" + photo[i].name, photo[i], "image/png")){
-			showSuccessUploadFile("La photo "+ photo[i].name);
-		}else{
-			showErrorUploadFile("La photo"+ photo[i].name);
+
+		if (fileClien.createFile(folder + "/resources/" + photo[i].name, photo[i], "image/png")) {
+			showSuccessUploadFile("La photo " + photo[i].name);
+		} else {
+			showErrorUploadFile("La photo" + photo[i].name);
 		}
 	}
 
 	for (i = 0; video != null && i < video.length; i++) {
-		if(fileClien.createFile(folder + "/resources/" + video[i].name, video[i], "video/mp4")){
-			showSuccessUploadFile("El video"+ video[i].name);
-		}else{
-			showErrorUploadFile("El video"+ video[i].name);
+		if (fileClien.createFile(folder + "/resources/" + video[i].name, video[i], "video/mp4")) {
+			showSuccessUploadFile("El video" + video[i].name);
+		} else {
+			showErrorUploadFile("El video" + video[i].name);
 		}
 	}
 
 	showSuccessUploadFile("Ruta " + file.name);
 
-	setFile(null);
-	setImage(null);
-	setVideo(null);
 
-	document.getElementById('photo').value = null;
-	document.getElementById('video').value = null;
-	document.getElementById('route').value = null;
+
+	console.log(bool + "-" + publico)
+	if (bool === publico) {
+		setFile(null);
+		//setImage(null);
+		//setVideo(null);
+		document.getElementById('photo').value = null;
+		document.getElementById('video').value = null;
+		document.getElementById('route').value = null;
+		publico = false;
+	}
+
+
 }
 
 export default AddRoute;
