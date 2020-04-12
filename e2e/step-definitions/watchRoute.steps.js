@@ -84,7 +84,7 @@ defineFeature(feature, test => {
             await page.waitFor(8000);
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
-                li.forEach(function (li) {
+                b.forEach(function (b) {
                     if (b.innerText == "Route test 1") {
                         b.click();
                     }
