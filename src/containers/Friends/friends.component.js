@@ -5,12 +5,13 @@ import {
   FriendsCardTitle,
   FriendsContainer,
   FriendsList,
-  FriendsTrailsCard,
+  FriendsRoutesCard,
   FriendsWrapper,
   FriendProfile,
   FriendName,
   ImageContainer,
-  Img
+  Img,
+  FriendsRoutesList
 } from './friends.style';
 import Modal from 'react-modal';
 import './addFriendModal.css';
@@ -21,7 +22,7 @@ import './addFriendModal.css';
  * @param props
  */
 export const FriendsPageContent = props => {
-  const { friends, friendsPhotos, addFriend } = props;
+  const { friends, friendsWebId, friendsPhotos, addFriend, getFriendRoutes } = props;
   const { t } = useTranslation();
 
   const [modalIsOpen,setIsOpen] = React.useState(false);
@@ -39,7 +40,7 @@ export const FriendsPageContent = props => {
   }
 
   return (
-    <FriendsWrapper data-testid="friends-wrapper">
+    <FriendsWrapper data-testid="friends-wrapper" id="friends-wrapper">
       <FriendsContainer data-testid="friends-container">
         <FriendsCard className="card">
           <FriendsCardTitle>
@@ -76,7 +77,7 @@ export const FriendsPageContent = props => {
           </FriendsCardTitle>
           <FriendsList>
             {friends.map((friend, index) => (
-                <FriendProfile key={index}>
+                <FriendProfile key={index} onClick={(event) => getFriendRoutes(event,friendsWebId[index])}>
                   <ImageContainer>
                     <Img src={friendsPhotos[index]} alt="profile"/>
                   </ImageContainer>
@@ -85,12 +86,14 @@ export const FriendsPageContent = props => {
             ))}
           </FriendsList>
         </FriendsCard>
-        <FriendsTrailsCard className="card">
+        <FriendsRoutesCard className="card" >
           <FriendsCardTitle>
             <h4>{t('friends.trails.title')}</h4>
           </FriendsCardTitle>
+          <FriendsRoutesList id="routesList">
 
-        </FriendsTrailsCard>
+          </FriendsRoutesList>
+        </FriendsRoutesCard>
       </FriendsContainer>
     </FriendsWrapper>
   );

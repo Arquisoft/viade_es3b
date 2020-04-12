@@ -50,7 +50,7 @@ export const FriendsCard = styled.div`
   }
 `;
 
-export const FriendsTrailsCard = styled.div`
+export const FriendsRoutesCard = styled.div`
   background-color: #fff;
   margin: 30px 0px 30px 40px;
 
@@ -61,6 +61,27 @@ export const FriendsTrailsCard = styled.div`
   @media screen and (max-width: 1000px) {
     margin: 30px auto;
   }
+`;
+
+export const FriendsRoutesList = styled.div`
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 30px 0px 50px;
+  @media screen and (max-width: 1000px) {
+    overflow: auto;
+    padding-left: 33%;
+  }
+`;
+
+export const FriendRoute = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0px 0px 10px;
 `;
 
 export const FriendsCardTitle = styled.div`
@@ -99,6 +120,8 @@ export const FriendsList = styled.div`
     padding-left: 33%;
   }
 `;
+
+
 export const FriendProfile = styled.div`
   width: 100%;
   height: auto;

@@ -82,6 +82,10 @@ function updatePercent(count, length) {
 }
 
 class Map extends React.Component {
+    constructor(props) {
+        super();
+        console.log(props);
+    }
     render() {
         return <LoadRoute></LoadRoute>
     }

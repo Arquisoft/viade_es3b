@@ -4,7 +4,11 @@ import {FriendsPageContent} from './friends.component';
 import {errorToaster} from '@utils';
 import auth from 'solid-auth-client';
 import FC from 'solid-file-client';
-
+import {useWebId} from "@solid/react";
+import {H2Format, InformationSection} from "../Map/map.style";
+import ReactDOM from "react-dom";
+import { FriendRoute } from './friends.style';
+import Map from "../Map/map.container";
 const defaultProfilePhoto = 'img/icon/empty-profile.svg';
 const reload = () => {
   window.location.reload();
@@ -19,6 +23,7 @@ export class FriendsComponent extends Component<Props> {
 
     this.state = {
       friends: [],
+      friendsWebId: [],
       friendsPhotos: []
     };
   }
@@ -40,12 +45,14 @@ export class FriendsComponent extends Component<Props> {
   getFriends = async () => {
     const { webId } = this.props;
     const friends=[];
+    const friendsWebId=[];
     const friendsPhotos=[];
 
     let image;
     try {
       const user = data[webId];
       for await (const friend of user.friends) {
+        friendsWebId.push(friend)
         const name = await data[friend].name;
         const imageLd = await data[friend].vcard_hasPhoto;
         friends.push(name.value);
@@ -56,28 +63,42 @@ export class FriendsComponent extends Component<Props> {
         }
         friendsPhotos.push(image)
       }
-      this.setState({friends: friends, friendsPhotos: friendsPhotos});
+      this.setState({friends: friends, friendsWebId: friendsWebId, friendsPhotos: friendsPhotos});
     } catch (e) {
       errorToaster(e.message, 'Error');
     }
   };
 
-  getFriendsTrails = async () => {
-    const { webId } = this.props;
-    const friendsTrails=[];
+  getFriendRoutes = async (event, friendWebId) => {
+    event.preventDefault();
+    const fc= new FC(auth, { enableLogging: true });
+    const url = friendWebId.toString().split("profile/card#me")[0] + "public/viade";
+    let friendsRoutes=[];
 
-    try {
-      const user = data[webId];
-      for await (const friend of user.friends) {
-        const name = await data[friend].name;
-        const imageLd = await data[friend].vcard_hasPhoto;
-        friendsTrails.push(name.value);
+    let routes = await fc.readFolder(url + "/routes");
+    if (routes.files.length !== 0) {
+      for (let i = 0; i < routes.files.length; i++) {
+        if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
+          // eslint-disable-next-line
+          fc.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
+            let routeFileName = routes.files[i].name.split('.json')[0];
+            friendsRoutes.push(<FriendRoute onClick={(event) => this.loadMapView(event, friendWebId.toString())}>{routeFileName}</FriendRoute>);
+            if (i===routes.files.length-1){
+              ReactDOM.render(friendsRoutes, document.getElementById('routesList'));
+            }
+          });
+        }
       }
-      this.setState({friendsTrails: friendsTrails});
-    } catch (e) {
-      errorToaster(e.message, 'Error');
+    }else{
+        ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('routesList'));
     }
   };
+
+  loadMapView = async (event, user) => {
+    event.preventDefault();
+    ReactDOM.render(<Map {...{user}}></Map>, document.getElementById('friends-wrapper'))
+
+  }
 
   addFriend = async (event, friendWebId) => {
     event.preventDefault();
@@ -126,10 +147,10 @@ export class FriendsComponent extends Component<Props> {
   };
 
   render() {
-    const { friends, friendsPhotos } = this.state;
+    const { friends, friendsWebId, friendsPhotos } = this.state;
     const { webId } = this.props;
     return (
-      <FriendsPageContent {...{ friends, friendsPhotos, webId, addFriend: this.addFriend }} />
+      <FriendsPageContent {...{ friends, friendsWebId, friendsPhotos, webId, addFriend: this.addFriend, getFriendRoutes: this.getFriendRoutes}} />
     );
   }
 }
