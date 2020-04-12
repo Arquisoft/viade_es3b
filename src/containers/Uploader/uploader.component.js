@@ -7,7 +7,8 @@ import fileClient from 'solid-file-client';
 import { UploaderWrapper, UploaderCard, FormCard, MultimediaCard, MultimediasCard, ChooseButton, UploadButton } from './uploader.style';
 import { useTranslation } from 'react-i18next';
 
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 
@@ -112,6 +113,23 @@ const AddRoute = () => {
 
 };
 
+const showErrorUploadFile = (name) => {
+	toast.error(name + " no se ha subido correctamente", {
+		delay: 1000,
+		autoClose: false,
+		position: toast.POSITION.TOP_CENTER
+	});
+}
+
+const showSuccessUploadFile = (name) => {
+	//https://github.com/fkhadra/react-toastify
+	toast.success(name + " se ha subido correctamente", {
+		delay: 1000,
+		autoClose: false,
+		position: toast.POSITION.TOP_CENTER
+	});
+}
+
 function getJson() {
 	var obj = ({
 		"@context": {
@@ -150,14 +168,22 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
 	await fileClien.createFile(folder + "/comments/routeComments/" + file.name.split('.json')[0] + "Comments.json", getJson(), file.type);
 
 	for (i = 0; photo != null && i < photo.length; i++) {
-		fileClien.createFile(folder + "/resources/" + photo[i].name, photo[i], "image/png");
+		if(fileClien.createFile(folder + "/resources/" + photo[i].name, photo[i], "image/png")){
+			showSuccessUploadFile("La photo");
+		}else{
+			showErrorUploadFile("La photo");
+		}
 	}
 
 	for (i = 0; video != null && i < video.length; i++) {
-		fileClien.createFile(folder + "/resources/" + video[i].name, video[i], "video/mp4");
+		if(fileClien.createFile(folder + "/resources/" + video[i].name, video[i], "video/mp4")){
+			showSuccessUploadFile("El video");
+		}else{
+			showErrorUploadFile("El video");
+		}
 	}
 
-	alert("La ruta se ha añadido con exito!");
+	showSuccessUploadFile("Ruta " + file.name);
 
 	setFile(null);
 	setImage(null);
