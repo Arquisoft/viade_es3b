@@ -9,4 +9,12 @@ to the application from anywhere, as long as you have a computer and internet co
 Depending on the course in the development of the application, an attempt will be made to adapt the application for mobile devices.
 
 === Infrastructure Level 1
-To do
+
+image::07DeploymentView.PNG[align="center"]
+
+The infractructure of the application is formed by 3 nodes. The user is connected to the first node which is the computer of the user, the user opens his browser that is necessary
+to connect to the application. This browser which is the first node is connected to the Viade Application through GitHub Pages where is our application deployed. Then
+the application is connected to the last node which is formed by 2 things, the first represents our POD, and the second represents another POD. We have to communicate to 
+our POD, the other POD or both to use the application. For the moment, this is what we have done and this is the infrastructure of the application.
+Our system only needs a computer with internet and a SOLID account, this is the infractrusture possible for all the scenarios, if we do something like adapt it to mobile
+devices we can add another infrastructure.

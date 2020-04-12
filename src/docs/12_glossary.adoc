@@ -8,4 +8,8 @@
 |Javascript |  Is an interpreted programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm.
 |Arc42 | Provides a template for documentation and communication of software and system architectures.
 |Solid Pod | Personal online data store . It allows users to save their information and the information they are sent. A POD can store photos, text, contacts or calendar events and many other things.
+|React | React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies.
+|Stakeholder | Person with an interest or concern in something, in the area we are working on, the decentralized chat.
+|Peer-to-Peer | Peer-to-peer computing or networking is a distributed application architecture that partitions tasks or workloads between peers. Peers are equally privileged, equipotent participants in the application. They are said to form a peer-to-peer network of nodes.
+|Rdf |It has come to be used as a general method for conceptual description or modeling of information that is implemented in web resources, using a variety of syntax notations and data serialization formats.
 |===
