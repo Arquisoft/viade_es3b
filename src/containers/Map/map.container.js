@@ -12,24 +12,33 @@ import { H2Format, InformationSection, } from './map.style';
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 
-const LoadRoute = () => {
-    var user = useWebId();
+const LoadRoute = (props) => {
+    var folder;
+    var user;
+    if (props.user === undefined){
+        folder = "viade";
+        user = useWebId();
+    }else{
+        folder = "public/viade";
+        user = props.user;
+    }
+   
 
     useEffect(() => {
         if (user !== undefined) {
-            const url = user.split("profile/card#me")[0] + "viade";
-            loadRoutes(url,user);
+            const url = user.split("profile/card#me")[0] + folder;
+            loadRoutes(url, user);
         }
     }, [user]);
 
     return (<InformationSection id="mapComponent"><H2Format id="porcentaje">Cargando: 0 %</H2Format></InformationSection>)
 }
 
-async function loadRoutes(url,user) {
+async function loadRoutes(url, user) {
     let routes = await fileClien.readFolder(url + "/routes");
     let rutasJson = [];
     let commentsJson = [];
-    let fileName =[];
+    let fileName = [];
     if (routes.files.length === 0) {
         try {
             ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
@@ -44,14 +53,14 @@ async function loadRoutes(url,user) {
         if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
             // eslint-disable-next-line
             fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
-                fileClien.readFile(url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0] + "Comments.json").then((fileComment) =>{
+                fileClien.readFile(url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0] + "Comments.json").then((fileComment) => {
                     commentsJson.push(JSON.parse(fileComment));
                     rutasJson.push(JSON.parse(file));
                     fileName.push(routes.files[i].name.split('.json')[0]);
                     count += 1;
                     updatePercent(count, routes.files.length);
                     if (Math.trunc((count) / routes.files.length * 100) === 100)
-                        loadMapView(new Rutas(rutasJson,commentsJson,fileName),user);
+                        loadMapView(new Rutas(rutasJson, commentsJson, fileName), user);
                 });
             });
         } else {
@@ -61,10 +70,10 @@ async function loadRoutes(url,user) {
     }
 }
 
-function loadMapView(rutas,user) {
+function loadMapView(rutas, user) {
     setTimeout(() => {
         try {
-            ReactDOM.render(<MapaComponent {... { rutas,user}}></MapaComponent>, document.getElementById('mapComponent'))
+            ReactDOM.render(<MapaComponent {... { rutas, user }}></MapaComponent>, document.getElementById('mapComponent'))
         }
         catch (error) {
             return;
@@ -81,14 +90,10 @@ function updatePercent(count, length) {
     }
 }
 
-class Map extends React.Component {
-    constructor(props) {
-        super();
-        console.log(props);
-    }
-    render() {
-        return <LoadRoute></LoadRoute>
-    }
+
+const Map = (props) => { 
+    const user = props.user;
+    return <LoadRoute {...{ user }}></LoadRoute>
 }
 
 export default Map;
