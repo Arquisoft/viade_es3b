@@ -29,11 +29,11 @@ const UploadJson = ({ setFile, file }) => {
 					<h2>Escoja un archivo JSON</h2>
 					<center>
 
-						<input value={null} type="file" class="custom-file-input" id="route" accept=".json" onChange={changeName} required />
-						<label id="label-input" for="route">
+						<input value= "" type="file" className="custom-file-input" id="route" accept=".json,.geojson,.jsonld" onChange={changeName} required />
+						<label id="label-input" htmlFor="route">
 							<span>{t('uploader.choose')}</span>
 						</label>
-						<h4 class="custom-file-label" id="nameRoute"> {filename}</h4>
+						<h4 className="custom-file-label" id="nameRoute"> {filename}</h4>
 					</center>
 				</div>
 			</ChooseButton>
@@ -74,12 +74,12 @@ const Formulario = () => {
 				<div><h2>Escoja los archivos multimedia que desee</h2></div>
 				<MultimediasCard>
 					<MultimediaCard>
-						<div class="form-group">
-							<h3 for="photo" class="labelPhoto">Seleccione las imágenes</h3>
+						<div className="form-group">
+							<h3 htmlFor="photo" className="labelPhoto">Seleccione las imágenes</h3>
 							<ChooseButton>
 								<center>
-									<input value={null} type="file" id="photo" name="image" accept=".png" multiple="true" onChange={(e) => setImage(e.target.files)} />
-									<label id="label-input" for="photo">
+									<input value= "" type="file" id="photo" name="image" accept=".png,.jpeg,.jpg" multiple={true} onChange={(e) => setImage(e.target.files)} />
+									<label id="label-input" htmlFor="photo">
 										<span>Elegir fotos</span>
 									</label>
 								</center>
@@ -88,12 +88,12 @@ const Formulario = () => {
 						</div>
 					</MultimediaCard>
 					<MultimediaCard>
-						<div class="form-group">
-							<h3 for="video" class="labelVideo">Seleccione los vídeos</h3>
+						<div className="form-group">
+							<h3 htmlFor="video" className="labelVideo">Seleccione los vídeos</h3>
 							<ChooseButton>
 								<center>
-									<input value={null} type="file" id="video" name="video" accept=".mp4" multiple="true" onChange={(e) => setVideo(e.target.files)} />
-									<label id="video-input" for="video">
+									<input value= "" type="file" id="video" name="video" accept=".mp4,.avg" multiple={true} onChange={(e) => setVideo(e.target.files)} />
+									<label id="video-input" htmlFor="video">
 										<span>Elegir videos</span>
 									</label>
 								</center>
@@ -114,7 +114,7 @@ const Formulario = () => {
 					<button onClick={() => {
 						createFolder(url + folder, file, image, video, setFile, setImage, setVideo, false)
 						if (publico) createFolder(url + "public/" + folder, file, image, video, setFile, setImage, setVideo, true)
-					}} class="btn btn-info" >Add route
+					}} className="btn btn-info" >Add route
                 </button>
 				</UploadButton>
 			</center>
@@ -128,7 +128,7 @@ const AddRoute = () => {
 		<UploaderWrapper>
 			<UploaderCard className="card">
 				<Fragment>
-					<h1 class="h2">{t('uploader.addRoute')}</h1>
+					<h1 className="h2">{t('uploader.addRoute')}</h1>
 					<Formulario />
 				</Fragment>
 			</UploaderCard>
@@ -194,37 +194,32 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
 
 	for (i = 0; photo != null && i < photo.length; i++) {
 
-		if (fileClien.createFile(folder + "/resources/" + photo[i].name, photo[i], "image/png")) {
+		if (fileClien.createFile(folder + "/resources/" + photo[i].name, photo[i], photo[i].type) && publico === bool) {
 			showSuccessUploadFile("La photo " + photo[i].name);
-		} else {
+		}
+		else if (publico === bool){
 			showErrorUploadFile("La photo" + photo[i].name);
 		}
 	}
 
 	for (i = 0; video != null && i < video.length; i++) {
-		if (fileClien.createFile(folder + "/resources/" + video[i].name, video[i], "video/mp4")) {
+		if (fileClien.createFile(folder + "/resources/" + video[i].name, video[i], "video/mp4" && publico === bool)) {
 			showSuccessUploadFile("El video" + video[i].name);
-		} else {
+		} else if (publico === bool){
 			showErrorUploadFile("El video" + video[i].name);
 		}
 	}
 
-	showSuccessUploadFile("Ruta " + file.name);
-
-
-
-	console.log(bool + "-" + publico)
 	if (bool === publico) {
+		showSuccessUploadFile("Ruta " + file.name);
 		setFile(null);
-		//setImage(null);
-		//setVideo(null);
+		setImage(null);
+		setVideo(null);
 		document.getElementById('photo').value = null;
 		document.getElementById('video').value = null;
 		document.getElementById('route').value = null;
 		publico = false;
 	}
-
-
 }
 
 export default AddRoute;
