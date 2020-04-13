@@ -58,9 +58,9 @@ async function loadRoutes(url, user) {
             return;
         }
     }
-
-    for (let i = 0; i < routes.files.length; i++) {
-        var count = 0;
+	var count = 0;
+	
+    for (let i = 0; i < routes.files.length; i++) { 
         if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld') || routes.files[i].name.includes('.geojson')) {
             // eslint-disable-next-line
             fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
@@ -70,14 +70,14 @@ async function loadRoutes(url, user) {
                     fileName.push(routes.files[i].name.split('.json')[0]);
                     count += 1;
                     updatePercent(count, routes.files.length);
-                    if (Math.trunc((count) / routes.files.length * 100) === 100)
+                    if (count === routes.files.length)
                         loadMapView(new Rutas(rutasJson, commentsJson, fileName), user);
                 });
             });
         } else {
             count += 1;
             updatePercent(count, routes.files.length);
-			if (Math.trunc((count) / routes.files.length * 100) === 100)
+			if (count === routes.files.length)
 			{
 				if (!rutasJson.length === 0)
                        loadMapView(new Rutas(rutasJson, commentsJson, fileName), user);
