@@ -54,7 +54,7 @@ export const FriendsRoutesCard = styled.div`
   background-color: #fff;
   margin: 30px 0px 30px 40px;
 
-  padding: 0 0 50px !important;
+  padding: 0px !important;
   min-height: 600px;
   justify-content:flex-start !important;
 
@@ -68,20 +68,19 @@ export const FriendsRoutesList = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 15px 30px 0px 50px;
-  @media screen and (max-width: 1000px) {
-    overflow: auto;
-    padding-left: 33%;
-  }
 `;
 
 export const FriendRoute = styled.div`
   width: 100%;
-  height: auto;
+  min-height: 150px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
-  padding: 0px 0px 10px;
+  padding: 25px 30px;
+  margin: 0px 0px 10px;
+  &:hover {
+      background-color: #f4f4f4 !important;
+  }
 `;
 
 export const FriendsCardTitle = styled.div`
@@ -102,9 +101,8 @@ export const FriendsCardTitle = styled.div`
     border: none !important;
     border-radius: 0 !important;
     border-left: 1px solid rgba(8, 53, 117, 0.1) !important;
-    transition: all 0.3s ease-in !important;
     &:hover {
-      background: rgba(8, 53, 117, 0.1) !important;
+      background: #f4f4f4 !important;
     }
   }
 `;
@@ -123,12 +121,15 @@ export const FriendsList = styled.div`
 
 
 export const FriendProfile = styled.div`
-  width: 100%;
-  height: auto;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  padding: 0px 0px 10px;
+  width: max-content;
+  margin: 0px 0px 10px;
+  &:hover {
+      font-weight: bold;
+      cursor: pointer;
+    }
 `;
 
 export const ImageContainer = styled.div`

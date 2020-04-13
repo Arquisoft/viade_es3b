@@ -23,8 +23,13 @@ export class FriendsComponent extends Component<Props> {
     this.state = {
       friends: [],
       friendsWebId: [],
-      friendsPhotos: []
+      friendsPhotos: [],
+      activeId: null
     };
+  }
+
+  handleClick(event, id) {
+    this.setState({ activeId: id })
   }
 
   componentDidMount() {
@@ -68,7 +73,7 @@ export class FriendsComponent extends Component<Props> {
     }
   };
 
-  getFriendRoutes = async (event, friendWebId) => {
+  getFriendRoutes = async (event, friendWebId, index) => {
     event.preventDefault();
     const fc= new FC(auth, { enableLogging: true });
     const url = friendWebId.toString().split("profile/card#me")[0] + "public/viade";
@@ -87,7 +92,16 @@ export class FriendsComponent extends Component<Props> {
             // eslint-disable-next-line
             fc.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
               let routeFileName = routes.files[i].name.split('.json')[0];
-              friendsRoutes.push(<FriendRoute onClick={(event) => this.loadMapView(event, friendWebId.toString())}>{routeFileName}</FriendRoute>);
+              friendsRoutes.push(<FriendRoute>
+                                    <div className="route-header" >
+                                      <div className="route-name" onClick={(event) => this.loadMapView(event, friendWebId.toString())}>{routeFileName}</div>
+                                      <div className="route-info">178 kilómetros</div>
+                                    </div>
+                                    <div className="route-body">
+                                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </div>
+                                  </FriendRoute>
+              );
               if (i===routes.files.length-1){
                 ReactDOM.render(friendsRoutes, document.getElementById('routesList'));
               }
@@ -96,6 +110,7 @@ export class FriendsComponent extends Component<Props> {
         }
       }
     }
+    this.handleClick(event,index);
   };
 
   loadMapView = async (event, user) => {
@@ -151,10 +166,10 @@ export class FriendsComponent extends Component<Props> {
   };
 
   render() {
-    const { friends, friendsWebId, friendsPhotos } = this.state;
+    const { friends, friendsWebId, friendsPhotos, activeId } = this.state;
     const { webId } = this.props;
     return (
-      <FriendsPageContent {...{ friends, friendsWebId, friendsPhotos, webId, addFriend: this.addFriend, getFriendRoutes: this.getFriendRoutes}} />
+      <FriendsPageContent {...{ friends, friendsWebId, friendsPhotos, webId, addFriend: this.addFriend, getFriendRoutes: this.getFriendRoutes, activeId}} />
     );
   }
 }
