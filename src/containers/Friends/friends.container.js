@@ -74,22 +74,27 @@ export class FriendsComponent extends Component<Props> {
     const url = friendWebId.toString().split("profile/card#me")[0] + "public/viade";
     let friendsRoutes=[];
 
-    let routes = await fc.readFolder(url + "/routes");
-    if (routes.files.length !== 0) {
-      for (let i = 0; i < routes.files.length; i++) {
-        if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
-          // eslint-disable-next-line
-          fc.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
-            let routeFileName = routes.files[i].name.split('.json')[0];
-            friendsRoutes.push(<FriendRoute onClick={(event) => this.loadMapView(event, friendWebId.toString())}>{routeFileName}</FriendRoute>);
-            if (i===routes.files.length-1){
-              ReactDOM.render(friendsRoutes, document.getElementById('routesList'));
-            }
-          });
+    let existe = await fc.itemExists(url + "/routes");
+    if (!existe) {
+      ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('routesList'));
+    }else{
+      let routes = await fc.readFolder(url + "/routes");
+      if (routes.files.length === 0) {
+        ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('routesList'));
+      }else{
+        for (let i = 0; i < routes.files.length; i++) {
+          if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
+            // eslint-disable-next-line
+            fc.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
+              let routeFileName = routes.files[i].name.split('.json')[0];
+              friendsRoutes.push(<FriendRoute onClick={(event) => this.loadMapView(event, friendWebId.toString())}>{routeFileName}</FriendRoute>);
+              if (i===routes.files.length-1){
+                ReactDOM.render(friendsRoutes, document.getElementById('routesList'));
+              }
+            });
+          }
         }
       }
-    }else{
-        ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('routesList'));
     }
   };
 
