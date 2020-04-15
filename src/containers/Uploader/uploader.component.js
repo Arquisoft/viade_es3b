@@ -4,7 +4,7 @@ import { useWebId } from '@solid/react';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
-import { UploaderWrapper, UploaderCard, FormCard, MultimediaCard, MultimediasCard, ChooseButton, UploadButton } from './uploader.style';
+import { UploaderWrapper, UploaderCard, ShareCard, FormCard, MultimediaCard, MultimediasCard, ChooseButton, UploadButton } from './uploader.style';
 import { useTranslation } from 'react-i18next';
 
 import { toast } from 'react-toastify';
@@ -97,10 +97,13 @@ const Formulario = () => {
 					</MultimediaCard>
 				</MultimediasCard>
 			</FormCard>
-			<FormCard>
-				<h3>{t('uploader.share')}</h3>
-				<input type="checkbox" id="cbox1" value="first_checkbox" onChange={clickButtom}></input>
-			</FormCard>
+			<ShareCard>
+				<div><h2>{t('uploader.share')}</h2></div>
+				<div class="flex-container">
+					<h3 htmlFor="cbox1">{t('uploader.accept')}</h3>
+					<input type="checkbox" id="cbox1" value="first_checkbox" onChange={clickButtom}></input>
+				</div>
+			</ShareCard>
 
 			<br></br>
 
@@ -144,6 +147,7 @@ const showErrorUploadFile = (name) => {
 }
 
 const showSuccessUploadFile = (name) => {
+	
 	//https://github.com/fkhadra/react-toastify
 	toast.success(name, {
 		delay: 1000,
