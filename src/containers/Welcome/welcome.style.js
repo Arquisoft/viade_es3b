@@ -111,10 +111,8 @@ export const WelcomeName = styled.span`
 `;
 
 export const HeaderCard = styled(PresentationBackground)`
-  
-  
   margin: 30px auto;
-border-radoious: 14px;
+  border-radoious: 14px;
   //Overriding the style guide card flexbox settings
   max-width: 80% !important;
   flex-direction: row !important;
