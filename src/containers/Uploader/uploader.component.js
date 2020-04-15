@@ -19,14 +19,11 @@ const UploadJson = ({ setFile, file }) => {
 	const changeName = e => {
 		setFile(e.target.files[0]);
 	}
-
-
-
 	return (
 		<div>
 			<ChooseButton>
 				<div>
-					<h2>Escoja un archivo JSON</h2>
+					<h2>{t('uploader.chooseJSON')}</h2>
 					<center>
 
 						<input value= "" type="file" className="custom-file-input" id="route" accept=".json,.geojson,.jsonld" onChange={changeName} required />
@@ -40,8 +37,6 @@ const UploadJson = ({ setFile, file }) => {
 		</div>
 	);
 };
-
-
 
 const Formulario = () => {
 	var user = "" + useWebId();
@@ -62,7 +57,7 @@ const Formulario = () => {
 			publico = true;
 		}
 	}
-
+	const { t } = useTranslation();
 	return (
 		<div>
 			<br></br>
@@ -71,16 +66,16 @@ const Formulario = () => {
 			</FormCard>
 			
 			<FormCard>
-				<div><h2>Escoja los archivos multimedia que desee</h2></div>
+				<div><h2>{t('uploader.chooseMediaFiles')}</h2></div>
 				<MultimediasCard>
 					<MultimediaCard>
 						<div className="form-group">
-							<h3 htmlFor="photo" className="labelPhoto">Seleccione las imágenes</h3>
+							<h3 htmlFor="photo" className="labelPhoto">{t('uploader.selectImages')}</h3>
 							<ChooseButton>
 								<center>
 									<input value= "" type="file" id="photo" name="image" accept=".png,.jpeg,.jpg" multiple={true} onChange={(e) => setImage(e.target.files)} />
 									<label id="label-input" htmlFor="photo">
-										<span>Elegir fotos</span>
+										<span>{t('uploader.chooseImages')}</span>
 									</label>
 								</center>
 
@@ -89,12 +84,12 @@ const Formulario = () => {
 					</MultimediaCard>
 					<MultimediaCard>
 						<div className="form-group">
-							<h3 htmlFor="video" className="labelVideo">Seleccione los vídeos</h3>
+							<h3 htmlFor="video" className="labelVideo">{t('uploader.selectVideos')}</h3>
 							<ChooseButton>
 								<center>
 									<input value= "" type="file" id="video" name="video" accept=".mp4,.avg" multiple={true} onChange={(e) => setVideo(e.target.files)} />
 									<label id="video-input" htmlFor="video">
-										<span>Elegir videos</span>
+										<span>{t('uploader.chooseVideos')}</span>
 									</label>
 								</center>
 							</ChooseButton>
@@ -103,7 +98,7 @@ const Formulario = () => {
 				</MultimediasCard>
 			</FormCard>
 			<FormCard>
-				<h3>Compartir</h3>
+				<h3>{t('uploader.share')}</h3>
 				<input type="checkbox" id="cbox1" value="first_checkbox" onChange={clickButtom}></input>
 			</FormCard>
 
@@ -112,9 +107,13 @@ const Formulario = () => {
 			<center>
 				<UploadButton>
 					<button onClick={() => {
-						createFolder(url + folder, file, image, video, setFile, setImage, setVideo, false)
-						if (publico) createFolder(url + "public/" + folder, file, image, video, setFile, setImage, setVideo, true)
-					}} className="btn btn-info" >Add route
+						if(file !== null){
+							createFolder(url + folder, file, image, video, setFile, setImage, setVideo, false)
+							if (publico) createFolder(url + "public/" + folder, file, image, video, setFile, setImage, setVideo, true)
+						}else{
+							showErrorUploadFile(t('uploader.chooseJSONFile'));
+						}
+					}} className="btn btn-info" >{t('uploader.addRoute')}
                 </button>
 				</UploadButton>
 			</center>
@@ -128,18 +127,16 @@ const AddRoute = () => {
 		<UploaderWrapper>
 			<UploaderCard className="card">
 				<Fragment>
-					<h1 className="h2">{t('uploader.addRoute')}</h1>
+					<h1>{t('uploader.addRoute')}</h1>
 					<Formulario />
 				</Fragment>
 			</UploaderCard>
 		</UploaderWrapper>
-
 	);
-
 };
 
 const showErrorUploadFile = (name) => {
-	toast.error(name + " no se ha subido correctamente", {
+	toast.error(name, {
 		delay: 1000,
 		autoClose: false,
 		position: toast.POSITION.TOP_CENTER
@@ -148,7 +145,7 @@ const showErrorUploadFile = (name) => {
 
 const showSuccessUploadFile = (name) => {
 	//https://github.com/fkhadra/react-toastify
-	toast.success(name + " se ha subido correctamente", {
+	toast.success(name, {
 		delay: 1000,
 		autoClose: false,
 		position: toast.POSITION.TOP_CENTER
@@ -182,31 +179,32 @@ function getJson() {
 
 
 const createFolder = async (folder, file, photo, video, setFile, setImage, setVideo, bool) => {
+	
 	let existe = await fileClien.itemExists(folder);
 	if (!existe) {
 		await fileClien.createFolder(folder);
 	}
 	let i = 0;
 
-
+	
 	await fileClien.createFile(folder + "/routes/" + file.name, file, file.type);
 	await fileClien.createFile(folder + "/comments/routeComments/" + file.name.split('.json')[0] + "Comments.json", getJson(), file.type);
 
 	for (i = 0; photo != null && i < photo.length; i++) {
-
 		if (fileClien.createFile(folder + "/resources/" + photo[i].name, photo[i], photo[i].type) && publico === bool) {
-			showSuccessUploadFile("La photo " + photo[i].name);
+			showSuccessUploadFile("La foto " + photo[i].name + " ha sido subida correctamente");
 		}
 		else if (publico === bool){
-			showErrorUploadFile("La photo" + photo[i].name);
+			showErrorUploadFile("La foto " + photo[i].name + " ha sido subida correctamente");
 		}
 	}
-
+	
 	for (i = 0; video != null && i < video.length; i++) {
 		if (fileClien.createFile(folder + "/resources/" + video[i].name, video[i], "video/mp4" && publico === bool)) {
-			showSuccessUploadFile("El video" + video[i].name);
+			 
+			showSuccessUploadFile("El vídeo " + video[i].name + " ha sido subido correctamente");
 		} else if (publico === bool){
-			showErrorUploadFile("El video" + video[i].name);
+			showErrorUploadFile("El vídeo" + video[i].name + " ha sido subido correctamente");
 		}
 	}
 
