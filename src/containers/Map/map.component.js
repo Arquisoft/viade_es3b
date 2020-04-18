@@ -53,15 +53,19 @@ const MapaComponent = props => {
 
 
   function shareRoute() {
-    document.getElementById("btShare").textContent =  "Compartida";
     document.getElementById("btShare").disabled = true;
-    currentRuta.shared = true;
+
+
+    document.getElementById("btShare").textContent =  "Compartida";
+    
+    currentRuta.share();
   }
 
   function addComment() {
     let text = document.getElementById("comentario").value;
     document.getElementById("comentario").value = "Publicando";
     document.getElementById("comentario").readonly = true;
+
     var fileClien = new fileClient(solidAuth, { enableLogging: true });
     let url = user.split("profile/card#me")[0] + currentRuta.CommentsFileName;
     console.log(url);
