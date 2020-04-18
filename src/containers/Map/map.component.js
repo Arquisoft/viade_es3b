@@ -5,7 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import ReactDOM from 'react-dom';
 import Slider from './prueba'
-import { Column, Up, MapaStyle, MapCard, Button, FormCard, ScrollDiv, MapSection ,CommentCard} from './map.style';
+import { Column, Up, MapaStyle, Button, FormCard, ScrollDiv, MapSection ,CommentCard} from './map.style';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
@@ -98,7 +98,7 @@ const MapaComponent = props => {
             <Map></Map>
           </div>
           <Column>
-            <MapCard>
+            
               <FormCard>
                 <h1 id="name">{currentRuta.name}</h1>
                 <h3 id="description">{currentRuta.description}</h3>
@@ -111,7 +111,7 @@ const MapaComponent = props => {
                   {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
                 </FormCard>
               </ScrollDiv>
-            </MapCard>
+          
           </Column>
         </Up>
       </MapSection>

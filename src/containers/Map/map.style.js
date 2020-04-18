@@ -10,7 +10,7 @@ export const MapSection = styled.section`
   justify-content: center;
   background:#a4d1d1;
   background-repeat: repeat;
-  padding: 0px 15px 30px 0px;
+  padding: 30px 0px 30px 30px;
 `;
 
 export const Column = styled.div`
@@ -36,20 +36,20 @@ export const Down = styled.div`
 `;
 
 export const MapaStyle = styled(Map)`
-  width: 75% !important; 
+  width: 72% !important; 
   height: 80vh !important; 
   float: left;
 `;
 
 export const MapCard = styled.div`
   background-color: #fff;
-  margin: 30px auto;
+  margin: 30px 0px;
   //Overriding the style guide card flexbox settings
-  max-width: 80% !important;
+  width: 100% !important;
   padding: 5px 10px !important; //temporary fix to a style guide bug
   align-items: center;
   h3{
-    padding: 0 30px;
+    padding: 0 0px;
     text-align: center;
     font-size: 1.2em;
   }
@@ -123,12 +123,14 @@ export const CommentCard = styled.div`
 
 `;
 
-export const ScrollDiv  = styled.div`
+export const ScrollDiv = styled.div`
   overflow-y: scroll;
   max-height: 38vh; 
 `;
 export const FormCard = styled.div`
-  margin: 15px 0px;
+margin: 30px 50px 0px 0px;
+background-color: #fff;
+  padding: 30px 15px 30px 15px;
   display: flex;
   border-radius: 4px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
@@ -143,6 +145,17 @@ export const FormCard = styled.div`
   border: 1px solid rgba(124, 77, 255, 0);
   transition: all .25s ease-in-out;
   height: auto;
+
+  button{
+    font-size: 1.1em;
+      color: #083575;
+      background:#8ed2d2;
+      font-weight:bold;
+  }
+  button:hover{
+      background:#a4d1d1;
+      color: #083575;
+  }
  
 `;
 
@@ -160,7 +173,7 @@ export const Button = styled.button`
   }
   `;
 
-  export const H2Format = styled.h2`
+export const H2Format = styled.h2`
       text-align:center;
       font-size: 3rem;
 `;
@@ -176,7 +189,7 @@ export const InformationSection = styled.section`
 `;
 
 
-  //************* prueba */
+//************* prueba */
 export const DivPrueba = styled.div`
 background:rgba(164, 209, 209,0.85);
 display: flex;
