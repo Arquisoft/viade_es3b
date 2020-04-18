@@ -173,6 +173,17 @@ export const Button = styled.button`
   }
   `;
 
+  export const ButtonShare = styled.button`
+  color: #fff !important;
+    background: #406cc8 !important;
+}disabled{
+      background:#fff !important;
+      color: #406cc8 !important;
+    }
+
+
+`;
+
 export const H2Format = styled.h2`
       text-align:center;
       font-size: 3rem;

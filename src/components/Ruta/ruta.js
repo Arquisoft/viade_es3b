@@ -17,6 +17,7 @@ export default class Ruta {
         commentsFile.comments.forEach( c => {if(c.text!== undefined) this.comments.push(new CommentObj(c.text,c.dateCreated))} );
         //Datos para subir commentarios al pod
         this.CommentsFileName = "viade/comments/routeComments/" + fileName + "Comments.json";
+        this.shared = false;
         
     }
 
