@@ -8,16 +8,17 @@ export default class Ruta {
         this.description = file.description;
         this.media = [];
         this.points = [];
-        this.waypoints = []; 
+        this.waypoints = [];
         file.points.forEach(p =>this.points.push(new Point(p.latitude, p.longitude,p.elevation)));
-        file.media.forEach(m => this.media.push(m["@id"]));
-        file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
-        this.currentMedia = 0;
-        this.comments = [];
-        commentsFile.comments.forEach( c => {if(c.text!== undefined) this.comments.push(new CommentObj(c.text,c.dateCreated))} );
-        //Datos para subir commentarios al pod
-        this.CommentsFileName = "viade/comments/routeComments/" + fileName + "Comments.json";
-        
+        if (commentsFile!==null){
+            file.media.forEach(m => this.media.push(m["@id"]));
+            file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name,w.description,new Point(w.latitude, w.longitude,w.elevation))))
+            this.currentMedia = 0;
+            this.comments = [];
+            commentsFile.comments.forEach( c => {if(c.text!== undefined) this.comments.push(new CommentObj(c.text,c.dateCreated))} );
+            //Datos para subir commentarios al pod
+            this.CommentsFileName = "viade/comments/routeComments/" + fileName + "Comments.json";
+        }
     }
 
     getNextMedia() {

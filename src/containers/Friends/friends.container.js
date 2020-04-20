@@ -8,6 +8,7 @@ import {H2Format} from "../Map/map.style";
 import ReactDOM from "react-dom";
 import { FriendRoute } from './friends.style';
 import Map from "../Map/map.container";
+import Ruta from "../../components/Ruta/ruta";
 const defaultProfilePhoto = 'img/icon/empty-profile.svg';
 const reload = () => {
   window.location.reload();
@@ -78,6 +79,8 @@ export class FriendsComponent extends Component<Props> {
     const fc= new FC(auth, { enableLogging: true });
     const url = friendWebId.toString().split("profile/card#me")[0] + "public/viade";
     let friendsRoutes=[];
+    let rutasJson = [];
+    let rutas = [];
 
     let existe = await fc.itemExists(url + "/routes");
     if (!existe) {
@@ -92,14 +95,13 @@ export class FriendsComponent extends Component<Props> {
             // eslint-disable-next-line
             fc.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
               let routeFileName = routes.files[i].name.split('.json')[0];
+              let ruta = new Ruta(JSON.parse(file),null, routeFileName);
               friendsRoutes.push(<FriendRoute>
                                     <div className="route-header" >
-                                      <div className="route-name" onClick={(event) => this.loadMapView(event, friendWebId.toString())}>{routeFileName}</div>
-                                      <div className="route-info">178 kilómetros</div>
+                                      <div className="route-name" onClick={(event) => this.loadMapView(event, friendWebId.toString())}>{ruta.name}</div>
+                                      <div className="route-info">{ruta.getDistance()+ " km"}</div>
                                     </div>
-                                    <div className="route-body">
-                                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </div>
+                                    <div className="route-body">{ruta.description}</div>
                                   </FriendRoute>
               );
               if (i===routes.files.length-1){
