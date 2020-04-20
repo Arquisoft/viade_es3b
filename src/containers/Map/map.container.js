@@ -18,6 +18,10 @@ const LoadRoute = (props) => {
     if (props.user === undefined){
         folder = "viade";
         user = useWebId();
+    }
+    else if (props.user === "public"){
+        folder = "public/viade";
+        user = useWebId();
     }else{
         folder = "public/viade";
         user = props.user;
@@ -27,6 +31,7 @@ const LoadRoute = (props) => {
     useEffect(() => {
         if (user !== undefined) {
             const url = user.split("profile/card#me")[0] + folder;
+
             loadRoutes(url, user);
         }
     }, [user]);
@@ -110,7 +115,14 @@ function updatePercent(count, length) {
 
 
 const Map = (props) => { 
-    const user = props.user;
+    let user = props.user;
+    if (user === undefined){
+        user = "public";
+        return (<InformationSection id="mapComponent">
+        <button onClick={() => ReactDOM.render(<LoadRoute {...{user}}></LoadRoute>, document.getElementById('mapComponent'))}>Compartidas</button>
+        <button  onClick={() => ReactDOM.render(<LoadRoute></LoadRoute>, document.getElementById('mapComponent'))}>Privadas</button>
+        </InformationSection>)
+    }
     return <LoadRoute {...{ user }}></LoadRoute>
 }
 
