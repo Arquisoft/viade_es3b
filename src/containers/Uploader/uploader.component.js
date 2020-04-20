@@ -195,6 +195,7 @@ function read(file, callback) {
 
 const createFolder = async (folder, file, photo, video, setFile, setImage, setVideo) => {
 	read(file, function (json) {
+	
 		let url;
 		let i;
 		let existe = fileClien.itemExists(folder);
@@ -224,12 +225,12 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
 			}
 		}
 
-		if (fileClien.createFile(folder + "/routes/" + file.name, file, file.type)) {
+		if (fileClien.createFile(folder + "/routes/" + file.name, JSON.stringify(json), file.type)) {
 			showSuccessUploadFile("Ruta " + file.name);
 		} else {
 			showErrorUploadFile("Ruta " + file.name);
 		}
-
+	
 		setFile(null);
 		setImage(null);
 		setVideo(null);
