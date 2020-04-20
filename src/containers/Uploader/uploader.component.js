@@ -26,7 +26,7 @@ const UploadJson = ({ setFile, file }) => {
 					<h2>{t('uploader.chooseJSON')}</h2>
 					<center>
 
-						<input value="" type="file" className="custom-file-input" id="route" accept=".json,.geojson,.jsonld" onChange={changeName} required />
+						<input value={null} type="file" className="custom-file-input" id="route" accept=".json,.geojson,.jsonld" onChange={changeName} required />
 						<label id="label-input" htmlFor="route">
 							<span>{t('uploader.choose')}</span>
 						</label>
@@ -73,7 +73,7 @@ const Formulario = () => {
 							<h3 htmlFor="photo" className="labelPhoto">{t('uploader.selectImages')}</h3>
 							<ChooseButton>
 								<center>
-									<input value={null} type="file" id="photo" name="image" accept=".png,.jpeg,.jpg" multiple={true} onChange={(e) => {setImage(e.target.files)}} />
+									<input value={null} type="file" id="photo" name="image" accept=".png,.jpeg,.jpg" multiple={true} onChange={(e) => { setImage(e.target.files) }} />
 									<label id="label-input" htmlFor="photo">
 										<span>{t('uploader.chooseImages')}</span>
 									</label>
@@ -206,7 +206,7 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
 
 		for (i = 0; photo != null && i < photo.length; i++) {
 			url = folder + "/resources/" + photo[i].name;
-			json.media.push({"@id" : url})
+			json.media.push({ "@id": url })
 			if (fileClien.createFile(url, photo[i], photo[i].type)) {
 				showSuccessUploadFile("La foto " + photo[i].name + " ha sido subida correctamente");
 			} else {
@@ -216,27 +216,27 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
 
 		for (i = 0; video != null && i < video.length; i++) {
 			url = folder + "/resources/" + video[i].name;
-			json.media.push({"@id" : url})
+			json.media.push({ "@id": url })
 			if (fileClien.createFile(url, video[i], "video/mp4")) {
 				showSuccessUploadFile("El vídeo " + video[i].name + " ha sido subido correctamente");
 			} else {
 				showErrorUploadFile("El vídeo" + video[i].name + " no se ha sido subido correctamente");
 			}
 		}
-		
-		if (fileClien.createFile(folder + "/routes/" + file.name, file, file.type)){
+
+		if (fileClien.createFile(folder + "/routes/" + file.name, file, file.type)) {
 			showSuccessUploadFile("Ruta " + file.name);
-		}else{
+		} else {
 			showErrorUploadFile("Ruta " + file.name);
 		}
-		
+
 		setFile(null);
 		setImage(null);
 		setVideo(null);
 		document.getElementById('photo').value = null;
 		document.getElementById('video').value = null;
 		document.getElementById('route').value = null;
-		document.getElementById('cbox1').checked=false;
+		document.getElementById('cbox1').checked = false;
 		publico = false;
 
 	});
