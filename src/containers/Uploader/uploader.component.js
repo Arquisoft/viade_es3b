@@ -73,7 +73,7 @@ const Formulario = () => {
 							<h3 htmlFor="photo" className="labelPhoto">{t('uploader.selectImages')}</h3>
 							<ChooseButton>
 								<center>
-									<input value="" type="file" id="photo" name="image" accept=".png,.jpeg,.jpg" multiple={true} onChange={(e) => setImage(e.target.files)} />
+									<input value={null} type="file" id="photo" name="image" accept=".png,.jpeg,.jpg" multiple={true} onChange={(e) => {setImage(e.target.files)}} />
 									<label id="label-input" htmlFor="photo">
 										<span>{t('uploader.chooseImages')}</span>
 									</label>
@@ -87,7 +87,7 @@ const Formulario = () => {
 							<h3 htmlFor="video" className="labelVideo">{t('uploader.selectVideos')}</h3>
 							<ChooseButton>
 								<center>
-									<input value="" type="file" id="video" name="video" accept=".mp4,.avg" multiple={true} onChange={(e) => setVideo(e.target.files)} />
+									<input value={null} type="file" id="video" name="video" accept=".mp4,.avg" multiple={true} onChange={(e) => setVideo(e.target.files)} />
 									<label id="video-input" htmlFor="video">
 										<span>{t('uploader.chooseVideos')}</span>
 									</label>
@@ -99,7 +99,7 @@ const Formulario = () => {
 			</FormCard>
 			<ShareCard>
 				<div><h2>{t('uploader.share')}</h2></div>
-				<div class="flex-container">
+				<div className="flex-container">
 					<h3 htmlFor="cbox1">{t('uploader.accept')}</h3>
 					<input type="checkbox" id="cbox1" value="first_checkbox" onChange={clickButtom}></input>
 				</div>
@@ -181,53 +181,65 @@ function getJson() {
 
 }
 
-function a(a){
-	console.log(a);
-	var b = JSON.parse(a);
-	console.log(b.description)
+
+function read(file, callback) {
+	var reader = new FileReader();
+
+	reader.onload = function () {
+		callback(JSON.parse(reader.result));
+	}
+
+	reader.readAsText(file);
 }
 
 
 const createFolder = async (folder, file, photo, video, setFile, setImage, setVideo) => {
-	let reader = new FileReader();
-	reader.onloadend = () => a(reader.result);
-	reader.readAsText(file, 'ISO-8859-1');
-
-	
-
-	/*let existe = await fileClien.itemExists(folder);
-	if (!existe) {
-		await fileClien.createFolder(folder);
-	}
-	let i = 0;
-
-
-	await fileClien.createFile(folder + "/routes/" + file.name, file, file.type);
-	await fileClien.createFile(folder + "/comments/routeComments/" + file.name.split('.json')[0] + "Comments.json", getJson(), file.type);
-
-	for (i = 0; photo != null && i < photo.length; i++) {
-		if (fileClien.createFile(folder + "/resources/" + photo[i].name, photo[i], photo[i].type)) {
-			showSuccessUploadFile("La foto " + photo[i].name + " ha sido subida correctamente");
-		} else {
-			showErrorUploadFile("La foto " + photo[i].name + " ha sido subida correctamente");
+	read(file, function (json) {
+		let url;
+		let i;
+		let existe = fileClien.itemExists(folder);
+		if (!existe) {
+			fileClien.createFolder(folder);
 		}
-	}
 
-	for (i = 0; video != null && i < video.length; i++) {
-		if (fileClien.createFile(folder + "/resources/" + video[i].name, video[i], "video/mp4")) {
-			showSuccessUploadFile("El vídeo " + video[i].name + " ha sido subido correctamente");
-		} else {
-			showErrorUploadFile("El vídeo" + video[i].name + " ha sido subido correctamente");
+		fileClien.createFile(folder + "/comments/routeComments/" + file.name.split('.json')[0] + "Comments.json", getJson(), file.type);
+
+		for (i = 0; photo != null && i < photo.length; i++) {
+			url = folder + "/resources/" + photo[i].name;
+			json.media.push({"@id" : url})
+			if (fileClien.createFile(url, photo[i], photo[i].type)) {
+				showSuccessUploadFile("La foto " + photo[i].name + " ha sido subida correctamente");
+			} else {
+				showErrorUploadFile("La foto " + photo[i].name + " no se ha sido subida correctamente");
+			}
 		}
-	}
-	showSuccessUploadFile("Ruta " + file.name);
-	setFile(null);
-	setImage(null);
-	setVideo(null);
-	document.getElementById('photo').value = null;
-	document.getElementById('video').value = null;
-	document.getElementById('route').value = null;
-	publico = false;*/
+
+		for (i = 0; video != null && i < video.length; i++) {
+			url = folder + "/resources/" + video[i].name;
+			json.media.push({"@id" : url})
+			if (fileClien.createFile(url, video[i], "video/mp4")) {
+				showSuccessUploadFile("El vídeo " + video[i].name + " ha sido subido correctamente");
+			} else {
+				showErrorUploadFile("El vídeo" + video[i].name + " no se ha sido subido correctamente");
+			}
+		}
+		
+		if (fileClien.createFile(folder + "/routes/" + file.name, file, file.type)){
+			showSuccessUploadFile("Ruta " + file.name);
+		}else{
+			showErrorUploadFile("Ruta " + file.name);
+		}
+		
+		setFile(null);
+		setImage(null);
+		setVideo(null);
+		document.getElementById('photo').value = null;
+		document.getElementById('video').value = null;
+		document.getElementById('route').value = null;
+		document.getElementById('cbox1').checked=false;
+		publico = false;
+
+	});
 }
 
 export default AddRoute;
