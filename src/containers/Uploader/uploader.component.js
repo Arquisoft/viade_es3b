@@ -4,7 +4,7 @@ import { useWebId } from '@solid/react';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
-import { UploaderWrapper, UploaderCard, FormCard, MultimediaCard, MultimediasCard, ChooseButton, UploadButton } from './uploader.style';
+import { UploaderWrapper, UploaderCard, ShareCard, FormCard, MultimediaCard, MultimediasCard, ChooseButton, UploadButton } from './uploader.style';
 import { useTranslation } from 'react-i18next';
 
 import { toast } from 'react-toastify';
@@ -19,29 +19,24 @@ const UploadJson = ({ setFile, file }) => {
 	const changeName = e => {
 		setFile(e.target.files[0]);
 	}
-
-
-
 	return (
 		<div>
 			<ChooseButton>
 				<div>
-					<h2>Escoja un archivo JSON</h2>
+					<h2>{t('uploader.chooseJSON')}</h2>
 					<center>
 
-						<input value={null} type="file" class="custom-file-input" id="route" accept=".json" onChange={changeName} required />
-						<label id="label-input" for="route">
+						<input value={null} type="file" className="custom-file-input" id="route" accept=".json,.geojson,.jsonld" onChange={changeName} required />
+						<label id="label-input" htmlFor="route">
 							<span>{t('uploader.choose')}</span>
 						</label>
-						<h4 class="custom-file-label" id="nameRoute"> {filename}</h4>
+						<h4 className="custom-file-label" id="nameRoute"> {filename}</h4>
 					</center>
 				</div>
 			</ChooseButton>
 		</div>
 	);
 };
-
-
 
 const Formulario = () => {
 	var user = "" + useWebId();
@@ -62,25 +57,25 @@ const Formulario = () => {
 			publico = true;
 		}
 	}
-
+	const { t } = useTranslation();
 	return (
 		<div>
 			<br></br>
 			<FormCard>
 				<UploadJson setFile={setFile} file={file} />
 			</FormCard>
-			
+
 			<FormCard>
-				<div><h2>Escoja los archivos multimedia que desee</h2></div>
+				<div><h2>{t('uploader.chooseMediaFiles')}</h2></div>
 				<MultimediasCard>
 					<MultimediaCard>
-						<div class="form-group">
-							<h3 for="photo" class="labelPhoto">Seleccione las imágenes</h3>
+						<div className="form-group">
+							<h3 htmlFor="photo" className="labelPhoto">{t('uploader.selectImages')}</h3>
 							<ChooseButton>
 								<center>
-									<input value={null} type="file" id="photo" name="image" accept=".png" multiple="true" onChange={(e) => setImage(e.target.files)} />
-									<label id="label-input" for="photo">
-										<span>Elegir fotos</span>
+									<input value={null} type="file" id="photo" name="image" accept=".png,.jpeg,.jpg" multiple={true} onChange={(e) => { setImage(e.target.files) }} />
+									<label id="label-input" htmlFor="photo">
+										<span>{t('uploader.chooseImages')}</span>
 									</label>
 								</center>
 
@@ -88,13 +83,13 @@ const Formulario = () => {
 						</div>
 					</MultimediaCard>
 					<MultimediaCard>
-						<div class="form-group">
-							<h3 for="video" class="labelVideo">Seleccione los vídeos</h3>
+						<div className="form-group">
+							<h3 htmlFor="video" className="labelVideo">{t('uploader.selectVideos')}</h3>
 							<ChooseButton>
 								<center>
-									<input value={null} type="file" id="video" name="video" accept=".mp4" multiple="true" onChange={(e) => setVideo(e.target.files)} />
-									<label id="video-input" for="video">
-										<span>Elegir videos</span>
+									<input value={null} type="file" id="video" name="video" accept=".mp4,.avg" multiple={true} onChange={(e) => setVideo(e.target.files)} />
+									<label id="video-input" htmlFor="video">
+										<span>{t('uploader.chooseVideos')}</span>
 									</label>
 								</center>
 							</ChooseButton>
@@ -102,20 +97,27 @@ const Formulario = () => {
 					</MultimediaCard>
 				</MultimediasCard>
 			</FormCard>
-			<FormCard>
-				<h3>Compartir</h3>
-				<input type="checkbox" id="cbox1" value="first_checkbox" onChange={clickButtom}></input>
-			</FormCard>
+			<ShareCard>
+				<div><h2>{t('uploader.share')}</h2></div>
+				<div className="flex-container">
+					<h3 htmlFor="cbox1">{t('uploader.accept')}</h3>
+					<input type="checkbox" id="cbox1" value="first_checkbox" onChange={clickButtom}></input>
+				</div>
+			</ShareCard>
 
 			<br></br>
 
 			<center>
 				<UploadButton>
 					<button onClick={() => {
-						createFolder(url + folder, file, image, video, setFile, setImage, setVideo, false)
-						if (publico) createFolder(url + "public/" + folder, file, image, video, setFile, setImage, setVideo, true)
-					}} class="btn btn-info" >Add route
-                </button>
+						if (file !== null) {
+							if (publico) createFolder(url + "public/" + folder, file, image, video, setFile, setImage, setVideo)
+							else createFolder(url + folder, file, image, video, setFile, setImage, setVideo)
+						} else {
+							showErrorUploadFile(t('uploader.chooseJSONFile'));
+						}
+					}} className="btn btn-info" >{t('uploader.addRoute')}
+					</button>
 				</UploadButton>
 			</center>
 		</div>
@@ -128,18 +130,16 @@ const AddRoute = () => {
 		<UploaderWrapper>
 			<UploaderCard className="card">
 				<Fragment>
-					<h1 class="h2">{t('uploader.addRoute')}</h1>
+					<h1>{t('uploader.addRoute')}</h1>
 					<Formulario />
 				</Fragment>
 			</UploaderCard>
 		</UploaderWrapper>
-
 	);
-
 };
 
 const showErrorUploadFile = (name) => {
-	toast.error(name + " no se ha subido correctamente", {
+	toast.error(name, {
 		delay: 1000,
 		autoClose: false,
 		position: toast.POSITION.TOP_CENTER
@@ -147,8 +147,9 @@ const showErrorUploadFile = (name) => {
 }
 
 const showSuccessUploadFile = (name) => {
+
 	//https://github.com/fkhadra/react-toastify
-	toast.success(name + " se ha subido correctamente", {
+	toast.success(name, {
 		delay: 1000,
 		autoClose: false,
 		position: toast.POSITION.TOP_CENTER
@@ -181,50 +182,64 @@ function getJson() {
 }
 
 
-const createFolder = async (folder, file, photo, video, setFile, setImage, setVideo, bool) => {
-	let existe = await fileClien.itemExists(folder);
-	if (!existe) {
-		await fileClien.createFolder(folder);
+function read(file, callback) {
+	var reader = new FileReader();
+
+	reader.onload = function () {
+		callback(JSON.parse(reader.result));
 	}
-	let i = 0;
+
+	reader.readAsText(file);
+}
 
 
-	await fileClien.createFile(folder + "/routes/" + file.name, file, file.type);
-	await fileClien.createFile(folder + "/comments/routeComments/" + file.name.split('.json')[0] + "Comments.json", getJson(), file.type);
-
-	for (i = 0; photo != null && i < photo.length; i++) {
-
-		if (fileClien.createFile(folder + "/resources/" + photo[i].name, photo[i], "image/png")) {
-			showSuccessUploadFile("La photo " + photo[i].name);
-		} else {
-			showErrorUploadFile("La photo" + photo[i].name);
+const createFolder = async (folder, file, photo, video, setFile, setImage, setVideo) => {
+	read(file, function (json) {
+		let url;
+		let i;
+		let existe = fileClien.itemExists(folder);
+		if (!existe) {
+			fileClien.createFolder(folder);
 		}
-	}
 
-	for (i = 0; video != null && i < video.length; i++) {
-		if (fileClien.createFile(folder + "/resources/" + video[i].name, video[i], "video/mp4")) {
-			showSuccessUploadFile("El video" + video[i].name);
-		} else {
-			showErrorUploadFile("El video" + video[i].name);
+		fileClien.createFile(folder + "/comments/routeComments/" + file.name.split('.json')[0] + "Comments.json", getJson(), file.type);
+
+		for (i = 0; photo != null && i < photo.length; i++) {
+			url = folder + "/resources/" + photo[i].name;
+			json.media.push({ "@id": url })
+			if (fileClien.createFile(url, photo[i], photo[i].type)) {
+				showSuccessUploadFile("La foto " + photo[i].name + " ha sido subida correctamente");
+			} else {
+				showErrorUploadFile("La foto " + photo[i].name + " no se ha sido subida correctamente");
+			}
 		}
-	}
 
-	showSuccessUploadFile("Ruta " + file.name);
+		for (i = 0; video != null && i < video.length; i++) {
+			url = folder + "/resources/" + video[i].name;
+			json.media.push({ "@id": url })
+			if (fileClien.createFile(url, video[i], "video/mp4")) {
+				showSuccessUploadFile("El vídeo " + video[i].name + " ha sido subido correctamente");
+			} else {
+				showErrorUploadFile("El vídeo" + video[i].name + " no se ha sido subido correctamente");
+			}
+		}
 
+		if (fileClien.createFile(folder + "/routes/" + file.name, file, file.type)) {
+			showSuccessUploadFile("Ruta " + file.name);
+		} else {
+			showErrorUploadFile("Ruta " + file.name);
+		}
 
-
-	console.log(bool + "-" + publico)
-	if (bool === publico) {
 		setFile(null);
-		//setImage(null);
-		//setVideo(null);
+		setImage(null);
+		setVideo(null);
 		document.getElementById('photo').value = null;
 		document.getElementById('video').value = null;
 		document.getElementById('route').value = null;
+		document.getElementById('cbox1').checked = false;
 		publico = false;
-	}
 
-
+	});
 }
 
 export default AddRoute;

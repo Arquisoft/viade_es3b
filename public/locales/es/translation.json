@@ -262,7 +262,16 @@
     "file": "El archivo ",
     "incorrectUpload": " no se ha subido correctamente.",
     "correctUpload": " se ha subido correctamente.",
-    "addRoute": "Añadir ruta"
+    "addRoute": "Añadir ruta",
+    "chooseMediaFiles": "Escoja los archivos multimedia que desee",
+    "selectImages": "Seleccione las imagenes",
+    "selectVideos": "Seleccione los vídeos",
+    "chooseImages": "Elegir fotos",
+    "chooseVideos": "Elegir vídeos",
+    "chooseJSON": "Escoja un archivo JSON",
+    "route": "Ruta",
+    "share": "Compartir",
+    "chooseJSONFile": "Por favor, elija un archivo JSON"
   },
   "friends": {
     "title": "Amigos",

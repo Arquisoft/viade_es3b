@@ -5,7 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import ReactDOM from 'react-dom';
 import Slider from './prueba'
-import { Column, Up, MapaStyle, MapCard, Button, FormCard, ScrollDiv, MapSection ,CommentCard} from './map.style';
+import { Column, Up, MapaStyle, Button, FormCard, ScrollDiv, MapSection ,CommentCard,ButtonShare} from './map.style';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
@@ -34,8 +34,11 @@ const MapaComponent = props => {
     document.getElementById("name").textContent = currentRuta.name;
     document.getElementById("description").textContent = currentRuta.description;
     document.getElementById("distance").textContent = "Distancia: " + currentRuta.getDistance() + " KM";
+    document.getElementById("btShare").textContent = (currentRuta.shared)? "Compartida" : "Compartir";
+    document.getElementById("btShare").disabled = currentRuta.shared;
     media = currentRuta.media;
     ReactDOM.hydrate(<MapaComponent  {... { rutas, user }}></MapaComponent>, document.getElementById('mapComponent'));
+
   }
 
   /* Método que devuelve los marcadores con los sistios de interes */
@@ -48,10 +51,21 @@ const MapaComponent = props => {
     return markets;
   }
 
+
+  function shareRoute() {
+    document.getElementById("btShare").disabled = true;
+
+
+    document.getElementById("btShare").textContent =  "Compartida";
+    
+    currentRuta.share();
+  }
+
   function addComment() {
     let text = document.getElementById("comentario").value;
     document.getElementById("comentario").value = "Publicando";
     document.getElementById("comentario").readonly = true;
+
     var fileClien = new fileClient(solidAuth, { enableLogging: true });
     let url = user.split("profile/card#me")[0] + currentRuta.CommentsFileName;
     console.log(url);
@@ -98,20 +112,21 @@ const MapaComponent = props => {
             <Map></Map>
           </div>
           <Column>
-            <MapCard>
+            
               <FormCard>
                 <h1 id="name">{currentRuta.name}</h1>
                 <h3 id="description">{currentRuta.description}</h3>
                 <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
-
                 <Slider {... { media }}></Slider>
+                <br></br>
+                <ButtonShare id="btShare" disabled={currentRuta.shared} onClick= {() => shareRoute()} >Compatir</ButtonShare>
               </FormCard>
               <ScrollDiv>
                 <FormCard  ><h2>Rutas:</h2>
                   {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
                 </FormCard>
               </ScrollDiv>
-            </MapCard>
+          
           </Column>
         </Up>
       </MapSection>

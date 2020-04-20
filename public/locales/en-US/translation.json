@@ -273,6 +273,15 @@
     "file": "The file ",
     "incorrectUpload": " has not been uploaded correctly.",
     "correctUpload": " has been uploaded successfully.",
-    "addRoute": "Add route"
+    "addRoute": "Add route",
+    "chooseMediaFiles": "Choose the media files you want",
+    "selectImages": "Select images",
+    "selectVideos": "Select videos",
+    "chooseImages": "Choose images",
+    "chooseVideos": "Choose videos",
+    "chooseJSON": "Choose JSON file",
+    "route": "Route",
+    "share": "Share",
+    "chooseJSONFile": "Please, choose JSON file"
   }
 }

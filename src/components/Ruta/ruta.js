@@ -19,6 +19,7 @@ export default class Ruta {
             //Datos para subir commentarios al pod
             this.CommentsFileName = "viade/comments/routeComments/" + fileName + "Comments.json";
         }
+        this.shared = false;
     }
 
     getNextMedia() {

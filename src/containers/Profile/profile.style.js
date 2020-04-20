@@ -1,13 +1,57 @@
 import styled from 'styled-components';
+import { HeaderProfileBackground } from '@util-components';
 
 export const ProfileWrapper = styled.section`
   display: flex;
   flex: 1 0 auto;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, #67e3c0ff 0%, #046df0f0 100%);
+  background: #a4d1d1;
   background-repeat: repeat;
   padding: 60px 0;
+
+  button{
+    font-size: 1.2em;
+    color: #083575;
+    background: #8ed2d2;
+    font-weight: bold;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: #354866;
+    border: 1px solid #DAE0E6;
+    cursor: pointer;
+    font-size: .8em;
+    padding: 0.5em 1em;
+    transition: 0.25s all ease-in-out;
+    outline: none;
+  }
+  button:hover{
+    background: #a4d1d1;
+    color: #083575;
+    border-color: #449DF5;
+    transition: 0.25s all ease-in-out;
+    font-weight: bold;
+  }
+  form > div > div > div > div{
+    background-color: #dcf1f1;
+    border: 1px solid #ccc!important;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  form > div > div:not(:first-child) {
+    background-color: #dcf1f1;
+    border: 1px solid #ccc!important;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  form > div {
+    border: 1px solid #ccc!important;
+    border-radius: 5px;
+  }
+
+ 
+  
 `;
 export const ProfileContainer = styled.div`
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
@@ -18,13 +62,11 @@ export const ProfileContainer = styled.div`
   flex: 1 0 auto;
 `;
 
-export const Header = styled.div`
+export const Header = styled(HeaderProfileBackground)`
   display: flex;
   position: relative;
   align-items: center;
   justify-content: center;
-  background-image: url('img/pattern-geo.png'),
-    linear-gradient(135deg, #7c4dff 0%, #18a9e6 50%, #01c9ea 100%);
   background-repeat: repeat, no-repeat;
   padding: 30px 20px;
 

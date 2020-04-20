@@ -2,8 +2,18 @@ import styled from 'styled-components';
 
 export const UploaderWrapper = styled.div`
     width: 100%;
-    background-color: #a4d1d1;
-    padding: 50px 0;
+  background: #a4d1d1;
+  background-repeat: repeat;
+  padding: 50px 0;
+  h3 {
+    color: #666666;
+    span {
+      font-weight: bold;
+    }
+    a {
+      font-size: 1.9rem;
+    }
+  }
 `;
 
 export const UploaderCard = styled.div`
@@ -17,6 +27,8 @@ export const UploaderCard = styled.div`
     padding: 0 30px;
     text-align: center;
   }
+
+  
 `;
 
 export const FileButton = styled.div`
@@ -113,10 +125,97 @@ export const FormCard = styled.div`
   padding: 1em 0;
   border: 1px solid rgba(124, 77, 255, 0);
   transition: all .25s ease-in-out;
+  @media screen and (max-width: 541px) {
+    width: 90%;
+    height: 90%;
+  }
+  @media screen and (max-width: 508px) {
+    width: 80%;
+    height: 80%;
+  }
+  @media screen and (max-width: 475px) {
+    width: 70%;
+    height: 70%;
+  }
+  @media screen and (max-width: 400px) {
+    width: 60%;
+    height: 60%;
+  }
+  @media screen and (max-width: 345px) {
+    width: 50%;
+    height: 50%;
+  } 
+  @media screen and (max-width: 300px) {
+    width: 40%;
+    height: 40%;
+  }
+    
+`;
+
+export const ShareCard = styled.div`
+
+  margin: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+  padding: 1em 0;
+  border: 1px solid rgba(124, 77, 255, 0);
+  transition: all .25s ease-in-out;
+
+    
+
+  
+  .flex-container {
+    flex-direction: row;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  
+
+  input[type="checkbox"]{
+    margin: 0px !important;
+    /* Doble-tamaño Checkboxes */
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari y Chrome */
+    -o-transform: scale(2); /* Opera */
+  }
+
+  h3{
+    margin-left: 30%;
+  }
+  @media screen and (max-width: 541px) {
+    width: 90%;
+    height: 90%;
+  }
+  @media screen and (max-width: 508px) {
+    width: 80%;
+    height: 80%;
+  }
+  @media screen and (max-width: 475px) {
+    width: 70%;
+    height: 70%;
+  }
+  @media screen and (max-width: 400px) {
+    width: 60%;
+    height: 60%;
+  }
+  @media screen and (max-width: 345px) {
+    width: 50%;
+    height: 50%;
+  } 
+  @media screen and (max-width: 300px) {
+    width: 40%;
+    height: 40%;
+  }
 `;
 
 export const MultimediaCard = styled.div`
-
   margin: 30px;
 `;
 

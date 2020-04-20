@@ -35,10 +35,21 @@ const LoadRoute = (props) => {
 }
 
 async function loadRoutes(url, user) {
+	
+	if (!await fileClien.itemExists(url))
+		try {
+            ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
+			return;
+        }
+        catch (error) {
+            return;
+        }
+	
     let routes = await fileClien.readFolder(url + "/routes");
     let rutasJson = [];
     let commentsJson = [];
     let fileName = [];
+	
     if (routes.files.length === 0) {
         try {
             ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
@@ -47,10 +58,10 @@ async function loadRoutes(url, user) {
             return;
         }
     }
-
-    for (let i = 0; i < routes.files.length; i++) {
-        var count = 0;
-        if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
+	var count = 0;
+	
+    for (let i = 0; i < routes.files.length; i++) { 
+        if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld') || routes.files[i].name.includes('.geojson')) {
             // eslint-disable-next-line
             fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
                 fileClien.readFile(url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0] + "Comments.json").then((fileComment) => {
@@ -59,13 +70,20 @@ async function loadRoutes(url, user) {
                     fileName.push(routes.files[i].name.split('.json')[0]);
                     count += 1;
                     updatePercent(count, routes.files.length);
-                    if (Math.trunc((count) / routes.files.length * 100) === 100)
+                    if (count === routes.files.length)
                         loadMapView(new Rutas(rutasJson, commentsJson, fileName), user);
                 });
             });
         } else {
             count += 1;
             updatePercent(count, routes.files.length);
+			if (count === routes.files.length)
+			{
+				if (!rutasJson.length === 0)
+                       loadMapView(new Rutas(rutasJson, commentsJson, fileName), user);
+				else
+					ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
+			}
         }
     }
 }
