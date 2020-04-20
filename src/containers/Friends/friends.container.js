@@ -8,6 +8,7 @@ import {H2Format} from "../Map/map.style";
 import ReactDOM from "react-dom";
 import { FriendRoute } from './friends.style';
 import Map from "../Map/map.container";
+import Ruta from "../../components/Ruta/ruta";
 const defaultProfilePhoto = 'img/icon/empty-profile.svg';
 const reload = () => {
   window.location.reload();
@@ -23,8 +24,13 @@ export class FriendsComponent extends Component<Props> {
     this.state = {
       friends: [],
       friendsWebId: [],
-      friendsPhotos: []
+      friendsPhotos: [],
+      activeId: null
     };
+  }
+
+  handleClick(event, id) {
+    this.setState({ activeId: id })
   }
 
   componentDidMount() {
@@ -68,29 +74,45 @@ export class FriendsComponent extends Component<Props> {
     }
   };
 
-  getFriendRoutes = async (event, friendWebId) => {
+  getFriendRoutes = async (event, friendWebId, index) => {
     event.preventDefault();
     const fc= new FC(auth, { enableLogging: true });
     const url = friendWebId.toString().split("profile/card#me")[0] + "public/viade";
     let friendsRoutes=[];
+    let rutasJson = [];
+    let rutas = [];
 
-    let routes = await fc.readFolder(url + "/routes");
-    if (routes.files.length !== 0) {
-      for (let i = 0; i < routes.files.length; i++) {
-        if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
-          // eslint-disable-next-line
-          fc.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
-            let routeFileName = routes.files[i].name.split('.json')[0];
-            friendsRoutes.push(<FriendRoute onClick={(event) => this.loadMapView(event, friendWebId.toString())}>{routeFileName}</FriendRoute>);
-            if (i===routes.files.length-1){
-              ReactDOM.render(friendsRoutes, document.getElementById('routesList'));
-            }
-          });
+    let existe = await fc.itemExists(url + "/routes");
+    if (!existe) {
+      ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('routesList'));
+    }else{
+      let routes = await fc.readFolder(url + "/routes");
+      if (routes.files.length === 0) {
+        ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('routesList'));
+      }else{
+        for (let i = 0; i < routes.files.length; i++) {
+          if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
+            // eslint-disable-next-line
+            fc.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
+              let routeFileName = routes.files[i].name.split('.json')[0];
+              let ruta = new Ruta(JSON.parse(file),null, routeFileName);
+              friendsRoutes.push(<FriendRoute>
+                                    <div className="route-header" >
+                                      <div className="route-name" onClick={(event) => this.loadMapView(event, friendWebId.toString())}>{ruta.name}</div>
+                                      <div className="route-info">{ruta.getDistance()+ " km"}</div>
+                                    </div>
+                                    <div className="route-body">{ruta.description}</div>
+                                  </FriendRoute>
+              );
+              if (i===routes.files.length-1){
+                ReactDOM.render(friendsRoutes, document.getElementById('routesList'));
+              }
+            });
+          }
         }
       }
-    }else{
-        ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('routesList'));
     }
+    this.handleClick(event,index);
   };
 
   loadMapView = async (event, user) => {
@@ -146,10 +168,10 @@ export class FriendsComponent extends Component<Props> {
   };
 
   render() {
-    const { friends, friendsWebId, friendsPhotos } = this.state;
+    const { friends, friendsWebId, friendsPhotos, activeId } = this.state;
     const { webId } = this.props;
     return (
-      <FriendsPageContent {...{ friends, friendsWebId, friendsPhotos, webId, addFriend: this.addFriend, getFriendRoutes: this.getFriendRoutes}} />
+      <FriendsPageContent {...{ friends, friendsWebId, friendsPhotos, webId, addFriend: this.addFriend, getFriendRoutes: this.getFriendRoutes, activeId}} />
     );
   }
 }
