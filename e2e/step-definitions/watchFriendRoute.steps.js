@@ -91,6 +91,15 @@ defineFeature(feature, test => {
 
                 });
             });
+            await page.evaluate(() => {
+                let b = [...document.querySelectorAll("button")];
+                b.forEach(function (b) {
+                    if (b.innerText == "Route 1") {
+                        b.click();
+                    }
+
+                });
+            });
 
             expect(page).toMatchElement('h2', { text: 'Route test 1' })
 
