@@ -66,11 +66,11 @@ defineFeature(feature, test => {
         when('I go to friend page', async () => {
             await page.waitFor(1000);
 
-            await page.goto("http://localhost:3000/viade_es3b/#/map", {
+            await page.goto("http://localhost:3000/viade_es3b/#/friends", {
                 waitUntil: 'networkidle2'
             });
 
-            expect(page.url()).toBe("http://localhost:3000/viade_es3b/#/map")
+            expect(page.url()).toBe("http://localhost:3000/viade_es3b/#/friends")
 
             
 
@@ -85,7 +85,7 @@ defineFeature(feature, test => {
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
-                    if (b.innerText == "Route test 1") {
+                    if (b.innerText == "amigo1") {
                         b.click();
                     }
 
