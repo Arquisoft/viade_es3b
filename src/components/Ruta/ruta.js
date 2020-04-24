@@ -46,7 +46,19 @@ export default class Ruta {
         return this.media[this.currentMedia];
     }
 
-    addComment(file, text) {
+    addComment(fileClien, text, user,callback) {
+
+        let url = user.split("profile/card#me")[0] + ((this.shared)? "public/":"") + "viade/comments/routeComments/" + this.CommentsFileName;
+        fileClien.readFile(url).then((file) => {
+            var value = this.createComment(JSON.parse(file), text);
+            fileClien.createFile(url, value, "application/json").then(() => {
+                callback();
+            })
+        }
+        );
+    }
+
+    createComment(file, text) {
         let f = new Date();
         let date = f.getFullYear() + "-" + (f.getMonth() + 1) + "-" + f.getDate();
         file.comments.push({
@@ -57,7 +69,6 @@ export default class Ruta {
         file.comments.forEach(c => { if (c.text !== undefined) this.comments.push(new CommentObj(c.text, c.dateCreated)) });
         return JSON.stringify(file);
     }
-
 
 
     getBetweenTwoPoints(lat1, lon1, lat2, lon2) {
@@ -84,7 +95,7 @@ export default class Ruta {
         return distance.toFixed(2);
     }
 
-    share(fileClient, url,callback) {
+    share(fileClient, url, callback) {
         console.log(this.fileName + "-" + this.shared);
         let folderToRemove = (this.shared) ? url + "public/viade/" : url + "viade/";
         let folderToCopy = (!this.shared) ? url + "public/viade/" : url + "viade/";
@@ -97,7 +108,7 @@ export default class Ruta {
                 }));
 
 
-       
+
     }
 
 

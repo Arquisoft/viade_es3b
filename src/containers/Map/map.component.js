@@ -66,18 +66,13 @@ const MapaComponent = props => {
     let text = document.getElementById("comentario").value;
     document.getElementById("comentario").value = "Publicando";
     document.getElementById("comentario").readonly = true;
+    currentRuta.addComment(fileClien,text,user,updateComments);
 
+  }
 
-    let url = user.split("profile/card#me")[0] + "viade/comments/routeComments/" + currentRuta.CommentsFileName;
-    fileClien.readFile(url).then((fileComment) => {
-
-      var value = currentRuta.addComment(JSON.parse(fileComment), text);
-      fileClien.createFile(url, value, "application/json").then(() => {
-        ReactDOM.hydrate(<Comments></Comments>, document.getElementById('comments'));
+  function updateComments(){
+    ReactDOM.hydrate(<Comments></Comments>, document.getElementById('comments'));
         document.getElementById("comentario").value = "";
-      })
-    }
-    );
   }
 
   const Comments = () => {
