@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import PresentationBackground from './presentation-background.component';
+import HeaderProfileBackground from './presentation-background.component';
 
 afterAll(cleanup);
 
-const { container } = render(<PresentationBackground />);
+const { container } = render(<HeaderProfileBackground />);
 
-describe('PresentationBackground', () => {
+describe('HeaderProfileBackground', () => {
   it('renders without crashing', () => {
     expect(container).toBeTruthy();
   });
