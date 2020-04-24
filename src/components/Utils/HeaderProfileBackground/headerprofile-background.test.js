@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import HeaderProfileBackground from './presentation-background.component';
+import HeaderProfileBackground from './headerprofile-background.component';
 
 afterAll(cleanup);
 
