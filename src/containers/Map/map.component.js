@@ -21,10 +21,11 @@ L.Icon.Default.mergeOptions({
 
 /* método que generar el mapa, junto con su nombre, y descripción*/
 const MapaComponent = props => {
+  console.log(props.name);
   let rutas = LeafletMap;
   rutas = props.rutas;
   let user = props.user;
-  let currentRuta = rutas.currentRuta;
+  let currentRuta = (props.name !== undefined) ? rutas.getRutaByName(props.name) : rutas.currentRuta;
   let media = currentRuta.media;
   let puntos = [];
 

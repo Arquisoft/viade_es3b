@@ -79,8 +79,8 @@ export class FriendsComponent extends Component<Props> {
     const fc= new FC(auth, { enableLogging: true });
     const url = friendWebId.toString().split("profile/card#me")[0] + "public/viade";
     let friendsRoutes=[];
-    let rutasJson = [];
-    let rutas = [];
+    //let rutasJson = [];
+    //let rutas = [];
 
     let existe = await fc.itemExists(url + "/routes");
     if (!existe) {
@@ -98,7 +98,7 @@ export class FriendsComponent extends Component<Props> {
               let ruta = new Ruta(JSON.parse(file),null, routeFileName);
               friendsRoutes.push(<FriendRoute>
                                     <div className="route-header" >
-                                      <div className="route-name" onClick={(event) => this.loadMapView(event, friendWebId.toString())}>{ruta.name}</div>
+                                      <div className="route-name" onClick={(event) => this.loadMapView(event, friendWebId.toString(), ruta.name)}>{ruta.name}</div>
                                       <div className="route-info">{ruta.getDistance()+ " km"}</div>
                                     </div>
                                     <div className="route-body">{ruta.description}</div>
@@ -115,9 +115,9 @@ export class FriendsComponent extends Component<Props> {
     this.handleClick(event,index);
   };
 
-  loadMapView = async (event, user) => {
+  loadMapView = async (event, user, name) => {
     event.preventDefault();
-    ReactDOM.render(<Map {...{user}}></Map>, document.getElementById('friends-wrapper'))
+    ReactDOM.render(<Map {...{user,name}}></Map>, document.getElementById('friends-wrapper'))
 
   }
 

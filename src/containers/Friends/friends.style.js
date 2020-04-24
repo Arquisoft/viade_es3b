@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const FriendsWrapper = styled.section`
   width: 100%;
   background:#a4d1d1;
-  padding: 50px 0;
+  padding: 0px 0;
   display: flex;
   justify-content: center;
   
@@ -21,6 +21,7 @@ export const FriendsWrapper = styled.section`
 `;
 
 export const FriendsContainer = styled.section`
+  padding: 50px 0;
   width: 100%;
   max-width: 80% !important;
   display: flex;

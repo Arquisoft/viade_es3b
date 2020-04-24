@@ -16,48 +16,48 @@ const LoadRoute = (props) => {
     var folder;
     var user;
     var share = false;
-    if (props.user === undefined){
+    if (props.user === undefined) {
         folder = "viade";
         user = useWebId();
     }
-    else if (props.user === "public"){
+    else if (props.user === "public") {
         folder = "public/viade";
         user = useWebId();
         share = true;
-    }else{
+    } else {
         share = undefined;
         folder = "public/viade";
         user = props.user;
     }
-   
+
 
     useEffect(() => {
         if (user !== undefined) {
             const url = user.split("profile/card#me")[0] + folder;
 
-            loadRoutes(url, user,share);
+            loadRoutes(url, user, share, props.name);
         }
     }, [user]);
 
     return (<InformationSection id="mapComponent"><H2Format id="porcentaje">Cargando: 0 %</H2Format></InformationSection>)
 }
 
-async function loadRoutes(url, user,share) {
-	
-	if (!await fileClien.itemExists(url))
-		try {
+async function loadRoutes(url, user, share, name) {
+
+    if (!await fileClien.itemExists(url))
+        try {
             ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
-			return;
+            return;
         }
         catch (error) {
             return;
         }
-	
+
     let routes = await fileClien.readFolder(url + "/routes");
     let rutasJson = [];
     let commentsJson = [];
     let fileName = [];
-	
+
     if (routes.files.length === 0) {
         try {
             ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
@@ -66,9 +66,9 @@ async function loadRoutes(url, user,share) {
             return;
         }
     }
-	var count = 0;
-	
-    for (let i = 0; i < routes.files.length; i++) { 
+    var count = 0;
+
+    for (let i = 0; i < routes.files.length; i++) {
         if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld') || routes.files[i].name.includes('.geojson')) {
             // eslint-disable-next-line
             fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
@@ -78,30 +78,31 @@ async function loadRoutes(url, user,share) {
                     fileName.push(routes.files[i].name.split('.json')[0]);
                     count += 1;
                     updatePercent(count, routes.files.length);
-                    if (count === routes.files.length){
-                        loadMapView(new Rutas(rutasJson, commentsJson, fileName,share), user);
+                    if (count === routes.files.length) {
+                        loadMapView(new Rutas(rutasJson, commentsJson, fileName, share), user, name);
                     }
-                        
+
                 });
             });
         } else {
             count += 1;
             updatePercent(count, routes.files.length);
-			if (count === routes.files.length)
-			{
-				if (!rutasJson.length === 0)
-                       loadMapView(new Rutas(rutasJson, commentsJson, fileName,share), user);
-				else
-					ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
-			}
+            if (count === routes.files.length) {
+                if (!rutasJson.length === 0) {
+                    loadMapView(new Rutas(rutasJson, commentsJson, fileName, share), user, name);
+                }
+
+                else
+                    ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
+            }
         }
     }
 }
 
-function loadMapView(rutas, user) {
+function loadMapView(rutas, user,name) {
     setTimeout(() => {
         try {
-            ReactDOM.render(<MapaComponent {... { rutas, user }}></MapaComponent>, document.getElementById('mapComponent'))
+            ReactDOM.render(<MapaComponent {... { rutas, user, name}}></MapaComponent>, document.getElementById('mapComponent'))
         }
         catch (error) {
             return;
@@ -119,16 +120,17 @@ function updatePercent(count, length) {
 }
 
 
-const Map = (props) => { 
+const Map = (props) => {
     let user = props.user;
-    if (user === undefined){
+    let name = props.name;
+    if (user === undefined) {
         user = "public";
         return (<InformationSection id="mapComponent">
-        <button onClick={() => ReactDOM.render(<LoadRoute {...{user}}></LoadRoute>, document.getElementById('mapComponent'))}>Compartidas</button>
-        <button  onClick={() => ReactDOM.render(<LoadRoute></LoadRoute>, document.getElementById('mapComponent'))}>Privadas</button>
+            <button onClick={() => ReactDOM.render(<LoadRoute {...{ user }}></LoadRoute>, document.getElementById('mapComponent'))}>Compartidas</button>
+            <button onClick={() => ReactDOM.render(<LoadRoute></LoadRoute>, document.getElementById('mapComponent'))}>Privadas</button>
         </InformationSection>)
     }
-    return <LoadRoute {...{ user }}></LoadRoute>
+    return <LoadRoute {...{ user, name }}></LoadRoute>
 }
 
 export default Map;
