@@ -75,7 +75,7 @@ async function loadRoutes(url, user, share, name) {
                 fileClien.readFile(url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0] + "Comments.json").then((fileComment) => {
                     commentsJson.push(JSON.parse(fileComment));
                     rutasJson.push(JSON.parse(file));
-                    fileName.push(routes.files[i].name.split('.json')[0]);
+                    fileName.push(routes.files[i].name);
                     count += 1;
                     updatePercent(count, routes.files.length);
                     if (count === routes.files.length) {

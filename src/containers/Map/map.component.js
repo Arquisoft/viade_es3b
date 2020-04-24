@@ -21,7 +21,7 @@ L.Icon.Default.mergeOptions({
 
 /* método que generar el mapa, junto con su nombre, y descripción*/
 const MapaComponent = props => {
-  console.log(props.name);
+  let fileClien = new fileClient(solidAuth, { enableLogging: true });
   let rutas = LeafletMap;
   rutas = props.rutas;
   let user = props.user;
@@ -53,13 +53,10 @@ const MapaComponent = props => {
   }
 
 
-  function shareRoute() {
+  function shareRoute() {    
+    currentRuta.share(fileClien,user.split("profile/card#me")[0]);
     document.getElementById("btShare").disabled = true;
-
-
     document.getElementById("btShare").textContent =  "Compartida";
-    
-    currentRuta.share();
   }
 
   function addComment() {
@@ -67,9 +64,8 @@ const MapaComponent = props => {
     document.getElementById("comentario").value = "Publicando";
     document.getElementById("comentario").readonly = true;
 
-    var fileClien = new fileClient(solidAuth, { enableLogging: true });
-    let url = user.split("profile/card#me")[0] + currentRuta.CommentsFileName;
-    console.log(url);
+    
+    let url = user.split("profile/card#me")[0] + "viade/comments/routeComments/" + currentRuta.CommentsFileName;
     fileClien.readFile(url).then((fileComment) =>{
     
     var value = currentRuta.addComment(JSON.parse(fileComment),text);
