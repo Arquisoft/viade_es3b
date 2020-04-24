@@ -3,7 +3,8 @@ import { Point, WayPoint, CommentObj } from "./point.js";
 
 
 export default class Ruta {
-    constructor(file, commentsFile, fileName, share) {
+    constructor(file, commentsFile, fileName, share, rutas) {
+        this.rutas = rutas;
         this.name = file.name;
         this.description = file.description;
         this.media = [];
@@ -46,9 +47,9 @@ export default class Ruta {
         return this.media[this.currentMedia];
     }
 
-    addComment(fileClien, text, user,callback) {
+    addComment(fileClien, text, user, callback) {
 
-        let url = user.split("profile/card#me")[0] + ((this.shared)? "public/":"") + "viade/comments/routeComments/" + this.CommentsFileName;
+        let url = user.split("profile/card#me")[0] + ((this.shared) ? "public/" : "") + "viade/comments/routeComments/" + this.CommentsFileName;
         fileClien.readFile(url).then((file) => {
             var value = this.createComment(JSON.parse(file), text);
             fileClien.createFile(url, value, "application/json").then(() => {
@@ -96,17 +97,67 @@ export default class Ruta {
     }
 
     share(fileClient, url, callback) {
+        let user = url;
         console.log(this.fileName + "-" + this.shared);
         let folderToRemove = (this.shared) ? url + "public/viade/" : url + "viade/";
         let folderToCopy = (!this.shared) ? url + "public/viade/" : url + "viade/";
 
         fileClient.move(folderToRemove + "routes/" + this.fileName, folderToCopy + "routes/" + this.fileName).then(
-            fileClient.move(folderToRemove + "comments/routeComments/" + this.CommentsFileName, folderToCopy +
-                "comments/routeComments/" + this.CommentsFileName).then(() => {
-                    this.shared = !this.shared;
-                    callback();
-                }));
+        fileClient.readFile(folderToRemove + "routes/" + this.fileName).then((file) => {
+            var value = this.updateMedia(JSON.parse(file), user);
+            fileClient.createFile( folderToCopy + "routes/" + this.fileName, value, "application/json").then(
+                fileClient.move(folderToRemove + "comments/routeComments/" + this.CommentsFileName, folderToCopy +
+                    "comments/routeComments/" + this.CommentsFileName).then(() => {
+                        this.shared = !this.shared;
+                        this.sharePhotos(fileClient, folderToCopy);
+                        callback();
+                    })
+            )
+        }));
+    }
 
+    sharePhotos(fileClient, folderToCopy) {
+        this.media.forEach(m => {
+            if (m.includes("viade")) {
+                if (this.rutas.exitMedia(m) <= 1) {
+                    fileClient.move(m, folderToCopy + m.split("viade/")[1])
+                }
+                else
+                    fileClient.copy(m, folderToCopy + m.split("viade/")[1])
+            }
+        });
+    }
+
+    updateMedia(json, user) {
+        json.media = [];
+       this.media.forEach(m => {
+            console.log("Media: " + m)
+            if (!m.includes(user)) {
+                console.log("Malll" + user);
+                json.media.push({
+                    "@id": m
+                });
+            } else {
+                console.log("Bien")
+                if (m.includes("/public/")) {
+                    
+                    m = m.split("public/")[0] + m.split("public/")[1];
+                    
+                    json.media.push({
+                        "@id": m
+                    });
+                } else {
+                    m = m.split("viade/")[0] + "public/viade/" + m.split("viade/")[1];
+                    console.log("BIen: " + m)
+                    json.media.push({
+                        "@id": m
+                    });
+                }
+
+            }
+        });
+        console.log(json);
+        return JSON.stringify(json);
 
 
     }

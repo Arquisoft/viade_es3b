@@ -44,7 +44,8 @@ const LoadRoute = (props) => {
 
 async function loadRoutes(url, user, share, name) {
 
-    if (!await fileClien.itemExists(url))
+    if (!await fileClien.itemExists(url)){
+    console.log("BIne");
         try {
             ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
             return;
@@ -52,6 +53,7 @@ async function loadRoutes(url, user, share, name) {
         catch (error) {
             return;
         }
+    }
 
     let routes = await fileClien.readFolder(url + "/routes");
     let rutasJson = [];
@@ -67,6 +69,7 @@ async function loadRoutes(url, user, share, name) {
         }
     }
     var count = 0;
+
 
     for (let i = 0; i < routes.files.length; i++) {
         if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld') || routes.files[i].name.includes('.geojson')) {
