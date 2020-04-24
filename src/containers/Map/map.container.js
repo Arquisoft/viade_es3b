@@ -15,6 +15,7 @@ const fileClien = new fileClient(solidAuth, { enableLogging: true });
 const LoadRoute = (props) => {
     var folder;
     var user;
+    var share = false;
     if (props.user === undefined){
         folder = "viade";
         user = useWebId();
@@ -22,7 +23,9 @@ const LoadRoute = (props) => {
     else if (props.user === "public"){
         folder = "public/viade";
         user = useWebId();
+        share = true;
     }else{
+        share = undefined;
         folder = "public/viade";
         user = props.user;
     }
@@ -32,14 +35,14 @@ const LoadRoute = (props) => {
         if (user !== undefined) {
             const url = user.split("profile/card#me")[0] + folder;
 
-            loadRoutes(url, user);
+            loadRoutes(url, user,share);
         }
     }, [user]);
 
     return (<InformationSection id="mapComponent"><H2Format id="porcentaje">Cargando: 0 %</H2Format></InformationSection>)
 }
 
-async function loadRoutes(url, user) {
+async function loadRoutes(url, user,share) {
 	
 	if (!await fileClien.itemExists(url))
 		try {
@@ -75,8 +78,10 @@ async function loadRoutes(url, user) {
                     fileName.push(routes.files[i].name.split('.json')[0]);
                     count += 1;
                     updatePercent(count, routes.files.length);
-                    if (count === routes.files.length)
-                        loadMapView(new Rutas(rutasJson, commentsJson, fileName), user);
+                    if (count === routes.files.length){
+                        loadMapView(new Rutas(rutasJson, commentsJson, fileName,share), user);
+                    }
+                        
                 });
             });
         } else {
@@ -85,7 +90,7 @@ async function loadRoutes(url, user) {
 			if (count === routes.files.length)
 			{
 				if (!rutasJson.length === 0)
-                       loadMapView(new Rutas(rutasJson, commentsJson, fileName), user);
+                       loadMapView(new Rutas(rutasJson, commentsJson, fileName,share), user);
 				else
 					ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
 			}

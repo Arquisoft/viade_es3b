@@ -5,7 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import ReactDOM from 'react-dom';
 import Slider from './prueba'
-import { Column, Up, MapaStyle, Button, FormCard, ScrollDiv, MapSection ,CommentCard,ButtonShare} from './map.style';
+import { Column, Up, MapaStyle, Button, FormCard, ScrollDiv, MapSection ,CommentCard,ButtonShare as ButtonShareStyle} from './map.style';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
@@ -104,6 +104,15 @@ const MapaComponent = props => {
       {getMark()}
     </MapaStyle>;
   }
+
+  const ButtonShare = () =>{
+    if(currentRuta.shared === undefined)
+      return <></>
+    else{
+      return <> <br></br><ButtonShareStyle id="btShare" disabled={currentRuta.shared} onClick= {() => shareRoute()} >Compatir</ButtonShareStyle></>
+    }
+
+  } 
   return (
     <div>
       <MapSection>
@@ -118,8 +127,7 @@ const MapaComponent = props => {
                 <h3 id="description">{currentRuta.description}</h3>
                 <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
                 <Slider {... { media }}></Slider>
-                <br></br>
-                <ButtonShare id="btShare" disabled={currentRuta.shared} onClick= {() => shareRoute()} >Compatir</ButtonShare>
+                <ButtonShare> </ButtonShare>
               </FormCard>
               <ScrollDiv>
                 <FormCard  ><h2>Rutas:</h2>
@@ -131,7 +139,6 @@ const MapaComponent = props => {
         </Up>
       </MapSection>
         <div id="comments"><Comments></Comments></div>
-      
     </div>
   );
 }

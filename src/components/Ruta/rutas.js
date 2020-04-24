@@ -1,10 +1,10 @@
 import Ruta from './ruta.js';
 
 class Rutas{
-    constructor(newRoutes,commentsJson,fileName){
+    constructor(newRoutes,commentsJson,fileName,share){
         this.rutas = [];
         for( var i= 0; i < newRoutes.length;  i ++){
-            this.rutas.push(new Ruta(newRoutes[i],commentsJson[i],fileName[i]))
+            this.rutas.push(new Ruta(newRoutes[i],commentsJson[i],fileName[i],share))
         }
         this.currentRuta = this.rutas[0];
     }

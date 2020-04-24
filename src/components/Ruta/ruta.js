@@ -3,7 +3,7 @@ import { Point , WayPoint,CommentObj} from "./point.js";
 
 
 export default class Ruta {
-    constructor(file,commentsFile,fileName) {
+    constructor(file,commentsFile,fileName,share) {
         this.name = file.name;
         this.description = file.description;
         this.media = [];
@@ -19,7 +19,7 @@ export default class Ruta {
             //Datos para subir commentarios al pod
             this.CommentsFileName = "viade/comments/routeComments/" + fileName + "Comments.json";
         }
-        this.shared = false;
+        this.shared = share;
     }
 
     getNextMedia() {
