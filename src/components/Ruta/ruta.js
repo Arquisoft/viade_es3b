@@ -84,7 +84,7 @@ export default class Ruta {
         return distance.toFixed(2);
     }
 
-    share(fileClient, url) {
+    share(fileClient, url,callback) {
         console.log(this.fileName + "-" + this.shared);
         let folderToRemove = (this.shared) ? url + "public/viade/" : url + "viade/";
         let folderToCopy = (!this.shared) ? url + "public/viade/" : url + "viade/";
@@ -93,7 +93,7 @@ export default class Ruta {
             fileClient.move(folderToRemove + "comments/routeComments/" + this.CommentsFileName, folderToCopy +
                 "comments/routeComments/" + this.CommentsFileName).then(() => {
                     this.shared = !this.shared;
-                    return;
+                    callback();
                 }));
 
 
