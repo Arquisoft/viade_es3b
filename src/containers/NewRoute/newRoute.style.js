@@ -106,6 +106,19 @@ export const ChooseButton = styled.div`
     }
 `;
 
+export const ShareCard = styled.div`
+  input[type="checkbox"]{
+    margin: 0px !important;
+    /* Doble-tamaño Checkboxes */
+    -ms-transform: scale(1); /* IE */
+    -moz-transform: scale(1); /* FF */
+    -webkit-transform: scale(1); /* Safari y Chrome */
+    -o-transform: scale(1); /* Opera */
+  }
+
+
+`;
+
 
 
 
