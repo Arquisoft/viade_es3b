@@ -12,6 +12,7 @@ import {
   FormModelConverter,
   FormModelRenderer,
   Mapa,
+  NewRoute,
   Uploader,
   Friends
 } from './containers';
@@ -31,6 +32,11 @@ const privateRoutes = [
     id: 'map',
     path: '/Map',
     component: Mapa
+  },
+  {
+    id: 'newRoute',
+    path: '/NewRoute',
+    component: NewRoute
   },
   {
      id: 'upload',
