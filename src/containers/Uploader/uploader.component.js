@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import createFolder from './../../utils/uploadRoute'
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 var publico = false;
@@ -111,8 +112,8 @@ const Formulario = () => {
 				<UploadButton>
 					<button onClick={() => {
 						if (file !== null) {
-							if (publico) createFolder(url + "public/" + folder, file, image, video, setFile, setImage, setVideo)
-							else createFolder(url + folder, file, image, video, setFile, setImage, setVideo)
+							if (publico) createFolder(fileClien,url + "public/" + folder, file, image, video, setFile, setImage, setVideo,publico,showSuccessUploadFile,showErrorUploadFile)
+							else createFolder(fileClien,url + folder, file, image, video, setFile, setImage, setVideo,publico,showSuccessUploadFile,showErrorUploadFile)
 						} else {
 							showErrorUploadFile(t('uploader.chooseJSONFile'));
 						}
@@ -156,7 +157,8 @@ const showSuccessUploadFile = (name) => {
 	});
 }
 
-function getJson() {
+/*
+function getJsonComments() {
 	var obj = ({
 		"@context": {
 			"@version": 1.1,
@@ -193,7 +195,7 @@ function read(file, callback) {
 }
 
 
-const createFolder = async (folder, file, photo, video, setFile, setImage, setVideo) => {
+/*const createFolder = async (folder, file, photo, video, setFile, setImage, setVideo) => {
 	read(file, function (json) {
 	
 		let url;
@@ -203,7 +205,7 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
 			fileClien.createFolder(folder);
 		}
 
-		fileClien.createFile(folder + "/comments/routeComments/" + file.name.split('.json')[0] + "Comments.json", getJson(), file.type);
+		fileClien.createFile(folder + "/comments/routeComments/" + file.name.split('.json')[0] + "Comments.json", getJsonComments(), file.type);
 
 		for (i = 0; photo != null && i < photo.length; i++) {
 			url = folder + "/resources/" + photo[i].name;
@@ -241,6 +243,6 @@ const createFolder = async (folder, file, photo, video, setFile, setImage, setVi
 		publico = false;
 
 	});
-}
+}*/
 
 export default AddRoute;
