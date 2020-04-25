@@ -1,5 +1,5 @@
 
-import getJsonComments from './defaultJson'
+import getJsonComments from './defaultJsonComments'
 
 function read(file, callback) {
 	var reader = new FileReader();
