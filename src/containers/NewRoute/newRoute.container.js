@@ -54,6 +54,8 @@ const NewRoute = (props) => {
                         </ChooseButton>
                     </MultimediaCard>
                 </MultimediasCard>
+                <br></br>
+                <button>Crear</button>
             </FormCard>
         </Right>
     </MapSection>)

@@ -1,4 +1,4 @@
-import { Map as DefaultMap, TileLayer, Marker, Polyline} from 'react-leaflet';
+import { Map as DefaultMap, TileLayer, Marker, Polyline,Popup} from 'react-leaflet';
 import React from 'react';
 
 
@@ -16,6 +16,13 @@ export default class Map extends React.Component {
       points: [],
     };
     this.updatePoints = props.updatePoints; 
+  }
+
+  deleteMarker(position){
+    let {points} = this.state
+    points = points.filter(function(value){ return value !== position});
+    this.setState({points});
+    this.updatePoints(points);
   }
   
   addMarker = (e) => {
@@ -38,7 +45,9 @@ export default class Map extends React.Component {
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
         />
         {this.state.points.map((position, idx) => 
-          <><Marker key={`marker-${idx}`} position={position}></Marker>
+          <><Marker key={`marker-${idx}`} position={position}>
+            <Popup><button onClick = {() => this.deleteMarker(position)}>Eliminar</button></Popup>
+          </Marker>
           <Polyline  color={'blue'} positions={this.state.points}></Polyline></>
         )}
 
