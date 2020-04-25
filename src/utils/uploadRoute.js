@@ -1,20 +1,10 @@
 
 import getJsonComments from './defaultJsonComments'
 
-function read(file, callback) {
-	var reader = new FileReader();
-
-	reader.onload = function () {
-		callback(JSON.parse(reader.result));
-	}
-
-	reader.readAsText(file);
-}
 
 
-export default function createFolder(fileClien,folder, file, photo, video, setFile, setImage, setVideo,publico,showSuccessUploadFile,showErrorUploadFile) {
-	read(file, function (json) {
-	
+
+export default function createFolder(fileClien,folder,json,name, photo, video,showSuccessUploadFile,showErrorUploadFile,callback) {
 		let url;
 		let i;
 		let existe = fileClien.itemExists(folder);
@@ -22,7 +12,7 @@ export default function createFolder(fileClien,folder, file, photo, video, setFi
 			fileClien.createFolder(folder);
 		}
 
-		fileClien.createFile(folder + "/comments/routeComments/" + file.name.split('.json')[0] + "Comments.json", getJsonComments(), file.type);
+		fileClien.createFile(folder + "/comments/routeComments/" + name.split('.json')[0] + "Comments.json", getJsonComments(), "application/json");
 
 		for (i = 0; photo != null && i < photo.length; i++) {
 			url = folder + "/resources/" + photo[i].name;
@@ -44,20 +34,15 @@ export default function createFolder(fileClien,folder, file, photo, video, setFi
 			}
 		}
 
-		if (fileClien.createFile(folder + "/routes/" + file.name, JSON.stringify(json), file.type)) {
-			showSuccessUploadFile("Ruta " + file.name);
+		if (fileClien.createFile(folder + "/routes/" + name, JSON.stringify(json), "application/json")) {
+			showSuccessUploadFile("Ruta " + name);
 		} else {
-			showErrorUploadFile("Ruta " + file.name);
+			showErrorUploadFile("Ruta " + name);
 		}
-	
-		setFile(null);
-		setImage(null);
-		setVideo(null);
-		document.getElementById('photo').value = null;
-		document.getElementById('video').value = null;
-		document.getElementById('route').value = null;
-		document.getElementById('cbox1').checked = false;
-		publico = false;
 
-    });
+		callback();
+	
+		
+
+
 }

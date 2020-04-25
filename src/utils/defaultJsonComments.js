@@ -20,7 +20,7 @@ export default function getJsonComments() {
 		}, "comments": []
 	});
 
-	return JSON.stringify(obj);
+	return  JSON.stringify(obj)
 
 }
 

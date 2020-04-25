@@ -1,5 +1,5 @@
 
-export default function getJsonROute(name,description,author,points,media) {
+export default function getJsonRoute(name,description,author,points,media) {
 	if(name === undefined) name = "";
 	if(description === undefined) description = "";
 	if(author === undefined) author = "";
@@ -55,13 +55,23 @@ export default function getJsonROute(name,description,author,points,media) {
 			"author": author,
 			"description": description,
 			"comments": "",
-			"media": media,
+			"media": [],
 			"waypoints" : [],
-			"points": points
+			"points": []
 		
 	});
 
-	return JSON.stringify(obj);
+	points.forEach(element => {
+		let lat = element.lat;
+		let lng = element.lng;
+		obj.points.push({
+			"latitude": lat,
+            "longitude": lng,
+            "elevation": 0
+		})
+	});
+
+	return obj;
 
 }
 
