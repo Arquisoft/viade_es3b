@@ -1,4 +1,4 @@
-import NewRoute from './map.container';
+import NewRoute from './newRoute.container';
 
 
 
