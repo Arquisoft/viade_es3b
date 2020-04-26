@@ -282,5 +282,6 @@
     "route": "Route",
     "share": "Share",
     "chooseJSONFile": "Please, choose JSON file"
+    }
   }
 }
