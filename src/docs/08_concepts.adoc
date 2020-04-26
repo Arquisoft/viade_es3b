@@ -13,6 +13,11 @@ POD to store and retrieve information of it. Each route has a media and a commen
 ==== User
 The user is the person who uses the application and can post routes and share routes with another user.
 
+=== Architecture and desing patterns
+
+We followed a P2P architecture because is the standard architecture of an application like this we implemented. There are only patterns in the creation of the objects of the
+application, we used prototype pattern to create those objects.
+
 === User Experience
 
 ==== User Interface
@@ -23,6 +28,18 @@ The user interface is developed with React, we tried to do it easy to use and ea
 
 The app is internacionalizated to be used in 2 languages, in English and Spanish for the people who can't understand English. This makes the application more usable for 
 all kind of people.
+
+=== Development concepts
+
+==== Building
+
+To build the application we use Node.js and his package manager, we build the app with it and we use some of the features it has.
+
+==== Testing
+
+We have 2 kind of tests in the application, we have tdd testing to incrementate the code coverage and to helping us to improve the application and we have bdd testing
+to check if the application works as it should.
+
 
 === Security and Safety
 
@@ -36,19 +53,19 @@ No part of the system has an aspect that endangers the life of the user.
 
 === “Under-the-hood”
 
-
 ==== Persistency
 
 The application is based on a decentralized system. Therefore, all information will be stored in each user's personal POD. It will be the user who grants the read / write permissions.
 
 ==== Transaction Handling
 
-The transactions realized across the application are asynchronous.
+The transactions realized across the application are asynchronous and we managed it to prevent unfinished transactions in the application to avoid errors.
 
 ==== Session Handling
 
-Session is handled by Solid Authentication Client.
+Session is handled by Solid Authentication Client, so it need an account with a SOLID Pod created and it will be handled by it.
 
 ==== Exception/Error Handling
 
-...
+We tried to manage exception and error handling in the code of the application.
+
