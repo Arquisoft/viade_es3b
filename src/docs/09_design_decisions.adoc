@@ -12,4 +12,7 @@ This section will be to specify some of the design decisions we took to develop 
 |Architecture | Peer-to-Peer because is the better in a Solid decentraliced app.
 |Data store | Solid Pods so we don't need any database, the routes, the comments and the images are stored there.
 |Map| Leaflet is the library used to see the map in our applications because is open source and easy to use.
+|Routes Format| The format for our routes is GeoJSON because we used it in other subject and we are familiarizated with it.
+|Testing| There aretesting in the application to improve our code coverage and to improve it.
+|Acceptance tests| We developped some behaviour-driven tests  via cucumber because we saw how it work in class and is easy to develop.
 |===

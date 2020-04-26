@@ -4,32 +4,38 @@
 This section describes overall, principal regulations and solution ideas that are relevant in multiple parts of the system.
 
 === Domain Model
+ 
+==== Route
 
-Overview of the fundamental data structures of the system and their relevant relationships.
+In the application , the base object we use and we modify is the object route. In the application we create objects route and we communicate this object with the user and 
+POD to store and retrieve information of it. Each route has a media and a comment atribute which store this in the application.
 
-...
+==== User
+The user is the person who uses the application and can post routes and share routes with another user.
 
 === User Experience
 
 ==== User Interface
 
-The user interface is developed with React. Screenshots of the main pages are shown below.
+The user interface is developed with React, we tried to do it easy to use and easy to understand to all kind of people.
 
 ==== Internationalization
 
-This app will be available in English.
+The app is internacionalizated to be used in 2 languages, in English and Spanish for the people who can't understand English. This makes the application more usable for 
+all kind of people.
 
 === Security and Safety
 
 ==== Security
 
-The application security is provided by the Solid Authentication Client and the Solid POD.
+The application security is provided by the Solid Authentication Client and the Solid POD, if you are not authenticated in the application, you can't navigate in it.
 
 ==== Safety
 
 No part of the system has an aspect that endangers the life of the user.
 
 === “Under-the-hood”
+
 
 ==== Persistency
 
