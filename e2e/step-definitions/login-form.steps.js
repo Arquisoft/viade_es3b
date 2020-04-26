@@ -27,8 +27,8 @@ defineFeature(feature, test => {
 
         when('I write my webID', async () => {
 
-            await page.waitForSelector(".sc-gzVnrw.hJUbuD");
-            await page.type(".sc-gzVnrw.hJUbuD", "https://viadeEs3b.solid.community/profile/card#me");
+            await page.waitForSelector(".sc-htoDjs.dopcfv");
+            await page.type(".sc-htoDjs.dopcfv", "https://viadeEs3b.solid.community/profile/card#me");
 
             await page.evaluate(() => {
                 let btns = [...document.querySelectorAll("button")];

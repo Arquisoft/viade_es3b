@@ -85,14 +85,25 @@ defineFeature(feature, test => {
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
-                    if (b.innerText == "Route test 1") {
+                    if (b.innerText == "Privadas") {
+                        b.click();
+                    }
+
+                });
+            });
+            await page.waitFor(5000);
+            await page.evaluate(() => {
+                let b = [...document.querySelectorAll("button")];
+                b.forEach(function (b) {
+                    if (b.innerText == "Ruta por Nava") {
                         b.click();
                     }
 
                 });
             });
 
-            expect(page).toMatchElement('h2', { text: 'Route test 1' })
+
+            expect(page).toMatchElement('h1', { text: 'Ruta por Nava' })
 
             
 
