@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import data from '@solid/query-ldflex';
-import {FriendsPageContent} from './friends.component';
-import {errorToaster} from '@utils';
+import { FriendsPageContent } from './friends.component';
+import { errorToaster } from '@utils';
 import auth from 'solid-auth-client';
 import FC from 'solid-file-client';
-import {H2Format} from "../Map/map.style";
+import { H2Format } from "../Map/map.style";
 import ReactDOM from "react-dom";
 import { FriendRoute } from './friends.style';
 import Map from "../Map/map.container";
+import Ruta from "../../components/Ruta/ruta";
 const defaultProfilePhoto = 'img/icon/empty-profile.svg';
 const reload = () => {
   window.location.reload();
@@ -23,29 +24,34 @@ export class FriendsComponent extends Component<Props> {
     this.state = {
       friends: [],
       friendsWebId: [],
-      friendsPhotos: []
+      friendsPhotos: [],
+      activeId: null
     };
+  }
+
+  handleClick(event, id) {
+    this.setState({ activeId: id })
   }
 
   componentDidMount() {
     const { webId } = this.props;
-    if (webId){
+    if (webId) {
       this.getFriends();
     }
   }
 
   componentDidUpdate(prevProps) {
     const { webId } = this.props;
-    if (webId && webId !== prevProps.webId){
+    if (webId && webId !== prevProps.webId) {
       this.getFriends();
     }
   }
 
   getFriends = async () => {
     const { webId } = this.props;
-    const friends=[];
-    const friendsWebId=[];
-    const friendsPhotos=[];
+    const friends = [];
+    const friendsWebId = [];
+    const friendsPhotos = [];
 
     let image;
     try {
@@ -62,40 +68,71 @@ export class FriendsComponent extends Component<Props> {
         }
         friendsPhotos.push(image)
       }
-      this.setState({friends: friends, friendsWebId: friendsWebId, friendsPhotos: friendsPhotos});
+      this.setState({ friends: friends, friendsWebId: friendsWebId, friendsPhotos: friendsPhotos });
     } catch (e) {
       errorToaster(e.message, 'Error');
     }
   };
 
-  getFriendRoutes = async (event, friendWebId) => {
+  getFriendRoutes = async (event, friendWebId, index) => {
     event.preventDefault();
-    const fc= new FC(auth, { enableLogging: true });
+    const fc = new FC(auth, { enableLogging: true });
     const url = friendWebId.toString().split("profile/card#me")[0] + "public/viade";
-    let friendsRoutes=[];
+    let friendsRoutes = [];
+    //let rutasJson = [];
+    //let rutas = [];
 
-    let routes = await fc.readFolder(url + "/routes");
-    if (routes.files.length !== 0) {
-      for (let i = 0; i < routes.files.length; i++) {
-        if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
-          // eslint-disable-next-line
-          fc.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
-            let routeFileName = routes.files[i].name.split('.json')[0];
-            friendsRoutes.push(<FriendRoute onClick={(event) => this.loadMapView(event, friendWebId.toString())}>{routeFileName}</FriendRoute>);
-            if (i===routes.files.length-1){
-              ReactDOM.render(friendsRoutes, document.getElementById('routesList'));
-            }
-          });
+    let existe = await fc.itemExists(url + "/routes");
+    if (!existe) {
+      try {
+        ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('routesList'));
+      }
+      catch (error) {
+        return;
+      }
+    } else {
+      let routes = await fc.readFolder(url + "/routes");
+      if (routes.files.length === 0) {
+        try {
+          ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('routesList'));
+        }
+        catch (error) {
+          return;
+        }
+      } else {
+        for (let i = 0; i < routes.files.length; i++) {
+          if (routes.files[i].name.includes('.json') || routes.files[i].name.includes('.jsonld')) {
+            // eslint-disable-next-line
+            fc.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
+              let routeFileName = routes.files[i].name.split('.json')[0];
+              let ruta = new Ruta(JSON.parse(file), null, routeFileName);
+              friendsRoutes.push(<FriendRoute>
+                <div className="route-header" >
+                  <div className="route-name" onClick={(event) => this.loadMapView(event, friendWebId.toString(), ruta.name)}>{ruta.name}</div>
+                  <div className="route-info">{ruta.getDistance() + " km"}</div>
+                </div>
+                <div className="route-body">{ruta.description}</div>
+              </FriendRoute>
+              );
+              if (i === routes.files.length - 1) {
+                try {
+                  ReactDOM.render(friendsRoutes, document.getElementById('routesList'));
+                }
+                catch (error) {
+                  return;
+                }
+              }
+            });
+          }
         }
       }
-    }else{
-        ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('routesList'));
     }
+    this.handleClick(event, index);
   };
 
-  loadMapView = async (event, user) => {
+  loadMapView = async (event, user, name) => {
     event.preventDefault();
-    ReactDOM.render(<Map {...{user}}></Map>, document.getElementById('friends-wrapper'))
+    ReactDOM.render(<Map {...{ user, name }}></Map>, document.getElementById('friends-wrapper'))
 
   }
 
@@ -111,7 +148,7 @@ export class FriendsComponent extends Component<Props> {
           await user.knows.add(data[friendWebId]);
           await reload();
         }
-      } else  {
+      } else {
         errorToaster('WebId no válido', 'Error');
       }
     } catch (e) {
@@ -119,7 +156,7 @@ export class FriendsComponent extends Component<Props> {
     }
   };
 
-  isWebIdValid = async(friendWebId) => {
+  isWebIdValid = async (friendWebId) => {
     const fc = new FC(auth);
     let session = await auth.currentSession()
     if (!session) {
@@ -128,7 +165,7 @@ export class FriendsComponent extends Component<Props> {
     try {
       let op = async client => await client.itemExists(friendWebId);
       return await op(fc);
-    }catch (e) {
+    } catch (e) {
     }
   };
 
@@ -146,10 +183,10 @@ export class FriendsComponent extends Component<Props> {
   };
 
   render() {
-    const { friends, friendsWebId, friendsPhotos } = this.state;
+    const { friends, friendsWebId, friendsPhotos, activeId } = this.state;
     const { webId } = this.props;
     return (
-      <FriendsPageContent {...{ friends, friendsWebId, friendsPhotos, webId, addFriend: this.addFriend, getFriendRoutes: this.getFriendRoutes}} />
+      <FriendsPageContent {...{ friends, friendsWebId, friendsPhotos, webId, addFriend: this.addFriend, getFriendRoutes: this.getFriendRoutes, activeId }} />
     );
   }
 }

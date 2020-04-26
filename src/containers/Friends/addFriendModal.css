@@ -52,3 +52,33 @@
 .close:focus {
     cursor: pointer;
 }
+
+.is-active {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.route-header{
+    width: max-content;
+    font-weight: bold;
+    display:flex;
+    flex-direction: row;
+ }
+.route-name{
+    color: #5361FD;
+    font-size: 30px;
+    padding-right: 20px;
+}
+
+.route-name:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.route-info{
+    font-size: 20px;
+}
+
+.route-body{
+    padding: 15px;
+}

@@ -5,7 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import ReactDOM from 'react-dom';
 import Slider from './prueba'
-import { Column, Up, MapaStyle, MapCard, Button, FormCard, ScrollDiv, MapSection ,CommentCard} from './map.style';
+import { Column, Up, MapaStyle, Button, FormCard, ScrollDiv, MapSection, CommentCard, ButtonShare as ButtonShareStyle } from './map.style';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
@@ -21,10 +21,11 @@ L.Icon.Default.mergeOptions({
 
 /* método que generar el mapa, junto con su nombre, y descripción*/
 const MapaComponent = props => {
+  let fileClien = new fileClient(solidAuth, { enableLogging: true });
   let rutas = LeafletMap;
   rutas = props.rutas;
   let user = props.user;
-  let currentRuta = rutas.currentRuta;
+  let currentRuta = (props.name !== undefined) ? rutas.getRutaByName(props.name) : rutas.currentRuta;
   let media = currentRuta.media;
   let puntos = [];
 
@@ -34,8 +35,10 @@ const MapaComponent = props => {
     document.getElementById("name").textContent = currentRuta.name;
     document.getElementById("description").textContent = currentRuta.description;
     document.getElementById("distance").textContent = "Distancia: " + currentRuta.getDistance() + " KM";
+    updateShareButton();
     media = currentRuta.media;
     ReactDOM.hydrate(<MapaComponent  {... { rutas, user }}></MapaComponent>, document.getElementById('mapComponent'));
+
   }
 
   /* Método que devuelve los marcadores con los sistios de interes */
@@ -48,29 +51,36 @@ const MapaComponent = props => {
     return markets;
   }
 
+
+  function shareRoute() {
+    document.getElementById("btShare").disabled = true;
+    currentRuta.share(fileClien, user.split("profile/card#me")[0],updateShareButton);
+  }
+
+  function updateShareButton(){
+    document.getElementById("btShare").textContent = (currentRuta.shared) ? "Descompartir" : "Compartir";
+    document.getElementById("btShare").disabled = false;
+  }
+
   function addComment() {
     let text = document.getElementById("comentario").value;
     document.getElementById("comentario").value = "Publicando";
     document.getElementById("comentario").readonly = true;
-    var fileClien = new fileClient(solidAuth, { enableLogging: true });
-    let url = user.split("profile/card#me")[0] + currentRuta.CommentsFileName;
-    console.log(url);
-    fileClien.readFile(url).then((fileComment) =>{
-    
-    var value = currentRuta.addComment(JSON.parse(fileComment),text);
-    fileClien.createFile(url, value, "application/json").then(() => {
-      ReactDOM.hydrate(<Comments></Comments>, document.getElementById('comments'));
-      document.getElementById("comentario").value = "";})
-    }
-    );
+    currentRuta.addComment(fileClien,text,user,updateComments);
+
+  }
+
+  function updateComments(){
+    ReactDOM.hydrate(<Comments></Comments>, document.getElementById('comments'));
+        document.getElementById("comentario").value = "";
   }
 
   const Comments = () => {
     function obtainComments() {
       let aux = [];
-      currentRuta.comments.forEach(c =>{
-          aux.push(<p key={c.text}><h1>{c.dateCreated}</h1>{c.text}</p>);
-        });
+      currentRuta.comments.forEach(c => {
+        aux.push(<p key={c.text}><h1>{c.dateCreated}</h1>{c.text}</p>);
+      });
       return aux;
     }
 
@@ -90,6 +100,15 @@ const MapaComponent = props => {
       {getMark()}
     </MapaStyle>;
   }
+
+  const ButtonShare = () => {
+    if (currentRuta.shared === undefined)
+      return <></>
+    else {
+      return <> <br></br><ButtonShareStyle id="btShare" onClick={() => shareRoute()} > {(currentRuta.shared) ? "Descompartir" : "Compartir" }</ButtonShareStyle></>
+    }
+
+  }
   return (
     <div>
       <MapSection>
@@ -98,25 +117,24 @@ const MapaComponent = props => {
             <Map></Map>
           </div>
           <Column>
-            <MapCard>
-              <FormCard>
-                <h1 id="name">{currentRuta.name}</h1>
-                <h3 id="description">{currentRuta.description}</h3>
-                <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
 
-                <Slider {... { media }}></Slider>
+            <FormCard>
+              <h1 id="name">{currentRuta.name}</h1>
+              <h3 id="description">{currentRuta.description}</h3>
+              <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
+              <Slider {... { media }}></Slider>
+              <ButtonShare> </ButtonShare>
+            </FormCard>
+            <ScrollDiv>
+              <FormCard  ><h2>Rutas:</h2>
+                {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
               </FormCard>
-              <ScrollDiv>
-                <FormCard  ><h2>Rutas:</h2>
-                  {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
-                </FormCard>
-              </ScrollDiv>
-            </MapCard>
+            </ScrollDiv>
+
           </Column>
         </Up>
       </MapSection>
-        <div id="comments"><Comments></Comments></div>
-      
+      <div id="comments"><Comments></Comments></div>
     </div>
   );
 }

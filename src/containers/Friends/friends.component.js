@@ -22,7 +22,7 @@ import './addFriendModal.css';
  * @param props
  */
 export const FriendsPageContent = props => {
-  const { friends, friendsWebId, friendsPhotos, addFriend, getFriendRoutes } = props;
+  const { friends, friendsWebId, friendsPhotos, addFriend, getFriendRoutes, activeId } = props;
   const { t } = useTranslation();
 
   const [modalIsOpen,setIsOpen] = React.useState(false);
@@ -77,7 +77,7 @@ export const FriendsPageContent = props => {
           </FriendsCardTitle>
           <FriendsList>
             {friends.map((friend, index) => (
-                <FriendProfile key={index} onClick={(event) => getFriendRoutes(event,friendsWebId[index])}>
+                <FriendProfile key={index} className={ activeId === index && 'is-active' } onClick={(event) => getFriendRoutes(event,friendsWebId[index],index)}>
                   <ImageContainer>
                     <Img src={friendsPhotos[index]} alt="profile"/>
                   </ImageContainer>

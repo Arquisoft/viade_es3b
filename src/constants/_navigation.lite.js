@@ -22,6 +22,13 @@ export const NavigationItems = [
     to: '/map'
   },
   {
+    id: 'newROute',
+    //icon: 'img/icon/map.png',
+    icon: '../images/viade-icons/map.png',
+    label: 'Nueva ruta',
+    to: '/newRoute'
+  },
+  {
     id: 'friends',
     //icon: 'img/viade-icons/people.svg',
     icon: '../images/viade-icons/people.svg',

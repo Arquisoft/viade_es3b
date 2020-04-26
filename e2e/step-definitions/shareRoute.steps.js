@@ -1,5 +1,5 @@
 const {defineFeature, loadFeature}=require('jest-cucumber');
-const feature = loadFeature('./e2e/features/watchRoute.feature');
+const feature = loadFeature('./e2e/features/shareRoute.feature');
 
 const puppeteer = require('puppeteer');
 let browser = null;
@@ -11,7 +11,7 @@ defineFeature(feature, test => {
         jest.setTimeout(1200000);
     });
 
-    test('Trying to see any route', ({given, when, and, then}) => {
+    test('Trying to share a Route', ({given, when, and, then}) => {
 
         given('I log in in the app', async () => {
             browser = await puppeteer.launch({
@@ -77,11 +77,8 @@ defineFeature(feature, test => {
             
 
         });
-
-       
-
-        then('I can see the route', async () => {
-            await page.waitFor(8000);
+        and('I share a route', async () => {
+            await page.waitFor(5000);
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
@@ -91,11 +88,55 @@ defineFeature(feature, test => {
 
                 });
             });
+            
+            await page.evaluate(() => {
+                let b = [...document.querySelectorAll("button")];
+                b.forEach(function (b) {
+                    if (b.innerText == "Route test 1") {
+                        b.click();
+                    }
+
+                });
+            });
+            
+            await page.evaluate(() => {
+                let b = [...document.querySelectorAll("button")];
+                b.forEach(function (b) {
+                    if (b.innerText == "Compartir") {
+                        b.click();
+                    }
+
+                });
+            });
+
+            
+
+            
+
+        });
+
+       
+
+        then('I can see the route in share routes', async () => {
+            
+            await page.goto("http://localhost:3000/viade_es3b/#/map", {
+                waitUntil: 'networkidle2'
+            });
             await page.waitFor(5000);
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
-                    if (b.innerText == "Ruta por Nava") {
+                    if (b.innerText == "Compartidas") {
+                        b.click();
+                    }
+
+                });
+            });
+            await page.waitFor(5000);
+            await page.evaluate(() => {
+                let b = [...document.querySelectorAll("button")];
+                b.forEach(function (b) {
+                    if (b.innerText == "Route test 1") {
                         b.click();
                     }
 
@@ -103,7 +144,16 @@ defineFeature(feature, test => {
             });
 
 
-            expect(page).toMatchElement('h1', { text: 'Ruta por Nava' })
+            expect(page).toMatchElement('h1', { text: 'Route test 1' })
+            await page.evaluate(() => {
+                let b = [...document.querySelectorAll("button")];
+                b.forEach(function (b) {
+                    if (b.innerText == "Descompartir") {
+                        b.click();
+                    }
+
+                });
+            });
 
             
 
