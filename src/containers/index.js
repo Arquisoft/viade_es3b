@@ -7,6 +7,7 @@ import { FormModelConverter, FormModelRenderer } from './FormModel';
 import Mapa from './Map';
 import Uploader from './Uploader';
 import Friends from './Friends';
+import NewRoute from './NewRoute';
 
 export {
   Login,
@@ -18,6 +19,7 @@ export {
   FormModelConverter,
   FormModelRenderer,
   Mapa,
+  NewRoute,
   Uploader,
   Friends
 };
