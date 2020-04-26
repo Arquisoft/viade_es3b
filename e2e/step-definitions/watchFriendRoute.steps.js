@@ -81,7 +81,7 @@ defineFeature(feature, test => {
        
 
         then('I can see a route from any friend', async () => {
-            await page.waitFor(8000);
+            await page.waitFor(6000);
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("span")];
                 b.forEach(function (b) {
@@ -91,6 +91,7 @@ defineFeature(feature, test => {
 
                 });
             });
+            await page.waitFor(6000);
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("div")];
                 b.forEach(function (b) {
@@ -100,7 +101,7 @@ defineFeature(feature, test => {
 
                 });
             });
-
+            await page.waitFor(4000);
             expect(page).toMatchElement('h1', { text: 'Route test 1' })
 
             

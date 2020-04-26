@@ -92,7 +92,7 @@ defineFeature(feature, test => {
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
-                    if (b.innerText == "Ruta por Nava") {
+                    if (b.innerText == "Route test 1") {
                         b.click();
                     }
 
@@ -136,7 +136,7 @@ defineFeature(feature, test => {
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
-                    if (b.innerText == "Ruta por Nava") {
+                    if (b.innerText == "Route test 1") {
                         b.click();
                     }
 
@@ -144,7 +144,7 @@ defineFeature(feature, test => {
             });
 
 
-            expect(page).toMatchElement('h1', { text: 'Ruta por Nava' })
+            expect(page).toMatchElement('h1', { text: 'Route test 1' })
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
