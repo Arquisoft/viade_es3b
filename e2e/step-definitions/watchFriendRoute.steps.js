@@ -1,5 +1,5 @@
 const {defineFeature, loadFeature}=require('jest-cucumber');
-const feature = loadFeature('./e2e/features/watchRoute.feature');
+const feature = loadFeature('./e2e/features/watchFriendRoute.feature');
 
 const puppeteer = require('puppeteer');
 let browser = null;
@@ -11,7 +11,7 @@ defineFeature(feature, test => {
         jest.setTimeout(1200000);
     });
 
-    test('Trying to see any route', ({given, when, and, then}) => {
+    test('Trying to see friends Route', ({given, when, and, then}) => {
 
         given('I log in in the app', async () => {
             browser = await puppeteer.launch({
@@ -22,8 +22,8 @@ defineFeature(feature, test => {
             await page.goto("http://localhost:3000/#/login", {
                 waitUntil: 'networkidle2'
             });
-            await page.waitForSelector(".sc-gzVnrw.hJUbuD");
-            await page.type(".sc-gzVnrw.hJUbuD", "https://viadeEs3b.solid.community/profile/card#me");
+            await page.waitForSelector(".sc-htoDjs.dopcfv");
+            await page.type(".sc-htoDjs.dopcfv", "https://viadeEs3b.solid.community/profile/card#me");
 
             await page.evaluate(() => {
                 let btns = [...document.querySelectorAll("button")];
@@ -83,25 +83,25 @@ defineFeature(feature, test => {
         then('I can see a route from any friend', async () => {
             await page.waitFor(8000);
             await page.evaluate(() => {
-                let b = [...document.querySelectorAll("button")];
+                let b = [...document.querySelectorAll("span")];
                 b.forEach(function (b) {
-                    if (b.innerText == "amigo1") {
+                    if (b.innerText == "Ignacio Bermejo") {
                         b.click();
                     }
 
                 });
             });
             await page.evaluate(() => {
-                let b = [...document.querySelectorAll("button")];
+                let b = [...document.querySelectorAll("div")];
                 b.forEach(function (b) {
-                    if (b.innerText == "Route 1") {
+                    if (b.innerText == "Route test 1") {
                         b.click();
                     }
 
                 });
             });
 
-            expect(page).toMatchElement('h2', { text: 'Route test 1' })
+            expect(page).toMatchElement('h1', { text: 'Route test 1' })
 
             
 
