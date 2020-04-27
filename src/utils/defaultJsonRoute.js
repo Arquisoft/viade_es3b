@@ -71,7 +71,7 @@ export default function getJsonRoute(name,description,author,points,media) {
 		})
 	});
 
-	points.forEach(element => {
+	media.forEach(element => {
 		obj.media.push({
 			"@id": element
 		})

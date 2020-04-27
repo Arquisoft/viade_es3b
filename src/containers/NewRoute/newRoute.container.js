@@ -9,13 +9,14 @@ import getJsonRoute from './../../utils/defaultJsonRoute'
 import fileClient from 'solid-file-client';
 import * as solidAuth from 'solid-auth-client';
 import { useWebId } from '@solid/react';
+import ReactDOM from 'react-dom';
 
 
 const NewRoute = (props) => {
     const ruta = props.currentRuta;
     const point = []
     if (ruta !== undefined) ruta.points.forEach(p => { point.push(p.getCoordinates()); });
-    const updateComment = (ruta === undefined) ? false : true;
+    const updateComment = (ruta === undefined) ? true : false;
     const user = "" + useWebId();
     const folder = "viade";
     const url = user.split("profile/card#me")[0];
@@ -42,6 +43,7 @@ const NewRoute = (props) => {
         document.getElementById('description').value = null;
         document.getElementById('image').value = null;
         document.getElementById('video').value = null;
+        ReactDOM.render( <Map {... { point, updatePoints }}></Map>,document.getElementById('leftMap'));
         if (ruta === undefined) document.getElementById('cbox1').checked =  false;
         publico = false;
     }
@@ -49,12 +51,11 @@ const NewRoute = (props) => {
 
     function updatePoints(point) {
         setPoints(point);
-
     }
 
 
 
-    const checkValues = () => {
+    function checkValues(){
         let error = false;
 
         error = checkString(name, "El nombre no puede estar vacio") ? true : error;
@@ -71,6 +72,7 @@ const NewRoute = (props) => {
     }
 
     const checkString = (value, message) => {
+        console.log("El valor " + value)
         if (value === null) {
             showErrorUploadFile(message);
             return true;
@@ -103,7 +105,7 @@ const NewRoute = (props) => {
 
 
     return (<MapSection>
-        <Left>
+        <Left id="leftMap">
             <Map {... { point, updatePoints }}></Map>
         </Left>
         <Right>
@@ -152,8 +154,8 @@ const NewRoute = (props) => {
                     : <></>}
 
                 <br></br>
-                <button onClick={() => {
-                    if (checkValues) {
+                <button id="btEdit" onClick={() => {
+                    if (!checkValues()) {
                         let json = getJsonRoute(name, description, user, points)
                         let nameFile = (ruta !== undefined) ? ruta.fileName : name.trim() + ".json"
                         if (publico) createFolder(fileClien, url + "public/" + folder, json, nameFile, image, video, updateComment, showSuccessUploadFile, showErrorUploadFile, clear)
