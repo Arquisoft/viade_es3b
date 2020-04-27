@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Image } from './headerprofile-background.style';
-import BackgroundImage from '../../../images/headerprofile.png'
+import BackgroundImage from '../../../images/header-profile.png'
 
 type Props = {
   children: React.Node,

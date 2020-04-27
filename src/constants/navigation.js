@@ -16,13 +16,13 @@ export const NavigationItems = [
   },
   {
     id: 'map',
-    icon: 'img/icon/map.png',
+    icon: 'img/viade-icons/map.png',
     label: 'navBar.myTrails',
     to: '/map'
   },
   {
     id: 'newRoute',
-    icon: 'img/icon/new_route.png',
+    icon: 'img/viade-icons/new_route.png',
     label: 'Nueva ruta',
     to: '/newRoute'
   },
