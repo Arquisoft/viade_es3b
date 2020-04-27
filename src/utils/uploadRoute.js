@@ -5,8 +5,7 @@ import getJsonComments from './defaultJsonComments'
 
 
 export default function createFolder(fileClien,folder,json,name, photo, video,updateComment,showSuccessUploadFile,showErrorUploadFile,callback) {
-	console.log(json);
-		/*let url;
+		let url;
 		let i;
 		let existe = fileClien.itemExists(folder);
 		if (!existe) {
@@ -40,7 +39,7 @@ export default function createFolder(fileClien,folder,json,name, photo, video,up
 		} else {
 			showErrorUploadFile("Ruta " + name);
 		}
-		*/
+		
 
 		callback();
 	
