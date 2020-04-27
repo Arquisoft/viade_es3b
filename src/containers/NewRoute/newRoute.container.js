@@ -30,13 +30,13 @@ const NewRoute = (props) => {
     const [description, setDescription] = (ruta !== undefined) ? useState(ruta.description) : useState(null);
     const [image, setImage] = useState(null);
     const [video, setVideo] = useState(null);
-    const [points, setPoints] = useState([]);
+    const [points, setPoints] = useState(point);
     const { t } = useTranslation();
 
 
 
     const clear = () => {
-        if (ruta !== undefined) loadMapView();
+        /*if (ruta !== undefined) loadMapView();
         else {
             setName(null);
             setDescription(null);
@@ -53,7 +53,7 @@ const NewRoute = (props) => {
 
             ReactDOM.render(<Map {... { point, updatePoints }}></Map>, document.getElementById('leftMap'));
         }
-
+*/
     }
 
     function loadMapView() {
@@ -103,6 +103,10 @@ const NewRoute = (props) => {
 
         } else if (description.length === 0) {
             setDescription(ruta.description);
+        }
+
+        if(points.length === 0){
+            setPoints(point)
         }
         return false;
     }

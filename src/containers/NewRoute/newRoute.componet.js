@@ -38,7 +38,7 @@ export default class Map extends React.Component {
     try{
       return (
         <DefaultMap 
-          center={(this.point.length !== 0)? this.props.point[0] : [43.355116, -5.851304]} 
+          center={(this.point.length !== 0)? this.point[0] : [43.355116, -5.851304]} 
           onClick={this.addMarker}
           zoom={13} 
           style={style.map}
