@@ -16,6 +16,8 @@ const NewRoute = (props) => {
     const ruta = props.currentRuta;
     const point = []
     if (ruta !== undefined) ruta.points.forEach(p => { point.push(p.getCoordinates()); });
+    const waypoints = (ruta !== undefined) ? ruta.waypoints : []
+    const media = (ruta !== undefined) ? ruta.meida : []
     const updateComment = (ruta === undefined) ? true : false;
     const user = "" + useWebId();
     const folder = "viade";
@@ -34,45 +36,78 @@ const NewRoute = (props) => {
 
 
     const clear = () => {
-        setName(null);
-        setDescription(null);
-        setImage(null);
-        setVideo(null);
-        setPoints(null);
-        document.getElementById('name').value = null;
-        document.getElementById('description').value = null;
-        document.getElementById('image').value = null;
-        document.getElementById('video').value = null;
-        ReactDOM.render( <Map {... { point, updatePoints }}></Map>,document.getElementById('leftMap'));
-        if (ruta === undefined) document.getElementById('cbox1').checked =  false;
-        publico = false;
+        if (ruta !== undefined) loadMapView();
+        else {
+            setName(null);
+            setDescription(null);
+            setImage(null);
+            setVideo(null);
+            setPoints(null);
+            document.getElementById('name').value = null;
+            document.getElementById('description').value = null;
+            document.getElementById('image').value = null;
+            document.getElementById('video').value = null;
+
+            document.getElementById('cbox1').checked = false;
+            publico = false;
+
+            ReactDOM.render(<Map {... { point, updatePoints }}></Map>, document.getElementById('leftMap'));
+        }
+
+    }
+
+    function loadMapView() {
+        let name = ruta.name;
+        let user = (ruta.shared) ? "public" : undefined;
+        ReactDOM.render(<Map {...{ user, name }}></Map>, document.getElementById('mapComponent'));
     }
 
 
     function updatePoints(point) {
+        let newPoints = [];
+        point.forEach(p => newPoints.push([p.lat, p.lng]));
         setPoints(point);
     }
 
 
 
-    function checkValues(){
-        let error = false;
+    function checkValues() {
+        if (ruta === undefined) {
+            let error = false;
 
-        error = checkString(name, "El nombre no puede estar vacio") ? true : error;
-        error = checkString(description, "La descripción no puede estar vacia") ? true : error;
+            error = checkString(name, "El nombre no puede estar vacio") ? true : error;
+            error = checkString(description, "La descripción no puede estar vacia") ? true : error;
 
-        console.log(points.length);
-        if (points.length === 0) {
-            error = true;
-            showErrorUploadFile("La ruta debe tener al menos un punto")
+            console.log(points.length);
+            if (points.length === 0) {
+                error = true;
+                showErrorUploadFile("La ruta debe tener al menos un punto")
+            }
+
+            return error;
         }
-
-        return error;
+        return checkName();
 
     }
 
+    const checkName = () => {
+        if (name === null) {
+            setName(ruta.name);
+
+        } else if (name.length === 0) {
+            setName(ruta.name);
+        }
+
+        if (description === null) {
+            setDescription(ruta.description);
+
+        } else if (description.length === 0) {
+            setDescription(ruta.description);
+        }
+        return false;
+    }
+
     const checkString = (value, message) => {
-        console.log("El valor " + value)
         if (value === null) {
             showErrorUploadFile(message);
             return true;
@@ -86,7 +121,7 @@ const NewRoute = (props) => {
 
     const showErrorUploadFile = (name) => {
         toast.error(name, {
-            delay: 1000,
+
             autoClose: false,
             position: toast.POSITION.TOP_CENTER
         });
@@ -95,7 +130,7 @@ const NewRoute = (props) => {
     const showSuccessUploadFile = (name) => {
         //https://github.com/fkhadra/react-toastify
         toast.success(name, {
-            delay: 1000,
+
             autoClose: false,
             position: toast.POSITION.TOP_CENTER
         });
@@ -110,7 +145,7 @@ const NewRoute = (props) => {
         </Left>
         <Right>
             <FormCard>
-                <h1>{(ruta === undefined)?"Crear nueva ruta" : "Editar ruta"}</h1>
+                <h1>{(ruta === undefined) ? "Crear nueva ruta" : "Editar ruta"}</h1>
                 <h2>Nombre</h2>
                 <input type="test" id="name" name="name" onChange={(e) => { setName(e.target.value) }} placeholder={(ruta !== undefined) ? ruta.name : ""} />
                 <h3>Descripcion</h3>
@@ -156,12 +191,12 @@ const NewRoute = (props) => {
                 <br></br>
                 <button id="btEdit" onClick={() => {
                     if (!checkValues()) {
-                        let json = getJsonRoute(name, description, user, points)
+                        let json = getJsonRoute(name, description, user, points, media, waypoints)
                         let nameFile = (ruta !== undefined) ? ruta.fileName : name.trim() + ".json"
                         if (publico) createFolder(fileClien, url + "public/" + folder, json, nameFile, image, video, updateComment, showSuccessUploadFile, showErrorUploadFile, clear)
                         else createFolder(fileClien, url + folder, json, nameFile, image, video, updateComment, showSuccessUploadFile, showErrorUploadFile, clear)
                     }
-                }}>{(ruta === undefined)?"Crear" : "Editar"}</button>
+                }}>{(ruta === undefined) ? "Crear" : "Editar"}</button>
             </FormCard>
         </Right>
     </MapSection>)

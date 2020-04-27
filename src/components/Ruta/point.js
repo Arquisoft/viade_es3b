@@ -10,6 +10,7 @@ export class Point{
         return [this.latitude,this.longitude];
     }
 
+
 }
 
 export class WayPoint{

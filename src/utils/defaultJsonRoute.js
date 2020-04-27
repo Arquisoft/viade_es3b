@@ -1,10 +1,11 @@
 
-export default function getJsonRoute(name,description,author,points,media) {
+export default function getJsonRoute(name,description,author,points,media,waypoints) {
 	if(name === undefined) name = "";
 	if(description === undefined) description = "";
 	if(author === undefined) author = "";
 	if(points === undefined) points = [];
 	if(media === undefined) media = [];
+	if(waypoints === undefined) waypoints = [];
 
 	var obj = ({
 			"@context": {
@@ -62,8 +63,9 @@ export default function getJsonRoute(name,description,author,points,media) {
 	});
 
 	points.forEach(element => {
-		let lat = element.lat;
-		let lng = element.lng;
+		let lat = element[0];
+		let lng = element[1];
+		
 		obj.points.push({
 			"latitude": lat,
             "longitude": lng,
@@ -74,6 +76,20 @@ export default function getJsonRoute(name,description,author,points,media) {
 	media.forEach(element => {
 		obj.media.push({
 			"@id": element
+		})
+	});
+
+	waypoints.forEach(element => {
+		let name = element.name;
+		let description = element.description;
+		let lat = element.point.latitude;
+		let lng = element.point.longitude;
+		obj.waypoints.push({
+			"name": name,
+            "description": description,
+            "latitude": lat,
+            "longitude": lng,
+            "elevation": 0
 		})
 	});
 
