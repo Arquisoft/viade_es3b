@@ -22,7 +22,7 @@ export const NavigationItems = [
   },
   {
     id: 'newRoute',
-    icon: 'img/icon/map.png',
+    icon: 'img/icon/new_route.png',
     label: 'Nueva ruta',
     to: '/newRoute'
   },
