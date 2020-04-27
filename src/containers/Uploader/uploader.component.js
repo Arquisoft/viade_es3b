@@ -125,8 +125,8 @@ const Formulario = () => {
 					<button onClick={() => {
 						if (file !== null) {
 							read(file, function (json) {
-							if (publico) createFolder(fileClien,url + "public/" + folder,json, file.name, image, video,showSuccessUploadFile,showErrorUploadFile,clear)
-							else createFolder(fileClien,url + folder, json, file.name, image, video,showSuccessUploadFile,showErrorUploadFile,clear)
+							if (publico) createFolder(fileClien,url + "public/" + folder,json, file.name, image, video,true,showSuccessUploadFile,showErrorUploadFile,clear)
+							else createFolder(fileClien,url + folder, json, file.name, image, video,true,showSuccessUploadFile,showErrorUploadFile,clear)
 							});
 						} else {
 							showErrorUploadFile(t('uploader.chooseJSONFile'));

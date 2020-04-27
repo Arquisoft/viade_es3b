@@ -8,6 +8,7 @@ import Slider from './prueba'
 import { Column, Up, MapaStyle, Button, FormCard, ScrollDiv, MapSection, CommentCard, ButtonShare as ButtonShareStyle } from './map.style';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
+import NewRoute from './../NewRoute/index'
 
 
 /* Método para cambiar la imagen del Marker */
@@ -124,6 +125,7 @@ const MapaComponent = props => {
               <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
               <Slider {... { media }}></Slider>
               <ButtonShare> </ButtonShare>
+              <button onClick={() => ReactDOM.render(<NewRoute {...{currentRuta}}></NewRoute>, document.getElementById('mapComponent'))}>Editar</button>
             </FormCard>
             <ScrollDiv>
               <FormCard  ><h2>Rutas:</h2>

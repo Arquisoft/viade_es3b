@@ -24,6 +24,10 @@ export default class Ruta {
         this.shared = share;
     }
 
+    getRuta(){
+        return this;
+    }
+
     getNextMedia() {
         if (this.currentMedia < this.media.length - 1) {
             this.currentMedia = this.currentMedia + 1;

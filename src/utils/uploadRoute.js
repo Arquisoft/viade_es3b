@@ -4,7 +4,7 @@ import getJsonComments from './defaultJsonComments'
 
 
 
-export default function createFolder(fileClien,folder,json,name, photo, video,showSuccessUploadFile,showErrorUploadFile,callback) {
+export default function createFolder(fileClien,folder,json,name, photo, video,updateComment,showSuccessUploadFile,showErrorUploadFile,callback) {
 		let url;
 		let i;
 		let existe = fileClien.itemExists(folder);
@@ -12,7 +12,7 @@ export default function createFolder(fileClien,folder,json,name, photo, video,sh
 			fileClien.createFolder(folder);
 		}
 
-		fileClien.createFile(folder + "/comments/routeComments/" + name.split('.json')[0] + "Comments.json", getJsonComments(), "application/json");
+		if(updateComment) fileClien.createFile(folder + "/comments/routeComments/" + name.split('.json')[0] + "Comments.json", getJsonComments(), "application/json");
 
 		for (i = 0; photo != null && i < photo.length; i++) {
 			url = folder + "/resources/" + photo[i].name;

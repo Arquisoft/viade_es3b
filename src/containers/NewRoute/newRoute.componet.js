@@ -12,8 +12,9 @@ const style = {
 export default class Map extends React.Component {
   constructor(props) {
     super();
+    this.point = props.point;
     this.state = {
-      points: [],
+      points: props.point,
     };
     this.updatePoints = props.updatePoints; 
   }
@@ -35,7 +36,7 @@ export default class Map extends React.Component {
   render() {
     return (
       <DefaultMap 
-        center={[43.355116, -5.851304]} 
+        center={(this.point.length !== 0)? this.props.point[0] : [43.355116, -5.851304]} 
         onClick={this.addMarker}
         zoom={13} 
         style={style.map}
