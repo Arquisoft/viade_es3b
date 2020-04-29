@@ -8,6 +8,9 @@ import {ImgPopupSytle, DivPrueba} from './map.style';
 const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) => {
     function getMedia(){
         var slide = []
+        if(m.media.length === 0){
+          slide.push( <DivPrueba><h2>Noy hay multimedia</h2></DivPrueba>)
+        }
         for (var i = 0; i < m.media.length ; i++) {
               slide.push( <DivPrueba>{getMediaComponent(m.media[i])}</DivPrueba>)
         }
