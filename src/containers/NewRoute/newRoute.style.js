@@ -1,4 +1,3 @@
-
 import styled from 'styled-components';
 import 'leaflet/dist/leaflet.css';
 import "video-react/dist/video-react.css";
@@ -110,4 +109,11 @@ export const ShareCard = styled.div`
     -o-transform: scale(2); /* Opera */
   }
 `;
+
+
+
+
+
+
+
 

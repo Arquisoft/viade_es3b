@@ -12,9 +12,8 @@ const style = {
 export default class Map extends React.Component {
   constructor(props) {
     super();
-    this.point = props.point
     this.state = {
-      points: props.point,
+      points: [],
     };
     this.updatePoints = props.updatePoints; 
   }
@@ -28,38 +27,31 @@ export default class Map extends React.Component {
   
   addMarker = (e) => {
     const {points} = this.state
-    points.push([e.latlng.lat,e.latlng.lng])
+    points.push(e.latlng)
     this.setState({points})
     this.updatePoints(points);
   }
 
-  
   render() {
-    try{
-      return (
-        <DefaultMap 
-          center={(this.point.length !== 0)? this.point[0] : [43.355116, -5.851304]} 
-          onClick={this.addMarker}
-          zoom={13} 
-          style={style.map}
-          >
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-          />
-          {this.state.points.map((position, idx) => 
-            <><Marker key={`marker-${idx}`} position={position}>
-              <Popup><button onClick = {() => this.deleteMarker(position)}>Eliminar</button></Popup>
-            </Marker>
-            <Polyline  color={'blue'} positions={this.state.points}></Polyline></>
-          )}
-  
-        </DefaultMap>
-      );
-    }catch(e){
-      return;
-    }
-    
-  }
+    return (
+      <DefaultMap 
+        center={[43.355116, -5.851304]} 
+        onClick={this.addMarker}
+        zoom={13} 
+        style={style.map}
+        >
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+        />
+        {this.state.points.map((position, idx) => 
+          <><Marker key={`marker-${idx}`} position={position}>
+            <Popup><button onClick = {() => this.deleteMarker(position)}>Eliminar</button></Popup>
+          </Marker>
+          <Polyline  color={'blue'} positions={this.state.points}></Polyline></>
+        )}
 
+      </DefaultMap>
+    );
+  }
 }
