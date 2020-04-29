@@ -1,6 +1,6 @@
 import Map from './newRoute.componet'
 import React, { useState } from 'react';
-import { MapSection, Left, Right, FormCard, ChooseButton, MultimediaCard, MultimediasCard, ShareCard } from './newRoute.style';
+import { NewRouteWrapper, MapSection, NewRouteSection, FormCard, ChooseButton, MultimediaCard, MultimediasCard, ShareCard } from './newRoute.style';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -143,11 +143,9 @@ const NewRoute = (props) => {
 
 
 
-    return (<MapSection>
-        <Left id="leftMap">
-            <Map {... { point, updatePoints }}></Map>
-        </Left>
-        <Right>
+    return (<NewRouteWrapper>
+        
+        <NewRouteSection>
             <FormCard>
                 <h1>{(ruta === undefined) ? "Crear nueva ruta" : "Editar ruta"}</h1>
                 <h2>Nombre</h2>
@@ -202,8 +200,11 @@ const NewRoute = (props) => {
                     }
                 }}>{(ruta === undefined) ? "Crear" : "Editar"}</button>
             </FormCard>
-        </Right>
-    </MapSection>)
+        </NewRouteSection>
+        <MapSection id="leftMap">
+            <Map {... { point, updatePoints }}></Map>
+        </MapSection>
+    </NewRouteWrapper>)
 }
 
 export default NewRoute;
