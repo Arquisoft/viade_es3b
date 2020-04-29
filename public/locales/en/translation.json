@@ -47,6 +47,7 @@
   },
   "navBar": {
     "routes": "Routes",
+    "newRoute": "New route",
     "welcome": "Welcome",
     "logOut": "Log out",
     "profile": "Profile",

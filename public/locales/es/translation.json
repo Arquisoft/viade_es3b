@@ -48,6 +48,7 @@
   "navBar": {
    
     "routes": "Rutas",
+    "newRoute": "Nueva ruta",
     "welcome": "Bienvenida",
     "formModel": "Form Model",
     "logOut": "Cerrar Sesión",

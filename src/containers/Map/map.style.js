@@ -216,8 +216,43 @@ export const ImgPopupSytle = styled.img`
 max-height: 95%; 
 max-width: 95%; 
 
-`
+`;
 
+
+export const ButtonsCard = styled.section`
+
+  border-radius: 4px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+  padding: 1em 0;
+  border: 1px solid rgba(124, 77, 255, 0);
+  transition: all .25s ease-in-out;
+  background-color: white;
+  padding: 75px 150px;
+  @media screen and (max-width: 980px) {
+    padding: 10px;
+  }
+  
+  button{
+    font-size: 1.1em;
+    color: #083575;
+    background:#8ed2d2;
+    font-weight:bold;
+    margin: 10px 5px 10px 5px;
+    width: 100%;
+    @media screen and (max-width: 980px) {
+      width: inherit;
+    }
+  }
+  button:hover{
+    background:#a4d1d1;
+    color: #083575;
+  }
+`;
 
 
 

@@ -1,6 +1,6 @@
 import Map from './newRoute.componet'
 import React, { useState } from 'react';
-import { NewRouteWrapper, MapSection, NewRouteSection, FormCard, ChooseButton, MultimediaCard, MultimediasCard, ShareCard } from './newRoute.style';
+import { NewRouteWrapper, InputsCard, MapSection, NewRouteSection, FormCard, ChooseButton, MultimediaCard, MultimediasCard, ShareCard } from './newRoute.style';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -148,6 +148,7 @@ const NewRoute = (props) => {
         <NewRouteSection>
             <FormCard>
                 <h1>{(ruta === undefined) ? "Crear nueva ruta" : "Editar ruta"}</h1>
+                <InputsCard>
                 <h2>Nombre</h2>
                 <input type="test" id="name" name="name" onChange={(e) => { setName(e.target.value) }} placeholder={(ruta !== undefined) ? ruta.name : ""} />
                 <h3>Descripcion</h3>
@@ -191,6 +192,7 @@ const NewRoute = (props) => {
                     : <></>}
 
                 <br></br>
+                </InputsCard>
                 <button id="btEdit" onClick={() => {
                     if (!checkValues()) {
                         let json = getJsonRoute(name, description, user, points, media, waypoints)

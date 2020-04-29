@@ -23,7 +23,7 @@ export const NavigationItems = [
   {
     id: 'newRoute',
     icon: 'img/viade-icons/new_route.png',
-    label: 'Nueva ruta',
+    label: 'navBar.newRoute',
     to: '/newRoute'
   },
   {

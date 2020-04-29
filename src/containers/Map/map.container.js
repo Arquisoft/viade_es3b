@@ -7,7 +7,7 @@ import fileClient from 'solid-file-client';
 import MapaComponent from './map.component';
 import Rutas from '../../components/Ruta/rutas';
 
-import { H2Format, InformationSection, } from './map.style';
+import { H2Format, InformationSection, ButtonsCard } from './map.style';
 
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
@@ -129,8 +129,14 @@ const Map = (props) => {
     if (user === undefined) {
         user = "public";
         return (<InformationSection id="mapComponent">
+            
+            <ButtonsCard>
+            <center><h1>Elija el tipo de rutas que desea ver</h1></center>
+            
             <button onClick={() => ReactDOM.render(<LoadRoute {...{ user }}></LoadRoute>, document.getElementById('mapComponent'))}>Compartidas</button>
             <button onClick={() => ReactDOM.render(<LoadRoute></LoadRoute>, document.getElementById('mapComponent'))}>Privadas</button>
+            
+            </ButtonsCard>
         </InformationSection>)
     }
     return <LoadRoute {...{ user, name }}></LoadRoute>

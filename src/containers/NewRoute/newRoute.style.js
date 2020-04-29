@@ -58,12 +58,29 @@ export const FormCard = styled.div`
     color: #083575;
     background:#8ed2d2;
     font-weight:bold;
-    
+    width: 100%;
   }
   button:hover{
     background:#a4d1d1;
     color: #083575;
   }
+  
+`;
+
+export const InputsCard = styled.div`
+  margin: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+  padding: 1em 0;
+  border: 1px solid rgba(124, 77, 255, 0);
+  transition: all .25s ease-in-out;
+  background-color: white;
+  padding: 5px;
   
 `;
 
