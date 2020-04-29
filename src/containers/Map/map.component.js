@@ -128,7 +128,7 @@ const MapaComponent = props => {
               <button onClick={() => ReactDOM.render(<NewRoute {...{currentRuta}}></NewRoute>, document.getElementById('mapComponent'))}>Editar</button>
             </FormCard>
             <ScrollDiv>
-              <FormCard  ><h2>Rutas:</h2>
+              <FormCard><h2>Rutas:</h2>
                 {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
               </FormCard>
             </ScrollDiv>

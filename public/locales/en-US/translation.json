@@ -252,6 +252,13 @@
     "save": "Save",
     "grantAccess": "Grant Access"
   },
+  "map": {
+    "chooseRoute": "Choose the type of route you want to see",
+    "shared": "Shared",
+    "private": "Privates",
+    "loading": "Loading",
+    "routes": "Routes"
+  },
   "friends": {
     "title": "Amigos",
     "addFriend": "Añadir amigo",

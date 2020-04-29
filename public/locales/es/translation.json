@@ -274,6 +274,13 @@
     "share": "Compartir",
     "chooseJSONFile": "Por favor, elija un archivo JSON"
   },
+  "map": {
+    "chooseRoute": "Elija el tipo de rutas que quiere ver",
+    "shared": "Compartidas",
+    "private": "Privadas",
+    "loading": "Cargando",
+    "routes": "Rutas"
+  },
   "friends": {
     "title": "Amigos",
     "addFriend": "Añadir amigo",

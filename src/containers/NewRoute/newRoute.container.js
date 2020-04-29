@@ -147,17 +147,17 @@ const NewRoute = (props) => {
         
         <NewRouteSection>
             <FormCard>
-                <h1>{(ruta === undefined) ? "Crear nueva ruta" : "Editar ruta"}</h1>
+                <center><h1>{(ruta === undefined) ? "Crear nueva ruta" : "Editar ruta"}</h1></center>
                 <InputsCard>
-                <h2>Nombre</h2>
+                <center><h2>Nombre</h2></center>
                 <input type="test" id="name" name="name" onChange={(e) => { setName(e.target.value) }} placeholder={(ruta !== undefined) ? ruta.name : ""} />
-                <h3>Descripcion</h3>
+                <center><h3>Descripcion</h3></center>
                 <input type="test" id="description" name="description" onChange={(e) => { setDescription(e.target.value) }} placeholder={(ruta !== undefined) ? ruta.description : ""} />
                 <MultimediasCard>
                     <MultimediaCard>
                         <ChooseButton>
                             <div>
-                                <h2>Seleccione fotos</h2>
+                            <center><h2>Seleccione fotos</h2></center>
                                 <center>
                                     <input value={null} type="file" id="image" name="image" accept=".png,.jpeg,.jpg" multiple={true} onChange={(e) => { setImage(e.target.files) }} />
                                     <label id="label-input" htmlFor="image">
@@ -170,7 +170,7 @@ const NewRoute = (props) => {
                     <MultimediaCard>
                         <ChooseButton>
                             <div>
-                                <h2>Seleccione videos</h2>
+                            <center><h2>Seleccione videos</h2></center>
                                 <center>
                                     <input value={null} type="file" id="video" name="video" accept=".mp4,.avg" multiple={true} onChange={(e) => setVideo(e.target.files)} />
                                     <label id="video-input" htmlFor="video">
@@ -185,7 +185,7 @@ const NewRoute = (props) => {
                 {(ruta === undefined) ?
                     <ShareCard>
                         <div className="flex-container">
-                            <h3 htmlFor="cbox1">Compartir</h3>
+                        <center><h3 htmlFor="cbox1">Compartir</h3></center>
                             <input type="checkbox" id="cbox1" value="first_checkbox" checked={(ruta !== undefined) ? ruta.shared : false} onChange={() => publico = !publico}></input>
                         </div>
                     </ShareCard>

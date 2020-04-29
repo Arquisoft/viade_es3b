@@ -252,6 +252,13 @@
     "save": "Save",
     "grantAccess": "Grant Access"
   },
+  "map": {
+    "chooseRoute": "Choose the type of route you want to see",
+    "shared": "Shared",
+    "private": "Privates",
+    "loading": "Loading",
+    "routes": "Routes"
+  },
   "friends": {
     "title": "Amigos",
     "addFriend": "Añadir amigo",
@@ -264,6 +271,7 @@
     "trails": {
       "title": "Rutas de mis amigos"
     },
+  
   "uploader": {
     "explanation": "Upload here the multimedia files of your routes",
     "upload": "Upload",

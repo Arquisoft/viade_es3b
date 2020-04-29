@@ -8,7 +8,7 @@ import MapaComponent from './map.component';
 import Rutas from '../../components/Ruta/rutas';
 
 import { H2Format, InformationSection, ButtonsCard } from './map.style';
-
+import { useTranslation } from 'react-i18next';
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 
@@ -35,11 +35,11 @@ const LoadRoute = (props) => {
         if (user !== undefined) {
             const url = user.split("profile/card#me")[0] + folder;
 
-            loadRoutes(url, user, share, props.name);
+            loadRoutes(url, user, share, props.name,);
         }
     }, [user]);
-
-    return (<InformationSection id="mapComponent"><H2Format id="porcentaje">Cargando: 0 %</H2Format></InformationSection>)
+    const { t } = useTranslation();
+    return (<InformationSection id="mapComponent"><H2Format id="porcentaje">{t('map.loading')}: 0 %</H2Format></InformationSection>)
 }
 
 async function loadRoutes(url, user, share, name) {
@@ -124,6 +124,7 @@ function updatePercent(count, length) {
 
 
 const Map = (props) => {
+    const { t } = useTranslation();
     let user = props.user;
     let name = props.name;
     if (user === undefined) {
@@ -131,10 +132,10 @@ const Map = (props) => {
         return (<InformationSection id="mapComponent">
             
             <ButtonsCard>
-            <center><h1>Elija el tipo de rutas que desea ver</h1></center>
+            <center><h1>{t('map.chooseRoute')}</h1></center>
             
-            <button onClick={() => ReactDOM.render(<LoadRoute {...{ user }}></LoadRoute>, document.getElementById('mapComponent'))}>Compartidas</button>
-            <button onClick={() => ReactDOM.render(<LoadRoute></LoadRoute>, document.getElementById('mapComponent'))}>Privadas</button>
+            <button onClick={() => ReactDOM.render(<LoadRoute {...{ user }}></LoadRoute>, document.getElementById('mapComponent'))}>{t('map.shared')}</button>
+            <button onClick={() => ReactDOM.render(<LoadRoute></LoadRoute>, document.getElementById('mapComponent'))}>{t('map.private')}</button>
             
             </ButtonsCard>
         </InformationSection>)
