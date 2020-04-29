@@ -1,6 +1,6 @@
 import Map from './newRoute.componet'
 import React, { useState } from 'react';
-import { MapSection, Left, Right, FormCard, ChooseButton, MultimediaCard, MultimediasCard, ShareCard } from './newRoute.style';
+import { NewRouteWrapper, MapSection, NewRouteSection, FormCard, ChooseButton, MultimediaCard, MultimediasCard, ShareCard } from './newRoute.style';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,106 +9,58 @@ import getJsonRoute from './../../utils/defaultJsonRoute'
 import fileClient from 'solid-file-client';
 import * as solidAuth from 'solid-auth-client';
 import { useWebId } from '@solid/react';
-import ReactDOM from 'react-dom';
 
 
 const NewRoute = (props) => {
-    const ruta = props.currentRuta;
-    const point = []
-    if (ruta !== undefined) ruta.points.forEach(p => { point.push(p.getCoordinates()); });
-    const waypoints = (ruta !== undefined) ? ruta.waypoints : []
-    const media = (ruta !== undefined) ? ruta.meida : []
-    const updateComment = (ruta === undefined) ? true : false;
     const user = "" + useWebId();
     const folder = "viade";
     const url = user.split("profile/card#me")[0];
 
     const fileClien = new fileClient(solidAuth, { enableLogging: true });
     let publico = false;
-
-    const [name, setName] = (ruta !== undefined) ? useState(ruta.name) : useState(null);
-    const [description, setDescription] = (ruta !== undefined) ? useState(ruta.description) : useState(null);
+    const [name, setName] = useState(null);
+    const [description, setDescription] = useState(null);
     const [image, setImage] = useState(null);
     const [video, setVideo] = useState(null);
-    const [points, setPoints] = useState(point);
+    const [points, setPoints] = useState([]);
     const { t } = useTranslation();
 
-
-
-    const clear = () => {
-        /*if (ruta !== undefined) loadMapView();
-        else {
-            setName(null);
-            setDescription(null);
-            setImage(null);
-            setVideo(null);
-            setPoints(null);
-            document.getElementById('name').value = null;
-            document.getElementById('description').value = null;
-            document.getElementById('image').value = null;
-            document.getElementById('video').value = null;
-
-            document.getElementById('cbox1').checked = false;
-            publico = false;
-
-            ReactDOM.render(<Map {... { point, updatePoints }}></Map>, document.getElementById('leftMap'));
-        }
-*/
-    }
-
-    function loadMapView() {
-        let name = ruta.name;
-        let user = (ruta.shared) ? "public" : undefined;
-        ReactDOM.render(<Map {...{ user, name }}></Map>, document.getElementById('mapComponent'));
-    }
+    const clear = () =>{
+		setName(null);
+		setDescription(null);
+        setImage(null);
+        setVideo(null);
+        setPoints(null);
+        document.getElementById('name').value = null;
+        document.getElementById('description').value = null;
+		document.getElementById('image').value = null;
+		document.getElementById('video').value = null;
+		document.getElementById('cbox1').checked = false;
+		publico = false;
+}
 
 
     function updatePoints(point) {
-        let newPoints = [];
-        point.forEach(p => newPoints.push([p.lat, p.lng]));
         setPoints(point);
-    }
-
-
-
-    function checkValues() {
-        if (ruta === undefined) {
-            let error = false;
-
-            error = checkString(name, "El nombre no puede estar vacio") ? true : error;
-            error = checkString(description, "La descripción no puede estar vacia") ? true : error;
-
-            console.log(points.length);
-            if (points.length === 0) {
-                error = true;
-                showErrorUploadFile("La ruta debe tener al menos un punto")
-            }
-
-            return error;
-        }
-        return checkName();
 
     }
 
-    const checkName = () => {
-        if (name === null) {
-            setName(ruta.name);
 
-        } else if (name.length === 0) {
-            setName(ruta.name);
+
+    const checkValues = () => {
+        let error = false;
+
+        error = checkString(name, "El nombre no puede estar vacio") ? true : error;
+        error = checkString(description, "La descripción no puede estar vacia") ? true : error;
+
+        console.log(points.length);
+        if (points.length === 0) {
+            error = true;
+            showErrorUploadFile("La ruta debe tener al menos un punto")
         }
 
-        if (description === null) {
-            setDescription(ruta.description);
+        return error;
 
-        } else if (description.length === 0) {
-            setDescription(ruta.description);
-        }
-
-        if(points.length === 0){
-            setPoints(point)
-        }
-        return false;
     }
 
     const checkString = (value, message) => {
@@ -125,7 +77,7 @@ const NewRoute = (props) => {
 
     const showErrorUploadFile = (name) => {
         toast.error(name, {
-
+            delay: 1000,
             autoClose: false,
             position: toast.POSITION.TOP_CENTER
         });
@@ -134,7 +86,7 @@ const NewRoute = (props) => {
     const showSuccessUploadFile = (name) => {
         //https://github.com/fkhadra/react-toastify
         toast.success(name, {
-
+            delay: 1000,
             autoClose: false,
             position: toast.POSITION.TOP_CENTER
         });
@@ -143,17 +95,16 @@ const NewRoute = (props) => {
 
 
 
-    return (<MapSection>
-        <Left id="leftMap">
-            <Map {... { point, updatePoints }}></Map>
-        </Left>
-        <Right>
+    return (
+    <NewRouteWrapper>
+        
+        <NewRouteSection>
             <FormCard>
-                <h1>{(ruta === undefined) ? "Crear nueva ruta" : "Editar ruta"}</h1>
+                <center><h1>Nueva ruta</h1></center>
                 <h2>Nombre</h2>
-                <input type="test" id="name" name="name" onChange={(e) => { setName(e.target.value) }} placeholder={(ruta !== undefined) ? ruta.name : ""} />
+                <input type="test" id="name" name="name" onChange={(e) => { setName(e.target.value) }} />
                 <h3>Descripcion</h3>
-                <input type="test" id="description" name="description" onChange={(e) => { setDescription(e.target.value) }} placeholder={(ruta !== undefined) ? ruta.description : ""} />
+                <input type="test" id="description" name="description" onChange={(e) => { setDescription(e.target.value) }} />
                 <MultimediasCard>
                     <MultimediaCard>
                         <ChooseButton>
@@ -183,29 +134,28 @@ const NewRoute = (props) => {
                     </MultimediaCard>
                 </MultimediasCard>
                 <br></br>
-                {(ruta === undefined) ?
-                    <ShareCard>
-                        <div className="flex-container">
-                            <h3 htmlFor="cbox1">Compartir</h3>
-                            <input type="checkbox" id="cbox1" value="first_checkbox" checked={(ruta !== undefined) ? ruta.shared : false} onChange={() => publico = !publico}></input>
-                        </div>
-                    </ShareCard>
-                    : <></>}
+                <ShareCard>
+                    <div className="flex-container">
+                        <h3 htmlFor="cbox1">Compartir</h3>
+                        <input type="checkbox" id="cbox1" value="first_checkbox" onChange={() => publico = !publico}></input>
+                    </div>
+                </ShareCard>
 
                 <br></br>
-                <button id="btEdit" onClick={() => {
-                    if (!checkValues()) {
-                        let json = getJsonRoute(name, description, user, points, media, waypoints)
-                        let nameFile = (ruta !== undefined) ? ruta.fileName : name.trim() + ".json"
-                        if (publico) createFolder(fileClien, url + "public/" + folder, json, nameFile, image, video, updateComment, showSuccessUploadFile, showErrorUploadFile, clear)
-                        else createFolder(fileClien, url + folder, json, nameFile, image, video, updateComment, showSuccessUploadFile, showErrorUploadFile, clear)
+                <button onClick={() => {
+                    if (checkValues) {
+                        let json = getJsonRoute(name, description, user, points)
+                        let nameFile = name.trim() + ".json"
+                        if (publico) createFolder(fileClien,url + "public/" + folder,json, nameFile, image, video,showSuccessUploadFile,showErrorUploadFile,clear)
+                        else createFolder(fileClien,url + folder, json, nameFile, image, video,showSuccessUploadFile,showErrorUploadFile,clear)
                     }
-                }}>{(ruta === undefined) ? "Crear" : "Editar"}</button>
+                }}>Crear</button>
             </FormCard>
-        </Right>
-    </MapSection>)
+        </NewRouteSection>
+        <MapSection>
+            <Map {... { updatePoints }}></Map>
+        </MapSection>
+    </NewRouteWrapper>)
 }
 
 export default NewRoute;
-
-
