@@ -5,7 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import ReactDOM from 'react-dom';
 import Slider from './prueba'
-import { CommentWrapper, RoutesCard, CommentContainer, MapContainerr, MapWrapper, MapCard, Left, Right, MapaStyle, Button, FormCard, ScrollDiv, MapSection, CommentCard, ButtonShare as ButtonShareStyle, MapContainer } from './map.style';
+import { ButtonsWrapper, RouteCard, CommentWrapper, RoutesCard, CommentContainer, MapContainerr, MapWrapper, MapCard, Left, Right, MapaStyle, Button, FormCard, ScrollDiv, MapSection, CommentCard, ButtonShare as ButtonShareStyle, MapContainer, ButtonsCard } from './map.style';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 import NewRoute from './../NewRoute/index'
@@ -113,64 +113,41 @@ const MapaComponent = props => {
   return (
     <MapWrapper>
       <MapContainerr>
-        
+        <RoutesCard className="routes">
+          <ScrollDiv>
+            <center>
+              <h1>Rutas</h1>
+            </center>
+            <center>
+              {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
+            </center>
+          </ScrollDiv>
+        </RoutesCard>
+        <Map></Map>
 
-      <RoutesCard className="card">
-        
-        <h2>Rutas:</h2>
-          {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
-      
-      </RoutesCard>
 
-        
-          <Map></Map>
-          
-        
-        
-        <Left className="card">
-        <h1 id="name">{currentRuta.name}</h1>
-        <h3 id="description">{currentRuta.description}</h3>
-        <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
-        <Slider {... { media }}></Slider>
-        <ButtonShare> </ButtonShare>
-        <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>, document.getElementById('mapComponent'))}>Editar</button>
-        </Left>
-        
+        <RouteCard className="routes">
+          <ScrollDiv>
+            <center><h1 id="name">{currentRuta.name}</h1></center>
+            <center><h3 id="description">{ currentRuta.description}</h3></center>
+            <center><h3 id="distance" >{ currentRuta.getDistance() + " KM"}</h3></center>
+            <ButtonsWrapper>
+            <Slider {... { media }}></Slider>
+            <ButtonShare> </ButtonShare>
+            <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>, document.getElementById('mapComponent'))}>Editar</button>
+            </ButtonsWrapper>
+          </ScrollDiv>
+        </RouteCard>
+
       </MapContainerr>
       <CommentContainer>
-        <CommentWrapper className="card">
-          <CommentCard >  
+        <CommentWrapper className="comments">
+          <CommentCard >
             <div id="comments"><Comments></Comments></div>
           </CommentCard>
         </CommentWrapper>
-        </CommentContainer>
+      </CommentContainer>
     </MapWrapper>
-    /*
-    <MapWrapper>
-      <MapCard>
-         <Map></Map> 
-        <div id="comments"><Comments></Comments></div>
-      </MapCard>
-      <FormCard>
-        <h1 id="name">{currentRuta.name}</h1>
-        <h3 id="description">{currentRuta.description}</h3>
-        <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
-        <Slider {... { media }}></Slider>
-        <ButtonShare> </ButtonShare>
-        <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>, document.getElementById('mapComponent'))}>Editar</button>
-        <ScrollDiv>
-          <FormCard><h2>Rutas:</h2>
-            {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
-          </FormCard>
-        </ScrollDiv>
-      </FormCard>
-
-
-      
-      
-    </MapWrapper >
-      */
-    
   );
 }
 export default MapaComponent;

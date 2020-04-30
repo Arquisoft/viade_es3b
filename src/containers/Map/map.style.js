@@ -13,6 +13,50 @@ export const MapWrapper = styled.div`
   justify-content: center;
   justify-content: center;
   flex-direction: column;
+
+  .routes {
+    display: flex;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* justify-content: center; */
+    padding: 1em 0;
+    border: 1px solid rgba(124, 77, 255, 0);
+    transition: all .25s ease-in-out;
+    width: 100%;
+  }
+  .comments {
+    display: flex;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1em 0;
+    border: 1px solid rgba(124, 77, 255, 0);
+    transition: all .25s ease-in-out;
+    width: 100%;
+  }
+
+  .map {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* justify-content: center; */
+    
+    transition: all .25s ease-in-out;
+    width: 100%;
+  }
 `;
 
 
@@ -45,11 +89,13 @@ export const MapContainerr = styled.div`
     flex-direction: column !important;
   }
 `;
-export const Left = styled.div`
+export const RouteCard = styled.div`
+
   margin: 5px;
   background-color: #fff;
-  width: 40% !important;
-  min-height: 600px;
+  width: 28vw !important;
+  min-height: 500px;
+  max-height: 500px;
   @media screen and (max-width: 1000px) {
     width: 100% !important;
     min-height: 200px;
@@ -60,8 +106,10 @@ export const Left = styled.div`
 export const RoutesCard = styled.div`
   margin: 5px;
   background-color: #fff;
-  width: 20% !important;
-  min-height: 600px;
+  width: 18vw !important;
+  min-height: 500px;
+  max-height: 500px;
+  
   @media screen and (max-width: 1000px) {
     width: 100% !important;
     min-height: 200px;
@@ -92,9 +140,14 @@ export const Down = styled.div`
 `;
 
 export const MapaStyle = styled(Map)`
-min-height: 600px;
+min-height: 500px;
+max-height: 500px;
+max-width: 48vw !important;
+min-width: 48vw !important;
 @media screen and (max-width: 1000px) {
   width: 100% !important;
+  max-width: 100%;
+min-width: 100%;
   min-height: 200px;
   max-height: 3000px;
   padding: 0  !important;
@@ -149,7 +202,8 @@ export const CommentCard = styled.div`
   `;
 
 export const ScrollDiv = styled.div`
-    
+    overflow: auto;
+    justify-content: center;
   `;
 export const FormCard = styled.div`
   margin: 15px 0px;
@@ -184,12 +238,21 @@ export const Button = styled.button`
   `;
 
 export const ButtonShare = styled.button`
-  color: #fff !important;
-    background: #406cc8 !important;
-    }disabled{
-      background:#fff !important;
-      color: #406cc8 !important;
-    }
+button{
+  font-size: 1.1em;
+  color: #083575;
+  background:#8ed2d2;
+  font-weight:bold;
+  margin: 10px 5px 10px 5px;
+  width: 90%;
+  @media screen and (max-width: 980px) {
+    width: inherit;
+  }
+}
+button:hover{
+  background:#a4d1d1;
+  color: #083575;
+}
 
 
 `;
@@ -264,7 +327,29 @@ export const ButtonsCard = styled.section`
   }
 `;
 
+export const ButtonsWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  
+  button{
+    font-size: 1.1em;
+    color: #083575;
+    background:#8ed2d2;
+    font-weight:bold;
+    margin: 10px 5px 10px 5px;
+    width: 90%;
+    @media screen and (max-width: 980px) {
+      width: inherit;
+    }
+  }
+  button:hover{
+    background:#a4d1d1;
+    color: #083575;
+  }
 
+`;
 
 
 
