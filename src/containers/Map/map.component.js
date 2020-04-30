@@ -5,7 +5,7 @@ import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import ReactDOM from 'react-dom';
 import Slider from './prueba'
-import { Column, Up, MapaStyle, Button, FormCard, ScrollDiv, MapSection, CommentCard, ButtonShare as ButtonShareStyle } from './map.style';
+import { CommentWrapper, RoutesCard, CommentContainer, MapContainerr, MapWrapper, MapCard, Left, Right, MapaStyle, Button, FormCard, ScrollDiv, MapSection, CommentCard, ButtonShare as ButtonShareStyle, MapContainer } from './map.style';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 import NewRoute from './../NewRoute/index'
@@ -55,10 +55,10 @@ const MapaComponent = props => {
 
   function shareRoute() {
     document.getElementById("btShare").disabled = true;
-    currentRuta.share(fileClien, user.split("profile/card#me")[0],updateShareButton);
+    currentRuta.share(fileClien, user.split("profile/card#me")[0], updateShareButton);
   }
 
-  function updateShareButton(){
+  function updateShareButton() {
     document.getElementById("btShare").textContent = (currentRuta.shared) ? "Descompartir" : "Compartir";
     document.getElementById("btShare").disabled = false;
   }
@@ -67,13 +67,13 @@ const MapaComponent = props => {
     let text = document.getElementById("comentario").value;
     document.getElementById("comentario").value = "Publicando";
     document.getElementById("comentario").readonly = true;
-    currentRuta.addComment(fileClien,text,user,updateComments);
+    currentRuta.addComment(fileClien, text, user, updateComments);
 
   }
 
-  function updateComments(){
+  function updateComments() {
     ReactDOM.hydrate(<Comments></Comments>, document.getElementById('comments'));
-        document.getElementById("comentario").value = "";
+    document.getElementById("comentario").value = "";
   }
 
   const Comments = () => {
@@ -106,38 +106,71 @@ const MapaComponent = props => {
     if (currentRuta.shared === undefined)
       return <></>
     else {
-      return <> <br></br><ButtonShareStyle id="btShare" onClick={() => shareRoute()} > {(currentRuta.shared) ? "Descompartir" : "Compartir" }</ButtonShareStyle></>
+      return <> <br></br><ButtonShareStyle id="btShare" onClick={() => shareRoute()} > {(currentRuta.shared) ? "Descompartir" : "Compartir"}</ButtonShareStyle></>
     }
 
   }
   return (
-    <div>
-      <MapSection>
-        <Up id="up">
-          <div id="map" >
-            <Map></Map>
-          </div>
-          <Column>
+    <MapWrapper>
+      <MapContainerr>
+        
 
-            <FormCard>
-              <h1 id="name">{currentRuta.name}</h1>
-              <h3 id="description">{currentRuta.description}</h3>
-              <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
-              <Slider {... { media }}></Slider>
-              <ButtonShare> </ButtonShare>
-              <button onClick={() => ReactDOM.render(<NewRoute {...{currentRuta}}></NewRoute>, document.getElementById('mapComponent'))}>Editar</button>
-            </FormCard>
-            <ScrollDiv>
-              <FormCard><h2>Rutas:</h2>
-                {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
-              </FormCard>
-            </ScrollDiv>
+      <RoutesCard className="card">
+        
+        <h2>Rutas:</h2>
+          {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
+      
+      </RoutesCard>
 
-          </Column>
-        </Up>
-      </MapSection>
-      <div id="comments"><Comments></Comments></div>
-    </div>
+        
+          <Map></Map>
+          
+        
+        
+        <Left className="card">
+        <h1 id="name">{currentRuta.name}</h1>
+        <h3 id="description">{currentRuta.description}</h3>
+        <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
+        <Slider {... { media }}></Slider>
+        <ButtonShare> </ButtonShare>
+        <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>, document.getElementById('mapComponent'))}>Editar</button>
+        </Left>
+        
+      </MapContainerr>
+      <CommentContainer>
+        <CommentWrapper className="card">
+          <CommentCard >  
+            <div id="comments"><Comments></Comments></div>
+          </CommentCard>
+        </CommentWrapper>
+        </CommentContainer>
+    </MapWrapper>
+    /*
+    <MapWrapper>
+      <MapCard>
+         <Map></Map> 
+        <div id="comments"><Comments></Comments></div>
+      </MapCard>
+      <FormCard>
+        <h1 id="name">{currentRuta.name}</h1>
+        <h3 id="description">{currentRuta.description}</h3>
+        <h3 id="distance" >{"Distancia: " + currentRuta.getDistance() + " KM"}</h3>
+        <Slider {... { media }}></Slider>
+        <ButtonShare> </ButtonShare>
+        <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>, document.getElementById('mapComponent'))}>Editar</button>
+        <ScrollDiv>
+          <FormCard><h2>Rutas:</h2>
+            {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
+          </FormCard>
+        </ScrollDiv>
+      </FormCard>
+
+
+      
+      
+    </MapWrapper >
+      */
+    
   );
 }
 export default MapaComponent;

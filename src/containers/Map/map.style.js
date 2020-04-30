@@ -3,104 +3,131 @@ import { Map } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import "video-react/dist/video-react.css";
 
-export const MapSection = styled.section`
-  display: flex;
-  flex: 1 0 auto;
-  align-items: center;
-  justify-content: center;
+export const MapWrapper = styled.div`
+  width: 100%;
   background:#a4d1d1;
-  background-repeat: repeat;
-  padding: 30px 0px 30px 30px;
+  padding: 0px 0;
+  display: flex;
+  align-items:center;
+  align-content:center;
+  justify-content: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
-export const Column = styled.div`
-        width: 25vw;
-        min-width: 400 px !important; 
-        float:right;
+
+
+export const CommentContainer = styled.div`
+  padding: 5px 5px 0px 5px;
+  width: 100%;
+  max-width: 100% !important;
+  display: flex;
+  flex-direction: row !important;
+  align-items:center;
+  align-content:center;
+  justify-content: center;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column !important;
+  }
 `;
 
-export const Up = styled.div`
-        height: 80vh;   
-        width: 100vw;
-        float:up;
-        text-align: center;    
-        background:#a4d1d1; 
+export const MapContainerr = styled.div`
+
+  padding: 5px;
+  width: 100%;
+  max-width: 100% !important;
+  display: flex;
+  flex-direction: row !important;
+  align-items:center;
+  align-content:center;
+  justify-content: center;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column !important;
+  }
+`;
+export const Left = styled.div`
+  margin: 5px;
+  background-color: #fff;
+  width: 40% !important;
+  min-height: 600px;
+  @media screen and (max-width: 1000px) {
+    width: 100% !important;
+    min-height: 200px;
+    max-height: 3000px;
+    padding: 0  !important;
+  }
+`;
+export const RoutesCard = styled.div`
+  margin: 5px;
+  background-color: #fff;
+  width: 20% !important;
+  min-height: 600px;
+  @media screen and (max-width: 1000px) {
+    width: 100% !important;
+    min-height: 200px;
+    max-height: 3000px;
+    padding: 0  !important;
+  }
+`;
+export const Right = styled.div`
+  background-color: #fff;
+  padding: 0px !important;
+  min-height: 600px;
+  margin: 5px;
+  @media screen and (max-width: 1000px) {
+    margin: 30px auto;
+  }
 `;
 
+export const CommentWrapper = styled.div`
+background-color: #fff;
+padding: 0px !important;
+margin: 5px;
+@media screen and (max-width: 1000px) {
+  margin: 30px auto;
+}
+`;
 export const Down = styled.div`
-        height: 80vh;      
-        float:down;
-        width: 100vw;
-        text-align: center;    
-        background:#a4d1d1; 
+       
 `;
 
 export const MapaStyle = styled(Map)`
-  width: 72% !important; 
-  height: 80vh !important; 
-  float: left;
+min-height: 600px;
+@media screen and (max-width: 1000px) {
+  width: 100% !important;
+  min-height: 200px;
+  max-height: 3000px;
+  padding: 0  !important;
+}
 `;
 
 export const MapCard = styled.div`
-  background-color: #fff;
-  margin: 30px 0px;
-  //Overriding the style guide card flexbox settings
-  width: 100% !important;
-  padding: 5px 10px !important; //temporary fix to a style guide bug
-  align-items: center;
-  h3{
-    padding: 0 0px;
-    text-align: center;
-    font-size: 1.2em;
-  }
-  h2{
-    font-weight:bold;
-  }
-
-  button{
-    font-size: 1.1em;
-      color: #083575;
-      background:#8ed2d2;
-      font-weight:bold;
-  }
-  button:hover{
-      background:#a4d1d1;
-      color: #083575;
-  }
+  width: 100%;
+  
 `;
+
 
 export const CommentCard = styled.div`
   background-color: #fff;
+  width:90%;
   margin: auto;
   //Overriding the style guide card flexbox settings
-  max-width: 60% !important;
-  align-items: center;
   padding: 30px 0px 30px 0px;
   h1{
     text-align: center;
   }
     input{
-    width: 60% !important; 
-    margin-left: 10%;
   }
-
   button{font-size: 1em;
         color: #083575;
         background:#8ed2d2;
         font-weight:bold;
-        width: 15% !important; 
-        margin-left: 5%;
-        margin-right: 10%;
-        
-
     }
     hover{
         background:#a4d1d1;
         color: #083575;
     }
   }
-
-
   p{
     font-size: 1em;
     color: #083575;
@@ -111,26 +138,21 @@ export const CommentCard = styled.div`
     border: 1px solid #a4d1d1; 
     border-radius: 6px;
     padding: 5px 30px 15px 30px;
-
     h1{
       font-size: 0.8em;
       text-align: right;
       font-weight: bold;
     }
-
     
   }
 
-`;
+  `;
 
 export const ScrollDiv = styled.div`
-  overflow-y: scroll;
-  max-height: 38vh; 
-`;
+    
+  `;
 export const FormCard = styled.div`
-margin: 30px 50px 0px 0px;
-background-color: #fff;
-  padding: 30px 15px 30px 15px;
+  margin: 15px 0px;
   display: flex;
   border-radius: 4px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
@@ -145,24 +167,12 @@ background-color: #fff;
   border: 1px solid rgba(124, 77, 255, 0);
   transition: all .25s ease-in-out;
   height: auto;
-
-  button{
-    font-size: 1.1em;
-      color: #083575;
-      background:#8ed2d2;
-      font-weight:bold;
-  }
-  button:hover{
-      background:#a4d1d1;
-      color: #083575;
-  }
- 
-`;
+  `;
 
 export const Button = styled.button`
-    font-size: 1em;
-      color: #083575;
-      background:#8ed2d2;
+      font-size: 1em;
+        color: #083575;
+        background:#8ed2d2;
       font-weight:bold;
       width: 75% !important; 
       margin:2px;
@@ -173,10 +183,10 @@ export const Button = styled.button`
   }
   `;
 
-  export const ButtonShare = styled.button`
+export const ButtonShare = styled.button`
   color: #fff !important;
     background: #406cc8 !important;
-}disabled{
+    }disabled{
       background:#fff !important;
       color: #406cc8 !important;
     }
