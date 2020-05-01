@@ -13,7 +13,7 @@ describe('Map', () => {
     </Router>
   );
 
-  const { container } = render(
+  const { component } = render(
     <Router>
       <Map />
     </Router>
@@ -24,6 +24,6 @@ describe('Map', () => {
   });
 
   test('NewRote without crashing', () => {
-    expect(container).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 });

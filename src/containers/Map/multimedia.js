@@ -61,7 +61,7 @@ function Slider(media) {
     setHandleOpen({ open: true });
   };
   const matches = useMediaQuery("(max-width:600px)");
-  let media = (media === undefined)? [] : media;
+  media = (media === undefined)? [] : media;
   return (
     <>
       <Button onClick={handleClick}>{t('route.multimedia')}</Button>
