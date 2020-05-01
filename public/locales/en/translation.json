@@ -267,7 +267,18 @@
     "publish": "Publishing",
     "delete": "Delete",
     "comments": "Comments",
-    "comment": "Comment"
+    "comment": "Comment",
+    "edit": "Edit",
+    "nomedia" : "There is no kind of multimedia",
+    "close": "Close",
+    "multimedia": "Multimedia",
+    "name": "Name can't be empty",
+    "description": "Description can't be empty",
+    "error": "Route must contain one point at least",
+    "id": "Name",
+    "newRoute": "Create new route",
+    "editRoute": "Edit route",
+    "routeDesc": "Description"
   },
   "friends": {
     "title": "Friends",

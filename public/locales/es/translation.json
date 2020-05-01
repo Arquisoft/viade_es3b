@@ -283,7 +283,18 @@
     "publish": "Publicando",
     "delete": "Eliminar",
     "comments": "Comentarios",
-    "comment": "Comentar"
+    "comment": "Comentar",
+    "edit": "Editar",
+    "nomedia" : "No hay multimedia",
+    "close": "Cerrar",
+    "multimedia": "Multimedia",
+    "name": "El nombre no puede estar vacio",
+    "description": "La descripción no puede estar vacia",
+    "error": "La ruta debe tener al menos un punto",
+    "id": "Nombre",
+    "newRoute": "Crear nueva ruta",
+    "editRoute": "Editar ruta",
+    "routeDesc": "Descripción"
 
   },
   "map": {

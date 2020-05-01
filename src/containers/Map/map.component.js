@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import ReactDOM from 'react-dom';
-import Slider from './prueba'
+import Slider from './multimedia'
 import { ButtonsWrapper, RouteCard, CommentWrapper, RoutesCard, CommentContainer, MapContainerr, MapWrapper, MapCard, Left, Right, MapaStyle, Button, FormCard, ScrollDiv, MapSection, CommentCard, ButtonShare as ButtonShareStyle, MapContainer, ButtonsCard } from './map.style';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
@@ -106,10 +106,11 @@ const MapaComponent = props => {
   }
 
   const ButtonShare = () => {
+    const { t } = useTranslation();
     if (currentRuta.shared === undefined)
       return <></>
     else {
-      return <> <br></br><ButtonShareStyle id="btShare" onClick={() => shareRoute()} > {(currentRuta.shared) ? "Descompartir" : "Compartir"}</ButtonShareStyle></>
+      return <> <br></br><ButtonShareStyle id="btShare" onClick={() => shareRoute()} > {(currentRuta.shared) ? t('route.unshare') : t('route.share')}</ButtonShareStyle></>
     }
 
   }
@@ -119,7 +120,7 @@ const MapaComponent = props => {
         <RoutesCard className="routes">
           <ScrollDiv>
             <center>
-              <h1>Rutas</h1>
+              <h1>{t('navBar.routes')}</h1>
             </center>
             <center>
               {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n,t)}> {n} </Button>)}
@@ -137,7 +138,7 @@ const MapaComponent = props => {
             <ButtonsWrapper>
             <Slider {... { media }}></Slider>
             <ButtonShare> </ButtonShare>
-            <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>, document.getElementById('mapComponent'))}>Editar</button>
+            <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>, document.getElementById('mapComponent'))}>{t('route.edit')}</button>
             </ButtonsWrapper>
           </ScrollDiv>
         </RouteCard>
