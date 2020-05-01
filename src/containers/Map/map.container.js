@@ -138,8 +138,8 @@ const Map = (props) => {
             <ButtonsCard>
             <center><h1>{t('map.chooseRoute')}</h1></center>
             
-            <button onClick={() => ReactDOM.render(<LoadRoute {...{ user }}></LoadRoute>, document.getElementById('mapComponent'))}>{t('map.shared')}</button>
-            <button onClick={() => ReactDOM.render(<LoadRoute></LoadRoute>, document.getElementById('mapComponent'))}>{t('map.private')}</button>
+            <button id = "shared" onClick={() => ReactDOM.render(<LoadRoute {...{ user }}></LoadRoute>, document.getElementById('mapComponent'))}>{t('map.shared')}</button>
+            <button id = "priavte" onClick={() => ReactDOM.render(<LoadRoute></LoadRoute>, document.getElementById('mapComponent'))}>{t('map.private')}</button>
             
             </ButtonsCard>
         </InformationSection>)
