@@ -1,14 +1,9 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
-.Contents
-The system consists in three main modules, a POD server preferably hosted in the machine of one of the developers, a Solid server also hosted in one of such machines and a Javascript client built with React that will provide the interface for the users to interact with the software solution.
+Viade_es3b is a decentralized application using SOLID, it was created with the entity ruta which is the most important of all aplication to load routes and store
+in SOLID PODs.
+To load and store the information, it uses libraries to load and store information in SOLID PODs with Javascript language.
+We used Arc42 to define the structure of the documentation and we use Asciidoctor to deploy it into an HTML to see it.
 
-As there are very different levels of skill in the development team in the various technologies that are going to be employed in the construction of the system, tasks are going to be divided among us in such a way that every developer has the chance to learn some of the basis of them in the implementation but the project's time to market meets the 3 month goal.
-
-.Motivation
-The system must be secure enough to prevent any kind of data loss, even in case of a security breach in the system.
-
-.Form
-Given that the developer in charge of the writing of this document is still learning the Javascript, Node, and React, this initial version of the document is not detailed, as will not be point 5.
 
