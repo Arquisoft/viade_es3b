@@ -9,7 +9,7 @@ import getJsonRoute from './../../utils/defaultJsonRoute'
 import fileClient from 'solid-file-client';
 import * as solidAuth from 'solid-auth-client';
 import { useWebId } from '@solid/react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 
 
 const NewRoute = (props) => {
@@ -54,11 +54,11 @@ const NewRoute = (props) => {
 */
     }
 
-    function loadMapView() {
+   /* function loadMapView() {
         let name = ruta.name;
         let user = (ruta.shared) ? "public" : undefined;
         ReactDOM.render(<Map {...{ user, name }}></Map>, document.getElementById('mapComponent'));
-    }
+    }*/
 
     function updatePoints(point) {
         let newPoints = [];
