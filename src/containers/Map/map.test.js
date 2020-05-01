@@ -7,9 +7,10 @@ import Slider from './multimedia'
 describe('Map', () => {
   afterAll(cleanup);
   const media = ['https://fotografias.lasexta.com/clipping/cmsimages02/2019/11/14/66C024AF-E20B-49A5-8BC3-A21DD22B96E6/58.jpg'];
+  const user = "https://viadees3b.solid.community/profile/card#me";
   const { container } = render(
     <Router>
-      <Map />
+      <Map {... {user}} />
     </Router>
   );
 
