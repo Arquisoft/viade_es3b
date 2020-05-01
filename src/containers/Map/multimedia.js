@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) => {
   const { t } = useTranslation();
+  
     function getMedia(t){
         var slide = []
         if(m.media.length === 0){
@@ -60,6 +61,7 @@ function Slider(media) {
     setHandleOpen({ open: true });
   };
   const matches = useMediaQuery("(max-width:600px)");
+  let media = (media === undefined)? [] : media;
   return (
     <>
       <Button onClick={handleClick}>{t('route.multimedia')}</Button>

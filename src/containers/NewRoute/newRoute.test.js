@@ -1,10 +1,17 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import { HashRouter as Router } from 'react-router-dom';
-import Map from './map.container';
+import NewRoute from './newRoute.container';
+import Map from './newRoute.container';
 
 describe('Map', () => {
   afterAll(cleanup);
+
+  const { container } = render(
+    <Router>
+      <NewRoute />
+    </Router>
+  );
 
   const { container } = render(
     <Router>
@@ -12,19 +19,11 @@ describe('Map', () => {
     </Router>
   );
 
-  const { multimedia } = render(
-    <Router>
-      <Slider></Slider> 
-    </Router>
-  );
-
-
-
-  test('Map container renders without crashing', () => {
+  test('NewRote renders without crashing', () => {
     expect(container).toBeTruthy();
   });
 
-  test('Multimedia container renders without crashing', () => {
-    expect(multimedia).toBeTruthy();
+  test('NewRote without crashing', () => {
+    expect(container).toBeTruthy();
   });
 });
