@@ -24,33 +24,6 @@ export default class Ruta {
         this.shared = share;
     }
 
-    getRuta(){
-        return this;
-    }
-
-    getNextMedia() {
-        if (this.currentMedia < this.media.length - 1) {
-            this.currentMedia = this.currentMedia + 1;
-        }
-        else {
-            this.currentMedia = 0;
-        }
-        return this.media[this.currentMedia];
-    }
-
-    getPreviusMedia() {
-        if (this.currentMedia === 0) {
-            this.currentMedia = this.media.length - 1;
-        } else {
-            this.currentMedia = this.currentMedia - 1;
-        }
-        return this.media[this.currentMedia];
-    }
-
-    getCurrentMedia() {
-        return this.media[this.currentMedia];
-    }
-
     addComment(fileClien, text, user, callback) {
 
         let url = user.split("profile/card#me")[0] + ((this.shared) ? "public/" : "") + "viade/comments/routeComments/" + this.CommentsFileName;
@@ -137,22 +110,18 @@ export default class Ruta {
        this.media.forEach(m => {
             console.log("Media: " + m)
             if (!m.includes(user)) {
-                console.log("Malll" + user);
                 json.media.push({
                     "@id": m
                 });
             } else {
                 console.log("Bien")
                 if (m.includes("/public/")) {
-                    
                     m = m.split("public/")[0] + m.split("public/")[1];
-                    
                     json.media.push({
                         "@id": m
                     });
                 } else {
                     m = m.split("viade/")[0] + "public/viade/" + m.split("viade/")[1];
-                    console.log("BIen: " + m)
                     json.media.push({
                         "@id": m
                     });

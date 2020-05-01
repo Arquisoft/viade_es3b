@@ -13,6 +13,8 @@ import { useTranslation } from 'react-i18next';
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 
 const LoadRoute = (props) => {
+    const { t } = useTranslation();
+
     var folder;
     var user;
     var share = false;
@@ -35,19 +37,18 @@ const LoadRoute = (props) => {
         if (user !== undefined) {
             const url = user.split("profile/card#me")[0] + folder;
 
-            loadRoutes(url, user, share, props.name,);
+            loadRoutes(url, user, share, props.name,t);
         }
     }, [user]);
-    const { t } = useTranslation();
+
     return (<InformationSection id="mapComponent"><H2Format id="porcentaje">{t('map.loading')}: 0 %</H2Format></InformationSection>)
 }
 
-async function loadRoutes(url, user, share, name) {
+async function loadRoutes(url, user, share, name,t) {
 
     if (!await fileClien.itemExists(url)){
-    console.log("BIne");
         try {
-            ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
+            noRoutesAvailable(t);
             return;
         }
         catch (error) {
@@ -62,7 +63,7 @@ async function loadRoutes(url, user, share, name) {
 
     if (routes.files.length === 0) {
         try {
-            ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
+            noRoutesAvailable(t);
         }
         catch (error) {
             return;
@@ -80,7 +81,7 @@ async function loadRoutes(url, user, share, name) {
                     rutasJson.push(JSON.parse(file));
                     fileName.push(routes.files[i].name);
                     count += 1;
-                    updatePercent(count, routes.files.length);
+                    updatePercent(count, routes.files.length,t);
                     if (count === routes.files.length) {
                         loadMapView(new Rutas(rutasJson, commentsJson, fileName, share), user, name);
                     }
@@ -89,14 +90,13 @@ async function loadRoutes(url, user, share, name) {
             });
         } else {
             count += 1;
-            updatePercent(count, routes.files.length);
+            updatePercent(count, routes.files.length,t);
             if (count === routes.files.length) {
                 if (!rutasJson.length === 0) {
                     loadMapView(new Rutas(rutasJson, commentsJson, fileName, share), user, name);
                 }
-
                 else
-                    ReactDOM.render(<H2Format>No hay rutas</H2Format>, document.getElementById('mapComponent'));
+                    noRoutesAvailable(t);
             }
         }
     }
@@ -113,15 +113,19 @@ function loadMapView(rutas, user,name) {
     }, 100);
 }
 
-function updatePercent(count, length) {
+function updatePercent(count, length , t) {
     try {
-        document.getElementById('porcentaje').textContent = "Cargando: " + Math.trunc((count) / length * 100) + " %";
+        ReactDOM.render(<H2Format id= {"porcentaje" + Math.trunc((count) / length * 100)}>
+            {t('map.loading')}  {Math.trunc((count) / length * 100) + " %"}</H2Format>, document.getElementById('mapComponent'))
     }
     catch (error) {
         return;
     }
 }
 
+function noRoutesAvailable(t) {
+    ReactDOM.render(<H2Format>{t('map.noRoutes')}</H2Format>, document.getElementById('mapComponent'));
+}
 
 const Map = (props) => {
     const { t } = useTranslation();

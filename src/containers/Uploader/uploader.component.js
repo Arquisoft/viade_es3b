@@ -15,8 +15,9 @@ const fileClien = new fileClient(solidAuth, { enableLogging: true });
 var publico = false;
 
 const UploadJson = ({ setFile, file }) => {
-	const filename = file == null ? '' : "Archivo seleccionado:" + file.name;
+
 	const { t } = useTranslation();
+	const filename = file == null ? '' : t('uploader.selectedFiles') + file.name;
 	const changeName = e => {
 		setFile(e.target.files[0]);
 	}
@@ -26,7 +27,6 @@ const UploadJson = ({ setFile, file }) => {
 				<div>
 					<h2>{t('uploader.chooseJSON')}</h2>
 					<center>
-
 						<input value={null} type="file" className="custom-file-input" id="route" accept=".json,.geojson,.jsonld" onChange={changeName} required />
 						<label id="label-input" htmlFor="route">
 							<span>{t('uploader.choose')}</span>
@@ -43,7 +43,6 @@ const Formulario = () => {
 	var user = "" + useWebId();
 	//it saves the actual state of the data
 	const [file, setFile] = useState(null);
-
 	const [image, setImage] = useState(null);
 	const [video, setVideo] = useState(null);
 	const folder = "viade";
