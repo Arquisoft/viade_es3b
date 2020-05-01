@@ -2,17 +2,40 @@
 
 
 == Building Block View
+In this section we show the static decomposition of the system into building blocks as well as their dependencies
+by means of a hierarchial collection of black boxes and white boxes and their descriptions.
 
+=== Scope & Context
+White box description of the overall system together with black box descriptions of all contained building blocks.
+See <<03_system_scope_and_context.adoc#section-system-scope-and-context, System Scope and Context>>
 
-.Level 1 white box class diagram
-image::white box level 1 diagram.png[diagram]
+=== Level 1
 
 At this early stage of the development process, this diagram contains as much detail as we can represent about the current view that we, the development team, have.
 
-.Composite structure diagram
-image::composite structure diagram.jpg[diagram]
+.White box description of the overall system together with black box descriptions
+image::BuildinBlockView-Level1.png[align="center"]
+
+|======================
+|Object   |Description
+|Solid Pod | It will contain all the data from the given user
+|Services | Provides logic to perform actions
+|======================
+
+=== Level 2
+
 In this view, we have a representation of the components of the system from a standpoint of the technologies used to implement each module.
 
+.Level 2 zooms into some building blocks of level 1
+image::BuildinBlockView-Level2.png[align="center"]
+
+|======================
+|Object   |Description
+|React containers | Login, register, uploader, profile... logic
+|Map container | Logic to manage the leaflet Map
+|New Route container | Logic to create and store routes
+|Friend container | Logic to manage friends and get their solid name and public routes basci info
+|======================
 
 .Motivation
 This separations of the system's parts was accomplished in order to give the development team a clearer view of how the information of the project's subject was going to be spread, and also to allow them to focus on single areas of software technology to ease the soon to come implementation task.

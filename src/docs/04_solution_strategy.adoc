@@ -1,14 +1,20 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
-.Contents
-The system consists in three main modules, a POD server preferably hosted in the machine of one of the developers, a Solid server also hosted in one of such machines and a Javascript client built with React that will provide the interface for the users to interact with the software solution.
+Viade_es3b is a decentralized application using SOLID, it was created with the entity ruta which is the most important of all aplication to load routes and store
+in SOLID PODs.
+To load and store the information, it uses libraries to load and store information in SOLID PODs with Javascript language.
 
-As there are very different levels of skill in the development team in the various technologies that are going to be employed in the construction of the system, tasks are going to be divided among us in such a way that every developer has the chance to learn some of the basis of them in the implementation but the project's time to market meets the 3 month goal.
+We used Arc42 to define the structure of the documentation and we use Asciidoctor to deploy it into an HTML to see it.
 
-.Motivation
-The system must be secure enough to prevent any kind of data loss, even in case of a security breach in the system.
+We used React to build the front-end of the application because the teacher told us to use it and is the first step to do the application more usable, which is one of the
+quality attribute we wanted to perform in the application.
 
-.Form
-Given that the developer in charge of the writing of this document is still learning the Javascript, Node, and React, this initial version of the document is not detailed, as will not be point 5.
+The interoperability of the application will be achieved using GEOJson and load this kind of files in the POD.
+
+Regarding testeability: We tried to implement tests in the application because being testeable was one of the quality attributes, we di an application with 
+several tests makeing it testeable in high level.
+
+We deploy the application using github pages to increment the performance, the efficiency of the application is based on javascript calls to the Solid POD, so we tried
+to do the bes in this aspect.
 
