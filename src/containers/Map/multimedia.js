@@ -4,12 +4,14 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { AutoRotatingCarousel} from "material-auto-rotating-carousel";
 import { Player } from 'video-react';
 import {ImgPopupSytle, DivPrueba} from './map.style';
+import { useTranslation } from 'react-i18next';
 
 const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) => {
-    function getMedia(){
+  const { t } = useTranslation();
+    function getMedia(t){
         var slide = []
         if(m.media.length === 0){
-          slide.push( <DivPrueba><h2>Noy hay multimedia</h2></DivPrueba>)
+          slide.push( <DivPrueba><h2>{t('route.nomedia')}</h2></DivPrueba>)
         }
         for (var i = 0; i < m.media.length ; i++) {
               slide.push( <DivPrueba>{getMediaComponent(m.media[i])}</DivPrueba>)
@@ -36,7 +38,7 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) =>
     <div>
       {}
       <AutoRotatingCarousel
-        label="Cerrar"
+        label={t('route.close')}
         open={handleOpen.open}
         onClose={() => setHandleOpen({ open: false })}
         onStart={() => setHandleOpen({ open: false })}
@@ -45,13 +47,14 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile, m}) =>
         mobile={isMobile}
         style={{ width: "center"}}
         containerStyle={{margin: "auto"}}>
-        {getMedia()}
+        {getMedia(t)}
       </AutoRotatingCarousel>
     </div>
   );
 };
 
 function Slider(media) {
+  const { t } = useTranslation();
   const [handleOpen, setHandleOpen] = useState({ open: false });
   const handleClick = () => {
     setHandleOpen({ open: true });
@@ -59,7 +62,7 @@ function Slider(media) {
   const matches = useMediaQuery("(max-width:600px)");
   return (
     <>
-      <Button onClick={handleClick}>Multimedia</Button>
+      <Button onClick={handleClick}>{t('route.multimedia')}</Button>
       <AutoRotatingCarouselModal
         isMobile={matches}
         handleOpen={handleOpen}

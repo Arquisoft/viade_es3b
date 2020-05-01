@@ -4,11 +4,12 @@ import 'leaflet/dist/leaflet.css';
 import './leaflet.css';
 import { Map as LeafletMap, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import ReactDOM from 'react-dom';
-import Slider from './prueba'
+import Slider from './multimedia'
 import { ButtonsWrapper, RouteCard, CommentWrapper, RoutesCard, CommentContainer, MapContainerr, MapWrapper, MapCard, Left, Right, MapaStyle, Button, FormCard, ScrollDiv, MapSection, CommentCard, ButtonShare as ButtonShareStyle, MapContainer, ButtonsCard } from './map.style';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
-import NewRoute from './../NewRoute/index'
+import NewRoute from './../NewRoute/index';
+import { useTranslation } from 'react-i18next';
 
 
 /* Método para cambiar la imagen del Marker */
@@ -22,6 +23,7 @@ L.Icon.Default.mergeOptions({
 
 /* método que generar el mapa, junto con su nombre, y descripción*/
 const MapaComponent = props => {
+  const { t } = useTranslation();
   let fileClien = new fileClient(solidAuth, { enableLogging: true });
   let rutas = LeafletMap;
   rutas = props.rutas;
@@ -31,12 +33,12 @@ const MapaComponent = props => {
   let puntos = [];
 
   /* Método para cambiar la ruta actualmento seleccionada */
-  function changeRuta(id) {
+  function changeRuta(id,t) {
     currentRuta = rutas.getRutaByName(id);
     document.getElementById("name").textContent = currentRuta.name;
     document.getElementById("description").textContent = currentRuta.description;
-    document.getElementById("distance").textContent = "Distancia: " + currentRuta.getDistance() + " KM";
-    updateShareButton();
+    document.getElementById("distance").textContent = t('route.distance') + currentRuta.getDistance() + " KM";
+    updateShareButton(t);
     media = currentRuta.media;
     ReactDOM.hydrate(<MapaComponent  {... { rutas, user }}></MapaComponent>, document.getElementById('mapComponent'));
 
@@ -55,17 +57,17 @@ const MapaComponent = props => {
 
   function shareRoute() {
     document.getElementById("btShare").disabled = true;
-    currentRuta.share(fileClien, user.split("profile/card#me")[0], updateShareButton);
+    currentRuta.share(fileClien, user.split("profile/card#me")[0], updateShareButton(t));
   }
 
-  function updateShareButton() {
-    document.getElementById("btShare").textContent = (currentRuta.shared) ? "Descompartir" : "Compartir";
+  function updateShareButton(t) {
+    document.getElementById("btShare").textContent = (currentRuta.shared) ? t('route.unshare') : t('route.share');
     document.getElementById("btShare").disabled = false;
   }
 
-  function addComment() {
+  function addComment(t) {
     let text = document.getElementById("comentario").value;
-    document.getElementById("comentario").value = "Publicando";
+    document.getElementById("comentario").value = t('route.publish');
     document.getElementById("comentario").readonly = true;
     currentRuta.addComment(fileClien, text, user, updateComments);
 
@@ -77,6 +79,7 @@ const MapaComponent = props => {
   }
 
   const Comments = () => {
+    const { t } = useTranslation();
     function obtainComments() {
       let aux = [];
       currentRuta.comments.forEach(c => {
@@ -86,10 +89,10 @@ const MapaComponent = props => {
     }
 
     return <CommentCard>
-      <h1 id="name">Comentarios</h1>
+      <h1 id="name">{t('route.comments')}</h1>
       {obtainComments()}
       <div></div><input type="text" id="comentario"></input>
-      <button onClick={addComment}>Comentar</button></CommentCard>;
+      <button onClick={addComment}>{t('route.comment')}</button></CommentCard>;
   }
 
   const Map = () => {
@@ -103,10 +106,11 @@ const MapaComponent = props => {
   }
 
   const ButtonShare = () => {
+    const { t } = useTranslation();
     if (currentRuta.shared === undefined)
       return <></>
     else {
-      return <> <br></br><ButtonShareStyle id="btShare" onClick={() => shareRoute()} > {(currentRuta.shared) ? "Descompartir" : "Compartir"}</ButtonShareStyle></>
+      return <> <br></br><ButtonShareStyle id="btShare" onClick={() => shareRoute()} > {(currentRuta.shared) ? t('route.unshare') : t('route.share')}</ButtonShareStyle></>
     }
 
   }
@@ -116,10 +120,10 @@ const MapaComponent = props => {
         <RoutesCard className="routes">
           <ScrollDiv>
             <center>
-              <h1>Rutas</h1>
+              <h1>{t('navBar.routes')}</h1>
             </center>
             <center>
-              {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n)}> {n} </Button>)}
+              {rutas.getNames().map((n, i) => <Button key={i} onClick={() => changeRuta(n,t)}> {n} </Button>)}
             </center>
           </ScrollDiv>
         </RoutesCard>
@@ -134,7 +138,7 @@ const MapaComponent = props => {
             <ButtonsWrapper>
             <Slider {... { media }}></Slider>
             <ButtonShare> </ButtonShare>
-            <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>, document.getElementById('mapComponent'))}>Editar</button>
+            <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>, document.getElementById('mapComponent'))}>{t('route.edit')}</button>
             </ButtonsWrapper>
           </ScrollDiv>
         </RouteCard>

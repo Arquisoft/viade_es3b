@@ -14,17 +14,17 @@
     "errorLoading": "Había un error al cargar tu documento. Por favor, intenta de nuevo.",
     "errorSaving": "Había un error al guardar tu documento. Por favor, intenta de nuevo.",
     "errorFetching": "Error recogiendo fichero.",
-    "accessGranted": "Collaborador ahora tiene acceso de leer y escribir.",
+    "accessGranted": "Colaborador ahora tiene acceso de leer y escribir.",
     "errorGrantingAccess": "Había un error al dar acceso a tu documento. Por favor, intenta de nuevo.",
     "saved": "Tu documento ha sido guardado al pod.",
     "notEditable": "(no editable)",
-    "notSharable": "(logéate y carga undocumento en tu própio pod para poder dar acceso)"
+    "notSharable": "(logéate y carga undocumento en tu propio pod para poder dar acceso)"
   },
   "login": {
     "title": "¡Hola! Bienvenid@ a Viade.",
     "loginTitle": "Iniciar sesión",
     "register": "Registrarse por una identidad Solid",
-    "solidHelp": "Qué es una identidad Solid?",
+    "solidHelp": "¿Qué es una identidad Solid?",
     "providerPlaceholder": "Proveedor de ID",
     "selectPlaceholder": "Seleccione su Proveedor",
     "inputPlaholder": "WebID",
@@ -41,7 +41,7 @@
   "register": {
     "title": "Hola! Bienvenid@ a Solid.",
     "step1Title": "Selecciona tu Proveedor",
-    "whatIsAProvider": "Qué es un Proveedor, cómo escoger uno?",
+    "whatIsAProvider": "¿Qué es un Proveedor, cómo escoger uno?",
     "alreadySolid": "Ya tengo una identidad Solid",
     "next": "Siguiente"
   },
@@ -81,8 +81,8 @@
     "redirectButton": "Llevarme a la página principal"
   },
   "welcome": {
-    "whatIsViade": "¿Qúe es Viade?",
-    "viadeIs": "Viade es un sistema de gestión de rutas descentralizado basado en las  especificaciones Solid.",
+    "whatIsViade": "¿Qué es Viade?",
+    "viadeIs": "Viade es un sistema de gestión de rutas descentralizado basado en las especificaciones Solid.",
     "realized":"Esta aplicación ha sido realizada por:",
     "welcome": "Bienvenid@",
     "doneMessage": "¿Terminaste?",
@@ -272,14 +272,38 @@
     "chooseJSON": "Escoja un archivo JSON",
     "route": "Ruta",
     "share": "Compartir",
-    "chooseJSONFile": "Por favor, elija un archivo JSON"
+    "unshare": "Dejar de compartir",
+    "chooseJSONFile": "Por favor, elija un archivo JSON",
+    "accept": "Seleccione para marcar ruta como compartida"
+  },
+  "route": {
+    "share": "Compartir",
+    "unshare": "Dejar de compartir",
+    "distance": "Distancia: ",
+    "publish": "Publicando",
+    "delete": "Eliminar",
+    "comments": "Comentarios",
+    "comment": "Comentar",
+    "edit": "Editar",
+    "nomedia" : "No hay multimedia",
+    "close": "Cerrar",
+    "multimedia": "Multimedia",
+    "name": "El nombre no puede estar vacio",
+    "description": "La descripción no puede estar vacia",
+    "error": "La ruta debe tener al menos un punto",
+    "id": "Nombre",
+    "newRoute": "Crear nueva ruta",
+    "editRoute": "Editar ruta",
+    "routeDesc": "Descripción"
+
   },
   "map": {
     "chooseRoute": "Elija el tipo de rutas que quiere ver",
     "shared": "Compartidas",
     "private": "Privadas",
     "loading": "Cargando",
-    "routes": "Rutas"
+    "routes": "Rutas",
+    "noRoutes": "No hay rutas"
   },
   "friends": {
     "title": "Amigos",
@@ -294,6 +318,4 @@
       "title": "Rutas de mis amigos"
     }
   }
-  
- 
 }

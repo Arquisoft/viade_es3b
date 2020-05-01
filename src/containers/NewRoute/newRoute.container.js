@@ -33,8 +33,6 @@ const NewRoute = (props) => {
     const [points, setPoints] = useState(point);
     const { t } = useTranslation();
 
-
-
     const clear = () => {
         /*if (ruta !== undefined) loadMapView();
         else {
@@ -62,28 +60,24 @@ const NewRoute = (props) => {
         ReactDOM.render(<Map {...{ user, name }}></Map>, document.getElementById('mapComponent'));
     }
 
-
     function updatePoints(point) {
         let newPoints = [];
         point.forEach(p => newPoints.push([p.lat, p.lng]));
         setPoints(point);
     }
 
-
-
-    function checkValues() {
+    function checkValues(t) {
         if (ruta === undefined) {
             let error = false;
 
-            error = checkString(name, "El nombre no puede estar vacio") ? true : error;
-            error = checkString(description, "La descripción no puede estar vacia") ? true : error;
+            error = checkString(name, t('route.name')) ? true : error;
+            error = checkString(description, t('route.description')) ? true : error;
 
             console.log(points.length);
             if (points.length === 0) {
                 error = true;
-                showErrorUploadFile("La ruta debe tener al menos un punto")
+                showErrorUploadFile(t('route.error'));
             }
-
             return error;
         }
         return checkName();
@@ -125,7 +119,6 @@ const NewRoute = (props) => {
 
     const showErrorUploadFile = (name) => {
         toast.error(name, {
-
             autoClose: false,
             position: toast.POSITION.TOP_CENTER
         });
@@ -134,30 +127,25 @@ const NewRoute = (props) => {
     const showSuccessUploadFile = (name) => {
         //https://github.com/fkhadra/react-toastify
         toast.success(name, {
-
             autoClose: false,
             position: toast.POSITION.TOP_CENTER
         });
     }
 
-
-
-
     return (<NewRouteWrapper>
-        
         <NewRouteSection>
             <FormCard>
-                <center><h1>{(ruta === undefined) ? "Crear nueva ruta" : "Editar ruta"}</h1></center>
+                <center><h1>{(ruta === undefined) ? t('route.newRoute') : t('route.editRoute')}</h1></center>
                 <InputsCard>
-                <center><h2>Nombre</h2></center>
+                <center><h2>{t('route.id')}</h2></center>
                 <input type="test" id="name" name="name" onChange={(e) => { setName(e.target.value) }} placeholder={(ruta !== undefined) ? ruta.name : ""} />
-                <center><h3>Descripcion</h3></center>
+                <center><h3>{t('route.routeDesc')}</h3></center>
                 <input type="test" id="description" name="description" onChange={(e) => { setDescription(e.target.value) }} placeholder={(ruta !== undefined) ? ruta.description : ""} />
                 <MultimediasCard>
                     <MultimediaCard>
                         <ChooseButton>
                             <div>
-                            <center><h2>Seleccione fotos</h2></center>
+                            <center><h2>{t('uploader.chooseImages')}</h2></center>
                                 <center>
                                     <input value={null} type="file" id="image" name="image" accept=".png,.jpeg,.jpg" multiple={true} onChange={(e) => { setImage(e.target.files) }} />
                                     <label id="label-input" htmlFor="image">
@@ -170,7 +158,7 @@ const NewRoute = (props) => {
                     <MultimediaCard>
                         <ChooseButton>
                             <div>
-                            <center><h2>Seleccione videos</h2></center>
+                            <center><h2>{t('uploader.chooseVideos')}</h2></center>
                                 <center>
                                     <input value={null} type="file" id="video" name="video" accept=".mp4,.avg" multiple={true} onChange={(e) => setVideo(e.target.files)} />
                                     <label id="video-input" htmlFor="video">
@@ -185,7 +173,7 @@ const NewRoute = (props) => {
                 {(ruta === undefined) ?
                     <ShareCard>
                         <div className="flex-container">
-                        <center><h3 htmlFor="cbox1">Compartir</h3></center>
+                        <center><h3 htmlFor="cbox1">{t('uploader.share')}</h3></center>
                             <input type="checkbox" id="cbox1" value="first_checkbox" checked={(ruta !== undefined) ? ruta.shared : false} onChange={() => publico = !publico}></input>
                         </div>
                     </ShareCard>
@@ -194,13 +182,13 @@ const NewRoute = (props) => {
                 <br></br>
                 </InputsCard>
                 <button id="btEdit" onClick={() => {
-                    if (!checkValues()) {
+                    if (!checkValues(t)) {
                         let json = getJsonRoute(name, description, user, points, media, waypoints)
                         let nameFile = (ruta !== undefined) ? ruta.fileName : name.trim() + ".json"
                         if (publico) createFolder(fileClien, url + "public/" + folder, json, nameFile, image, video, updateComment, showSuccessUploadFile, showErrorUploadFile, clear)
                         else createFolder(fileClien, url + folder, json, nameFile, image, video, updateComment, showSuccessUploadFile, showErrorUploadFile, clear)
                     }
-                }}>{(ruta === undefined) ? "Crear" : "Editar"}</button>
+                }}>{(ruta === undefined) ? t('route.newRoute') : t('route.editRoute')}</button>
             </FormCard>
         </NewRouteSection>
         <MapSection id="leftMap">

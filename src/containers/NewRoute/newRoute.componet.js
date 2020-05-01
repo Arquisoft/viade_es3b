@@ -1,20 +1,20 @@
 import { Map as DefaultMap, TileLayer, Marker, Polyline,Popup} from 'react-leaflet';
 import React from 'react';
 
-
 const style = {
   map: {
     height: '100%',
     width: '100%'
   }
-}
+};
 
 export default class Map extends React.Component {
+
   constructor(props) {
     super();
     this.point = props.point
     this.state = {
-      points: props.point,
+      points: props.point
     };
     this.updatePoints = props.updatePoints; 
   }
@@ -32,7 +32,6 @@ export default class Map extends React.Component {
     this.setState({points})
     this.updatePoints(points);
   }
-
   
   render() {
     try{
@@ -53,13 +52,10 @@ export default class Map extends React.Component {
             </Marker>
             <Polyline  color={'blue'} positions={this.state.points}></Polyline></>
           )}
-  
         </DefaultMap>
       );
     }catch(e){
       return;
     }
-    
   }
-
 }
