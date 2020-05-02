@@ -32,6 +32,7 @@ class Rutas{
     }
 
     getRutaByPosition(p){
+        if( p >=  this.rutas.length) return undefined;
         this.currentRuta = this.rutas[p];
         return this.rutas[p];
     }
@@ -43,4 +44,3 @@ class Rutas{
 
 
 export default Rutas;
-

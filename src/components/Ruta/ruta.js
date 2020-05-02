@@ -10,12 +10,13 @@ export default class Ruta {
         this.media = [];
         this.points = [];
         this.waypoints = [];
+        this.comments = [];
         file.points.forEach(p => this.points.push(new Point(p.latitude, p.longitude, p.elevation)));
         if (commentsFile !== null) {
             file.media.forEach(m => this.media.push(m["@id"]));
             file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name, w.description, new Point(w.latitude, w.longitude, w.elevation))))
             this.currentMedia = 0;
-            this.comments = [];
+          
             commentsFile.comments.forEach(c => { if (c.text !== undefined) this.comments.push(new CommentObj(c.text, c.dateCreated)) });
             //Datos para subir commentarios al pod
             this.fileName = fileName;
@@ -26,6 +27,7 @@ export default class Ruta {
 
     addComment(fileClien, text, user, callback) {
 
+        
         let url = user.split("profile/card#me")[0] + ((this.shared) ? "public/" : "") + "viade/comments/routeComments/" + this.CommentsFileName;
         fileClien.readFile(url).then((file) => {
             var value = this.createComment(JSON.parse(file), text);
@@ -35,6 +37,22 @@ export default class Ruta {
         }
         );
     }
+    getWayPoints(){
+        return this.waypoints;
+    }
+
+    addWayPoints(waypoint){
+        this.waypoints.push(waypoint);
+    }
+
+    getNumberOfComments(){
+        return this.comments.length;
+    }
+
+    getName(){
+        return this.name;
+    }
+
 
     createComment(file, text) {
         let f = new Date();
@@ -137,4 +155,3 @@ export default class Ruta {
 
 
 }
-

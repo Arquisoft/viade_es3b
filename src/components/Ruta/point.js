@@ -1,4 +1,3 @@
-
 export class Point{
     constructor(latitude,longitude,altitude){
         this.latitude = latitude;
@@ -18,6 +17,18 @@ export class WayPoint{
         this.name = name;
         this.description = description;
         this.point = point;
+    }
+
+    getName(){
+      return this.name;
+    }
+
+    getDescription(){
+        return this.name;
+    }
+
+    getPoint(){
+        return this.point;
     }
 }
 
