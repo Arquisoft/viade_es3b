@@ -82,7 +82,7 @@ defineFeature(feature, test => {
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
-                    if (b.innerText == "Privadas") {
+                    if (b.innerText == "map.private") {
                         b.click();
                     }
 
@@ -102,7 +102,7 @@ defineFeature(feature, test => {
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
-                    if (b.innerText == "Compartir") {
+                    if (b.innerText == "map.shared") {
                         b.click();
                     }
 
@@ -122,17 +122,17 @@ defineFeature(feature, test => {
             await page.goto("http://localhost:3000/viade_es3b/#/map", {
                 waitUntil: 'networkidle2'
             });
-            await page.waitFor(5000);
+            await page.waitFor(8000);
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
-                    if (b.innerText == "Compartidas") {
+                    if (b.innerText == "map.shared") {
                         b.click();
                     }
 
                 });
             });
-            await page.waitFor(5000);
+            await page.waitFor(8000);
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
@@ -143,7 +143,7 @@ defineFeature(feature, test => {
                 });
             });
 
-
+            await page.waitFor(8000);
             expect(page).toMatchElement('h1', { text: 'Route test 1' })
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
