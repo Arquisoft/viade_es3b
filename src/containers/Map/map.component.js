@@ -88,11 +88,18 @@ const MapaComponent = props => {
       return aux;
     }
 
+    function obtainButton(){
+      return (currentRuta.shared !== undefined)?
+        <div> <div></div><input type="text" id="comentario"></input>
+        <button onClick={addComment}>{t('route.comment')}</button></div> : <></>;
+    }
+
     return <CommentCard>
       <h1 id="name">{t('route.comments')}</h1>
       {obtainComments()}
-      <div></div><input type="text" id="comentario"></input>
-      <button onClick={addComment}>{t('route.comment')}</button></CommentCard>;
+      {obtainButton()}
+      </CommentCard>
+      ;
   }
 
   const Map = () => {

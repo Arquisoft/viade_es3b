@@ -317,5 +317,8 @@
     "trails": {
       "title": "Rutas de mis amigos"
     }
+  },
+  "errorCheckRuta": {
+    "propiedad": "El fichero json no contine la propiedad "
   }
 }

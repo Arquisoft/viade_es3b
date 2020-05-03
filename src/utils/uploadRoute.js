@@ -1,10 +1,14 @@
 
 import getJsonComments from './defaultJsonComments'
+import checkJson from './checkJson'
 
 
 
 
-export default function createFolder(fileClien,folder,json,name, photo, video,updateComment,showSuccessUploadFile,showErrorUploadFile,callback) {
+export default function createFolder(fileClien, folder, json, name, photo, video, updateComment, showSuccessUploadFile, showErrorUploadFile, callback) {
+	let fileJson = checkJson(json, name, showErrorUploadFile);
+	if (fileJson !== null) {
+		json = fileJson;
 		let url;
 		let i;
 		let existe = fileClien.itemExists(folder);
@@ -12,7 +16,7 @@ export default function createFolder(fileClien,folder,json,name, photo, video,up
 			fileClien.createFolder(folder);
 		}
 
-		if(updateComment) fileClien.createFile(folder + "/comments/routeComments/" + name.split('.json')[0] + "Comments.json", getJsonComments(), "application/json");
+		if (updateComment) fileClien.createFile(folder + "/comments/routeComments/" + name.split('.json')[0] + "Comments.json", getJsonComments(), "application/json");
 
 		for (i = 0; photo != null && i < photo.length; i++) {
 			url = folder + "/resources/" + photo[i].name;
@@ -39,11 +43,10 @@ export default function createFolder(fileClien,folder,json,name, photo, video,up
 		} else {
 			showErrorUploadFile("Ruta " + name);
 		}
-		
 
-		callback();
-	
-		
-
-
+	}
+	callback();
 }
+
+
+

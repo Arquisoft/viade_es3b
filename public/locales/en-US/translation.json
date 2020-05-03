@@ -314,5 +314,8 @@
     "unshare": "Stop sharing",
     "chooseJSONFile": "Please, choose JSON file",
     "accept": "Select to mark route as shared"
+    },
+    "errorCheckRuta": {
+      "propiedad": "The json file does not contain the property "
     }
 }
