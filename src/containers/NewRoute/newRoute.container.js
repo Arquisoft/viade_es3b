@@ -44,8 +44,10 @@ const NewRoute = (props) => {
             document.getElementById('description').value = null;
             document.getElementById('image').value = null;
             document.getElementById('video').value = null;
+            document.getElementById('name').placeholder = "";
+            document.getElementById('description').placeholder = "";
 
-            document.getElementById('cbox1').checked = false;
+            if(ruta === undefined) document.getElementById('cbox1').checked = false;
             publico = false;
 
             ReactDOM.render(<Map {... { point, updatePoints }}></Map>, document.getElementById('leftMap'));
@@ -183,6 +185,7 @@ const NewRoute = (props) => {
                     if (!checkValues(t)) {
                         let json = getJsonRoute(name, description, user, points, media, waypoints)
                         let nameFile = (ruta !== undefined) ? ruta.fileName : name.trim() + ".json"
+                        if(ruta !== undefined) publico = ruta.shared;
                         if (publico) createFolder(fileClien, url + "public/" + folder, json, nameFile, image, video, updateComment, showSuccessUploadFile, showErrorUploadFile, clear)
                         else createFolder(fileClien, url + folder, json, nameFile, image, video, updateComment, showSuccessUploadFile, showErrorUploadFile, clear)
                     }
@@ -196,5 +199,3 @@ const NewRoute = (props) => {
 }
 
 export default NewRoute;
-
-
