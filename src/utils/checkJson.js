@@ -44,5 +44,5 @@ export default function checkJson(json, fileName, showErrorUploadFile) {
 
 function message(file,propiedad,showErrorUploadFile){
      // eslint-disable-next-line
-    showErrorUploadFile("(" + file + ") " + "The json file does not contain the property " + propiedad);
+    if(showErrorUploadFile !== undefined) showErrorUploadFile("(" + file + ") " + "The json file does not contain the property " + propiedad);
 }
