@@ -85,7 +85,6 @@ export const WelcomePageContent = props => {
         <p>{t('welcome.realized')}</p>
         <ul>
           <li>Daniel de Lera</li>
-          <li>Federico Cuervo</li>
           <li>Ismael Cadenas</li>
           <li>Alfonso Lozana</li>
           <li>Ignacio Bermejo</li>
