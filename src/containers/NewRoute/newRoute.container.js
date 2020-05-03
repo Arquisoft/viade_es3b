@@ -34,8 +34,7 @@ const NewRoute = (props) => {
     const { t } = useTranslation();
 
     const clear = () => {
-        /*if (ruta !== undefined) loadMapView();
-        else {
+       
             setName(null);
             setDescription(null);
             setImage(null);
@@ -50,8 +49,7 @@ const NewRoute = (props) => {
             publico = false;
 
             ReactDOM.render(<Map {... { point, updatePoints }}></Map>, document.getElementById('leftMap'));
-        }
-*/
+     
     }
 
    /* function loadMapView() {
@@ -174,7 +172,7 @@ const NewRoute = (props) => {
                     <ShareCard>
                         <div className="flex-container">
                         <center><h3 htmlFor="cbox1">{t('uploader.share')}</h3></center>
-                            <input type="checkbox" id="cbox1" value="first_checkbox" checked={(ruta !== undefined) ? ruta.shared : false} onChange={() => publico = !publico}></input>
+                            <input type="checkbox" id="cbox1" value="first_checkbox" onChange={(e) => publico = !publico}></input>
                         </div>
                     </ShareCard>
                     : <></>}
