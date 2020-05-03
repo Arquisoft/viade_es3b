@@ -30,7 +30,7 @@ No functional
 | Priority | Goal | Description
 | 1 | Security | Give users ownership of their information and grant them control over access to it
 | 2 | Usability | Create a friendly interface that does not require prior knowledge
-| 3 | Reliability | A failure in the application cannot imply a filtering of the data.
+| 3 | Interoperability | The application must be compatible with other applications.
 | 4 | Compatibility | Support different types of route formats and images.
 |===
 
@@ -45,5 +45,4 @@ No functional
 | Team | Responsible for developing the app | They hope to make a good application and learn to use new technologies.
 | Inrupt | Company that will test and evaluate the app  | They expect to get an application that uses SOLID
 |===
-
 
