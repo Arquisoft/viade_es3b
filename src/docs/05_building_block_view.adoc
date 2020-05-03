@@ -14,7 +14,7 @@ See <<03_system_scope_and_context.adoc#section-system-scope-and-context, System 
 At this early stage of the development process, this diagram contains as much detail as we can represent about the current view that we, the development team, have.
 
 .White box description of the overall system together with black box descriptions
-image::BuildinBlockView-Level1.png[align="center"]
+image::BuildingBlockView-Level1.png[align="center"]
 
 |======================
 |Object   |Description
@@ -28,7 +28,7 @@ image::BuildinBlockView-Level1.png[align="center"]
 In this view, we have a representation of the components of the system from a standpoint of the technologies used to implement each module.
 
 .Level 2 zooms into Service and Interface blocks of level 1
-image::BuildinBlockView-Level2.png[align="center"]
+image::BuildingBlockView-Level2.png[align="center"]
 
 |======================
 |Object   |Description
