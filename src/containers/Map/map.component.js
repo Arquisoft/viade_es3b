@@ -67,7 +67,7 @@ const MapaComponent = props => {
 
   function addComment(t) {
     let text = document.getElementById("comentario").value;
-    document.getElementById("comentario").value = '...';
+    document.getElementById("comentario").value = t('route.publish');
     document.getElementById("comentario").readonly = true;
     currentRuta.addComment(fileClien, text, user, updateComments);
 
@@ -88,18 +88,11 @@ const MapaComponent = props => {
       return aux;
     }
 
-    function obtainButton(){
-      return (currentRuta.shared !== undefined)?
-        <div> <div></div><input type="text" id="comentario"></input>
-        <button onClick={addComment}>{t('route.comment')}</button></div> : <></>;
-    }
-
     return <CommentCard>
       <h1 id="name">{t('route.comments')}</h1>
       {obtainComments()}
-      {obtainButton()}
-      </CommentCard>
-      ;
+      <div></div><input type="text" id="comentario"></input>
+      <button onClick={addComment}>{t('route.comment')}</button></CommentCard>;
   }
 
   const Map = () => {
@@ -112,12 +105,6 @@ const MapaComponent = props => {
     </MapaStyle>;
   }
 
-  const RuteInformation = (props) => {
-    let currentRuta = props.currentRuta;
-    return <div><center><h1 id="name">{currentRuta.name}</h1></center>
-    <center><h3 id="description">{ currentRuta.description}</h3></center>
-    <center><h3 id="distance" >{ t('route.distance') + currentRuta.getDistance() + " KM"}</h3></center></div>
-  }
   const ButtonShare = () => {
     const { t } = useTranslation();
     if (currentRuta.shared === undefined)
@@ -141,11 +128,11 @@ const MapaComponent = props => {
           </ScrollDiv>
         </RoutesCard>
         <Map></Map>
-
-
         <RouteCard className="routes">
           <ScrollDiv>
-            <RuteInformation {... {currentRuta}}></RuteInformation>
+            <center><h1 id="name">{currentRuta.name}</h1></center>
+            <center><h3 id="description">{ currentRuta.description}</h3></center>
+            <center><h3 id="distance" >{ currentRuta.getDistance() + " KM"}</h3></center>
             <ButtonsWrapper>
             <Slider {... { media }}></Slider>
             <ButtonShare> </ButtonShare>
