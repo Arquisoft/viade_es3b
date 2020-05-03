@@ -6,10 +6,38 @@
 
 # VIADE ES3B
 
-This repository contains a skeleton of the VIADE project.
+## Description
+This repository contains the work do it during the semester to do a decentralized routes management system based on the solid specifications.
 
 This project is an assignment for the [Software Architecture course](https://arquisoft.github.io/) following [these requirements](https://labra.solid.community/public/SoftwareArchitecture/AssignmentDescription/).
 
 The app is deployed at [https://arquisoft.github.io/viade_es3b/](https://arquisoft.github.io/viade_es3b/) which also contains a [technical documentation](https://arquisoft.github.io/viade_es3b/docs).
 
 More information about how this project has been setup is available [in the wiki](https://github.com/Arquisoft/viade_es3b/wiki).
+
+## Cloning repository
+```
+> git clone -b https://github.com/Arquisoft/viade_es3b.git
+
+```
+### Installing
+
+```
+> npm install
+```
+### Running
+```
+> npm start
+```
+
+### Testing
+```
+> npm test
+```
+
+## Participants
+Daniel de Lera
+Ismael Cadenas
+Alfonso Lozana
+Ignacio Bermejo
+Jorge Iturrioz
