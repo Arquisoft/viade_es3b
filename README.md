@@ -33,6 +33,19 @@ More information about how this project has been setup is available [in the wiki
 ### Testing
 ```
 > npm test
+
+```
+
+### BDD Testing
+```
+> npm run test:e2e
+
+```
+
+### Documentation
+```
+> npm run docs
+
 ```
 
 ## Participants
