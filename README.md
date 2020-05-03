@@ -2,6 +2,7 @@
 [![codecov](https://codecov.io/gh/Arquisoft/viade_es3b/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/viade_es3b)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6d87ad7b8b89409aa9dc2d7a7492affc)](https://www.codacy.com/gh/Arquisoft/viade_0?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arquisoft/viade_0&amp;utm_campaign=Badge_Grade)
 [![documentation](https://img.shields.io/badge/docs-arc42-9cf.svg)](https://arquisoft.github.io/viade_es3b/docs/)
+[![Version Badge](https://img.shields.io/badge/Version-1.1-<COLOR>.svg)](https://arquisoft.github.io/viade_es3b)
 
 # VIADE ES3B
 
