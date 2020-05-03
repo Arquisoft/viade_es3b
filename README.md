@@ -36,8 +36,8 @@ More information about how this project has been setup is available [in the wiki
 ```
 
 ## Participants
-Daniel de Lera
-Ismael Cadenas
-Alfonso Lozana
-Ignacio Bermejo
-Jorge Iturrioz
+* Daniel de Lera
+* Ismael Cadenas
+* Alfonso Lozana
+* Ignacio Bermejo
+* Jorge Iturrioz
