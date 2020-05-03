@@ -173,12 +173,17 @@ export const CommentCard = styled.div`
   h1{
     text-align: center;
   }
-    input{
+    input#comentario{
+      width: 85%;
   }
   button{font-size: 1em;
         color: #083575;
         background:#8ed2d2;
         font-weight:bold;
+        margin: 0px 0px 0px 5px;
+        @media screen and (max-width: 1000px) {
+          margin: 5px 0px 0px;
+        }
     }
     hover{
         background:#a4d1d1;
