@@ -149,7 +149,9 @@ const MapaComponent = props => {
             <ButtonsWrapper>
             <Slider {... { media }}></Slider>
             <ButtonShare> </ButtonShare>
-            <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>, document.getElementById('mapComponent'))}>{t('route.edit')}</button>
+              {(currentRuta.shared !== undefined)?
+                  <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>,
+                      document.getElementById('mapComponent'))}>{t('route.edit')}</button>: <></>}
             </ButtonsWrapper>
           </ScrollDiv>
         </RouteCard>
