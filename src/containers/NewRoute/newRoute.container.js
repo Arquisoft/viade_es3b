@@ -9,7 +9,7 @@ import getJsonRoute from './../../utils/defaultJsonRoute'
 import fileClient from 'solid-file-client';
 import * as solidAuth from 'solid-auth-client';
 import { useWebId } from '@solid/react';
-//import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 
 
 const NewRoute = (props) => {
