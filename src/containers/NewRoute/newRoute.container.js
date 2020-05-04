@@ -33,6 +33,47 @@ const NewRoute = (props) => {
     const [points, setPoints] = useState(point);
     const { t } = useTranslation();
 
+    photoShow();
+	function photoShow() {
+		if(image !== null){
+            //Muestro el encabezado (Archivos seleccionados)
+			document.getElementById('header-file-container-photo').style.display ="initial";
+			//Borro lo seleccionado anteriormente
+			document.getElementById('file-container-photo').removeChild(document.getElementById('photo-list'));
+			var contenedor = document.createElement('ul');
+			contenedor.id = 'photo-list';
+			//Inserto la lista al div con id=file-container
+			document.getElementById('file-container-photo').insertAdjacentElement('beforeend',contenedor);
+			for(var i = 0; i < image.length; i++){
+				let file = image[i];
+				var elemento = document.createElement("li");
+				elemento.insertAdjacentText('beforeend', i+1 + "- " + file.name);
+				contenedor.insertAdjacentElement('beforeend',elemento);	
+			}
+			
+		}		
+	}
+	videoShow();
+	function videoShow() {
+		if(video !== null){
+            //Muestro el encabezado (Archivos seleccionados)
+			document.getElementById('header-file-container-video').style.display ="initial";
+			//Borro lo seleccionado anteriormente
+			document.getElementById('file-container-video').removeChild(document.getElementById('video-list'));
+			var contenedor = document.createElement('ul');
+			contenedor.id = 'video-list';
+			//Inserto la lista al div con id=file-container
+			document.getElementById('file-container-video').insertAdjacentElement('beforeend',contenedor);
+			for(var i = 0; i < video.length; i++){
+				let file = video[i];
+				var elemento = document.createElement("li");
+				elemento.insertAdjacentText('beforeend', i+1 + "- " + file.name);
+				contenedor.insertAdjacentElement('beforeend',elemento);	
+			}
+			
+		}		
+    }
+    
     const clear = () => {
        
             setName(null);
@@ -153,7 +194,13 @@ const NewRoute = (props) => {
                                     </label>
                                 </center>
                             </div>
+                            
                         </ChooseButton>
+                        <div id="file-container-photo">
+                                 <h3 id="header-file-container-photo">{t('uploader.selectedFilesPhoto')}</h3>
+
+								<ul id="photo-list"></ul>
+							</div>
                     </MultimediaCard>
                     <MultimediaCard>
                         <ChooseButton>
@@ -167,6 +214,10 @@ const NewRoute = (props) => {
                                 </center>
                             </div>
                         </ChooseButton>
+                        <div id="file-container-video">
+                                <h3 id="header-file-container-video">{t('uploader.selectedFilesVideo')}</h3>
+								<ul id="video-list"></ul>
+							</div>
                     </MultimediaCard>
                 </MultimediasCard>
                 <br></br>

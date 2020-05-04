@@ -39,7 +39,18 @@ export const NewRouteSection = styled.div`
 `;
 
 export const MultimediaCard = styled.div`
+ul{
+  margin 5px;
   
+}
+h3{
+  display: none;
+  font-size:1.0rem;
+  font-weight: 500;
+}
+#file-container-photo, #file-container-video{
+  margin-top: 10px;
+}
 `;
 
 export const MultimediasCard = styled.div`
