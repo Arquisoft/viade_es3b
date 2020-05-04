@@ -258,7 +258,7 @@
     "explanation": "Sube aquí los archivos multimedia de tus rutas",
     "upload": "Subir",
     "choose": "Elegir archivos",
-    "selectedFiles": "Archivos seleccionados:",
+    "selectedFiles": "Archivo seleccionado: ",
     "modifyFiles": "Modificar archivos",
     "file": "El archivo ",
     "incorrectUpload": " no se ha subido correctamente.",
@@ -274,7 +274,9 @@
     "share": "Compartir",
     "unshare": "Dejar de compartir",
     "chooseJSONFile": "Por favor, elija un archivo JSON",
-    "accept": "Seleccione para marcar ruta como compartida"
+    "accept": "Seleccione para marcar ruta como compartida",
+    "selectedFilesVideo": "Videos seleccionados",
+    "selectedFilesPhoto": "Fotos seleccionadas"
   },
   "route": {
     "share": "Compartir",

@@ -217,6 +217,16 @@ export const ShareCard = styled.div`
 
 export const MultimediaCard = styled.div`
   margin: 30px;
+  ul{
+    margin 5px;
+  }
+  h3{
+    display: none;
+    
+  }
+  #file-container-photo, #file-container-video{
+    margin-top: 10px;
+  }
 `;
 
 export const MultimediasCard = styled.div`

@@ -297,7 +297,7 @@
     "explanation": "Upload here the multimedia files of your routes",
     "upload": "Upload",
     "choose": "Choose files",
-    "selectedFiles": "Selected files:",
+    "selectedFiles": "Selected file: ",
     "modifyFiles": "Modify files",
     "file": "The file ",
     "incorrectUpload": " has not been uploaded correctly.",
@@ -313,7 +313,9 @@
     "share": "Share",
     "unshare": "Stop sharing",
     "chooseJSONFile": "Please, choose JSON file",
-    "accept": "Select to mark route as shared"
+    "accept": "Select to mark route as shared",
+    "selectedFilesVideo": "Selected videos",
+    "selectedFilesPhoto": "Selected photos"
     },
     "errorCheckRuta": {
       "propiedad": "The json file does not contain the property "
