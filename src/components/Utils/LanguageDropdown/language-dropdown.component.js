@@ -47,22 +47,22 @@ class LanguageDropdown extends Component<Props> {
         label: t('navBar.languages.en'),
         onClick: () => this.onLanguageSelect('en'),
         icon: 'us',
-        customIcon: true
+        customIcon: false
       },
       {
         label: t('navBar.languages.es'),
         onClick: () => this.onLanguageSelect('es'),
         icon: 'es',
-        customIcon: true
+        customIcon: false
       }
     ];
     return (
       <Dropdown actions={profileOpts} hover>
-        <div
-          className={`flag-icon flag-icon-${
-            language && languages[language] ? languages[language].icon : 'us'
-          }`}
-        />
+        <div>
+          <p>
+            {t('navBar.languages.language')}
+          </p>
+        </div>
       </Dropdown>
     );
   }

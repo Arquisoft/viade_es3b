@@ -58,7 +58,8 @@
 	"upload": "Upload file",
     "languages": {
       "en": "English (English)",
-      "es": "Español (Spanish)"
+      "es": "Español (Spanish)",
+      "language": "Language"
     },
     "notifications": {
       "global": "Global",

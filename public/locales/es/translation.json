@@ -60,7 +60,8 @@
 	"upload": "Subir fichero",
     "languages": {
       "en": "English (Inglés)",
-      "es": "Español (Español)"
+      "es": "Español (Español)",
+      "language": "Idioma"
     },
     "notifications": {
       "global": "Global",
