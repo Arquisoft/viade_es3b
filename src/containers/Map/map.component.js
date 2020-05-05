@@ -69,7 +69,7 @@ const MapaComponent = props => {
     let text = document.getElementById("comentario").value;
     document.getElementById("comentario").value = '...';
     document.getElementById("comentario").readonly = true;
-    currentRuta.addComment(fileClien, text, user, updateComments);
+    currentRuta.addComment(fileClien, text, updateComments);
 
   }
 

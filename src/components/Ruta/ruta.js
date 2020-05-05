@@ -6,6 +6,7 @@ export default class Ruta {
     constructor(file, commentsFile, fileName, share, rutas) {
         this.rutas = rutas;
         this.name = file.name;
+        this.urlComments = file.comments
         this.description = file.description;
         this.media = [];
         this.points = [];
@@ -25,13 +26,10 @@ export default class Ruta {
         this.shared = share;
     }
 
-    addComment(fileClien, text, user, callback) {
-
-        
-        let url = user.split("profile/card#me")[0] + ((this.shared) ? "public/" : "") + "viade/comments/routeComments/" + this.CommentsFileName;
-        fileClien.readFile(url).then((file) => {
+    addComment(fileClien, text, callback) {
+        fileClien.readFile(this.urlComments).then((file) => {
             var value = this.createComment(JSON.parse(file), text);
-            fileClien.createFile(url, value, "application/json").then(() => {
+            fileClien.createFile(this.urlComments, value, "application/json").then(() => {
                 callback();
             })
         }
@@ -96,15 +94,19 @@ export default class Ruta {
         console.log(this.fileName + "-" + this.shared);
         let folderToRemove = (this.shared) ? url + "public/viade/" : url + "viade/";
         let folderToCopy = (!this.shared) ? url + "public/viade/" : url + "viade/";
+        let folderToCopyCommens = this.urlComments.includes("public/viade")? 
+        this.urlComments.split("public/viade")[0] + "viade" + this.urlComments.split("public/viade")[1]:
+        this.urlComments.split("viade")[0] +"public/viade" +url.split("viade")[1];
 
         fileClient.move(folderToRemove + "routes/" + this.fileName, folderToCopy + "routes/" + this.fileName).then(
         fileClient.readFile(folderToRemove + "routes/" + this.fileName).then((file) => {
             var value = this.updateMedia(JSON.parse(file), user);
+            this.comments = folderToCopyCommens;
             fileClient.createFile( folderToCopy + "routes/" + this.fileName, value, "application/json").then(
-                fileClient.move(folderToRemove + "comments/routeComments/" + this.CommentsFileName, folderToCopy +
-                    "comments/routeComments/" + this.CommentsFileName).then(() => {
+                fileClient.move(this.urlComments, folderToCopyCommens).then(() => {
                         this.shared = !this.shared;
                         this.sharePhotos(fileClient, folderToCopy);
+                        this.urlComments = folderToCopyCommens;
                         callback();
                     })
             )

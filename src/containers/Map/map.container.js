@@ -10,6 +10,7 @@ import Rutas from '../../components/Ruta/rutas';
 import { H2Format, InformationSection, ButtonsCard } from './map.style';
 import { useTranslation } from 'react-i18next';
 import checkJson from './../../utils/checkJson'
+import getJsonComments from './../../utils/defaultJsonRoute'
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 
@@ -78,12 +79,11 @@ async function loadRoutes(url, user, share, name, t) {
             // eslint-disable-next-line
             fileClien.readFile(url + "/routes/" + routes.files[i].name).then((file) => {
                 let json = (checkJson(JSON.parse(file), file));
-                
+
                 if (json !== null) {
                     console.log(json)
-                    let urlComments = checkCommets(json.comments, url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0], fileClien)
-                    console.log("Valor: " + urlComments)
-                    if(urlComments != null){
+                    checkCommets(json.comments, url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0] + "Comments.json", fileClien).then((urlComments) =>{
+                    json.comments = urlComments;
                         fileClien.readFile(urlComments).then((fileComment) => {
                             commentsJson.push(JSON.parse(fileComment));
                             rutasJson.push(json);
@@ -94,31 +94,33 @@ async function loadRoutes(url, user, share, name, t) {
                                 loadMapView(new Rutas(rutasJson, commentsJson, fileName, share), user, name);
                             }
                         });
-                    } else {
-                        commentsJson.push(null);
-                        rutasJson.push(json);
-                        fileName.push(routes.files[i].name);
-                        count += 1;
-                        updatePercent(count, routes.files.length, t);
-                        if (count === routes.files.length) {
-                            loadMapView(new Rutas(rutasJson, commentsJson, fileName, share), user, name);
-                        }
-
-                    }
+                    } 
+                );
                 } else { loadInvalidRoute(); }
             });
         } else { loadInvalidRoute(); }
     }
+      
+    function checkCommets(url, url2, fileClien) {
+        return new Promise((resolve,reject) =>{
+        if (url === undefined || url === null || url === "") {
+            fileClien.itemExists(url2).then((value) => {
+                console.log(value);
+                if (value) resolve(url2);
+                else {
+                    fileClien.createFile(url2, getJsonComments(), "application/json").then(resolve(url2));
+                }
+            });
+        }
+        else {
+            fileClien.itemExists(url).then((value) => {
+                if (value) resolve(url);
+                else {
+                    fileClien.createFile(url2, getJsonComments(), "application/json").then(resolve(url2));}
+            });
+        }
+    });}
 
-    function checkCommets(url,url2, fileClien) {
-        console.log(url);
-        if (url === undefined || url === null || url === ""){
-            
-            if (fileClien.itemExists(url2)) return url2;
-            else return null;   
-        } 
-        return fileClien.itemExists(url)? url : null;
-    }
 
     function loadInvalidRoute() {
         count += 1;
