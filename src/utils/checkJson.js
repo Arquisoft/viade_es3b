@@ -35,7 +35,7 @@ export default function checkJson(json, fileName, showErrorUploadFile) {
     }
 
     if (json.author === undefined) json.author = "anonimo";
-    if (json.comments === undefined) json.comments = [];
+    if (json.comments === undefined) json.comments = null;
     if (json.media === undefined) json.media = [];
     if (json.waypoints === undefined) json.waypoints = [];
 

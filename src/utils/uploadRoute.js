@@ -16,7 +16,11 @@ export default function createFolder(fileClien, folder, json, name, photo, video
 			fileClien.createFolder(folder);
 		}
 
-		if (updateComment) fileClien.createFile(folder + "/comments/routeComments/" + name.split('.json')[0] + "Comments.json", getJsonComments(), "application/json");
+		
+		if (updateComment){
+			fileJson.comments = folder + "/comments/routeComments/" + name.split('.json')[0] + "Comments.json";
+			fileClien.createFile(folder + "/comments/routeComments/" + name.split('.json')[0] + "Comments.json", getJsonComments(), "application/json");
+		} 
 
 		for (i = 0; photo != null && i < photo.length; i++) {
 			url = folder + "/resources/" + photo[i].name;
