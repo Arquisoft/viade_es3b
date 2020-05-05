@@ -10,7 +10,7 @@ import Rutas from '../../components/Ruta/rutas';
 import { H2Format, InformationSection, ButtonsCard } from './map.style';
 import { useTranslation } from 'react-i18next';
 import checkJson from './../../utils/checkJson'
-import getJsonComments from './../../utils/defaultJsonRoute'
+
 
 const fileClien = new fileClient(solidAuth, { enableLogging: true });
 
@@ -82,44 +82,59 @@ async function loadRoutes(url, user, share, name, t) {
 
                 if (json !== null) {
                     console.log(json)
-                    checkCommets(json.comments, url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0] + "Comments.json", fileClien).then((urlComments) =>{
-                    json.comments = urlComments;
-                        fileClien.readFile(urlComments).then((fileComment) => {
-                            commentsJson.push(JSON.parse(fileComment));
-                            rutasJson.push(json);
-                            fileName.push(routes.files[i].name);
-                            count += 1;
-                            updatePercent(count, routes.files.length, t);
-                            if (count === routes.files.length) {
-                                loadMapView(new Rutas(rutasJson, commentsJson, fileName, share), user, name);
+                    let urlDefault = url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0] + "Comments.json";
+                    checkCommets(json.comments, urlDefault, fileClien).then((urlComments) => {
+                            if (urlComments === null) {
+                                json.comments = urlDefault;
+                                commentsJson.push(null);
+                                rutasJson.push(json);
+                                fileName.push(routes.files[i].name);
+                                count += 1;
+                                updatePercent(count, routes.files.length, t);
+                                if (count === routes.files.length) {
+                                    loadMapView(new Rutas(rutasJson, commentsJson, fileName, share), user, name);
+                                }
+                            } else {
+                                json.comments = urlComments;
+                                fileClien.readFile(urlComments).then((fileComment) => {
+                                    commentsJson.push(JSON.parse(fileComment));
+                                    rutasJson.push(json);
+                                    fileName.push(routes.files[i].name);
+                                    count += 1;
+                                    updatePercent(count, routes.files.length, t);
+                                    if (count === routes.files.length) {
+                                        loadMapView(new Rutas(rutasJson, commentsJson, fileName, share), user, name);
+                                    }
+                                });
                             }
-                        });
-                    } 
-                );
+                        }
+                        );
                 } else { loadInvalidRoute(); }
             });
         } else { loadInvalidRoute(); }
     }
-      
+
     function checkCommets(url, url2, fileClien) {
-        return new Promise((resolve,reject) =>{
-        if (url === undefined || url === null || url === "") {
-            fileClien.itemExists(url2).then((value) => {
-                console.log(value);
-                if (value) resolve(url2);
-                else {
-                    fileClien.createFile(url2, getJsonComments(), "application/json").then(resolve(url2));
-                }
-            });
-        }
-        else {
-            fileClien.itemExists(url).then((value) => {
-                if (value) resolve(url);
-                else {
-                    fileClien.createFile(url2, getJsonComments(), "application/json").then(resolve(url2));}
-            });
-        }
-    });}
+        return new Promise((resolve, reject) => {
+            if (url === undefined || url === null || url === "") {
+                fileClien.itemExists(url2).then((value) => {
+                    console.log(value);
+                    if (value) resolve(url2);
+                    else {
+                        resolve(null);
+                    }
+                });
+            }
+            else {
+                fileClien.itemExists(url).then((value) => {
+                    if (value) resolve(url);
+                    else {
+                        resolve(null);
+                    }
+                });
+            }
+        });
+    }
 
 
     function loadInvalidRoute() {
