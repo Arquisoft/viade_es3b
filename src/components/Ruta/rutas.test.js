@@ -9,8 +9,8 @@ describe('RUtas', () => {
   afterAll(cleanup);
   let point = new Point(150, 30, 0);
   let wayPoint = new WayPoint("Way point", "Descripción", point);
-  let ruta1 = getJsonRoute('ruta1', 'descripcion ruta 1', 'Alfonso Lozana', [[0, 0], [1, 1]], ["multimedia"], [new WayPoint("Way point", "Descripción", wayPoint)])
-  let ruta2 = getJsonRoute('ruta2', 'descripcion ruta 2', 'Alfonso Lozana', [[0, 0], [1, 1]], ["multimedia2"], [])
+  let ruta1 = getJsonRoute('ruta1', 'descripcion ruta 1', 'Alfonso Lozana','', [[0, 0], [1, 1]], ["multimedia"], [new WayPoint("Way point", "Descripción", wayPoint)])
+  let ruta2 = getJsonRoute('ruta2', 'descripcion ruta 2', 'Alfonso Lozana','', [[0, 0], [1, 1]], ["multimedia2"], [])
   let rutas = new Rutas([ruta1, ruta2], [JSON.parse(getJsonComments()), JSON.parse(getJsonComments())], ['ruta1', 'ruta2'], false, null);
 
 

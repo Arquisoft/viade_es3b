@@ -1,11 +1,13 @@
 import { Point, WayPoint, CommentObj } from "./point.js";
 //import CommentObj from './comment.js'
+import getJsonComments from './../../utils/defaultJsonRoute'
 
 
 export default class Ruta {
     constructor(file, commentsFile, fileName, share, rutas) {
         this.rutas = rutas;
         this.name = file.name;
+        this.urlComments = file.comments;
         this.description = file.description;
         this.media = [];
         this.points = [];
@@ -13,43 +15,49 @@ export default class Ruta {
         this.comments = [];
         file.points.forEach(p => this.points.push(new Point(p.latitude, p.longitude, p.elevation)));
         if (commentsFile !== null) {
-            file.media.forEach(m => this.media.push(m["@id"]));
-            file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name, w.description, new Point(w.latitude, w.longitude, w.elevation))))
-            this.currentMedia = 0;
-          
             commentsFile.comments.forEach(c => { if (c.text !== undefined) this.comments.push(new CommentObj(c.text, c.dateCreated)) });
-            //Datos para subir commentarios al pod
-            this.fileName = fileName;
-            this.CommentsFileName = fileName.split('.')[0] + "Comments.json";
         }
+        file.media.forEach(m => this.media.push(m["@id"]));
+        file.waypoints.forEach(w => this.waypoints.push(new WayPoint(w.name, w.description, new Point(w.latitude, w.longitude, w.elevation))))
+        this.currentMedia = 0;
+        //Datos para subir commentarios al pod
+        this.fileName = fileName;
         this.shared = share;
     }
 
-    addComment(fileClien, text, user, callback) {
-
-        
-        let url = user.split("profile/card#me")[0] + ((this.shared) ? "public/" : "") + "viade/comments/routeComments/" + this.CommentsFileName;
-        fileClien.readFile(url).then((file) => {
-            var value = this.createComment(JSON.parse(file), text);
-            fileClien.createFile(url, value, "application/json").then(() => {
-                callback();
-            })
-        }
-        );
+    addComment(fileClien, text, callback) {
+        console.log("aaaaa " + this.urlComments);
+        fileClien.itemExists(this.urlComments).then((value) => {
+            console.log("Valoaaaaar   : " + value);
+            if (!value) {
+                var json = this.createComment(getJsonComments(), text);
+                fileClien.createFile(this.urlComments, json, "application/json").then(() => {
+                    callback();
+                });
+            } else {
+                fileClien.readFile(this.urlComments).then((file) => {
+                    var json = this.createComment(JSON.parse(file), text);
+                    fileClien.createFile(this.urlComments, json, "application/json").then(() => {
+                        callback();
+                    })
+                }
+                );
+            }
+        });
     }
-    getWayPoints(){
+    getWayPoints() {
         return this.waypoints;
     }
 
-    addWayPoints(waypoint){
+    addWayPoints(waypoint) {
         this.waypoints.push(waypoint);
     }
 
-    getNumberOfComments(){
+    getNumberOfComments() {
         return this.comments.length;
     }
 
-    getName(){
+    getName() {
         return this.name;
     }
 
@@ -93,22 +101,24 @@ export default class Ruta {
 
     share(fileClient, url, callback) {
         let user = url;
-        console.log(this.fileName + "-" + this.shared);
         let folderToRemove = (this.shared) ? url + "public/viade/" : url + "viade/";
         let folderToCopy = (!this.shared) ? url + "public/viade/" : url + "viade/";
-
+        let folderToCopyCommens = this.urlComments.includes("public/viade") ? 
+        "Destiono " +this.urlComments.split("public/viade")[0] + "viade" + this.urlComments.split("public/viade")[1] :
+        "Destiono " +this.urlComments.split("viade/")[0] + "/public/viade" + this.urlComments.split("viade/")[1] ;
         fileClient.move(folderToRemove + "routes/" + this.fileName, folderToCopy + "routes/" + this.fileName).then(
-        fileClient.readFile(folderToRemove + "routes/" + this.fileName).then((file) => {
-            var value = this.updateMedia(JSON.parse(file), user);
-            fileClient.createFile( folderToCopy + "routes/" + this.fileName, value, "application/json").then(
-                fileClient.move(folderToRemove + "comments/routeComments/" + this.CommentsFileName, folderToCopy +
-                    "comments/routeComments/" + this.CommentsFileName).then(() => {
-                        this.shared = !this.shared;
+            fileClient.readFile(folderToRemove + "routes/" + this.fileName).then((file) => {
+                var value = this.updateMedia(JSON.parse(file), user);
+                fileClient.createFile(folderToCopy + "routes/" + this.fileName, value, "application/json").then(() =>{ 
+                   fileClient.move(this.urlComments, folderToCopyCommens).then(() => {
                         this.sharePhotos(fileClient, folderToCopy);
-                        callback();
+                        this.urlComments = folderToCopyCommens;
                     })
-            )
-        }));
+                    this.shared = !this.shared;
+                    callback();
+                }
+                )
+            }));
     }
 
     sharePhotos(fileClient, folderToCopy) {
@@ -125,7 +135,7 @@ export default class Ruta {
 
     updateMedia(json, user) {
         json.media = [];
-       this.media.forEach(m => {
+        this.media.forEach(m => {
             console.log("Media: " + m)
             if (!m.includes(user)) {
                 json.media.push({
