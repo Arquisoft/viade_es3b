@@ -57,11 +57,11 @@ const MapaComponent = props => {
 
   function shareRoute() {
     document.getElementById("btShare").disabled = true;
-    currentRuta.share(fileClien, user.split("profile/card#me")[0], updateShareButton(t));
+    currentRuta.share(fileClien, user.split("profile/card#me")[0], updateShareButton);
   }
 
-  function updateShareButton(t) {
-    document.getElementById("btShare").textContent = (currentRuta.shared) ? t('route.unshare') : t('route.share');
+  function updateShareButton() {
+    ReactDOM.hydrate(<ButtonShare></ButtonShare>, document.getElementById('divSahred'));
     document.getElementById("btShare").disabled = false;
   }
 
@@ -148,7 +148,7 @@ const MapaComponent = props => {
             <RuteInformation {... {currentRuta}}></RuteInformation>
             <ButtonsWrapper>
             <Slider {... { media }}></Slider>
-            <ButtonShare> </ButtonShare>
+            <div id = "divSahred"><ButtonShare> </ButtonShare></div>
               {(currentRuta.shared !== undefined)?
                   <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>,
                       document.getElementById('mapComponent'))}>{t('route.edit')}</button>: <></>}

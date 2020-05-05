@@ -101,7 +101,6 @@ export default class Ruta {
 
     share(fileClient, url, callback) {
         let user = url;
-        console.log(this.fileName + "-" + this.shared);
         let folderToRemove = (this.shared) ? url + "public/viade/" : url + "viade/";
         let folderToCopy = (!this.shared) ? url + "public/viade/" : url + "viade/";
         let folderToCopyCommens = this.urlComments.includes("public/viade") ? 
@@ -112,11 +111,11 @@ export default class Ruta {
                 var value = this.updateMedia(JSON.parse(file), user);
                 fileClient.createFile(folderToCopy + "routes/" + this.fileName, value, "application/json").then(() =>{ 
                    fileClient.move(this.urlComments, folderToCopyCommens).then(() => {
-                        this.shared = !this.shared;
                         this.sharePhotos(fileClient, folderToCopy);
                         this.urlComments = folderToCopyCommens;
-                        callback();
                     })
+                    this.shared = !this.shared;
+                    callback();
                 }
                 )
             }));
