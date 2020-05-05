@@ -4,7 +4,7 @@ import { useWebId } from '@solid/react';
 import * as solidAuth from 'solid-auth-client';
 import fileClient from 'solid-file-client';
 
-import { UploaderWrapper, UploaderCard, ShareCard, FormCard, MultimediaCard, MultimediasCard, ChooseButton, UploadButton } from './uploader.style';
+import { SelectCard, UploaderWrapper, UploaderCard, ShareCard, FormCard, MultimediaCard, MultimediasCard, ChooseButton, UploadButton } from './uploader.style';
 import { useTranslation } from 'react-i18next';
 
 import { toast } from 'react-toastify';
@@ -112,6 +112,7 @@ const Formulario = () => {
 	return (
 		<div>
 			<br></br>
+			<SelectCard>
 			<FormCard>
 				<UploadJson setFile={setFile} file={file} />
 			</FormCard>
@@ -162,7 +163,7 @@ const Formulario = () => {
 					<input type="checkbox" id="cbox1" value="first_checkbox" onChange={clickButtom}></input>
 				</div>
 			</ShareCard>
-
+			</SelectCard>
 			<br></br>
 
 			<center>
