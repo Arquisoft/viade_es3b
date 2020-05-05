@@ -74,7 +74,8 @@ const MapaComponent = props => {
   }
 
   function updateComments() {
-    ReactDOM.hydrate(<Comments></Comments>, document.getElementById('comments'));
+    ReactDOM.unmountComponentAtNode(document.getElementById('mapComponent'));
+    ReactDOM.hydrate(<MapaComponent  {... { rutas, user }}></MapaComponent>, document.getElementById('mapComponent'));
     document.getElementById("comentario").value = "";
   }
 
@@ -141,8 +142,6 @@ const MapaComponent = props => {
           </ScrollDiv>
         </RoutesCard>
         <Map></Map>
-
-
         <RouteCard className="routes">
           <ScrollDiv>
             <RuteInformation {... {currentRuta}}></RuteInformation>
@@ -155,7 +154,6 @@ const MapaComponent = props => {
             </ButtonsWrapper>
           </ScrollDiv>
         </RouteCard>
-
       </MapContainerr>
       <CommentContainer>
         <CommentWrapper className="comments">
