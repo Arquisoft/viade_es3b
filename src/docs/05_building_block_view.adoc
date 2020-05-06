@@ -14,27 +14,34 @@ See <<03_system_scope_and_context.adoc#section-system-scope-and-context, System 
 At this early stage of the development process, this diagram contains as much detail as we can represent about the current view that we, the development team, have.
 
 .White box description of the overall system together with black box descriptions
-image::BuildinBlockView-Level1.png[align="center"]
+image::BuildingBlockView-Level1.png[align="center"]
 
 |======================
 |Object   |Description
 |Solid Pod | It will contain all the data from the given user
 |Services | Provides logic to perform actions
+|Interfaces | Provides user interactions with the system
 |======================
 
 === Level 2
 
 In this view, we have a representation of the components of the system from a standpoint of the technologies used to implement each module.
 
-.Level 2 zooms into some building blocks of level 1
-image::BuildinBlockView-Level2.png[align="center"]
+.Level 2 zooms into Service and Interface blocks of level 1
+image::BuildingBlockView-Level2.png[align="center"]
 
 |======================
 |Object   |Description
 |React containers | Login, register, uploader, profile... logic
+|Uploader container | Logic to upload routes, photos and videos
 |Map container | Logic to manage the leaflet Map
 |New Route container | Logic to create and store routes
-|Friend container | Logic to manage friends and get their solid name and public routes basci info
+|Friend container | Logic to manage friends and get their solid name and public routes basic info
+|React components | Login, register, uploader, profile... interfaces
+|Uploader component | Interface to upload routes, photos and videos
+|Map component | Interface that displays private or shared routes
+|New Route component | Interface to create routes and upload photos and videos
+|Friend component | Interface to manage friends and get their solid name and public routes basic info
 |======================
 
 .Motivation

@@ -16,6 +16,7 @@
 |Constraint |Explanation
 |Time |We only have one semester to develop the application. Assuming we haven't knowledge about technologies involved and having the deadline on 4th May, we may have problems completing all the checkpoints required.
 |Team |We are 6 persons in the team and we had never worked together before.
+|COVID-19 |COVID-19 has meant that we were unable to meet in person, making organization a little more difficult.
 |===
 ****
 

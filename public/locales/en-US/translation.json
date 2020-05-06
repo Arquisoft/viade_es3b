@@ -58,7 +58,8 @@
 	"upload": "Upload file",
     "languages": {
       "en": "English (English)",
-      "es": "Español (Spanish)"
+      "es": "Español (Spanish)",
+      "language": "Language"
     },
     "notifications": {
       "global": "Global",
@@ -257,25 +258,47 @@
     "shared": "Shared",
     "private": "Privates",
     "loading": "Loading",
-    "routes": "Routes"
+    "routes": "Routes",
+    "noRoutes": "There are no routes"
+  },
+  "route": {
+    "share": "Share",
+    "unshare": "Stop sharing",
+    "distance": "Distance: ",
+    "publish": "Publishing",
+    "delete": "Delete",
+    "comments": "Comments",
+    "comment": "Comment",
+    "edit": "Edit",
+    "nomedia" : "There is no kind of multimedia",
+    "close": "Close",
+    "multimedia": "Multimedia",
+    "name": "Name can't be empty",
+    "description": "Description can't be empty",
+    "error": "Route must contain one point at least",
+    "id": "Name",
+    "newRoute": "Create new route",
+    "editRoute": "Edit route",
+    "routeDesc": "Description"
   },
   "friends": {
-    "title": "Amigos",
-    "addFriend": "Añadir amigo",
-    "sendRequest": "Enviar solicitud",
+    "title": "Friends",
+    "addFriend": "Add friend",
+    "sendRequest": "Send friend request",
     "requests": {
-      "title": "Solicitudes de amistad",
-      "send": "Enviadas",
-      "receive": "Recibidas"
+      "title": "Friends' requests",
+      "send": "Sent",
+      "receive": "Received"
     },
     "trails": {
-      "title": "Rutas de mis amigos"
-    },
+      "title": "Friends' routes"
+    }
+  },
   "uploader": {
     "explanation": "Upload here the multimedia files of your routes",
     "upload": "Upload",
     "choose": "Choose files",
-    "selectedFiles": "Selected files:",
+    "selectedFiles": "Selected file: ",
     "modifyFiles": "Modify files",
     "file": "The file ",
     "incorrectUpload": " has not been uploaded correctly.",
@@ -289,7 +312,13 @@
     "chooseJSON": "Choose JSON file",
     "route": "Route",
     "share": "Share",
-    "chooseJSONFile": "Please, choose JSON file"
+    "unshare": "Stop sharing",
+    "chooseJSONFile": "Please, choose JSON file",
+    "accept": "Select to mark route as shared",
+    "selectedFilesVideo": "Selected videos",
+    "selectedFilesPhoto": "Selected photos"
+    },
+    "errorCheckRuta": {
+      "propiedad": "The json file does not contain the property "
     }
-  }
 }

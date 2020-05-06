@@ -10,11 +10,10 @@ We used Arc42 to define the structure of the documentation and we use Asciidocto
 We used React to build the front-end of the application because the teacher told us to use it and is the first step to do the application more usable, which is one of the
 quality attribute we wanted to perform in the application.
 
-The interoperability of the application will be achieved using GEOJson and load this kind of files in the POD.
+The interoperability of the application will be achieved using Json and load this kind of files in the POD. To achieve this objective we will follow the standard defined in https://github.com/Arquisoft/viadeSpec.
 
 Regarding testeability: We tried to implement tests in the application because being testeable was one of the quality attributes, we di an application with 
 several tests makeing it testeable in high level.
 
 We deploy the application using github pages to increment the performance, the efficiency of the application is based on javascript calls to the Solid POD, so we tried
 to do the bes in this aspect.
-

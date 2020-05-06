@@ -8,7 +8,7 @@ This section describes overall, principal regulations and solution ideas that ar
 ==== Route
 
 In the application , the base object we use and we modify is the object route. In the application we create objects route and we communicate this object with the user and 
-POD to store and retrieve information of it. Each route has a media and a comment atribute which store this in the application.
+POD to store and retrieve information of it. Each route  has a name,description,media,points and a comment atribute which store this in the application.
 
 ==== User
 The user is the person who uses the application and can post routes and share routes with another user.
@@ -26,7 +26,7 @@ The user interface is developed with React, we tried to do it easy to use and ea
 
 ==== Internationalization
 
-The app is internacionalizated to be used in 2 languages, in English and Spanish for the people who can't understand English. This makes the application more usable for 
+The app is internationalized to be used in 2 languages, in English and Spanish for the people who can't understand English. This makes the application more usable for
 all kind of people.
 
 === Development concepts
@@ -37,8 +37,11 @@ To build the application we use Node.js and his package manager, we build the ap
 
 ==== Testing
 
-We have 2 kind of tests in the application, we have tdd testing to incrementate the code coverage and to helping us to improve the application and we have bdd testing
-to check if the application works as it should.
+We have 3 types of tests in the application: +
+
+TDD testing:: Increment the code coverage and help us to improve the application. Performed using react-testing library.
+BDD testing:: to check if the application works as it should. Performed using Cucumber and jest-puppeteer.
+Load testing:: Simulation of multiple users accessing the application concurrently. Performed using Gatling.
 
 
 === Security and Safety
@@ -68,4 +71,3 @@ Session is handled by Solid Authentication Client, so it need an account with a 
 ==== Exception/Error Handling
 
 We tried to manage exception and error handling in the code of the application.
-

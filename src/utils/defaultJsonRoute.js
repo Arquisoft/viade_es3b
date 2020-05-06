@@ -1,11 +1,12 @@
 
-export default function getJsonRoute(name,description,author,points,media,waypoints) {
+export default function getJsonRoute(name,description,author,comments,points,media,waypoints) {
 	if(name === undefined) name = "";
 	if(description === undefined) description = "";
 	if(author === undefined) author = "";
 	if(points === undefined) points = [];
 	if(media === undefined) media = [];
 	if(waypoints === undefined) waypoints = [];
+	if(comments === undefined) comments = [];
 
 	var obj = ({
 			"@context": {
@@ -55,7 +56,7 @@ export default function getJsonRoute(name,description,author,points,media,waypoi
 			"name": name,
 			"author": author,
 			"description": description,
-			"comments": "",
+			"comments": comments,
 			"media": [],
 			"waypoints" : [],
 			"points": []

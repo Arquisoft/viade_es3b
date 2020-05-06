@@ -64,7 +64,7 @@ defineFeature(feature, test => {
         });
 
         when('I go to friend page', async () => {
-            await page.waitFor(1000);
+            await page.waitFor(3000);
 
             await page.goto("http://localhost:3000/viade_es3b/#/friends", {
                 waitUntil: 'networkidle2'
@@ -81,7 +81,7 @@ defineFeature(feature, test => {
        
 
         then('I can see a route from any friend', async () => {
-            await page.waitFor(6000);
+            await page.waitFor(7000);
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("span")];
                 b.forEach(function (b) {
@@ -91,7 +91,7 @@ defineFeature(feature, test => {
 
                 });
             });
-            await page.waitFor(6000);
+            await page.waitFor(7000);
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("div")];
                 b.forEach(function (b) {
@@ -101,7 +101,7 @@ defineFeature(feature, test => {
 
                 });
             });
-            await page.waitFor(4000);
+            await page.waitFor(7000);
             expect(page).toMatchElement('h1', { text: 'Route test 1' })
 
             

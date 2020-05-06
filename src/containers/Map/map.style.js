@@ -45,6 +45,9 @@ export const MapWrapper = styled.div`
     border: 1px solid rgba(124, 77, 255, 0);
     transition: all .25s ease-in-out;
     width: 100%;
+    @media screen and (max-width: 1000px) {
+      width: 90vw;
+    }
   }
 
   .map {
@@ -97,7 +100,7 @@ export const RouteCard = styled.div`
   min-height: 500px;
   max-height: 500px;
   @media screen and (max-width: 1000px) {
-    width: 100% !important;
+    width: 90vw !important;
     min-height: 200px;
     max-height: 3000px;
     padding: 0  !important;
@@ -111,7 +114,7 @@ export const RoutesCard = styled.div`
   max-height: 500px;
   
   @media screen and (max-width: 1000px) {
-    width: 100% !important;
+    width: 90vw !important;
     min-height: 200px;
     max-height: 3000px;
     padding: 0  !important;
@@ -134,6 +137,7 @@ margin: 5px;
 @media screen and (max-width: 1000px) {
   margin: 30px auto;
 }
+
 `;
 export const Down = styled.div`
        
@@ -142,12 +146,12 @@ export const Down = styled.div`
 export const MapaStyle = styled(Map)`
 min-height: 500px;
 max-height: 500px;
-max-width: 48vw !important;
+max-width: 48vw ;
 min-width: 48vw !important;
 @media screen and (max-width: 1000px) {
-  width: 100% !important;
+  width: 90vw !important;
   max-width: 100%;
-min-width: 100%;
+  min-width: 100%;
   min-height: 200px;
   max-height: 3000px;
   padding: 0  !important;
@@ -169,12 +173,17 @@ export const CommentCard = styled.div`
   h1{
     text-align: center;
   }
-    input{
+    input#comentario{
+      width: 85%;
   }
   button{font-size: 1em;
         color: #083575;
         background:#8ed2d2;
         font-weight:bold;
+        margin: 0px 0px 0px 5px;
+        @media screen and (max-width: 1000px) {
+          margin: 5px 0px 0px;
+        }
     }
     hover{
         background:#a4d1d1;

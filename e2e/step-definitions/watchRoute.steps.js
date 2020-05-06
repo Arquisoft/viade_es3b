@@ -85,13 +85,13 @@ defineFeature(feature, test => {
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {
-                    if (b.innerText == "Privadas") {
+                    if (b.innerText == "map.private") {
                         b.click();
                     }
 
                 });
             });
-            await page.waitFor(5000);
+            await page.waitFor(10000);
             await page.evaluate(() => {
                 let b = [...document.querySelectorAll("button")];
                 b.forEach(function (b) {

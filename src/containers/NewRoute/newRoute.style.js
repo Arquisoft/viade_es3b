@@ -7,6 +7,9 @@ export const NewRouteWrapper = styled.section`
   flex: 1 0 auto;
   flex-direction: row;
   background-color: #a4d1d1;
+  @media screen and (max-width: 1000px) {
+    
+  }
 `;
 
 export const MapSection = styled.div`
@@ -20,6 +23,9 @@ export const MapSection = styled.div`
   -o-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 1000px) {
+    width: 55%;
+  }
 `;
 
 export const NewRouteSection = styled.div`
@@ -27,10 +33,24 @@ export const NewRouteSection = styled.div`
   border: 1px solid rgba(124, 77, 255, 0);
   transition: all .25s ease-in-out;
   background-color: #a4d1d1;
+  @media screen and (max-width: 1000px) {
+    width: 45%;
+  }
 `;
 
 export const MultimediaCard = styled.div`
+ul{
+  margin 5px;
   
+}
+h3{
+  display: none;
+  font-size:1.0rem;
+  font-weight: 500;
+}
+#file-container-photo, #file-container-video{
+  margin-top: 10px;
+}
 `;
 
 export const MultimediasCard = styled.div`

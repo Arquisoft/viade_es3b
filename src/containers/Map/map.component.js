@@ -57,24 +57,25 @@ const MapaComponent = props => {
 
   function shareRoute() {
     document.getElementById("btShare").disabled = true;
-    currentRuta.share(fileClien, user.split("profile/card#me")[0], updateShareButton(t));
+    currentRuta.share(fileClien, user.split("profile/card#me")[0], updateShareButton);
   }
 
-  function updateShareButton(t) {
-    document.getElementById("btShare").textContent = (currentRuta.shared) ? t('route.unshare') : t('route.share');
+  function updateShareButton() {
+    ReactDOM.hydrate(<ButtonShare></ButtonShare>, document.getElementById('divSahred'));
     document.getElementById("btShare").disabled = false;
   }
 
   function addComment(t) {
     let text = document.getElementById("comentario").value;
-    document.getElementById("comentario").value = t('route.publish');
+    document.getElementById("comentario").value = '...';
     document.getElementById("comentario").readonly = true;
-    currentRuta.addComment(fileClien, text, user, updateComments);
+    currentRuta.addComment(fileClien,text, updateComments);
 
   }
 
   function updateComments() {
-    ReactDOM.hydrate(<Comments></Comments>, document.getElementById('comments'));
+    ReactDOM.unmountComponentAtNode(document.getElementById('mapComponent'));
+    ReactDOM.hydrate(<MapaComponent  {... { rutas, user }}></MapaComponent>, document.getElementById('mapComponent'));
     document.getElementById("comentario").value = "";
   }
 
@@ -88,11 +89,18 @@ const MapaComponent = props => {
       return aux;
     }
 
+    function obtainButton(){
+      return (currentRuta.shared !== undefined)?
+        <div> <div></div><input type="text" id="comentario"></input>
+        <button onClick={addComment}>{t('route.comment')}</button></div> : <></>;
+    }
+
     return <CommentCard>
       <h1 id="name">{t('route.comments')}</h1>
       {obtainComments()}
-      <div></div><input type="text" id="comentario"></input>
-      <button onClick={addComment}>{t('route.comment')}</button></CommentCard>;
+      {obtainButton()}
+      </CommentCard>
+      ;
   }
 
   const Map = () => {
@@ -105,6 +113,12 @@ const MapaComponent = props => {
     </MapaStyle>;
   }
 
+  const RuteInformation = (props) => {
+    let currentRuta = props.currentRuta;
+    return <div><center><h1 id="name">{currentRuta.name}</h1></center>
+    <center><h3 id="description">{ currentRuta.description}</h3></center>
+    <center><h3 id="distance" >{ t('route.distance') + currentRuta.getDistance() + " KM"}</h3></center></div>
+  }
   const ButtonShare = () => {
     const { t } = useTranslation();
     if (currentRuta.shared === undefined)
@@ -128,21 +142,18 @@ const MapaComponent = props => {
           </ScrollDiv>
         </RoutesCard>
         <Map></Map>
-
-
         <RouteCard className="routes">
           <ScrollDiv>
-            <center><h1 id="name">{currentRuta.name}</h1></center>
-            <center><h3 id="description">{ currentRuta.description}</h3></center>
-            <center><h3 id="distance" >{ currentRuta.getDistance() + " KM"}</h3></center>
+            <RuteInformation {... {currentRuta}}></RuteInformation>
             <ButtonsWrapper>
             <Slider {... { media }}></Slider>
-            <ButtonShare> </ButtonShare>
-            <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>, document.getElementById('mapComponent'))}>{t('route.edit')}</button>
+            <div id = "divSahred"><ButtonShare> </ButtonShare></div>
+              {(currentRuta.shared !== undefined)?
+                  <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>,
+                      document.getElementById('mapComponent'))}>{t('route.edit')}</button>: <></>}
             </ButtonsWrapper>
           </ScrollDiv>
         </RouteCard>
-
       </MapContainerr>
       <CommentContainer>
         <CommentWrapper className="comments">
