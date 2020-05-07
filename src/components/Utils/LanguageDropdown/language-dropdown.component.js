@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Dropdown } from '@util-components';
 import { toast } from 'react-toastify';
 
-const languages = {
+/*const languages = {
   en: {
     id: 'en',
     icon: 'us'
@@ -15,7 +15,8 @@ const languages = {
     id: 'en-US',
     icon: 'us'
   }
-};
+};*/
+
 
 type Props = {
   i18n: Object,
@@ -41,19 +42,16 @@ class LanguageDropdown extends Component<Props> {
 
   render() {
     const { t } = this.props;
-    const { language } = this.state;
+
+    //const { language } = this.state;
     const profileOpts = [
       {
         label: t('navBar.languages.en'),
-        onClick: () => this.onLanguageSelect('en'),
-        icon: 'us',
-        customIcon: false
+        onClick: () => this.onLanguageSelect('en')
       },
       {
         label: t('navBar.languages.es'),
-        onClick: () => this.onLanguageSelect('es'),
-        icon: 'es',
-        customIcon: false
+        onClick: () => this.onLanguageSelect('es')
       }
     ];
     return (

@@ -164,20 +164,21 @@
     "workbox-webpack-plugin": "3.6.3"
   },
   "jest": {
-    "collectCoverage":true,
+    "collectCoverage": true,
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
-    "!src/**/*.d.ts"
-    
+      "!src/**/*.d.ts"
     ],
     "coverageDirectory": "coverage",
     "resolver": "jest-pnp-resolver",
     "setupFiles": [
       "react-app-polyfill/jsdom"
     ],
-    "setupFilesAfterEnv":["react-app-polyfill/jsdom"],
+    "setupFilesAfterEnv": [
+      "react-app-polyfill/jsdom"
+    ],
     "testEnvironment": "jsdom",
-    "testPathIgnorePatterns":[
+    "testPathIgnorePatterns": [
       "\\\\node_modules\\\\",
       "\\\\scripts\\\\",
       "/scripts/"

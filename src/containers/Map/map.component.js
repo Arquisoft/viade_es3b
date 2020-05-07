@@ -57,11 +57,11 @@ const MapaComponent = props => {
 
   function shareRoute() {
     document.getElementById("btShare").disabled = true;
-    currentRuta.share(fileClien, user.split("profile/card#me")[0], updateShareButton(t));
+    currentRuta.share(fileClien, user.split("profile/card#me")[0], updateShareButton);
   }
 
-  function updateShareButton(t) {
-    document.getElementById("btShare").textContent = (currentRuta.shared) ? t('route.unshare') : t('route.share');
+  function updateShareButton() {
+    ReactDOM.hydrate(<ButtonShare></ButtonShare>, document.getElementById('divSahred'));
     document.getElementById("btShare").disabled = false;
   }
 
@@ -69,12 +69,13 @@ const MapaComponent = props => {
     let text = document.getElementById("comentario").value;
     document.getElementById("comentario").value = '...';
     document.getElementById("comentario").readonly = true;
-    currentRuta.addComment(fileClien, text, user, updateComments);
+    currentRuta.addComment(fileClien,text, updateComments);
 
   }
 
   function updateComments() {
-    ReactDOM.hydrate(<Comments></Comments>, document.getElementById('comments'));
+    ReactDOM.unmountComponentAtNode(document.getElementById('mapComponent'));
+    ReactDOM.hydrate(<MapaComponent  {... { rutas, user }}></MapaComponent>, document.getElementById('mapComponent'));
     document.getElementById("comentario").value = "";
   }
 
@@ -141,21 +142,18 @@ const MapaComponent = props => {
           </ScrollDiv>
         </RoutesCard>
         <Map></Map>
-
-
         <RouteCard className="routes">
           <ScrollDiv>
             <RuteInformation {... {currentRuta}}></RuteInformation>
             <ButtonsWrapper>
             <Slider {... { media }}></Slider>
-            <ButtonShare> </ButtonShare>
+            <div id = "divSahred"><ButtonShare> </ButtonShare></div>
               {(currentRuta.shared !== undefined)?
                   <button onClick={() => ReactDOM.render(<NewRoute {...{ currentRuta }}></NewRoute>,
                       document.getElementById('mapComponent'))}>{t('route.edit')}</button>: <></>}
             </ButtonsWrapper>
           </ScrollDiv>
         </RouteCard>
-
       </MapContainerr>
       <CommentContainer>
         <CommentWrapper className="comments">

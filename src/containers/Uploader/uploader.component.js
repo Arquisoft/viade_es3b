@@ -51,14 +51,7 @@ const Formulario = () => {
 	photoShow();
 	function photoShow() {
 		if(image !== null){
-			//Muestro el encabezado (Archivos seleccionados)
-			document.getElementById('header-file-container-photo').style.display ="initial";
-			//Borro lo seleccionado anteriormente
-			document.getElementById('file-container-photo').removeChild(document.getElementById('photo-list'));
-			var contenedor = document.createElement('ul');
-			contenedor.id = 'photo-list';
-			//Inserto la lista al div con id=file-container
-			document.getElementById('file-container-photo').insertAdjacentElement('beforeend',contenedor);
+			var contenedor = resetPhotoShow();
 			for(var i = 0; i < image.length; i++){
 				let file = image[i];
 				var elemento = document.createElement("li");
@@ -71,14 +64,9 @@ const Formulario = () => {
 	videoShow();
 	function videoShow() {
 		if(video !== null){
-			//Muestro el encabezado (Archivos seleccionados)
-			document.getElementById('header-file-container-video').style.display ="initial";
-			//Borro lo seleccionado anteriormente
-			document.getElementById('file-container-video').removeChild(document.getElementById('video-list'));
-			var contenedor = document.createElement('ul');
-			contenedor.id = 'video-list';
-			//Inserto la lista al div con id=file-container
-			document.getElementById('file-container-video').insertAdjacentElement('beforeend',contenedor);
+		
+			var contenedor = resetVideoShow();
+	
 			for(var i = 0; i < video.length; i++){
 				let file = video[i];
 				var elemento = document.createElement("li");
@@ -88,6 +76,32 @@ const Formulario = () => {
 			
 		}		
 	}
+
+	function resetPhotoShow(){
+		//Muestro el encabezado (Archivos seleccionados)
+		document.getElementById('header-file-container-photo').style.display ="initial";
+		//Borro lo seleccionado anteriormente
+		document.getElementById('file-container-photo').removeChild(document.getElementById('photo-list'));
+		var contenedor = document.createElement('ul');
+		contenedor.id = 'photo-list';
+		//Inserto la lista al div con id=file-container
+		document.getElementById('file-container-photo').insertAdjacentElement('beforeend',contenedor);
+		return contenedor;
+	}
+
+	function resetVideoShow(){
+
+		//Muestro el encabezado (Archivos seleccionados)
+		document.getElementById('header-file-container-video').style.display ="initial";
+		//Borro lo seleccionado anteriormente
+		document.getElementById('file-container-video').removeChild(document.getElementById('video-list'));
+		var contenedor = document.createElement('ul');
+		contenedor.id = 'video-list';
+		//Inserto la lista al div con id=file-container
+		document.getElementById('file-container-video').insertAdjacentElement('beforeend',contenedor);
+		return contenedor;
+	}
+
 	function clickButtom() {
 		if (publico) {
 			publico = false;
@@ -105,6 +119,9 @@ const Formulario = () => {
 		document.getElementById('video').value = null;
 		document.getElementById('route').value = null;
 		document.getElementById('cbox1').checked = false;
+		resetPhotoShow();
+		resetVideoShow();
+		
 		publico = false;
 }
 
