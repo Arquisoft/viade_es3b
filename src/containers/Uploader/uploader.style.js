@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const UploaderWrapper = styled.div`
     width: 100%;
+    height: 90%;
   background: #a4d1d1;
   background-repeat: repeat;
   padding: 50px 0;
@@ -29,6 +30,15 @@ export const UploaderCard = styled.div`
   }
 
   
+`;
+
+export const SelectCard = styled.div`
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+    @media screen and (max-width: 1000px) {
+      flex-direction: column;
+}
 `;
 
 export const FileButton = styled.div`
@@ -226,6 +236,8 @@ export const MultimediaCard = styled.div`
   }
   #file-container-photo, #file-container-video{
     margin-top: 10px;
+    overflow: auto;
+    height: 20%;
   }
 `;
 
