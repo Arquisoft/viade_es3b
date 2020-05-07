@@ -186,7 +186,7 @@ const Formulario = () => {
 			<center>
 				<UploadButton>
 					<button onClick={() => {
-						if (file !== null) {
+						if (file !== null && isValidFile(file)) {
 							read(file, function (json) {
 							if (publico) createFolder(fileClien,url + "public/" + folder,json, file.name, image, video,true,showSuccessUploadFile,showErrorUploadFile,clear)
 							else createFolder(fileClien,url + folder, json, file.name, image, video,true,showSuccessUploadFile,showErrorUploadFile,clear)
@@ -202,6 +202,11 @@ const Formulario = () => {
 	);
 };
 
+function isValidFile(file) {
+	let type = file.name.split(".").pop();
+	return !!(type === "json" || type ==="geojson" || type === "jsonld");
+
+}
 	
 function read(file, callback) {
 	var reader = new FileReader();
