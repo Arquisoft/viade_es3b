@@ -81,7 +81,6 @@ async function loadRoutes(url, user, share, name, t) {
                 let json = (checkJson(JSON.parse(file), file));
 
                 if (json !== null) {
-                    console.log(json)
                     let urlDefault = url + "/comments/routeComments/" + routes.files[i].name.split('.json')[0] + "Comments.json";
                     checkCommets(json.comments, urlDefault, fileClien).then((urlComments) => {
                             if (urlComments === null) {
@@ -118,12 +117,13 @@ async function loadRoutes(url, user, share, name, t) {
         return new Promise((resolve, reject) => {
             if (url === undefined || url === null || url === "") {
                 fileClien.itemExists(url2).then((value) => {
-                    console.log(value);
                     if (value) resolve(url2);
                     else {
                         resolve(null);
                     }
                 });
+            }else if(url.includes("/comments/routeComments/commentExample.json")){
+                resolve(null);
             }
             else {
                 fileClien.itemExists(url).then((value) => {

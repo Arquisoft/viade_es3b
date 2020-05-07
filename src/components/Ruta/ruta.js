@@ -26,9 +26,9 @@ export default class Ruta {
     }
 
     addComment(fileClien, text, callback) {
-        console.log("aaaaa " + this.urlComments);
+ 
         fileClien.itemExists(this.urlComments).then((value) => {
-            console.log("Valoaaaaar   : " + value);
+            
             if (!value) {
                 var json = this.createComment(getJsonComments(), text);
                 fileClien.createFile(this.urlComments, json, "application/json").then(() => {
@@ -136,13 +136,12 @@ export default class Ruta {
     updateMedia(json, user) {
         json.media = [];
         this.media.forEach(m => {
-            console.log("Media: " + m)
+
             if (!m.includes(user)) {
                 json.media.push({
                     "@id": m
                 });
             } else {
-                console.log("Bien")
                 if (m.includes("/public/")) {
                     m = m.split("public/")[0] + m.split("public/")[1];
                     json.media.push({
@@ -157,7 +156,6 @@ export default class Ruta {
 
             }
         });
-        console.log(json);
         return JSON.stringify(json);
 
 

@@ -175,7 +175,6 @@ export class FriendsComponent extends Component<Props> {
 
     for await (const friend of user.friends) {
       if (String(friend).localeCompare(String(friendWebId)) === 0) {
-        console.log(friend.toString());
         return true;
       }
     }

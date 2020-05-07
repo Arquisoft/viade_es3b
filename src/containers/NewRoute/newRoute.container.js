@@ -126,8 +126,6 @@ const NewRoute = (props) => {
 
             error = checkString(name, t('route.name')) ? true : error;
             error = checkString(description, t('route.description')) ? true : error;
-
-            console.log(points.length);
             if (points.length === 0) {
                 error = true;
                 showErrorUploadFile(t('route.error'));
