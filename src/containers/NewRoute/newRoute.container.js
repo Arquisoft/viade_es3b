@@ -94,8 +94,8 @@ const NewRoute = (props) => {
         comments = '';
         setName(null);
         setDescription(null);
-        setImage([]);
-        setVideo([]);
+        setImage(null);
+        setVideo(null);
         setPoints([]);
         document.getElementById('name').value = null;
         document.getElementById('description').value = null;
@@ -113,11 +113,6 @@ const NewRoute = (props) => {
 
     }
 
-    /* function loadMapView() {
-         let name = ruta.name;
-         let user = (ruta.shared) ? "public" : undefined;
-         ReactDOM.render(<Map {...{ user, name }}></Map>, document.getElementById('mapComponent'));
-     }*/
 
     function updatePoints(point) {
         let newPoints = [];
